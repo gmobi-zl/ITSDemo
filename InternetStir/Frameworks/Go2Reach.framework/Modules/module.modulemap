@@ -1,0 +1,6 @@
+framework module Go2Reach {
+  umbrella header "Go2Reach.h"
+
+  export *
+  module * { export * }
+}
