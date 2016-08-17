@@ -72,6 +72,7 @@
 		18F6655D1D5B382400BDB2E8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665471D5B382400BDB2E8 /* UIView+WebCacheOperation.m */; };
 		18F665601D5C5E0700BDB2E8 /* DataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6655E1D5C5E0700BDB2E8 /* DataService.m */; };
 		18F665631D5C631D00BDB2E8 /* NewsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665621D5C631D00BDB2E8 /* NewsCategory.m */; };
+		18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665651D5DA95B00BDB2E8 /* SplashController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +194,8 @@
 		18F6655F1D5C5E0700BDB2E8 /* DataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataService.h; sourceTree = "<group>"; };
 		18F665611D5C631D00BDB2E8 /* NewsCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCategory.h; sourceTree = "<group>"; };
 		18F665621D5C631D00BDB2E8 /* NewsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCategory.m; sourceTree = "<group>"; };
+		18F665641D5DA94A00BDB2E8 /* SplashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
+		18F665651D5DA95B00BDB2E8 /* SplashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +367,8 @@
 			children = (
 				18F664F81D5B20C000BDB2E8 /* ViewController.h */,
 				18F664F91D5B20C000BDB2E8 /* ViewController.m */,
+				18F665641D5DA94A00BDB2E8 /* SplashController.h */,
+				18F665651D5DA95B00BDB2E8 /* SplashController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				18F665501D5B382400BDB2E8 /* NSData+ImageContentType.m in Sources */,
 				18F665181D5B311400BDB2E8 /* PopoNewsData.m in Sources */,
 				18F6654A1D5B382400BDB2E8 /* MJRefreshConst.m in Sources */,
+				18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */,
 				18F664D01D5AC9FF00BDB2E8 /* MMLogger.m in Sources */,
 				18F665161D5B311400BDB2E8 /* NewsImage.m in Sources */,
 				18F6654D1D5B382400BDB2E8 /* UIScrollView+MJExtension.m in Sources */,
@@ -687,6 +693,11 @@
 				INFOPLIST_FILE = InternetStir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InternetStir/Frameworks/GoogleAnalytics",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmobi.InternetStir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -705,6 +716,11 @@
 				INFOPLIST_FILE = InternetStir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/InternetStir/Frameworks/GoogleAnalytics",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmobi.InternetStir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -729,6 +745,7 @@
 				18F664AF1D59BA9B00BDB2E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
