@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SplashController.h"
 #import "MMSystemHelper.h"
-
+#import "ViewController.h"
 
 @implementation SplashController
 
@@ -47,9 +47,17 @@
     [self.bgImage setImage:bgImg];
     self.bgImage.frame = CGRectMake(0, 0, width, height);
     self.bgImage.hidden = NO;
+    self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushNextVc)];
+    [self.bgImage addGestureRecognizer:tap];
 }
+-(void) pushNextVc{
 
+    ViewController *vc = [[ViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
