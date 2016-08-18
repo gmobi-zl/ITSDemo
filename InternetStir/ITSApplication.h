@@ -13,7 +13,7 @@
 //#import "RemoteService.h"
 #import "DataService.h"
 #import "MMLogger.h"
-//#import "ReportService.h"
+#import "ReportService.h"
 
 #define ITS_NSLocalizedString(key, comment) \
     [ITSApplication getLocalString:(key) defVal:comment]
@@ -22,7 +22,7 @@
 
 //@property RemoteService* remoteSvr;
 @property DataService* dataSvr;
-//@property ReportService* reportSvr;
+@property ReportService* reportSvr;
 
 @property NSString* baseUrl;
 //@property NSString* group;

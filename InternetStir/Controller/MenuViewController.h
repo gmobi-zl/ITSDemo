@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong) UIImageView *bgImage;
-@property (nonatomic, strong) UIButton *icon;
+@property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *headerBg;
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *loginButton;
+@property (nonatomic, strong) UILabel *label;
 //@property (nonatomic, strong) UIView *bgView;
 @end

@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
         self.icon = [[UIImageView alloc] init];
         [self.contentView addSubview:self.icon];
         

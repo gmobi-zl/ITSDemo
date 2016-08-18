@@ -42,13 +42,27 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
     [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
     self.commentView.delegate = self;
     [self.view addSubview:self.commentView];
-
 }
 - (void)push{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择", nil];
     [sheet showInView:self.view];
 }
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    Btn.frame = CGRectMake(0, 20, 30, 30);
+//    [Btn setBackgroundImage:[UIImage imageNamed:@"navigaton_back"] forState:UIControlStateNormal];
+//    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+//    self.navigationItem.leftBarButtonItem = left;
 
+}
+- (void)clickBack{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //调用相册
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -108,7 +122,21 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
+         DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
+         DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
+         commentItem.name = @"孙燕姿";
+         commentItem.icon = @"高圆圆";
+         commentItem.replys = 0;
+         commentItem.shuoshuoText = contentStr;
+         FrameNeedChanged.detailCommentItem = commentItem;
+         //        familyGroupFrameNeedChanged.
+         NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
          
+         [mutaArray insertObject:FrameNeedChanged atIndex:0];
+         self.commentData = mutaArray;
+         
+         [self.tableView reloadData];
+
      }];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

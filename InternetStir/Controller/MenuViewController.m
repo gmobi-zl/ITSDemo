@@ -12,6 +12,8 @@
 #import "MMSystemHelper.h"
 #import "ITSApplication.h"
 #import "LoginViewController.h"
+#import "UIImageView+WebCache.h"
+#import "SettingController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -26,13 +28,11 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     self.title = @"粉絲小幫手";
 //    self.headerBg = [[UIView alloc] init];
 //    self.headerBg.frame = CGRectMake(0, -20, self.view.bounds.size.width, 20);
 //    [self.navigationController.navigationBar addSubview:self.headerBg];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.headerBg.backgroundColor = [UIColor grayColor];
     //    [self.navigationController.navigationBar addSubview:self.headerBg];
     self.bgImage = [[UIImageView alloc] init];
@@ -42,35 +42,20 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
     
-    self.icon = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.icon = [[UIImageView alloc] init];
     self.icon.frame = CGRectMake((screenW - 70) / 2, (screenH/3  - 70) / 2 - 20, 70, 70);
-    [self.icon setBackgroundImage:[UIImage imageNamed:@"head"] forState:UIControlStateNormal];
-    [self.icon addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
+    self.icon.image = [UIImage imageNamed:@"head"];
+//    [self.icon addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
     self.icon.layer.masksToBounds = YES;
-    self.icon.userInteractionEnabled = YES;
+    self.icon.userInteractionEnabled = NO;
     self.icon.layer.cornerRadius = 35;
     [self.bgImage addSubview:self.icon];
-    
-    NSString *name = @"點擊登陸";
-    [self.bgImage addSubview:self.icon];
-    
-    CGSize nameLabelSize = [self sizeWithString:name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
-    CGFloat userNameX = ([UIScreen mainScreen].bounds.size.width - nameLabelSize.width)/2;
-    CGFloat userNmaeY = self.icon.frame.origin.y + 80;
-    UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, userNmaeY, nameLabelSize.width, nameLabelSize.height)];
-    userNameLabel.textColor = [UIColor whiteColor];
-    userNameLabel.font = [UIFont systemFontOfSize:16];
-    userNameLabel.text = @"";
-    userNameLabel.tag = 99;
-    userNameLabel.textAlignment = NSTextAlignmentCenter;
-    userNameLabel.text = name;
-    [self.bgImage addSubview:userNameLabel];
 
     [self creatButton];
-    [self creatScrollView];
     self.tableView = [[UITableView alloc] init];
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH -screenH/3-104);
     self.tableView.rowHeight = 60;
+    self.tableView.hidden = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.hidden = NO;
@@ -78,10 +63,28 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.tableView registerClass:[MenuViewCell class] forCellReuseIdentifier:MenuTableViewCellIdentifier];
     [self.scrollView addSubview:self.tableView];
     
-//    self.bgView = [[UIView alloc] init];
-//    self.bgView.frame = CGRectMake(screenW, 0, screenW, screenH -screenH/3-104);
-//    self.bgView.backgroundColor = [UIColor redColor];
-//    [self.scrollView addSubview:self.bgView];
+    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.loginButton.frame = CGRectMake(120, screenH - 250, screenW - 240, 40);
+    [self.loginButton addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
+    self.loginButton.backgroundColor = [UIColor yellowColor];
+    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.loginButton.layer.masksToBounds = YES;
+    self.loginButton.layer.cornerRadius = 8;
+    self.loginButton.layer.borderWidth = 0.5;
+    self.loginButton.hidden = YES;
+    self.loginButton.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.loginButton setTitle:@"點擊登入" forState:UIControlStateNormal];
+    [self.view addSubview:self.loginButton];
+    
+    self.label = [[UILabel alloc] init];
+    NSString *name = @"(登入後才能瀏覽粉絲小幫手~)";
+    CGSize size = [MMSystemHelper sizeWithString:name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT, 20)];
+    self.label.frame = CGRectMake(screenW/2 - size.width/2, screenH - 200, size.width, 20);
+    self.label.textAlignment = NSTextAlignmentCenter;
+    self.label.text = name;
+    self.label.hidden = YES;
+    self.label.font = [UIFont systemFontOfSize:12];
+    [self.view addSubview:self.label];
 }
 - (void)pushLoginVc{
     
@@ -114,7 +117,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         [self.view addSubview:but];
     }
     //3 155 255
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, screenH/3 + 64 + 38, screenW/3, 2)];
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, screenH/3 + 64 + 38, screenW, 2)];
     self.line.backgroundColor = [UIColor colorWithRed:3/255.0 green:155/255.0 blue:255/255.0 alpha:1];
     [self.view addSubview:self.line];
 
@@ -123,57 +126,69 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     switch (button.tag) {
         case 100:
         {
-            self.scrollView.contentOffset = CGPointMake(0, 0);
-            [UIView animateWithDuration:0.2 animations:^{
-                self.line.frame = CGRectMake(0, screenH/3 + 64 + 38, screenW/3, 2);
-            }];
-            
+            SettingController *vc = [[SettingController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 101:
         {
-            self.scrollView.contentOffset = CGPointMake(screenW, 0);
-            [UIView animateWithDuration:0.2 animations:^{
-                self.line.frame = CGRectMake(screenW/3, screenH/3 + 64 + 38, screenW/3, 2);
-            }];
+            
         }
             break;
         case 102:
         {
-            self.scrollView.contentOffset = CGPointMake(screenW*2, 0);
-            [UIView animateWithDuration:0.2 animations:^{
-                self.line.frame = CGRectMake(screenW/3*2, screenH/3 + 64 + 38, screenW/3, 2);
-            }];
+
         }
             break;
         default:
             break;
     }
 }
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollVie{
-  
-    if ([scrollVie isKindOfClass:[UITableView class]]) {
-        return;
-    }
-    CGPoint curPoint = scrollVie.contentOffset;
-    NSInteger current = curPoint.x/scrollVie.frame.size.width;
-    [UIView animateWithDuration:0.2 animations:^{
-        self.line.frame = CGRectMake(current*screenW/3, screenH/3 + 64 + 38, screenW/3, 2);
-    }];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+
+    if (ds.user.isLogin == YES) {
+        NSString *icon = ds.user.avatar; //[loginDic objectForKey:@"avatar"];
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"avator"] options:SDWebImageRefreshCached];
+        
+        NSString *name = @"點擊登出";
+        CGSize nameLabelSize = [MMSystemHelper sizeWithString:name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+        CGFloat userNameX = ([UIScreen mainScreen].bounds.size.width - nameLabelSize.width)/2;
+        CGFloat userNmaeY = self.icon.frame.origin.y + 80;
+        UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, userNmaeY,nameLabelSize.width, nameLabelSize.height)];
+        userNameLabel.textColor = [UIColor whiteColor];
+        userNameLabel.font = [UIFont systemFontOfSize:16];
+        userNameLabel.text = @"";
+        userNameLabel.tag = 99;
+        userNameLabel.textAlignment = NSTextAlignmentCenter;
+        userNameLabel.text = name;
+        userNameLabel.userInteractionEnabled = YES;
+        [self.bgImage addSubview:userNameLabel];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginOut)];
+        [userNameLabel addGestureRecognizer:tap];
+        
+        self.tableView.hidden = NO;
+        self.label.hidden = YES;
+        self.loginButton.hidden = YES;
+    }else{
+        self.tableView.hidden = YES;
+        self.label.hidden = NO;
+        self.loginButton.hidden = NO;
+    }
 }
--(CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize
-{
-    NSDictionary *dict = @{NSFontAttributeName : font};
-    // 如果将来计算的文字的范围超出了指定的范围,返回的就是指定的范围
-    // 如果将来计算的文字的范围小于指定的范围, 返回的就是真实的范围
-    CGSize size = [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
-    return size;
+- (void)loginOut{
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
+    [al show];
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   
     ITSApplication* poApp = [ITSApplication get];

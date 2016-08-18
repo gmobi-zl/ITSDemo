@@ -8,7 +8,10 @@
 //
 
 #import "LoginViewController.h"
-#include "MMSystemHelper.h"
+#import "MMSystemHelper.h"
+#import "AboutController.h"
+#import "EditionController.h"
+#import "FeedBackController.h"
 
 @interface LoginViewController ()
 

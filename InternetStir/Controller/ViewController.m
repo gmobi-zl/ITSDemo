@@ -14,6 +14,7 @@
 #import "CommentViewController.h"
 #import "UUInputAccessoryView.h"
 #import "MenuViewController.h"
+#import "DetailContentController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -140,7 +141,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
+    if (tableView == self.RigthTableView) {
+        DetailContentController *vc = [[DetailContentController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 - (void)pushComment:(UIButton*)button{
     
@@ -151,7 +155,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
     
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
                                    content:@""
-                                      name:@"jpj"
+                                      name:@""
                                      Block:^(NSString *contentStr)
      {
          
@@ -217,8 +221,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
     [Btn setBackgroundImage:[UIImage imageNamed:@"list_2"] forState:UIControlStateNormal];
-    
-    //[backBtn setTitle:@"Categories" forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;

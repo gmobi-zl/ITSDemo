@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) NSMutableArray *replysView;
 @property (nonatomic, strong) NSMutableArray *replyIconView;
+@property (nonatomic, strong) NSMutableArray *replyNameView;
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyNameLabel;
 @property (nonatomic, strong) UIImageView *replyIcon;

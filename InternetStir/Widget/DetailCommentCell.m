@@ -14,14 +14,16 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
+
         self.icon = [[UIImageView alloc] init];
         self.icon.layer.masksToBounds = YES;
         self.icon.layer.cornerRadius = 20;
         [self.contentView addSubview:self.icon];
         
         self.nameLabel = [[UILabel alloc] init];
-        self.nameLabel.font = [UIFont systemFontOfSize:10];
+        self.nameLabel.font = [UIFont systemFontOfSize:14];
+        self.nameLabel.textColor = [UIColor cyanColor];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
@@ -39,9 +41,10 @@
         self.replyIcon.layer.cornerRadius = 20;
         [self.contentView addSubview:self.replyIcon];
         
-        self.replyNameLabel = [[UILabel alloc] init];
-        self.replyNameLabel.font = [UIFont systemFontOfSize:10];
-        [self.contentView addSubview:self.replyNameLabel];
+//        self.replyNameLabel = [[UILabel alloc] init];
+//        self.replyNameLabel.font = [UIFont systemFontOfSize:14];
+//        self.replyNameLabel.textAlignment = NSTextAlignmentLeft;
+//        [self.contentView addSubview:self.replyNameLabel];
         
         self.replyBackgroundView = [[UIImageView alloc] init];
         self.replyBackgroundView.backgroundColor = [UIColor grayColor];
@@ -71,8 +74,15 @@
             [imageView removeFromSuperview];
         }
     }
+    for (int i = 0; i < [self.replyNameView count]; i++) {
+        UILabel *label = [self.replyNameView objectAtIndex:i];
+        if (label.superview) {
+            [label removeFromSuperview];
+        }
+    }
     [self.replysView removeAllObjects];
     [self.replyIconView removeAllObjects];
+    [self.replyNameView removeAllObjects];
 }
 -(void)settingtData
 {
@@ -94,6 +104,13 @@
         [self.contentView addSubview:replyIcon];
         self.replyIcon = replyIcon;
         [self.replyIconView addObject:replyIcon];
+        
+        UILabel *replyName = [[UILabel alloc] init];
+        replyName.text = @"范冰冰";
+        replyName.font = [UIFont systemFontOfSize:14];
+//        self.replyNameLabel = replyName;
+        [self.contentView addSubview:replyName];
+        [self.replyNameView addObject:replyName];
     }
 }
 -(void)settingFrame
@@ -105,9 +122,10 @@
     }
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
         ((UIImageView *)[self.replyIconView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replyPictureF objectAtIndex:i] CGRectValue];
-//        self.replyIcon.frame = [(NSValue *)[self.detailCommentFrame.replyPictureF objectAtIndex:i] CGRectValue];
     }
-
+    for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
+        ((UILabel *)[self.replyNameView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replyNameF objectAtIndex:i] CGRectValue];
+    }
     self.commentLabel.frame = self.detailCommentFrame.contentF;
     self.replyBackgroundView.frame = self.detailCommentFrame.replyBackgroundF;
 }
@@ -117,6 +135,12 @@
         _replysView = [[NSMutableArray alloc]init];
     }
     return _replysView;
+}
+-(NSMutableArray *)replyNameView{
+    if (!_replyNameView) {
+        _replyNameView = [[NSMutableArray alloc] init];
+    }
+    return _replyNameView;
 }
 -(NSMutableArray *)replyIconView{
     if (!_replyIconView) {

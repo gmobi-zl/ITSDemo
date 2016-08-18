@@ -10,6 +10,7 @@
 #import "SplashController.h"
 #import "MMSystemHelper.h"
 #import "ViewController.h"
+#import "TabBarController.h"
 
 @implementation SplashController
 
@@ -55,8 +56,10 @@
 }
 -(void) pushNextVc{
 
-    ViewController *vc = [[ViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    ViewController *vc = [[ViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    TabBarController *tabBar = [[TabBarController alloc] init];
+    [self.navigationController pushViewController:tabBar animated:YES];
 }
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

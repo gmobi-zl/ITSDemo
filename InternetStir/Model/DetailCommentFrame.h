@@ -18,6 +18,7 @@
 @property (nonatomic, assign) CGRect replyF;
 @property (nonatomic, strong) NSMutableArray *replysF;
 @property (nonatomic, strong) NSMutableArray *replyPictureF;
+@property (nonatomic, strong) NSMutableArray *replyNameF;
 @property (nonatomic, assign) float cellHeight;
 @property (nonatomic, assign) CGRect replyBackgroundF;
 @property (nonatomic, assign) CGRect replyIcon;

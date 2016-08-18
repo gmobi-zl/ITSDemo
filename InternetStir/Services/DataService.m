@@ -448,10 +448,6 @@
 }
 
 -(NSMutableArray*) getSettingList{
-
-//    if (self.settingList != nil){
-//        return self.settingList;
-//    }
     
     if (self.settingList == nil)
         self.settingList = [NSMutableArray arrayWithCapacity:3];
@@ -483,7 +479,7 @@
     
     SettingItem* video = [[SettingItem alloc] init];
     video.iconName = @"setting_autoplay";
-    video.settingName = ITS_NSLocalizedString(@"SettingVideo", nil);
+    video.settingName = @"推播通知";
     video.type = SettingTypeSwitch;
     video.actionType = SETTING_ACTION_VIDEO;
     video.isSwitch = NO;

@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
         CGFloat screenW = [MMSystemHelper getScreenWidth];
         CGFloat itemHeight = 60; //[[ConfigService get] getNewsListItemHeight:NEWS_TYPE_IMAGE]; //screenH / 7;
         CGFloat itemWidth = screenW * 3 / 4;

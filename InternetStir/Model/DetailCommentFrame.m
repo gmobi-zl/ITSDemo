@@ -23,7 +23,7 @@
     
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:self.detailCommentItem.name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:self.detailCommentItem.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
     CGFloat nameLabelY = iconViewY;
     CGFloat nameLabelWidth = nameLabelSize.width;
     CGFloat nameLabelHeight = nameLabelSize.height;
@@ -38,7 +38,7 @@
 //    
     //shuoshuotextF正文
     CGFloat contentLabelX = nameLabelX;
-    CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2 + 20;
+    CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
     CGSize contentLabelSize = [MMSystemHelper sizeWithString:self.detailCommentItem.shuoshuoText font:[UIFont systemFontOfSize:14 ] maxSize:CGSizeMake(screenW - nameLabelX - padding, MAXFLOAT)];
     CGFloat contentLabelWidth = contentLabelSize.width;
     CGFloat contentLabelHeight = contentLabelSize.height;
@@ -53,7 +53,7 @@
         for (int i = 0; i < [self.detailCommentItem.replys count]; i++) {
             
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
-            
+            CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight + 5, 100, 20);
             self.cellHeight += 30 + padding/2;
             CGSize replyLabelSize = [MMSystemHelper sizeWithString:[self.detailCommentItem.replys objectAtIndex:i] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
             CGFloat replyLabelY = self.cellHeight;
@@ -63,6 +63,7 @@
             CGRect replyF = CGRectMake(replyLabelX, replyLabelY, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
             [self.replyPictureF addObject:[NSValue valueWithCGRect:pictureF]];
+            [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];
         }
         
         //评论的背景
@@ -72,6 +73,12 @@
         self.replyBackgroundF = CGRectMake(nameLabelX, CGRectGetMaxY(self.contentF) + padding, replyBackgroundWidth, replyBackgroundHeight);
     }
 
+}
+-(NSMutableArray *)replyNameF{
+    if (!_replyNameF) {
+        _replyNameF = [[NSMutableArray alloc] init];
+    }
+    return _replyNameF;
 }
 -(NSMutableArray *)replyPictureF{
 

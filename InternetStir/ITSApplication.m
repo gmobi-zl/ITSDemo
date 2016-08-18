@@ -55,10 +55,11 @@ NSString* customerLocal = nil;
     
     //self.remoteSvr = [RemoteService alloc];
     self.dataSvr = [DataService alloc];
-    //self.reportSvr = [ReportService alloc];
+    
+    self.reportSvr = [ReportService alloc];
 
     self.isUserOpen = NO;
-    //[self.reportSvr initService];
+    [self.reportSvr initService];
     
     
     [[ConfigService get] initLocaleConfig];
