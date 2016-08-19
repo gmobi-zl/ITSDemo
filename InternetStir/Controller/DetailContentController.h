@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PNMoodView.h"
 
-@interface DetailContentController : UIViewController
+@interface DetailContentController : UIViewController<UIGestureRecognizerDelegate>
+@property (copy) NSString *path;
+@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) PNMoodView* moodView;
 
 @end

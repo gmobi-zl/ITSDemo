@@ -15,6 +15,6 @@
 @property (nonatomic, strong)UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *line;
 
--(void)showDataWithModel;
+-(void)showDataWithModel:(NSInteger)index;
 
 @end

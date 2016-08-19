@@ -13,6 +13,7 @@
 #import "CommentCell.h"
 #import "CommentViewController.h"
 #import "UUInputAccessoryView.h"
+#import "ITSAppConst.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -27,16 +28,20 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"蔡阿嘎";
+//    self.title = @"蔡阿嘎";
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
+    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 64);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentCellIdentifier];
 
     [self.view addSubview:self.tableView];
+    
+    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
+    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+    [self.navigationController.navigationBar addSubview:statusBarView];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -58,6 +63,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     }
     CommentCell *tmpCell = (CommentCell*)cell;
     tmpCell.commentFrame = self.commentData[indexPath.row];
+    tmpCell.button.tag = indexPath.row;
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     for (int i = 0; i < [tmpCell.replysView count]; i++) {
         ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
@@ -65,6 +71,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
         tmpCell.replyLabel.userInteractionEnabled = YES;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 0, tmpCell.replyLabel.frame.size.width, tmpCell.replyLabel.frame .size.height);
+        
         [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
         button.userInteractionEnabled = YES;
         button.tag = indexPath.row;
@@ -76,6 +83,8 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 - (void)pushComment:(UIButton*)button{
     
     CommentViewController *vc = [[CommentViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    vc.frame = [self.commentData objectAtIndex:button.tag];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)tapReply:(UIButton *)button{
@@ -98,8 +107,23 @@ NSString *const CommentCellIdentifier = @"CommentCell";
         NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dictArray count]];
         for (NSDictionary *dict in dictArray) {
-            CommentItem *commentItem = [CommentItem familyGroupWithDict:dict];
+            CommentItem *commentItem = [[CommentItem alloc] init];
             CommentFrame *commentFrame = [[CommentFrame alloc]init];
+            commentItem.replys = [[NSMutableArray alloc] init];
+            commentItem.name = [dict objectForKey:@"name"];
+            commentItem.icon = [dict objectForKey:@"icon"];
+            commentItem.pictures = [dict objectForKey:@"pictures"];
+            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
+            NSMutableArray *reply = [dict objectForKey:@"replys"];
+            for (NSDictionary *dic in reply) {
+                ReplyItem *item = [[ReplyItem alloc] init];
+                item.name = [dic objectForKey:@"name"];
+                item.comment = [dic objectForKey:@"comment"];
+                item.icon = [dic objectForKey:@"icon"];
+                [item setValuesForKeysWithDictionary:dic];
+                commentItem.item = item;
+                [commentItem.replys addObject:item];
+            }
             commentFrame.commentItem = commentItem;
             
             [models addObject:commentFrame];
@@ -112,6 +136,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+//    self.title = @"蔡阿嘎";
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
@@ -120,11 +145,12 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"list_2"] forState:UIControlStateNormal];
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
-
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 - (void)pushMenu{
     

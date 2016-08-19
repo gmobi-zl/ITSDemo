@@ -30,10 +30,17 @@ NSString *const PopNewsChannelSetTableViewCellIdentifier = @"PNewsChannelSetCell
 //    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self initViews];
-    
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
     
 }
-
+-(void) clickBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void) initViews{
     self.headerBg = [[UIView alloc] init];
     self.headerBg.backgroundColor = [MMSystemHelper string2UIColor:COLOR_BG_RED];

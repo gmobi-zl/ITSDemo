@@ -8,6 +8,10 @@
 //
 
 #import "DetailContentController.h"
+#import "MMSystemHelper.h"
+
+#define screenW [MMSystemHelper getScreenWidth]
+#define screenH [MMSystemHelper getScreenHeight]
 
 @interface DetailContentController ()
 
@@ -18,8 +22,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-}
+    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.webView = [[UIWebView alloc] init];
+    self.webView.frame = CGRectMake(0, 0, screenW, screenH);
+    [self.view addSubview:self.webView];
+    NSURL *url = [NSURL URLWithString:self.path];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 
+}
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
+
+}
+- (void)clickBack{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

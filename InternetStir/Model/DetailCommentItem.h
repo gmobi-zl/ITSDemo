@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ReplyItem.h"
 @interface DetailCommentItem : NSObject
 @property (strong,nonatomic)NSString *icon;  //头像
 @property (strong,nonatomic)NSString *name;  //昵称
@@ -16,6 +16,7 @@
 @property (strong,nonatomic)NSString *pictures;   //发表的图片
 @property (strong,nonatomic)NSMutableArray *replys;   //评论
 @property (strong,nonatomic)NSString *replyIcon;
+@property (strong,nonatomic)ReplyItem *item;
 #pragma mark - 最后要考虑是暂存coredata里还是plist文件里
 +(id)familyGroupWithDict:(NSDictionary *)dict;
 @end

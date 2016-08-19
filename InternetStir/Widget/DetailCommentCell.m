@@ -8,6 +8,7 @@
 //
 
 #import "DetailCommentCell.h"
+#import "MMSystemHelper.h"
 
 @implementation DetailCommentCell
 
@@ -23,7 +24,7 @@
         
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.font = [UIFont systemFontOfSize:14];
-        self.nameLabel.textColor = [UIColor cyanColor];
+        self.nameLabel.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
@@ -38,16 +39,11 @@
         
         self.replyIcon = [[UIImageView alloc] init];
         self.replyIcon.layer.masksToBounds = YES;
-        self.replyIcon.layer.cornerRadius = 20;
+        self.replyIcon.layer.cornerRadius = 15;
         [self.contentView addSubview:self.replyIcon];
         
-//        self.replyNameLabel = [[UILabel alloc] init];
-//        self.replyNameLabel.font = [UIFont systemFontOfSize:14];
-//        self.replyNameLabel.textAlignment = NSTextAlignmentLeft;
-//        [self.contentView addSubview:self.replyNameLabel];
-        
         self.replyBackgroundView = [[UIImageView alloc] init];
-        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
+//        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:self.replyBackgroundView];
     }
     return self;
@@ -91,24 +87,28 @@
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.shuoshuoText;
     for (NSInteger i = 0; i < comment.replys.count; i++) {
+        
+        ReplyItem *item = [comment.replys objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:12];
         replyLabel.numberOfLines = 0;
-        replyLabel.text = [comment.replys objectAtIndex:i];
+        replyLabel.text = item.comment;
         self.replyLabel = replyLabel;
         [self.contentView addSubview:replyLabel];
         [self.replysView addObject:replyLabel];
         
         UIImageView *replyIcon = [[UIImageView alloc] init];
-        replyIcon.image = [UIImage imageNamed:@"范冰冰"];
+        replyIcon.layer.masksToBounds = YES;
+        replyIcon.layer.cornerRadius = 15;
+        replyIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",item.icon]];
         [self.contentView addSubview:replyIcon];
         self.replyIcon = replyIcon;
         [self.replyIconView addObject:replyIcon];
         
         UILabel *replyName = [[UILabel alloc] init];
-        replyName.text = @"范冰冰";
+        replyName.text = item.name;
+        replyName.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
         replyName.font = [UIFont systemFontOfSize:14];
-//        self.replyNameLabel = replyName;
         [self.contentView addSubview:replyName];
         [self.replyNameView addObject:replyName];
     }

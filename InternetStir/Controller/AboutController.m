@@ -127,6 +127,17 @@
     appWebSite.font = [UIFont systemFontOfSize:14];
     [appWebSite setTextColor:[MMSystemHelper string2UIColor:COLOR_SPLASH_FT_INFO]];
     [self.view addSubview:appWebSite];
+    
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
+
+}
+- (void)clickBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

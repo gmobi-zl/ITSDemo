@@ -41,12 +41,14 @@
     }
     return self;
 }
--(void)showDataWithModel{
+-(void)showDataWithModel:(NSInteger)index{
+    
+    NSArray *titleArr = @[@"為什麼台灣還不能下載Pokemon Go啊?!!(惱怒)只好先來個真人版過過乾癮了~",@"哈哈哈~ 全台灣都在瘋Pokemon Go的症候群，Level從1到10，你已經第幾級了呀? 今天起床我第一件事，就是先看我的道場有沒有被打來? 嗯... 我已經走火入魔的第8級了 XDDD",@"如果Line聊天群組真人化！(蔡阿嘎 X HTC10)",@"日本超商10大必買零食飲料！(蔡阿嘎真心推薦)",@"嘎名人落台語10：蔡阿嘎X玖壹壹。911出道至今最犧牲演出！"];
     
     self.titleLabel.frame = CGRectMake(15, 10, self.bounds.size.width - 30, 0);
     self.titleLabel.font = [UIFont systemFontOfSize:18];
     self.titleLabel.textColor = [UIColor blackColor];
-    self.titleLabel.text = @"ee WE FE  V RFA EWGFJEFBOEWB EBFJ PWJEBF JBEJABRJQRBGAV P  NQRJGN PJQB PRJE BGPJERBG J PQJERNG NREJQPGBG";
+    self.titleLabel.text = titleArr[index];
     self.titleLabel.numberOfLines = 2;
     
     CGSize size = [self.titleLabel sizeThatFits:CGSizeMake(self.titleLabel.bounds.size.width, MAXFLOAT)];
@@ -56,7 +58,7 @@
     self.titleLabel.frame = frame;
 
     self.icon.frame = CGRectMake(15, size.height + 10 , [[UIScreen mainScreen] bounds].size.width - 30,  9 * ([[UIScreen mainScreen] bounds].size.width - 30)/16);
-    self.icon.image = [UIImage imageNamed:@"news_featured_nonpicture"];
+    self.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg",index]];
     
     self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 10, 40, 20);
     self.sourceLabel.font = [UIFont systemFontOfSize:10];

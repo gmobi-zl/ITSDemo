@@ -9,6 +9,9 @@
 #import "ContentController.h"
 #import "ContentViewCell.h"
 #import "MMSystemHelper.h"
+#import "DetailContentController.h"
+#import "ITSAppConst.h"
+#import "MenuViewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -31,6 +34,37 @@ NSString *const ContentCellIdentifier = @"ContentCell";
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     [self.view addSubview:self.tableView];
     
+    self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
+                    @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
+                    @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
+                    @"https://www.youtube.com/watch?v=veBjTuLDzF0",
+                    @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
+    
+    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
+    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+    [self.navigationController.navigationBar addSubview:statusBarView];
+    
+}
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     @{NSFontAttributeName:[UIFont systemFontOfSize:19],
+       
+       NSForegroundColorAttributeName:[UIColor blackColor]}];
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
+
+}
+- (void)pushMenu{
+    
+    MenuViewController *menu = [[MenuViewController alloc] init];
+    [self.navigationController pushViewController:menu animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -38,7 +72,7 @@ NSString *const ContentCellIdentifier = @"ContentCell";
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 10;
+    return 5;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -48,11 +82,18 @@ NSString *const ContentCellIdentifier = @"ContentCell";
         cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentCellIdentifier];
     }
     ContentViewCell* tmpCell = (ContentViewCell*)cell;
-    [tmpCell showDataWithModel];
+    [tmpCell showDataWithModel:indexPath.row];
     
     return tmpCell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    DetailContentController *detail = [[DetailContentController alloc] init];
+    detail.path = self.urlArr[indexPath.row];
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
