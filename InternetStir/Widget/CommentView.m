@@ -46,7 +46,7 @@
     [self.button addTarget:self action:@selector(pushKeyboard) forControlEvents:UIControlEventTouchUpInside];
     self.button.titleLabel.font = [UIFont systemFontOfSize: 14.0];
     self.button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
+    
     self.button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 25);
     self.button.imageEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 30);
     UIImage* backIcon = [UIImage imageNamed:@"icon_Edit"];

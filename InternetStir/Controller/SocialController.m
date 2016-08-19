@@ -31,16 +31,23 @@
     
     CGFloat space = (screenW - 5*30)/(5 + 1);
     
-    UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(0, 0, screenW, 40);
-    view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:view];
+    self.bgView = [[UIView alloc] init];
+    self.bgView.frame = CGRectMake(0, 0, screenW, 40);
+    self.bgView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.bgView];
+    NSArray *image = @[@"social_fb",@"social_g+",@"social_yt",@"social_in",@"social_blog"];
+    NSArray *selectImage = @[@"social_fb_sel",@"social_g+_sel",@"social_yt_sel",@"social_in_sel",@"social_blog_sel"];
     for (NSInteger i = 0; i < 5; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        button.frame = CGRectMake(space + i * (30 + space), 5, 30, 30);
-        [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.tag = i;
-        [view addSubview:button];
+        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btn.frame = CGRectMake(space + i * (30 + space), 5, 30, 30);
+        [self.btn setBackgroundImage:[UIImage imageNamed:image[i]] forState:UIControlStateNormal];
+        [self.btn setImage:[UIImage imageNamed:selectImage[i]] forState:UIControlStateSelected];
+        [self.btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        self.btn.tag = i + 100;
+        if (i == 0) {
+            self.btn.selected  = YES;
+        }
+        [self.view addSubview:self.btn];
     }
     self.webView = [[UIWebView alloc] init];
     self.webView.frame = CGRectMake(0, 40, screenW, screenH - 104);
@@ -53,8 +60,23 @@
     [self.navigationController.navigationBar addSubview:statusBarView];
 
 }
-- (void)btnClick:(UIButton *)button{
-    NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:button.tag]];
+- (void)btnClick:(UIButton *)btn{
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:100];
+    if (btn.tag != 0) {
+        button.selected = NO;
+    }
+    if (self.button == nil) {
+        btn.selected = YES;
+        self.button = btn;
+    }else if (self.button != nil && self.button == btn){
+        btn.selected = YES;
+    }else if (self.button != btn && self.button != nil){
+        self.button.selected = NO;
+        btn.selected = YES;
+        self.button = btn;
+    }
+    NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:btn.tag - 100]];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 - (void)viewWillAppear:(BOOL)animated{

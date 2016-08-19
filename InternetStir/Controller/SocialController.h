@@ -11,4 +11,7 @@
 @interface SocialController : UIViewController
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UIButton *btn;
+@property (nonatomic, strong) UIView *bgView;
 @end
