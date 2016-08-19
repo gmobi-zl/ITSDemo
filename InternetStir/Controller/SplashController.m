@@ -51,9 +51,11 @@
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushNextVc)];
-    [self.bgImage addGestureRecognizer:tap];
+    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushNextVc)];
+    //[self.bgImage addGestureRecognizer:tap];
 }
+
+
 -(void) pushNextVc{
 
 //    ViewController *vc = [[ViewController alloc] init];
@@ -61,10 +63,20 @@
     TabBarController *tabBar = [[TabBarController alloc] init];
     [self.navigationController pushViewController:tabBar animated:YES];
 }
+
+-(void) delayToHome{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self pushNextVc];
+    });
+}
+
+
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
+    
+    [self delayToHome];
 }
 
 -(void) viewWillAppear:(BOOL)animated{

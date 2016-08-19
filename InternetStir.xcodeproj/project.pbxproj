@@ -950,7 +950,7 @@
 					"$(PROJECT_DIR)/InternetStir/Frameworks/GoogleAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmobi.InternetStir;
+				PRODUCT_BUNDLE_IDENTIFIER = pub.celeb.tw001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -973,7 +973,7 @@
 					"$(PROJECT_DIR)/InternetStir/Frameworks/GoogleAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmobi.InternetStir;
+				PRODUCT_BUNDLE_IDENTIFIER = pub.celeb.tw001;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
