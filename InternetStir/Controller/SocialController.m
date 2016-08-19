@@ -27,7 +27,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://www.youtube.com/user/kyoko38",@"https://www.instagram.com/yga0721/",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"http://yga0721.pixnet.net/blog"];
+    self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.youtube.com/user/kyoko38",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
     
     CGFloat space = (screenW - 5*30)/(5 + 1);
     
