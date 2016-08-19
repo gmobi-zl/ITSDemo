@@ -12,6 +12,35 @@
 #define padding 10
 
 @implementation DetailCommentFrame
+- (void)setItem:(ReplyItem *)item{
+    _item = item;
+    CGFloat screenW = [MMSystemHelper getScreenWidth];
+    CGFloat iconViewX = padding + 5;
+    CGFloat iconViewY = padding + 5;
+    CGFloat iconViewWidth = 40;
+    CGFloat iconViewHeight = 40;
+    self.iconF = CGRectMake(iconViewX, iconViewY , iconViewWidth, iconViewHeight);
+    
+    //nameF昵称
+    CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:self.item.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+    CGFloat nameLabelY = iconViewY;
+    CGFloat nameLabelWidth = nameLabelSize.width;
+    CGFloat nameLabelHeight = nameLabelSize.height;
+    self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight);
+    
+    //正文
+    CGFloat contentLabelX = nameLabelX;
+    CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
+    CGSize contentLabelSize = [MMSystemHelper sizeWithString:self.item.comment font:[UIFont systemFontOfSize:12 ] maxSize:CGSizeMake(screenW - nameLabelX - padding, MAXFLOAT)];
+    CGFloat contentLabelWidth = contentLabelSize.width;
+    CGFloat contentLabelHeight = contentLabelSize.height;
+    self.contentF = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
+    
+    self.cellHeight = CGRectGetMaxY(self.contentF) + padding;
+
+    self.lineF = CGRectMake(0, self.cellHeight - 0.5, screenW, 0.5);
+}
 - (void)setDetailCommentItem:(DetailCommentItem *)detailCommentItem{
     _detailCommentItem = detailCommentItem;
     CGFloat screenW = [MMSystemHelper getScreenWidth];

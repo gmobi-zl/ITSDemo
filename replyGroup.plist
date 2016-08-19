@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
+			<key>icon</key>
+			<string>a-1</string>
+			<key>name</key>
+			<string>蔡阿嘎</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>a-9.jpg</string>
+			<key>name</key>
+			<string>汪士硯</string>
+			<key>comment</key>
+			<string>當初 吃到吐</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>你不說我都不知道原來波卡改叫樂事了！我以為它停產了因為買不到😓
+我也跟阿嘎一樣收集了神奇寶貝的卡片耶😃我都叫它炫風卡</string>
+			<key>name</key>
+			<string>許妤婕</string>
+			<key>icon</key>
+			<string>a-6.jpg</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
+			<key>icon</key>
+			<string>a-1</string>
+			<key>name</key>
+			<string>蔡阿嘎</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>汪士硯</string>
+			<key>icon</key>
+			<string>a-9</string>
+			<key>comment</key>
+			<string>當初 吃到吐</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>你不說我都不知道原來波卡改叫樂事了！我以為它停產了因為買不到😓
+我也跟阿嘎一樣收集了神奇寶貝的卡片耶😃我都叫它炫風卡</string>
+			<key>name</key>
+			<string>許妤婕</string>
+			<key>icon</key>
+			<string>a-6</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
+			<key>icon</key>
+			<string>a-1</string>
+			<key>name</key>
+			<string>蔡阿嘎</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>許妤婕</string>
+			<key>comment</key>
+			<string>賺很大喔~哈哈哈哈哈哈哈哈哈</string>
+			<key>icon</key>
+			<string>a-6.jpg</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>哈哈~ 眼尖的鄉親應該有發現，不久前我們悄悄地搬家啦!!! 告別室友，跟嘎嫂二伯開始害羞的小夫妻同居生活啦!! 從無到有，佈置傢俱的過程，用縮時攝影跟大家分享!! 呵呵~</string>
+			<key>icon</key>
+			<string>a-1</string>
+			<key>name</key>
+			<string>蔡阿嘎</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>以後回家後要會面4秒就合體嗎？</string>
+			<key>name</key>
+			<string>朱啟菖</string>
+			<key>icon</key>
+			<string>b-12.jpg</string>
+		</dict>
+		<dict>
+			<key>icon</key>
+			<string>b-9.jpg</string>
+			<key>name</key>
+			<string>無聊過一天</string>
+			<key>comment</key>
+			<string>早生貴子</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>賺很大喔~哈哈哈哈哈哈哈哈哈</string>
+			<key>name</key>
+			<string>Jiayu Dai</string>
+			<key>icon</key>
+			<string>b-6.jpg</string>
+		</dict>
+	</array>
+</array>
+</plist>

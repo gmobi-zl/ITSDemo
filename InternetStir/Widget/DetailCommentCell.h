@@ -20,5 +20,6 @@
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyNameLabel;
 @property (nonatomic, strong) UIImageView *replyIcon;
-@property (nonatomic,strong)  UIImageView *replyBackgroundView;
+@property (nonatomic, strong) UIImageView *replyBackgroundView;
+@property (nonatomic, strong) UILabel *line;
 @end

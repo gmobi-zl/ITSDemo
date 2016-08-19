@@ -38,6 +38,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 104);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView registerClass:[DetailCommentCell class] forCellReuseIdentifier:DetailCommentTableViewCellIdentifier];
     [self.view addSubview:self.tableView];
     
@@ -46,6 +47,9 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
     [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
     self.commentView.delegate = self;
     [self.view addSubview:self.commentView];
+    [self writeClick];
+    
+//    self.replyData = [[NSMutableArray alloc] init];
 }
 - (void)push{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择", nil];
@@ -91,35 +95,45 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 -(NSMutableArray *)commentData
 {
     if (!_commentData) {
-        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"FamilyGroup.plist" ofType:nil];
+        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
         NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
-        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dictArray count]];
-        for (NSDictionary *dict in dictArray) {
-            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
-            DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
-            commentItem.replys = [[NSMutableArray alloc] init];
-            commentItem.name = [dict objectForKey:@"name"];
-            commentItem.icon = [dict objectForKey:@"icon"];
-            commentItem.pictures = [dict objectForKey:@"pictures"];
-            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
-            NSMutableArray *reply = [dict objectForKey:@"replys"];
-            for (NSDictionary *dic in reply) {
-                ReplyItem *item = [[ReplyItem alloc] init];
-                item.name = [dic objectForKey:@"name"];
-                item.comment = [dic objectForKey:@"comment"];
-                item.icon = [dic objectForKey:@"icon"];
-                [item setValuesForKeysWithDictionary:dic];
-                commentItem.item = item;
-                [commentItem.replys addObject:item];
-            }
-            commentFrame.detailCommentItem = commentItem;
+        NSArray *dataArr = [dictArray objectAtIndex:self.index];
+        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
+        for (NSDictionary *dict in dataArr) {
+            ReplyItem *item = [[ReplyItem alloc] init];
             
+//            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
+            DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
+            item.name = [dict objectForKey:@"name"];
+            item.icon = [dict objectForKey:@"icon"];
+            item.comment = [dict objectForKey:@"comment"];
+            commentFrame.item = item;
             [models addObject:commentFrame];
+//            commentItem.replys = [[NSMutableArray alloc] init];
+//            commentItem.name = [dict objectForKey:@"name"];
+//            commentItem.icon = [dict objectForKey:@"icon"];
+//            commentItem.pictures = [dict objectForKey:@"pictures"];
+//            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
+//            NSMutableArray *reply = [dict objectForKey:@"replys"];
+//            for (NSDictionary *dic in reply) {
+//                ReplyItem *item = [[ReplyItem alloc] init];
+//                item.name = [dic objectForKey:@"name"];
+//                item.comment = [dic objectForKey:@"comment"];
+//                item.icon = [dic objectForKey:@"icon"];
+//                [item setValuesForKeysWithDictionary:dic];
+//                commentItem.item = item;
+//                [commentItem.replys addObject:item];
+//            }
+//            commentFrame.detailCommentItem = commentItem;
+            
+//            [models addObject:commentFrame];
         }
         _commentData = [models copy];
+        
     }
-    //NSLog(@"%lu",(unsigned long)[_statusFrames count]);
-    return _commentData;}
+
+    return _commentData;
+}
 
 - (void)writeNewComment{
     
@@ -141,16 +155,16 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                      Block:^(NSString *contentStr)
      {
          DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
-         DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
+         ReplyItem *commentItem = [[ReplyItem alloc] init];
          commentItem.name = @"孙燕姿";
          commentItem.icon = @"高圆圆";
-         commentItem.replys = 0;
-         commentItem.shuoshuoText = contentStr;
-         FrameNeedChanged.detailCommentItem = commentItem;
+//         commentItem.replys = 0;
+         commentItem.comment = contentStr;
+         FrameNeedChanged.item = commentItem;
          //        familyGroupFrameNeedChanged.
          NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
          
-         [mutaArray insertObject:FrameNeedChanged atIndex:0];
+         [mutaArray insertObject:FrameNeedChanged atIndex:self.commentData.count];
          self.commentData = mutaArray;
          
          [self.tableView reloadData];

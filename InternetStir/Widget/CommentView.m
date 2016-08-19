@@ -33,7 +33,7 @@
     self.icon.frame = CGRectMake(10, 5, 30, 30);
     [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo"] forState:UIControlStateNormal];
     [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo_sel"] forState:UIControlStateHighlighted];
-    [self addSubview:self.icon];
+//    [self addSubview:self.icon];
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.button setTitle:@"留言..." forState:UIControlStateNormal];

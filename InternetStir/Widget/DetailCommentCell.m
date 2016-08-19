@@ -29,7 +29,7 @@
         
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.numberOfLines = 0;
-        self.commentLabel.font = [UIFont systemFontOfSize:14];
+        self.commentLabel.font = [UIFont systemFontOfSize:12];
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
@@ -45,6 +45,11 @@
         self.replyBackgroundView = [[UIImageView alloc] init];
 //        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:self.replyBackgroundView];
+        
+        self.line = [[UILabel alloc] init];
+        self.line.backgroundColor = [UIColor grayColor];
+        self.line.alpha = 0.4;
+        [self.contentView addSubview:self.line];
     }
     return self;
 }
@@ -82,36 +87,37 @@
 }
 -(void)settingtData
 {
-    DetailCommentItem *comment = self.detailCommentFrame.detailCommentItem;
-    self.icon.image = [UIImage imageNamed:comment.icon];
-    self.nameLabel.text = comment.name;
-    self.commentLabel.text = comment.shuoshuoText;
-    for (NSInteger i = 0; i < comment.replys.count; i++) {
-        
-        ReplyItem *item = [comment.replys objectAtIndex:i];
-        UILabel *replyLabel = [[UILabel alloc]init];
-        replyLabel.font = [UIFont systemFontOfSize:12];
-        replyLabel.numberOfLines = 0;
-        replyLabel.text = item.comment;
-        self.replyLabel = replyLabel;
-        [self.contentView addSubview:replyLabel];
-        [self.replysView addObject:replyLabel];
-        
-        UIImageView *replyIcon = [[UIImageView alloc] init];
-        replyIcon.layer.masksToBounds = YES;
-        replyIcon.layer.cornerRadius = 15;
-        replyIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",item.icon]];
-        [self.contentView addSubview:replyIcon];
-        self.replyIcon = replyIcon;
-        [self.replyIconView addObject:replyIcon];
-        
-        UILabel *replyName = [[UILabel alloc] init];
-        replyName.text = item.name;
-        replyName.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
-        replyName.font = [UIFont systemFontOfSize:14];
-        [self.contentView addSubview:replyName];
-        [self.replyNameView addObject:replyName];
-    }
+//    DetailCommentItem *comment = self.detailCommentFrame.detailCommentItem;
+    ReplyItem *item = self.detailCommentFrame.item;
+    self.icon.image = [UIImage imageNamed:item.icon];
+    self.nameLabel.text = item.name;
+    self.commentLabel.text = item.comment;
+//    for (NSInteger i = 0; i < comment.replys.count; i++) {
+//        
+//        ReplyItem *item = [comment.replys objectAtIndex:i];
+//        UILabel *replyLabel = [[UILabel alloc]init];
+//        replyLabel.font = [UIFont systemFontOfSize:12];
+//        replyLabel.numberOfLines = 0;
+//        replyLabel.text = item.comment;
+//        self.replyLabel = replyLabel;
+//        [self.contentView addSubview:replyLabel];
+//        [self.replysView addObject:replyLabel];
+//        
+//        UIImageView *replyIcon = [[UIImageView alloc] init];
+//        replyIcon.layer.masksToBounds = YES;
+//        replyIcon.layer.cornerRadius = 15;
+//        replyIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",item.icon]];
+//        [self.contentView addSubview:replyIcon];
+//        self.replyIcon = replyIcon;
+//        [self.replyIconView addObject:replyIcon];
+//        
+//        UILabel *replyName = [[UILabel alloc] init];
+//        replyName.text = item.name;
+//        replyName.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
+//        replyName.font = [UIFont systemFontOfSize:14];
+//        [self.contentView addSubview:replyName];
+//        [self.replyNameView addObject:replyName];
+//    }
 }
 -(void)settingFrame
 {
@@ -128,6 +134,7 @@
     }
     self.commentLabel.frame = self.detailCommentFrame.contentF;
     self.replyBackgroundView.frame = self.detailCommentFrame.replyBackgroundF;
+    self.line.frame = self.detailCommentFrame.lineF;
 }
 -(NSMutableArray *)replysView
 {

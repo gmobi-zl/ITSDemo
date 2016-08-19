@@ -14,7 +14,7 @@
 #import "CommentViewController.h"
 #import "UUInputAccessoryView.h"
 #import "ITSAppConst.h"
-
+#import "DetailCommentFrame.h"
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
@@ -84,7 +84,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     
     CommentViewController *vc = [[CommentViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
-    vc.frame = [self.commentData objectAtIndex:button.tag];
+    vc.index = button.tag;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)tapReply:(UIButton *)button{
@@ -130,7 +130,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
         }
         _commentData = [models copy];
     }
-    //NSLog(@"%lu",(unsigned long)[_statusFrames count]);
+    
     return _commentData;
 }
 
@@ -156,6 +156,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     
     MenuViewController *menu = [[MenuViewController alloc] init];
     menu.hidesBottomBarWhenPushed = YES;
+    
     [self.navigationController pushViewController:menu animated:YES];
 }
 - (void)didReceiveMemoryWarning {

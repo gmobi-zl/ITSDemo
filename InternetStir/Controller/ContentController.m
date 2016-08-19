@@ -28,7 +28,7 @@ NSString *const ContentCellIdentifier = @"ContentCell";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
+    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 64);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
