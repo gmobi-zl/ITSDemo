@@ -10,4 +10,5 @@
 
 @interface SocialController : UIViewController
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) NSArray *dataArr;
 @end

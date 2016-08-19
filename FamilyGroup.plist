@@ -7,113 +7,126 @@
 		<string>43分钟前</string>
 		<key>replys</key>
 		<array>
-			<string>任泉    11111111111111111111</string>
-			<string> 赵薇   黑乎乎的很多很多很多很多很多很多很多很多很多很多好的好</string>
+			<dict>
+				<key>icon</key>
+				<string>a-9</string>
+				<key>comment</key>
+				<string>當初 吃到吐</string>
+				<key>name</key>
+				<string>汪士硯</string>
+			</dict>
+			<dict>
+				<key>comment</key>
+				<string>你不說我都不知道原來波卡改叫樂事了！我以為它停產了因為買不到😓
+我也跟阿嘎一樣收集了神奇寶貝的卡片耶😃我都叫它炫風卡</string>
+				<key>name</key>
+				<string>許妤婕</string>
+				<key>icon</key>
+				<string>a-6</string>
+			</dict>
 		</array>
 		<key>pictures</key>
-		<string>picture4</string>
+		<string>a-3.jpg</string>
 		<key>shuoshuoText</key>
-		<string>范冰冰   不带老婆度假的后果</string>
+		<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
 		<key>name</key>
-		<string>范冰冰</string>
+		<string>蔡阿嘎</string>
 		<key>icon</key>
-		<string>范冰冰</string>
+		<string>a-1</string>
 	</dict>
 	<dict>
 		<key>time</key>
 		<string>5小时前</string>
 		<key>replys</key>
 		<array>
-			<string>汪峰   及金额金额金额金额金额金额金额金额金额金额及金额金额金额及诶诶金额金额金额金额金额金额及</string>
+			<dict>
+				<key>name</key>
+				<string>汪士硯</string>
+				<key>icon</key>
+				<string>a-9</string>
+				<key>comment</key>
+				<string>當初 吃到吐</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>許妤婕</string>
+				<key>comment</key>
+				<string>你不說我都不知道原來波卡改叫樂事了！我以為它停產了因為買不到😓
+我也跟阿嘎一樣收集了神奇寶貝的卡片耶😃我都叫它炫風卡</string>
+				<key>icon</key>
+				<string>a-6</string>
+			</dict>
 		</array>
 		<key>pictures</key>
-		<string>picture4</string>
+		<string>a-3.jpg</string>
 		<key>shuoshuoText</key>
-		<string>范冰冰  不带老婆度假的后果</string>
+		<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
 		<key>name</key>
-		<string>范冰冰</string>
+		<string>蔡阿嘎</string>
 		<key>icon</key>
-		<string>范冰冰</string>
+		<string>a-1</string>
 	</dict>
 	<dict>
 		<key>time</key>
 		<string>23小时前</string>
 		<key>replys</key>
 		<array>
-			<string>高圆圆   是计算机上计算机上计算机上计算机上计算机上计算机上计算机上计算机上计算机上计算机上</string>
-			<string> 王宝强  的基督教的基督教的基督教打交道的基督教的基督教的基督教的</string>
+			<dict>
+				<key>icon</key>
+				<string>a-6</string>
+				<key>comment</key>
+				<string>賺很大喔~哈哈哈哈哈哈哈哈哈</string>
+				<key>name</key>
+				<string>許妤婕</string>
+			</dict>
 		</array>
 		<key>pictures</key>
-		<string>picture4</string>
+		<string>a-3.jpg</string>
 		<key>shuoshuoText</key>
-		<string> 范冰冰  不带老婆度假的后果</string>
+		<string>15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD</string>
 		<key>name</key>
-		<string>范冰冰</string>
+		<string>蔡阿嘎</string>
 		<key>icon</key>
-		<string>范冰冰</string>
+		<string>a-1</string>
 	</dict>
 	<dict>
 		<key>time</key>
 		<string>昨天</string>
 		<key>replys</key>
 		<array>
-			<string> 王宝强  的基督教的基督教的基督教打交道的基督教的基督教的基督教的</string>
+			<dict>
+				<key>comment</key>
+				<string>以後回家後要會面4秒就合體嗎？</string>
+				<key>name</key>
+				<string>朱啟菖</string>
+				<key>icon</key>
+				<string>b-12</string>
+			</dict>
+			<dict>
+				<key>comment</key>
+				<string>早生貴子</string>
+				<key>name</key>
+				<string>無聊過一天</string>
+				<key>icon</key>
+				<string>b-9</string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Jiayu Dai</string>
+				<key>comment</key>
+				<string>賺很大喔~哈哈哈哈哈哈哈哈哈</string>
+				<key>icon</key>
+				<string>b-6</string>
+			</dict>
 		</array>
 		<key>pictures</key>
-		<string>picture1</string>
+		<string>b-3</string>
 		<key>shuoshuoText</key>
-		<string>不带老婆度假的后果</string>
+		<string>哈哈~ 眼尖的鄉親應該有發現，不久前我們悄悄地搬家啦!!! 告別室友，跟嘎嫂二伯開始害羞的小夫妻同居生活啦!! 從無到有，佈置傢俱的過程，用縮時攝影跟大家分享!! 呵呵~</string>
 		<key>name</key>
-		<string>范冰冰</string>
+		<string>蔡阿嘎</string>
 		<key>icon</key>
-		<string>范冰冰</string>
-	</dict>
-	<dict>
-		<key>time</key>
-		<string>昨天</string>
-		<key>replys</key>
-		<array/>
-		<key>pictures</key>
-		<string>picture4</string>
-		<key>shuoshuoText</key>
-		<string>不带老婆度假的后果</string>
-		<key>name</key>
-		<string>范冰冰</string>
-		<key>icon</key>
-		<string>范冰冰</string>
-	</dict>
-	<dict>
-		<key>time</key>
-		<string>两天前</string>
-		<key>replys</key>
-		<array>
-			<string>高圆圆   谁谁谁谁谁谁水水水水哈哈哈哈哈哈哈哈哈哈哈哈</string>
-		</array>
-		<key>pictures</key>
-		<string>picture4</string>
-		<key>shuoshuoText</key>
-		<string>林峰   我就在这里带着你很值得，一切都不可思议，因为爱的只有你，我遗失了自己</string>
-		<key>name</key>
-		<string>林峰</string>
-		<key>icon</key>
-		<string>林峰</string>
-	</dict>
-	<dict>
-		<key>time</key>
-		<string>3天前</string>
-		<key>replys</key>
-		<array>
-			<string>范冰冰：我没有说谎，是爱情说谎，他太依赖，骗我说有可能有希望，我没有说谎，是很感谢今晚的相伴，但我竟然有些不习惯</string>
-			<string>林峰：你算什么男人，算什么男人，眼睁睁看她走却不闻不问，是有多天真，就别再硬撑，期待你挽回你却拱手让人</string>
-		</array>
-		<key>pictures</key>
-		<string>picture4</string>
-		<key>shuoshuoText</key>
-		<string> 高圆圆  我爱你，是忠于自己忠于爱情的信仰，我爱你，是那么温暖那么温柔的力量，爱是一种信仰，把你，带回我的身旁</string>
-		<key>name</key>
-		<string>高圆圆</string>
-		<key>icon</key>
-		<string>高圆圆</string>
+		<string>a-1</string>
 	</dict>
 </array>
 </plist>

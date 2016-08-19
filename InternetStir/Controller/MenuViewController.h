@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *bgImage;
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UITableView *tableView;

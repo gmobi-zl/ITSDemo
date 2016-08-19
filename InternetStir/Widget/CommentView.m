@@ -30,18 +30,30 @@
     [self addSubview:line];
     
     self.icon = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.icon.frame = CGRectMake(10, 10, 20, 20);
-    [self.icon setBackgroundImage:[UIImage imageNamed:@"list_2"] forState:UIControlStateNormal];
+    self.icon.frame = CGRectMake(10, 5, 30, 30);
+    [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo"] forState:UIControlStateNormal];
+    [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo_sel"] forState:UIControlStateHighlighted];
     [self addSubview:self.icon];
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.button setTitle:@"留言..." forState:UIControlStateNormal];
-    self.button.frame = CGRectMake(50, 5, screenW - 50, 30);
+    self.button.frame = CGRectMake(50, 5, screenW - 80, 30);
+    self.button.layer.masksToBounds = YES;
+    self.button.layer.cornerRadius = 5;
+    self.button.layer.borderWidth = 1;
+    self.button.backgroundColor = [UIColor whiteColor];
     [self.button setTitleColor:[MMSystemHelper string2UIColor:@"#ececec"]forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(pushKeyboard) forControlEvents:UIControlEventTouchUpInside];
     self.button.titleLabel.font = [UIFont systemFontOfSize: 14.0];
     self.button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
+    self.button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 25);
+    self.button.imageEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 30);
+    UIImage* backIcon = [UIImage imageNamed:@"icon_Edit"];
+    [self.button setImage:backIcon forState:UIControlStateNormal];
+    [self addSubview:self.button];
+
+    
     [self addSubview:self.button];
 
 }

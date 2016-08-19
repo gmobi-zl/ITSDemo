@@ -9,6 +9,7 @@
 #import "CommentFrame.h"
 #import "MMSystemHelper.h"
 #define padding 10
+
 @implementation CommentFrame
 - (void) setCommentItem:(CommentItem *)commentItem{
 
@@ -23,34 +24,47 @@
     
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:self.commentItem.name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
-    CGFloat nameLabelY = iconViewHeight / 2 + 5;
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:self.commentItem.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+    CGFloat nameLabelY = iconViewHeight / 2 + 12;
     CGFloat nameLabelWidth = nameLabelSize.width;
     CGFloat nameLabelHeight = nameLabelSize.height;
     self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight);
 
-    self.photoF = CGRectMake(10, iconViewY + iconViewHeight + 5, screenW - 20, 9 * (screenW - 20) / 16);
+    self.photoF = CGRectMake(0, iconViewY + iconViewHeight + 3, screenW, 9 * (screenW - 20) / 16);
     self.cellHeight = CGRectGetMaxY(self.photoF) + padding;
 
-    
-    CGFloat contentH = [MMSystemHelper sizeWithString:self.commentItem.shuoshuoText font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 20, MAXFLOAT)].height;
-    self.contentF = CGRectMake(10, self.cellHeight, screenW - 20, contentH);
-    self.cellHeight = CGRectGetMaxY(self.contentF) + padding;
-
+    CGSize size = [MMSystemHelper sizeWithString:self.commentItem.shuoshuoText font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 120, MAXFLOAT)];
+    CGFloat contentH = size.height;
+    self.userNameF = CGRectMake(50, self.cellHeight + padding/2 + 2, 50, 20);
+    self.imageF = CGRectMake(10, self.cellHeight, 30, 30);
+    self.contentF = CGRectMake(100, self.cellHeight + padding,size.width, contentH);
+    if (contentH > 30) {
+         self.cellHeight = CGRectGetMaxY(self.contentF) + padding;
+    }else{
+        self.cellHeight = CGRectGetMaxY(self.imageF) + padding;
+    }
     
     if ([self.commentItem.replys count]) {
         for (int i = 0; i < [self.commentItem.replys count]; i++) {
-            CGSize replyLabelSize = [MMSystemHelper sizeWithString:[self.commentItem.replys objectAtIndex:i] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 20, MAXFLOAT)];
-            CGFloat replyLabelY = self.cellHeight;
+            
+            ReplyItem *item = [self.commentItem.replys objectAtIndex:i];
+
+            CGRect pictureF = CGRectMake(10, self.cellHeight, 30, 30);
+            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT, 20)];
+            CGRect nameF = CGRectMake(50, self.cellHeight + 5, size.width, 20);
+            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 120, MAXFLOAT)];
+            CGFloat replyLabelY = nameF.origin.y;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;
-            self.cellHeight += padding +replyLabelHeight;
-            CGRect replyF = CGRectMake(10, replyLabelY, replyLabelWidth, replyLabelHeight);
+            self.cellHeight += replyLabelHeight + 2 * padding;
+            CGRect replyF = CGRectMake(50 + size.width + 10, replyLabelY + 3, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
+            [self.replyIconF addObject:[NSValue valueWithCGRect:pictureF]];
+            [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];
         }
     }
     CGFloat buttonW = [MMSystemHelper sizeWithString:@"查看更多留言" font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
-    self.buttonF = CGRectMake(screenW - buttonW - 20, self.cellHeight, buttonW, 30);
+    self.buttonF = CGRectMake(screenW/2 - buttonW/2, self.cellHeight, buttonW, 30);
     self.cellHeight = CGRectGetMaxY(self.buttonF) + padding;
 }
 -(NSMutableArray *)replysF
@@ -59,5 +73,17 @@
         _replysF = [[NSMutableArray alloc]init];
     }
     return _replysF;
+}
+-(NSMutableArray *)replyNameF{
+    if (!_replyNameF) {
+        _replyNameF = [[NSMutableArray alloc] init];
+    }
+    return _replyNameF;
+}
+-(NSMutableArray *)replyIconF{
+    if (!_replyIconF) {
+        _replyIconF = [[NSMutableArray alloc] init];
+    }
+    return _replyIconF;
 }
 @end

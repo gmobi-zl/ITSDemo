@@ -29,6 +29,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"粉絲小幫手";
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+
 //    self.headerBg = [[UIView alloc] init];
 //    self.headerBg.frame = CGRectMake(0, -20, self.view.bounds.size.width, 20);
 //    [self.navigationController.navigationBar addSubview:self.headerBg];
@@ -36,7 +40,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.headerBg.backgroundColor = [UIColor grayColor];
     //    [self.navigationController.navigationBar addSubview:self.headerBg];
     self.bgImage = [[UIImageView alloc] init];
-    self.bgImage.frame = CGRectMake(0, 64, screenW, screenH/3);
+    self.bgImage.frame = CGRectMake(0, 0, screenW, screenH/3);
     self.bgImage.backgroundColor = [UIColor grayColor];
     self.bgImage.contentMode = UIViewContentModeScaleToFill;
     self.bgImage.userInteractionEnabled = YES;
@@ -53,7 +57,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 
     [self creatButton];
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH -screenH/3-104);
+    self.tableView.frame = CGRectMake(0,screenH/3 + 38, screenW, screenH -screenH/3-104);
     self.tableView.rowHeight = 60;
     self.tableView.hidden = YES;
     self.tableView.delegate = self;
@@ -61,12 +65,12 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.tableView.hidden = NO;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView registerClass:[MenuViewCell class] forCellReuseIdentifier:MenuTableViewCellIdentifier];
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.loginButton.frame = CGRectMake(120, screenH - 250, screenW - 240, 40);
+    self.loginButton.frame = CGRectMake(120, screenH - 270, screenW - 240, 40);
     [self.loginButton addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
-    self.loginButton.backgroundColor = [UIColor yellowColor];
+    self.loginButton.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.loginButton.layer.masksToBounds = YES;
     self.loginButton.layer.cornerRadius = 8;
@@ -85,6 +89,17 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.label.hidden = YES;
     self.label.font = [UIFont systemFontOfSize:12];
     [self.view addSubview:self.label];
+    
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
+}
+- (void)clickBack{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)pushLoginVc{
     
@@ -109,7 +124,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     for(NSInteger i = 0;i < 3;i++)
     {
         UIButton *but = [UIButton buttonWithType:UIButtonTypeSystem];
-        but.frame = CGRectMake(screenW/3 * i , screenH/3 + 64, screenW/3, 38);
+        but.frame = CGRectMake(screenW/3 * i , screenH/3 , screenW/3, 38);
         [but setTitle:titleArr[i] forState:UIControlStateNormal];
         but.tag = 100 + i;
         [but setTitleColor:[UIColor colorWithRed:3/255.0 green:155/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
@@ -117,7 +132,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         [self.view addSubview:but];
     }
     //3 155 255
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, screenH/3 + 64 + 38, screenW, 2)];
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, screenH/3 + 38, screenW, 2)];
     self.line.backgroundColor = [UIColor colorWithRed:3/255.0 green:155/255.0 blue:255/255.0 alpha:1];
     [self.view addSubview:self.line];
 

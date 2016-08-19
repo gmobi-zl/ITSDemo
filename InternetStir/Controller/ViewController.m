@@ -135,7 +135,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
             cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentTableViewCellIdentifier];
         }
         ContentViewCell* tmpCell = (ContentViewCell*)cell;
-        [tmpCell showDataWithModel];
+        [tmpCell showDataWithModel:indexPath.row];
     }
     return cell;
 }

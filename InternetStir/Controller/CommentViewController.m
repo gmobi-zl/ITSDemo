@@ -20,7 +20,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 
 #define  WEAKSELF  __weak typeof(self) weakSelf = self;
 
-@interface CommentViewController ()
+@interface CommentViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -28,17 +28,21 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"蔡阿嘎";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat screenH = [MMSystemHelper getScreenHeight];
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 40);
+    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 104);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerClass:[DetailCommentCell class] forCellReuseIdentifier:DetailCommentTableViewCellIdentifier];
     [self.view addSubview:self.tableView];
     
-    self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 40, screenW, 40)];
+    self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 104, screenW, 40)];
+    self.commentView.backgroundColor = [UIColor blackColor];
     [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
     self.commentView.delegate = self;
     [self.view addSubview:self.commentView];
@@ -51,12 +55,12 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
     
     [super viewWillAppear:animated];
     
-//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    Btn.frame = CGRectMake(0, 20, 30, 30);
-//    [Btn setBackgroundImage:[UIImage imageNamed:@"navigaton_back"] forState:UIControlStateNormal];
-//    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
-//    self.navigationItem.leftBarButtonItem = left;
+    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    Btn.frame = CGRectMake(0, 20, 30, 30);
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+    self.navigationItem.leftBarButtonItem = left;
 
 }
 - (void)clickBack{
@@ -91,8 +95,23 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
         NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dictArray count]];
         for (NSDictionary *dict in dictArray) {
-            DetailCommentItem *commentItem = [DetailCommentItem familyGroupWithDict:dict];
+            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
             DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
+            commentItem.replys = [[NSMutableArray alloc] init];
+            commentItem.name = [dict objectForKey:@"name"];
+            commentItem.icon = [dict objectForKey:@"icon"];
+            commentItem.pictures = [dict objectForKey:@"pictures"];
+            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
+            NSMutableArray *reply = [dict objectForKey:@"replys"];
+            for (NSDictionary *dic in reply) {
+                ReplyItem *item = [[ReplyItem alloc] init];
+                item.name = [dic objectForKey:@"name"];
+                item.comment = [dic objectForKey:@"comment"];
+                item.icon = [dic objectForKey:@"icon"];
+                [item setValuesForKeysWithDictionary:dic];
+                commentItem.item = item;
+                [commentItem.replys addObject:item];
+            }
             commentFrame.detailCommentItem = commentItem;
             
             [models addObject:commentFrame];
@@ -100,8 +119,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
         _commentData = [models copy];
     }
     //NSLog(@"%lu",(unsigned long)[_statusFrames count]);
-    return _commentData;
-}
+    return _commentData;}
 
 - (void)writeNewComment{
     

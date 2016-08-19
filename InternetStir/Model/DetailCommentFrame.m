@@ -52,10 +52,11 @@
         CGFloat replyLabelX = nameLabelX + padding/2;
         for (int i = 0; i < [self.detailCommentItem.replys count]; i++) {
             
+            ReplyItem *item = [self.detailCommentItem.replys objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight + 5, 100, 20);
             self.cellHeight += 30 + padding/2;
-            CGSize replyLabelSize = [MMSystemHelper sizeWithString:[self.detailCommentItem.replys objectAtIndex:i] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;

@@ -460,15 +460,23 @@
     
     NSMutableArray* chList = [ds getPoNewsChannelList];
     
-    if (chList != nil && [chList count] > 1){
-        SettingItem* edition = [SettingItem alloc];
-        edition.iconName = @"set_edition";
-        
-        edition.settingName = ITS_NSLocalizedString(@"SettingEdition", nil);
-        edition.type = SettingTypeDetail;
-        edition.actionType = SETTING_ACTION_EDITION;
-        [self.settingList addObject:edition];
-    }
+//    if (chList != nil && [chList count] > 1){
+//        SettingItem* edition = [SettingItem alloc];
+//        edition.iconName = @"set_edition";
+//        
+//        edition.settingName = ITS_NSLocalizedString(@"SettingEdition", nil);
+//        edition.type = SettingTypeDetail;
+//        edition.actionType = SETTING_ACTION_EDITION;
+//        [self.settingList addObject:edition];
+//    }
+    SettingItem* edition = [SettingItem alloc];
+    edition.iconName = @"set_edition";
+    
+    edition.settingName = ITS_NSLocalizedString(@"SettingEdition", nil);
+    edition.type = SettingTypeDetail;
+    edition.actionType = SETTING_ACTION_EDITION;
+    [self.settingList addObject:edition];
+
     
     SettingItem* clearCache = [SettingItem alloc];
     clearCache.iconName = @"set_clean";
