@@ -12,6 +12,7 @@
 #import "MMSystemHelper.h"
 #import "ITSAppConst.h"
 #import "MenuViewController.h"
+#import "ConfigService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -32,9 +33,12 @@
     CGFloat space = (screenW - 5*30)/(5 + 1);
     
     self.bgView = [[UIView alloc] init];
-    self.bgView.frame = CGRectMake(0, 0, screenW, 40);
+    self.bgView.frame = CGRectMake(0, 1, screenW, 40);
     self.bgView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.bgView];
+    
+    [self configUI];
+
     NSArray *image = @[@"social_fb",@"social_g+",@"social_yt",@"social_in",@"social_blog"];
     NSArray *selectImage = @[@"social_fb_sel",@"social_g+_sel",@"social_yt_sel",@"social_in_sel",@"social_blog_sel"];
     for (NSInteger i = 0; i < 5; i++) {
@@ -49,19 +53,59 @@
         }
         [self.view addSubview:self.btn];
     }
-    self.webView = [[UIWebView alloc] init];
-    self.webView.frame = CGRectMake(0, 40, screenW, screenH - 104);
-    [self.view addSubview:self.webView];
+//    self.webView = [[WKWebView alloc] init];
+//    self.webView.frame = CGRectMake(0, 40, screenW, screenH - 64 - 49 - 40);
+//    [self.view addSubview:self.webView];
     NSURL *url = [NSURL URLWithString:@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
     UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
     statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     [self.navigationController.navigationBar addSubview:statusBarView];
 
 }
+- (void)configUI {
+    
+    ConfigService *cs = [ConfigService get];
+    // 进度条
+    UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, screenW, 0)];
+    progressView.tintColor = [cs getPrgoressBackgroundColor];
+    progressView.trackTintColor = [UIColor whiteColor];
+    [self.view addSubview:progressView];
+    self.progressView = progressView;
+    
+    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 40, screenW, screenH - 64 - 49 - 40)];
+    wkWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    wkWebView.backgroundColor = [UIColor whiteColor];
+    wkWebView.navigationDelegate = self;
+    [self.view insertSubview:wkWebView belowSubview:progressView];
+    
+    [wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    self.webView = wkWebView;
+    
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"]) {
+        CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
+        if (newprogress == 1) {
+            //            self.progressView.hidden = YES;
+            [self.progressView setProgress:1 animated:NO];
+        }else {
+            self.progressView.hidden = NO;
+            [self.progressView setProgress:newprogress animated:YES];
+        }
+    }
+}
+
+- (void)dealloc {
+    
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    
+}
+
 - (void)btnClick:(UIButton *)btn{
     
+    [self configUI];
+
     UIButton *button = (UIButton *)[self.view viewWithTag:100];
     if (btn.tag != 0) {
         button.selected = NO;
@@ -76,6 +120,7 @@
         btn.selected = YES;
         self.button = btn;
     }
+    
     NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:btn.tag - 100]];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
@@ -98,6 +143,7 @@
 - (void)pushMenu{
 
     MenuViewController *menu = [[MenuViewController alloc] init];
+    menu.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:menu animated:YES];
     
 }

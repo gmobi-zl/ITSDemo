@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "DetailCommentItem.h"
 @interface DetailCommentFrame : NSObject
-@property (nonatomic, strong) ReplyItem *item;
+//@property (nonatomic, strong) ReplyItem *item;
 @property (nonatomic, strong) DetailCommentItem *detailCommentItem;
 @property (nonatomic, assign) CGRect iconF;
 @property (nonatomic, assign) CGRect nameF;

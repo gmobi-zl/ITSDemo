@@ -12,4 +12,6 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *comment;
+@property (nonatomic, assign) int type;
+//@property (strong,nonatomic)NSMutableArray *replys;   //评论
 @end

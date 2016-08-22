@@ -100,14 +100,14 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
         NSArray *dataArr = [dictArray objectAtIndex:self.index];
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
         for (NSDictionary *dict in dataArr) {
-            ReplyItem *item = [[ReplyItem alloc] init];
+            DetailCommentItem *item = [[DetailCommentItem alloc] init];
             
 //            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
             DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
             item.name = [dict objectForKey:@"name"];
             item.icon = [dict objectForKey:@"icon"];
             item.comment = [dict objectForKey:@"comment"];
-            commentFrame.item = item;
+            commentFrame.detailCommentItem = item;
             [models addObject:commentFrame];
 //            commentItem.replys = [[NSMutableArray alloc] init];
 //            commentItem.name = [dict objectForKey:@"name"];
@@ -155,16 +155,16 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                      Block:^(NSString *contentStr)
      {
          DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
-         ReplyItem *commentItem = [[ReplyItem alloc] init];
+         DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
          commentItem.name = @"孙燕姿";
          commentItem.icon = @"高圆圆";
 //         commentItem.replys = 0;
          commentItem.comment = contentStr;
-         FrameNeedChanged.item = commentItem;
+         FrameNeedChanged.detailCommentItem = commentItem;
          //        familyGroupFrameNeedChanged.
          NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
          
-         [mutaArray insertObject:FrameNeedChanged atIndex:self.commentData.count];
+         [mutaArray insertObject:FrameNeedChanged atIndex:1];
          self.commentData = mutaArray;
          
          [self.tableView reloadData];
@@ -188,11 +188,100 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
         cell = [[DetailCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DetailCommentTableViewCellIdentifier];
     }
     DetailCommentCell *tmpCell = (DetailCommentCell*)cell;
+    [tmpCell.bgButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.bgButton.tag = indexPath.row;
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
+
+    for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
+        ((UIImageView *)[tmpCell.replyIconView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.detailCommentFrame.replyPictureF objectAtIndex:i] CGRectValue];
+        tmpCell.replyIcon = [tmpCell.replyIconView objectAtIndex:i];
+        tmpCell.replyIcon.userInteractionEnabled = YES;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, tmpCell.replyIcon.frame.size.width, tmpCell.replyIcon.frame .size.height);
+        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
+        button.userInteractionEnabled = YES;
+        button.tag = indexPath.row;
+        [tmpCell.replyIcon addSubview:button];
+    }
+    for (int i = 0; i < [tmpCell.replyNameView count]; i++) {
+        ((UILabel *)[tmpCell.replyNameView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.detailCommentFrame.replyNameF objectAtIndex:i] CGRectValue];
+        tmpCell.replyNameLabel = [tmpCell.replyNameView objectAtIndex:i];
+        tmpCell.replyNameLabel.userInteractionEnabled = YES;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, tmpCell.replyNameLabel.frame.size.width, tmpCell.replyNameLabel.frame .size.height);
+        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
+        button.userInteractionEnabled = YES;
+        button.tag = indexPath.row;
+        [tmpCell.replyNameLabel addSubview:button];
+    }
     return tmpCell;
 }
+//回复的回复
+- (void)tapReply:(UIButton *)btn{
 
+    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+                                   content:@""
+                                      name:@""
+                                     Block:^(NSString *contentStr)
+     {
+         DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:btn.tag];
+         DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
+         
+         //做个中转
+         NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
+         [mutaArray addObjectsFromArray:newReplyItem.replys];
+         ReplyItem *newsItem = [[ReplyItem alloc] init];
+         newsItem.comment = contentStr;
+         frameNeedChanged.replysF = nil;
+         frameNeedChanged.replyPictureF = nil;
+         frameNeedChanged.replyNameF = nil;
+         newsItem.name = @"高圆圆";
+         newsItem.icon = @"高圆圆";
+         [mutaArray addObject:newsItem];
+         newReplyItem.replys = mutaArray;
+         newsItem.type = 2;
+         frameNeedChanged.detailCommentItem = newReplyItem;
+         [self.tableView reloadData];
+     }];
+}
+- (void)replyClick:(UIButton *)btn {
+    
+    if (btn.tag == 0) {
+        [self writeNewComment];
+    }else{
+        [self replyToreply:btn.tag];
+    }
+}
 
+//粉丝互相回复
+- (void)replyToreply :(NSInteger)index{
+    
+    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+                                   content:@""
+                                      name:@""
+                                     Block:^(NSString *contentStr)
+     {
+         DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];
+         DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
+         
+         //做个中转
+         NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
+         [mutaArray addObjectsFromArray:newReplyItem.replys];
+         ReplyItem *newsItem = [[ReplyItem alloc] init];
+         newsItem.comment = contentStr;
+         frameNeedChanged.replysF = nil;
+         frameNeedChanged.replyPictureF = nil;
+         frameNeedChanged.replyNameF = nil;
+         newsItem.name = @"高圆圆";
+         newsItem.icon = @"高圆圆";
+         [mutaArray addObject:newsItem];
+         newReplyItem.replys = mutaArray;
+         newsItem.type = 1;
+         frameNeedChanged.detailCommentItem = newReplyItem;
+         [self.tableView reloadData];
+     }];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

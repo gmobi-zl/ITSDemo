@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface SocialController : UIViewController
-@property (nonatomic, strong) UIWebView *webView;
+@interface SocialController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
+@property (nonatomic, strong) WKWebView *webView;
+@property (strong, nonatomic) UIProgressView *progressView;
 @property (nonatomic, strong) NSArray *dataArr;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIButton *btn;

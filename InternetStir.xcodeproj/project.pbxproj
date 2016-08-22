@@ -78,6 +78,7 @@
 		E181D12D1D669525005115E6 /* b-9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D1291D669525005115E6 /* b-9.jpg */; };
 		E181D12E1D669525005115E6 /* b-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D12A1D669525005115E6 /* b-12.jpg */; };
 		E181D1301D66AB64005115E6 /* replyGroup.plist in Resources */ = {isa = PBXBuildFile; fileRef = E181D12F1D66AB64005115E6 /* replyGroup.plist */; };
+		E181D1331D66F785005115E6 /* WebviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E181D1321D66F785005115E6 /* WebviewController.m */; };
 		E189F5EF1D64158E008587CE /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5E81D64158E008587CE /* ContentViewCell.m */; };
 		E189F5F01D64158E008587CE /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5EA1D64158E008587CE /* CommentCell.m */; };
 		E189F5F11D64158E008587CE /* DetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5EC1D64158E008587CE /* DetailCommentCell.m */; };
@@ -261,6 +262,8 @@
 		E181D1291D669525005115E6 /* b-9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-9.jpg"; sourceTree = "<group>"; };
 		E181D12A1D669525005115E6 /* b-12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-12.jpg"; sourceTree = "<group>"; };
 		E181D12F1D66AB64005115E6 /* replyGroup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = replyGroup.plist; sourceTree = "<group>"; };
+		E181D1311D66F785005115E6 /* WebviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewController.h; sourceTree = "<group>"; };
+		E181D1321D66F785005115E6 /* WebviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewController.m; sourceTree = "<group>"; };
 		E189F5E71D64158E008587CE /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
 		E189F5E81D64158E008587CE /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
 		E189F5E91D64158E008587CE /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 				E189F6491D645C9D008587CE /* AboutController.m */,
 				E189F64B1D645D55008587CE /* FeedBackController.h */,
 				E189F64C1D645D55008587CE /* FeedBackController.m */,
+				E181D1311D66F785005115E6 /* WebviewController.h */,
+				E181D1321D66F785005115E6 /* WebviewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				E189F6111D6415DB008587CE /* MenuViewController.m in Sources */,
 				E189F6471D645B10008587CE /* ChannelSetCell.m in Sources */,
 				E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */,
+				E181D1331D66F785005115E6 /* WebviewController.m in Sources */,
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
 				18F664CA1D5AC9FF00BDB2E8 /* MMDictionaryHelper.m in Sources */,
 				E189F64D1D645D55008587CE /* FeedBackController.m in Sources */,

@@ -22,4 +22,5 @@
 @property (nonatomic, strong) UIImageView *replyIcon;
 @property (nonatomic, strong) UIImageView *replyBackgroundView;
 @property (nonatomic, strong) UILabel *line;
+@property (nonatomic, strong) UIButton *bgButton;
 @end

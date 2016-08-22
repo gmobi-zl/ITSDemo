@@ -13,8 +13,9 @@
 @property (nonatomic, strong)UIImageView *icon;
 @property (nonatomic, strong)UILabel *sourceLabel;
 @property (nonatomic, strong)UILabel *timeLabel;
-@property (nonatomic, strong) UILabel *line;
-
+@property (nonatomic, strong)UILabel *line;
+@property (nonatomic, strong)UIView *bgView;
+@property (nonatomic, strong)UIImageView *photo;
 -(void)showDataWithModel:(NSInteger)index;
 
 @end

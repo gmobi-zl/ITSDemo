@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SettingController.h"
+#import "WebviewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -41,7 +42,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     //    [self.navigationController.navigationBar addSubview:self.headerBg];
     self.bgImage = [[UIImageView alloc] init];
     self.bgImage.frame = CGRectMake(0, 0, screenW, screenH/3);
-    self.bgImage.backgroundColor = [UIColor grayColor];
+    self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     self.bgImage.contentMode = UIViewContentModeScaleToFill;
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
@@ -147,7 +148,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
             break;
         case 101:
         {
-            
+            WebviewController *vc = [[WebviewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 102:
@@ -195,6 +197,12 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
     }
+    
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
 }
 - (void)loginOut{
     UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];

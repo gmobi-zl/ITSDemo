@@ -12,6 +12,7 @@
 #define padding 10
 
 @implementation DetailCommentFrame
+/*
 - (void)setItem:(ReplyItem *)item{
     _item = item;
     CGFloat screenW = [MMSystemHelper getScreenWidth];
@@ -40,7 +41,7 @@
     self.cellHeight = CGRectGetMaxY(self.contentF) + padding;
 
     self.lineF = CGRectMake(0, self.cellHeight - 0.5, screenW, 0.5);
-}
+}*/
 - (void)setDetailCommentItem:(DetailCommentItem *)detailCommentItem{
     _detailCommentItem = detailCommentItem;
     CGFloat screenW = [MMSystemHelper getScreenWidth];
@@ -68,7 +69,7 @@
     //shuoshuotextF正文
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
-    CGSize contentLabelSize = [MMSystemHelper sizeWithString:self.detailCommentItem.shuoshuoText font:[UIFont systemFontOfSize:14 ] maxSize:CGSizeMake(screenW - nameLabelX - padding, MAXFLOAT)];
+    CGSize contentLabelSize = [MMSystemHelper sizeWithString:self.detailCommentItem.comment font:[UIFont systemFontOfSize:14 ] maxSize:CGSizeMake(screenW - nameLabelX - padding, MAXFLOAT)];
     CGFloat contentLabelWidth = contentLabelSize.width;
     CGFloat contentLabelHeight = contentLabelSize.height;
     self.contentF = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
@@ -85,7 +86,13 @@
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight + 5, 100, 20);
             self.cellHeight += 30 + padding/2;
-            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+            CGSize replyLabelSize;
+            if (item.type == 1) {
+                replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+            }else{
+               replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"林峰回复啊%@：%@",item.name,item.comment ] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+            }
+            
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;
@@ -101,7 +108,9 @@
         CGFloat replyBackgroundWidth = screenW - 1.5*padding -nameLabelX;
         CGFloat replyBackgroundHeight = self.cellHeight - padding*2 - CGRectGetMaxY(self.contentF);
         self.replyBackgroundF = CGRectMake(nameLabelX, CGRectGetMaxY(self.contentF) + padding, replyBackgroundWidth, replyBackgroundHeight);
+
     }
+    self.lineF = CGRectMake(0, self.cellHeight - 0.5, screenW, 0.5);
 
 }
 -(NSMutableArray *)replyNameF{

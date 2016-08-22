@@ -80,6 +80,12 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CommentViewController *vc = [[CommentViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)pushComment:(UIButton*)button{
     
     CommentViewController *vc = [[CommentViewController alloc] init];
@@ -89,15 +95,19 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 }
 - (void)tapReply:(UIButton *)button{
     
-    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
-                                   content:@""
-                                      name:@""
-                                     Block:^(NSString *contentStr)
-     {
-         
-         
-         
-     }];
+    CommentViewController *vc = [[CommentViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+//                                   content:@""
+//                                      name:@""
+//                                     Block:^(NSString *contentStr)
+//     {
+//         
+//         
+//         
+//     }];
 }
 
 -(NSMutableArray *)commentData
@@ -155,6 +165,7 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 - (void)pushMenu{
     
     MenuViewController *menu = [[MenuViewController alloc] init];
+    menu.hidesBottomBarWhenPushed = YES;
     menu.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:menu animated:YES];

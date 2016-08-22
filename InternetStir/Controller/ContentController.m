@@ -31,6 +31,7 @@ NSString *const ContentCellIdentifier = @"ContentCell";
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 64);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     [self.view addSubview:self.tableView];
     
@@ -64,11 +65,12 @@ NSString *const ContentCellIdentifier = @"ContentCell";
 - (void)pushMenu{
     
     MenuViewController *menu = [[MenuViewController alloc] init];
+    menu.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:menu animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 280;
+    return 0.5 + 20 + 5 + 40 + 10 + 3 * (screenW - 30)/4 + 10;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
