@@ -110,7 +110,7 @@
         if (item.type == 1) {
             replyLabel.text = item.comment;
         }else{
-            NSString *searchText = [NSString stringWithFormat:@"林峰回复%@：%@", item.name,item.comment];
+            NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
             NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
             NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"："].location);
             [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
