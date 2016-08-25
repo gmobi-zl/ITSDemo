@@ -20,11 +20,6 @@
         CGFloat itemHeight = 60; //[[ConfigService get] getNewsListItemHeight:NEWS_TYPE_IMAGE]; //screenH / 7;
         CGFloat itemWidth = screenW * 3 / 4;
         self.contentView.frame = CGRectMake(0, 0, itemWidth, itemHeight);
-        self.line = [[UIView alloc] init];
-        self.line.frame = CGRectMake(10, 0, screenW - 20, 0.5);
-        self.line.backgroundColor = [UIColor grayColor];//[UIColor lightGrayColor];
-        self.line.alpha = 0.5;
-        [self.contentView addSubview:self.line];
         self.icon = [[UIImageView alloc] init];
         CGFloat iconW = 42;
         CGFloat iconH = 42;
@@ -41,8 +36,13 @@
         [self.title setFont:titleFont];
         self.title.text = @"设置";
         [self.title setNumberOfLines:1];
-        
         [self.contentView addSubview:self.title];
+        
+        self.line = [[UIView alloc] init];
+        self.line.frame = CGRectMake(10, 59, screenW - 20, 0.5);
+        self.line.backgroundColor = [UIColor grayColor];//[UIColor lightGrayColor];
+        self.line.alpha = 0.5;
+        [self.contentView addSubview:self.line];
     }
     return self;
 }

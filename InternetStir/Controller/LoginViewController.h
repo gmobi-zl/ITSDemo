@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface LoginViewController : UIViewController<UIGestureRecognizerDelegate>
+#import <GoogleSignIn/GoogleSignIn.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+@interface LoginViewController : UIViewController<UIGestureRecognizerDelegate,GIDSignInDelegate,GIDSignInUIDelegate>
 
 @end

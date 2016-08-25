@@ -17,5 +17,6 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UILabel *userNameLabel;
 //@property (nonatomic, strong) UIView *bgView;
 @end

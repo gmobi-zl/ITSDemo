@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ITSApplication.h"
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface AppDelegate ()
 
@@ -15,15 +17,38 @@
 
 @implementation AppDelegate
 
-
+static NSString * const kClientID =
+@"1052945573217-6mlkd00jdq31bq4u28dijtp72hokgvmq.apps.googleusercontent.com";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     [ITSApplication start];
-    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    [Fabric with:@[[Twitter class]]];
+    [[Twitter sharedInstance] startWithConsumerKey:@"lbF0Iu1RuUHbLxft64xbFeuFW" consumerSecret:@"DHzSxiPD5C0TvLvJkivgj3VsJyPBdbuzT7ZktaNSNEQljKuzpJ"];
+
+    [Fabric with:@[[Twitter sharedInstance]]];
+
     return YES;
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    BOOL success = NO;
+    if ([[GIDSignIn sharedInstance] handleURL:url
+                            sourceApplication:sourceApplication
+                                   annotation:annotation]){
+        success = YES;
+    }
+   else if ( [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation]){
+        success = YES;
+    }
+    return success;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

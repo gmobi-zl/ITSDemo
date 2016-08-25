@@ -12,12 +12,19 @@
 #import "AboutController.h"
 #import "EditionController.h"
 #import "FeedBackController.h"
+#import "ITSApplication.h"
+#import "FacebookService.h"
+#import "SettingService.h"
+#import "TwitterService.h"
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+static NSString * const kClientID =
+@"972637543371-5t6ssr6qj1vfff0m55rfc91qskdivbtf.apps.googleusercontent.com";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,17 +35,20 @@
 
     self.title = @"登入帳號";
     [self creatUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFacebookUserInfo) name:@"getFacebookUserInfo" object:[ITSApplication get].fbSvr];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getTwitterUserInfo) name:@"getTwitterUserInfo" object:[ITSApplication get].tw];
 }
 - (void)creatUI{
     CGFloat screenW = [MMSystemHelper getScreenWidth];
-    
+    CGFloat space = screenW/6;
     NSArray *titleArr = @[@"Facebook",@"Twitter",@"Google"];
     for (int i = 0; i < titleArr.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.layer.masksToBounds = YES;
         button.tag = i + 1;
         button.layer.cornerRadius = 6;
-        button.frame = CGRectMake(70, 150 + i * 100, screenW - 140, 40);
+        button.frame = CGRectMake(70, space + i * 100, screenW - 140, 40);
         [button setTitle:[titleArr objectAtIndex:i] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor cyanColor];
         [button addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,17 +57,127 @@
     
     CGSize size = [MMSystemHelper sizeWithString:@"未經允許，我們不會發布至您的Facebook,Twitter,Google" font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 140, MAXFLOAT)];
     UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(70, 400, screenW - 140, size.height);
+    label.frame = CGRectMake(70, 310, screenW - 140, size.height);
     label.text = @"未經允許，我們不會發布至您的Facebook,Twitter,Google";
     label.textAlignment = NSTextAlignmentLeft;
     label.numberOfLines = 0;
     label.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:label];
 }
+
 //login
 - (void)login:(UIButton*)button{
 
+    ITSApplication* poApp = [ITSApplication get];
+    FacebookService *faceBook = poApp.fbSvr;
+    TwitterService *tw = poApp.tw;
+    if (button.tag == 1) {
+        
+        [faceBook facebookLogin:^(int resultCode) {
+            if (resultCode == ITS_FB_LOGIN_SUCCESS) {
+                [faceBook facebookUserInfo];
+            } else {
+             
+                UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+                [al show];
+            }
+
+        } viewController:self];
+    }else if (button.tag == 2) {
+        [tw twitterLogin:^(int resultCode) {
+            if (resultCode == ITS_TW_LOGIN_SUCCESS) {
+                [tw getUserInfo];
+            }else{
+            
+            }
+        }];
+    }else {
+        GIDSignIn* signIn = [GIDSignIn sharedInstance];
+        signIn.clientID = kClientID;
+        signIn.scopes = @[ @"profile", @"email"];
+        signIn.delegate = self;
+        signIn.uiDelegate = self;
+        [[GIDSignIn sharedInstance] signIn];
+
+    }
 }
+#pragma mark GIDSignInDelegate google
+- (void)signIn:(GIDSignIn *)signIn
+didSignInForUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+    if (error) {
+        return;
+    }
+    
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+    
+//    FacebookService *facebook = poApp.fbSvr;
+    //    ds.user.userName = facebook.userName;
+    //    ds.user.avatar = facebook.icon;
+    //    ds.user.isLogin = YES;
+    NSString* avatar = @"";
+    if ([GIDSignIn sharedInstance].currentUser.profile.hasImage) {
+        NSURL *imageURL =
+        [[GIDSignIn sharedInstance].currentUser.profile imageURLWithDimension:1];
+        avatar = [NSString stringWithFormat:@"%@",imageURL];
+    }
+
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"google",@"type",
+                         user.userID,@"openid",
+                         user.profile.name ,@"name",
+                         avatar,@"avatar",
+                         nil];
+    
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+- (void)signIn:(GIDSignIn *)signIn
+didDisconnectWithUser:(GIDGoogleUser *)user
+     withError:(NSError *)error {
+}
+- (void)getFacebookUserInfo{
+    
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+    
+    FacebookService *facebook = poApp.fbSvr;
+//    ds.user.userName = facebook.userName;
+//    ds.user.avatar = facebook.icon;
+//    ds.user.isLogin = YES;
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"facebook",@"type",
+                         facebook.uId,@"openid",
+                         facebook.userName ,@"name",
+                         facebook.icon,@"avatar",
+                         nil];
+    
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)getTwitterUserInfo{
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+    
+    TwitterService *twitter = poApp.tw;
+
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"twitter",@"type",
+                         twitter.uId,@"openid",
+                         twitter.name ,@"name",
+                         twitter.icon ,@"avatar",
+                         nil];
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -70,6 +190,21 @@
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
 }
+#pragma mark GIDSignInDelegate google
+//- (void)signIn:(GIDSignIn *)signIn
+//didSignInForUser:(GIDGoogleUser *)user
+//     withError:(NSError *)error {
+//    if (error) {
+//        return;
+//    }
+//
+//   
+//}
+//- (void)signIn:(GIDSignIn *)signIn
+//didDisconnectWithUser:(GIDGoogleUser *)user
+//     withError:(NSError *)error {
+//}
+//
 - (void)clickBack{
     
     [self.navigationController popViewControllerAnimated:YES];

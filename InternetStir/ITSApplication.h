@@ -14,6 +14,8 @@
 #import "DataService.h"
 #import "MMLogger.h"
 #import "ReportService.h"
+#import "FacebookService.h"
+#import "TwitterService.h"
 
 #define ITS_NSLocalizedString(key, comment) \
     [ITSApplication getLocalString:(key) defVal:comment]
@@ -24,6 +26,8 @@
 @property DataService* dataSvr;
 @property ReportService* reportSvr;
 
+@property FacebookService* fbSvr;
+@property TwitterService* tw;
 @property NSString* baseUrl;
 //@property NSString* group;
 @property BOOL isFirstOpen;

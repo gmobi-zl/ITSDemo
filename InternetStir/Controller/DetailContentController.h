@@ -10,11 +10,11 @@
 #import "PNMoodView.h"
 #import <WebKit/WebKit.h>
 
-@interface DetailContentController : UIViewController<UIGestureRecognizerDelegate,WKUIDelegate,WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
+@interface DetailContentController : UIViewController<UIGestureRecognizerDelegate,WKUIDelegate,WKNavigationDelegate,WKNavigationDelegate>
 @property (copy) NSString *path;
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) PNMoodView* moodView;
 @property (strong, nonatomic) UIProgressView *progressView;
-//@property (strong, nonatomic) UIWebView *webView;
-//@property (strong, nonatomic) WKWebView *wkWebView;
+@property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
+@property (nonatomic, strong) UIView *backView;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <GoogleSignIn/GoogleSignIn.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

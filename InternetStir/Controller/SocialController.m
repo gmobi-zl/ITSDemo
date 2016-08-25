@@ -38,7 +38,7 @@
     [self.view addSubview:self.bgView];
     
     [self configUI];
-
+    
     NSArray *image = @[@"social_fb",@"social_g+",@"social_yt",@"social_in",@"social_blog"];
     NSArray *selectImage = @[@"social_fb_sel",@"social_g+_sel",@"social_yt_sel",@"social_in_sel",@"social_blog_sel"];
     for (NSInteger i = 0; i < 5; i++) {
@@ -53,14 +53,25 @@
         }
         [self.view addSubview:self.btn];
     }
-//    self.webView = [[WKWebView alloc] init];
-//    self.webView.frame = CGRectMake(0, 40, screenW, screenH - 64 - 49 - 40);
-//    [self.view addSubview:self.webView];
     NSURL *url = [NSURL URLWithString:@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
     statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     [self.navigationController.navigationBar addSubview:statusBarView];
+    [self creatActivityIndicat];
+}
+- (void)creatActivityIndicat{
+
+    self.backView = [[UIView alloc] init];
+    self.backView.frame = CGRectMake(0, 40, screenW,screenH - 40);
+    self.backView.backgroundColor = [UIColor blackColor];
+    self.backView.alpha = 0.5;
+    self.backView.hidden = NO;
+    [self.view addSubview:self.backView];
+    
+    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.testActivityIndicato.frame = CGRectMake(0, 150, screenW, 50);
+    [self.backView addSubview:self.testActivityIndicato];
 
 }
 - (void)configUI {
@@ -73,7 +84,7 @@
     [self.view addSubview:progressView];
     self.progressView = progressView;
     
-    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 40, screenW, screenH - 64 - 49 - 40)];
+    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 40, screenW, screenH - 49 - 40)];
     wkWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     wkWebView.backgroundColor = [UIColor whiteColor];
     wkWebView.navigationDelegate = self;
@@ -95,7 +106,18 @@
         }
     }
 }
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
 
+    self.backView.hidden = NO;
+    [self.testActivityIndicato startAnimating];
+}
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    self.backView.hidden = YES;
+    [self.testActivityIndicato stopAnimating];
+}
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+
+}
 - (void)dealloc {
     
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -105,7 +127,7 @@
 - (void)btnClick:(UIButton *)btn{
     
     [self configUI];
-
+    [self creatActivityIndicat];
     UIButton *button = (UIButton *)[self.view viewWithTag:100];
     if (btn.tag != 0) {
         button.selected = NO;
@@ -128,9 +150,7 @@
     
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setTitleTextAttributes:
-     
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
-       
        NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -139,6 +159,7 @@
     [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
+    
 }
 - (void)pushMenu{
 

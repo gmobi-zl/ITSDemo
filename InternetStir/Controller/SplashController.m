@@ -50,9 +50,6 @@
     self.bgImage.hidden = NO;
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
-    
-    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushNextVc)];
-    //[self.bgImage addGestureRecognizer:tap];
 }
 
 

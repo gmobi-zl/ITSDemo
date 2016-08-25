@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-@interface WebviewController : UIViewController
+@interface WebviewController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, strong) WKWebView *webView;
+@property (strong, nonatomic) UIProgressView *progressView;
+@property (nonatomic, strong) UIView *backView;
+@property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
 @end

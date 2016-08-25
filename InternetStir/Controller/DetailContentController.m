@@ -35,6 +35,17 @@
 //    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 //    
 
+    self.backView = [[UIView alloc] init];
+    self.backView.frame = CGRectMake(0, 0, screenW,screenH);
+    self.backView.backgroundColor = [UIColor blackColor];
+    self.backView.alpha = 0.5;
+    self.backView.hidden = NO;
+    [self.view addSubview:self.backView];
+    
+    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.testActivityIndicato.frame = CGRectMake(0, 150, screenW, 50);
+    [self.backView addSubview:self.testActivityIndicato];
+
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -68,9 +79,23 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [wkWebView loadRequest:request];
     self.webView = wkWebView;
-    
 }
-
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+    
+    self.backView.hidden = NO;
+    [self.testActivityIndicato startAnimating];
+}
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    self.backView.hidden = YES;
+    [self.testActivityIndicato stopAnimating];
+}
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"404" ofType:@"html"];
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
+}
 - (void)clickBack{
     
     [self.navigationController popViewControllerAnimated:YES];

@@ -11,9 +11,12 @@
 
 @interface SocialController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, strong) WKWebView *webView;
-@property (strong, nonatomic) UIProgressView *progressView;
+@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) NSArray *dataArr;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIButton *btn;
 @property (nonatomic, strong) UIView *bgView;
+@property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
+@property (nonatomic, strong) UIView *backView;
+
 @end

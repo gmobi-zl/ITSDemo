@@ -58,6 +58,8 @@ NSString* customerLocal = nil;
     
     self.reportSvr = [ReportService alloc];
 
+    self.fbSvr = [FacebookService alloc];
+    self.tw = [TwitterService alloc];
     self.isUserOpen = NO;
     [self.reportSvr initService];
     
