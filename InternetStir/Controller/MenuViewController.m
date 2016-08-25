@@ -52,7 +52,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.view addSubview:self.bgImage];
     
     self.icon = [[UIImageView alloc] init];
-    self.icon.backgroundColor = [UIColor redColor];
+//    self.icon.backgroundColor = [UIColor redColor];
     self.icon.layer.cornerRadius = 35;
     self.icon.layer.masksToBounds = YES;
     self.icon.frame = CGRectMake((screenW - 70) / 2, (screenH/3  - 70) / 2 - 20, 70, 70);
