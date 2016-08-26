@@ -23,9 +23,9 @@
 - (void)creatTabBarController{
 
     NSArray *vcName = @[@"HomeViewController",@"ContentController",@"SocialController"];
-    NSString* newsTitle = ITS_NSLocalizedString(@"PageMain", @"News");
-    NSString* disTitle = ITS_NSLocalizedString(@"PageDiscover", @"Discover");
-    NSString* meTitle = ITS_NSLocalizedString(@"PageMe", @"Me");
+    NSString* newsTitle = @"留言";
+    NSString* disTitle = @"内容";
+    NSString* meTitle = @"社群";
     //NSString* videoTitle = PPN_NSLocalizedString(@"PageVideo", @"Video");
     NSArray *title = @[newsTitle,disTitle,meTitle];
 

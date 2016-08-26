@@ -97,7 +97,7 @@
 {
     DetailCommentItem *comment = self.detailCommentFrame.detailCommentItem;
 //    self.icon.image = [UIImage imageNamed:comment.icon];
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:comment.icon] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.comment;
     for (NSInteger i = 0; i < comment.replys.count; i++) {
