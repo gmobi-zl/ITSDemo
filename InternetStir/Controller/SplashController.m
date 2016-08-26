@@ -11,6 +11,8 @@
 #import "MMSystemHelper.h"
 #import "ViewController.h"
 #import "TabBarController.h"
+#import "ITSApplication.h"
+#import "DataService.h"
 
 @implementation SplashController
 
@@ -72,7 +74,9 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
-    
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+    [ds initUser];
     [self delayToHome];
 }
 

@@ -9,6 +9,7 @@
 
 #import "DetailCommentCell.h"
 #import "MMSystemHelper.h"
+#import "UIImageView+WebCache.h"
 
 @implementation DetailCommentCell
 
@@ -95,8 +96,8 @@
 -(void)settingtData
 {
     DetailCommentItem *comment = self.detailCommentFrame.detailCommentItem;
-//    ReplyItem *item = self.detailCommentFrame.item;
-    self.icon.image = [UIImage imageNamed:comment.icon];
+//    self.icon.image = [UIImage imageNamed:comment.icon];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.comment;
     for (NSInteger i = 0; i < comment.replys.count; i++) {
@@ -104,9 +105,7 @@
         ReplyItem *item = [comment.replys objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:12];
-        replyLabel.numberOfLines = 0;
-//        replyLabel.text = item.comment;
-        
+        replyLabel.numberOfLines = 0;        
         if (item.type == 1) {
             replyLabel.text = item.comment;
         }else{
@@ -127,7 +126,7 @@
         UIImageView *replyIcon = [[UIImageView alloc] init];
         replyIcon.layer.masksToBounds = YES;
         replyIcon.layer.cornerRadius = 15;
-        replyIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",item.icon]];
+        [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
         [self.contentView addSubview:replyIcon];
         self.replyIcon = replyIcon;
         [self.replyIconView addObject:replyIcon];

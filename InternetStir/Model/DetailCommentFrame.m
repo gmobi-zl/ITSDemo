@@ -9,6 +9,9 @@
 
 #import "DetailCommentFrame.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
+#import "DataService.h"
+
 #define padding 10
 
 @implementation DetailCommentFrame
@@ -44,6 +47,10 @@
 }*/
 - (void)setDetailCommentItem:(DetailCommentItem *)detailCommentItem{
     _detailCommentItem = detailCommentItem;
+
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat iconViewX = padding + 5;
     CGFloat iconViewY = padding + 5;
@@ -90,7 +97,7 @@
             if (item.type == 1) {
                 replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
             }else{
-               replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"林峰回复啊%@：%@",item.name,item.comment ] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+               replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@回复啊%@：%@",item.name,item.name,item.comment ] font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
             }
             
             CGFloat replyLabelY = self.cellHeight;

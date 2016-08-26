@@ -37,7 +37,6 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-
 //    self.headerBg = [[UIView alloc] init];
 //    self.headerBg.frame = CGRectMake(0, -20, self.view.bounds.size.width, 20);
 //    [self.navigationController.navigationBar addSubview:self.headerBg];
@@ -52,10 +51,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.view addSubview:self.bgImage];
     
     self.icon = [[UIImageView alloc] init];
-//    self.icon.backgroundColor = [UIColor redColor];
+    self.icon.backgroundColor = [UIColor redColor];
+    self.icon.frame = CGRectMake((screenW - 70) / 2, (screenH/3  - 70) / 2 - 20, 70, 70);
     self.icon.layer.cornerRadius = 35;
     self.icon.layer.masksToBounds = YES;
-    self.icon.frame = CGRectMake((screenW - 70) / 2, (screenH/3  - 70) / 2 - 20, 70, 70);
     self.icon.image = [UIImage imageNamed:@"head"];
     [self.bgImage addSubview:self.icon];
 
@@ -188,13 +187,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* poApp = [ITSApplication get];
     DataService* ds = poApp.dataSvr;
 
-    SettingService* ss = [SettingService get];
-    NSDictionary *data = [ss getDictoryValue:CONFIG_USERLOGIN_INFO defValue:nil];
-
-    NSString *isLogin = [data objectForKey:@"type"];
-    if (isLogin.length > 0) {
-//        NSString *icon = ds.user.avatar; //[loginDic objectForKey:@"avatar"];
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:[data objectForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+    if (ds.user.isLogin == YES) {
+        NSString *icon = ds.user.avatar; //[loginDic objectForKey:@"avatar"];
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
         
         self.userNameLabel.hidden = NO;
         self.tableView.hidden = NO;

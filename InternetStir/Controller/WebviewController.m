@@ -11,7 +11,7 @@
 #import "MMSystemHelper.h"
 #import "ConfigService.h"
 
-#define URL @"https://www.escapex.com"
+#define URL @"http://jakkolai.wixsite.com/celeb"
 @interface WebviewController ()
 
 @end

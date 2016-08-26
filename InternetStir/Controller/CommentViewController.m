@@ -15,6 +15,8 @@
 #import "SettingService.h"
 #import "UUInputAccessoryView.h"
 #import "PickerImageTools.h"
+#import "LoginViewController.h"
+#import "UIImageView+WebCache.h"
 
 NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 
@@ -65,6 +67,14 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
+    
+    SettingService* ss = [SettingService get];
+    NSString *str = [ss getStringValue:@"login" defValue:nil];
+    if (str.length > 0) {
+        [self writeClick];
+        [ss setStringValue:@"login" data:@""];
+    }
+
 
 }
 - (void)clickBack{
@@ -144,31 +154,36 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 -(void)writeClick{
     
     UIKeyboardType type = UIKeyboardTypeDefault;
-    SettingService* ss = [SettingService get];
-    
     ITSApplication* poApp = [ITSApplication get];
     DataService* ds = poApp.dataSvr;
-    
+    SettingService* ss = [SettingService get];
+
     [UUInputAccessoryView showKeyboardType:type
                                    content:@""
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
-         DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
-         commentItem.name = @"孙燕姿";
-         commentItem.icon = @"高圆圆";
-//         commentItem.replys = 0;
-         commentItem.comment = contentStr;
-         FrameNeedChanged.detailCommentItem = commentItem;
-         //        familyGroupFrameNeedChanged.
-         NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
-         
-         [mutaArray insertObject:FrameNeedChanged atIndex:1];
-         self.commentData = mutaArray;
-         
-         [self.tableView reloadData];
+         if (ds.user.isLogin == NO) {
+             LoginViewController *loginVc = [[LoginViewController alloc] init];
+             [self.navigationController pushViewController:loginVc animated:YES];
+             [ss setStringValue:@"login" data:contentStr];
 
+         }else{
+             DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
+             DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
+             commentItem.name = ds.user.userName;
+             commentItem.icon = ds.user.avatar;
+             //         commentItem.replys = 0;
+             commentItem.comment = contentStr;
+             FrameNeedChanged.detailCommentItem = commentItem;
+             //        familyGroupFrameNeedChanged.
+             NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
+             
+             [mutaArray insertObject:FrameNeedChanged atIndex:1];
+             self.commentData = mutaArray;
+             
+             [self.tableView reloadData];
+         }
      }];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -219,30 +234,43 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 //回复的回复
 - (void)tapReply:(UIButton *)btn{
 
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+//    SettingService* ss = [SettingService get];
+
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
                                    content:@""
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:btn.tag];
-         DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
          
-         //做个中转
-         NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
-         [mutaArray addObjectsFromArray:newReplyItem.replys];
-         ReplyItem *newsItem = [[ReplyItem alloc] init];
-         newsItem.comment = contentStr;
-         frameNeedChanged.replysF = nil;
-         frameNeedChanged.replyPictureF = nil;
-         frameNeedChanged.replyNameF = nil;
-         newsItem.name = @"高圆圆";
-         newsItem.icon = @"高圆圆";
-         [mutaArray addObject:newsItem];
-         newReplyItem.replys = mutaArray;
-         newsItem.type = 2;
-         frameNeedChanged.detailCommentItem = newReplyItem;
-         [self.tableView reloadData];
-     }];
+         if (ds.user.isLogin == NO) {
+             LoginViewController *loginVc = [[LoginViewController alloc] init];
+             [self.navigationController pushViewController:loginVc animated:YES];
+//             [ss setStringValue:@"login" data:contentStr];
+
+         }else {
+             DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:btn.tag];
+             DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
+             
+             //做个中转
+             NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
+             [mutaArray addObjectsFromArray:newReplyItem.replys];
+             ReplyItem *newsItem = [[ReplyItem alloc] init];
+             newsItem.comment = contentStr;
+             frameNeedChanged.replysF = nil;
+             frameNeedChanged.replyPictureF = nil;
+             frameNeedChanged.replyNameF = nil;
+             newsItem.name = ds.user.userName;
+             newsItem.icon = ds.user.avatar;
+             [mutaArray addObject:newsItem];
+             newReplyItem.replys = mutaArray;
+             newsItem.type = 2;
+             frameNeedChanged.detailCommentItem = newReplyItem;
+             [self.tableView reloadData];
+
+         }
+    }];
 }
 - (void)replyClick:(UIButton *)btn {
     
@@ -256,30 +284,43 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 //粉丝互相回复
 - (void)replyToreply :(NSInteger)index{
     
+    ITSApplication* poApp = [ITSApplication get];
+    DataService* ds = poApp.dataSvr;
+//    SettingService* ss = [SettingService get];
+
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
                                    content:@""
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];
-         DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
          
-         //做个中转
-         NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
-         [mutaArray addObjectsFromArray:newReplyItem.replys];
-         ReplyItem *newsItem = [[ReplyItem alloc] init];
-         newsItem.comment = contentStr;
-         frameNeedChanged.replysF = nil;
-         frameNeedChanged.replyPictureF = nil;
-         frameNeedChanged.replyNameF = nil;
-         newsItem.name = @"高圆圆";
-         newsItem.icon = @"高圆圆";
-         [mutaArray addObject:newsItem];
-         newReplyItem.replys = mutaArray;
-         newsItem.type = 1;
-         frameNeedChanged.detailCommentItem = newReplyItem;
-         [self.tableView reloadData];
-     }];
+         if (ds.user.isLogin == NO) {
+             LoginViewController *loginVc = [[LoginViewController alloc] init];
+             [self.navigationController pushViewController:loginVc animated:YES];
+//             [ss setStringValue:@"login" data:contentStr];
+
+         }else {
+             DetailCommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];
+             DetailCommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
+             
+             //做个中转
+             NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
+             [mutaArray addObjectsFromArray:newReplyItem.replys];
+             ReplyItem *newsItem = [[ReplyItem alloc] init];
+             newsItem.comment = contentStr;
+             frameNeedChanged.replysF = nil;
+             frameNeedChanged.replyPictureF = nil;
+             frameNeedChanged.replyNameF = nil;
+             newsItem.name = ds.user.userName;
+             newsItem.icon = ds.user.avatar;
+             [mutaArray addObject:newsItem];
+             newReplyItem.replys = mutaArray;
+             newsItem.type = 1;
+             frameNeedChanged.detailCommentItem = newReplyItem;
+             [self.tableView reloadData];
+
+         }
+    }];
 
 }
 - (void)didReceiveMemoryWarning {
