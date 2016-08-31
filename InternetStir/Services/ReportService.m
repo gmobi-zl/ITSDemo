@@ -95,7 +95,7 @@
         if (self.isSending == NO){
             BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
             
-            ITSApplication* app = [ITSApplication get];
+//            ITSApplication* app = [ITSApplication get];
             NSString* did = @"";//[app.dataSvr getServerDeviceId];
             
             if (did != nil && isHadNetwork == YES) {

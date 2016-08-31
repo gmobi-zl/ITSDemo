@@ -182,6 +182,7 @@ typedef enum{
 
 @property (copy) NSString* iconName;
 @property (copy) NSString* actionName;
+@property (assign) BOOL isSelect;
 
 @end
 

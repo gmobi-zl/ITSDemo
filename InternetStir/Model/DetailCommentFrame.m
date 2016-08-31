@@ -48,8 +48,8 @@
 - (void)setDetailCommentItem:(DetailCommentItem *)detailCommentItem{
     _detailCommentItem = detailCommentItem;
 
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+//    ITSApplication* poApp = [ITSApplication get];
+//    DataService* ds = poApp.dataSvr;
 
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat iconViewX = padding + 5;

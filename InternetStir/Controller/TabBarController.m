@@ -9,6 +9,8 @@
 #import "TabBarController.h"
 #import "ITSApplication.h"
 #import "MMSystemHelper.h"
+#import "ITSAppConst.h"
+
 @interface TabBarController ()
 
 @end
@@ -23,7 +25,7 @@
 - (void)creatTabBarController{
 
     NSArray *vcName = @[@"HomeViewController",@"ContentController",@"SocialController"];
-    NSString* newsTitle = @"留言";
+    NSString* newsTitle = @"留言";//NSLocalizedString(@"test", nil);
     NSString* disTitle = @"内容";
     NSString* meTitle = @"社群";
     //NSString* videoTitle = PPN_NSLocalizedString(@"PageVideo", @"Video");

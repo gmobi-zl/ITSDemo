@@ -279,7 +279,7 @@
     else
         [self.showCategoryList removeAllObjects];
     
-    SettingService* ss = [SettingService get];
+//    SettingService* ss = [SettingService get];
     ConfigService *cf = [ConfigService get];
     NSString *ch = [cf getChannel];
     NSString *savedKey = [NSString stringWithFormat:@"%@_%@", SAVED_USER_CATEGORY_LIST, ch];
@@ -371,77 +371,38 @@
     else
         [self.leftMenuList removeAllObjects];
     
-//    LeftMenuItem* account = [LeftMenuItem alloc];
-//    account.iconName = @"setting_account setting";
-//    account.actionName = ITS_NSLocalizedString(@"Account_set", nil);
-//    [self.leftMenuList addObject:account];
-//
-//    LeftMenuItem* comment = [LeftMenuItem alloc];
-//    comment.iconName = @"setting_my comment";
-//    comment.actionName = ITS_NSLocalizedString(@"about_me", nil);
-//    [self.leftMenuList addObject:comment];
-//    // fav
-//    LeftMenuItem* fav = [LeftMenuItem alloc];
-//    fav.iconName = @"sidebar_myfavorites";
-//    fav.actionName = ITS_NSLocalizedString(@"LMenuFavour", nil);
-//    [self.leftMenuList addObject:fav];
-//    
-//    LeftMenuItem* feed = [LeftMenuItem alloc];
-//    feed.iconName = @"sidebar_newsfeeds";
-//    feed.actionName = ITS_NSLocalizedString(@"LMenuFeed", nil);
-//    [self.leftMenuList addObject:feed];
-//
-//    LeftMenuItem* histroy = [LeftMenuItem alloc];
-//    histroy.iconName = @"sidebar_recentlyread";
-//    histroy.actionName = ITS_NSLocalizedString(@"LMenuHistroy", nil);
-//    [self.leftMenuList addObject:histroy];
-//
-////    LeftMenuItem* download = [LeftMenuItem alloc];
-////    download.iconName = @"sidebar_offlinedownload";
-////    download.actionName = PPN_NSLocalizedString(@"LMenuDownload", nil);
-////    [self.leftMenuList addObject:download];
-//
-//    LeftMenuItem* settings = [LeftMenuItem alloc];
-//    settings.iconName = @"sidebar_settings";
-//    settings.actionName = ITS_NSLocalizedString(@"LMenuConfig", nil);
-//    [self.leftMenuList addObject:settings];
     LeftMenuItem* fav = [LeftMenuItem alloc];
-    fav.iconName = @"范冰冰";
+    fav.iconName = @"icon_collection";
     fav.actionName = @"我的收藏";
     [self.leftMenuList addObject:fav];
     
     LeftMenuItem* comment = [LeftMenuItem alloc];
-    comment.iconName = @"范冰冰";
+    comment.iconName = @"icon_track";
     comment.actionName = @"留言追蹤";
     [self.leftMenuList addObject:comment];
     // fav
     LeftMenuItem* download = [LeftMenuItem alloc];
-    download.iconName = @"范冰冰";
+    download.iconName = @"icon_pic";
     download.actionName = @"貼圖下載";
     [self.leftMenuList addObject:download];
     
     LeftMenuItem* feed = [LeftMenuItem alloc];
-    feed.iconName = @"范冰冰";
+    feed.iconName = @"icon_buydigital";
     feed.actionName = @"買數位產品";
     [self.leftMenuList addObject:feed];
     
     LeftMenuItem* histroy = [LeftMenuItem alloc];
-    histroy.iconName = @"范冰冰";
+    histroy.iconName = @"icon_buypoint";
     histroy.actionName = @"買點數";
     [self.leftMenuList addObject:histroy];
-    
-    //    LeftMenuItem* download = [LeftMenuItem alloc];
-    //    download.iconName = @"sidebar_offlinedownload";
-    //    download.actionName = PPN_NSLocalizedString(@"LMenuDownload", nil);
-    //    [self.leftMenuList addObject:download];
-    
+        
     LeftMenuItem* settings = [LeftMenuItem alloc];
-    settings.iconName = @"范冰冰";
+    settings.iconName = @"icon_fans";
     settings.actionName = @"粉絲牆";
     [self.leftMenuList addObject:settings];
     
     LeftMenuItem* menu = [LeftMenuItem alloc];
-    menu.iconName = @"范冰冰";
+    menu.iconName = @"icon_list";
     menu.actionName = @"購買清單";
     [self.leftMenuList addObject:menu];
 
@@ -469,13 +430,13 @@
 //        edition.actionType = SETTING_ACTION_EDITION;
 //        [self.settingList addObject:edition];
 //    }
-    SettingItem* edition = [SettingItem alloc];
-    edition.iconName = @"set_edition";
-    
-    edition.settingName = ITS_NSLocalizedString(@"SettingEdition", nil);
-    edition.type = SettingTypeDetail;
-    edition.actionType = SETTING_ACTION_EDITION;
-    [self.settingList addObject:edition];
+//    SettingItem* edition = [SettingItem alloc];
+//    edition.iconName = @"set_edition";
+//    
+//    edition.settingName = ITS_NSLocalizedString(@"SettingEdition", nil);
+//    edition.type = SettingTypeDetail;
+//    edition.actionType = SETTING_ACTION_EDITION;
+//    [self.settingList addObject:edition];
 
     
     SettingItem* clearCache = [SettingItem alloc];

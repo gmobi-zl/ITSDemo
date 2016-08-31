@@ -18,5 +18,6 @@
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
 @property (nonatomic, strong) UIView *backView;
+@property (nonatomic, strong) UILabel *line;
 
 @end

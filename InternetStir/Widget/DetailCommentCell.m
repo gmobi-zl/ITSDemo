@@ -136,7 +136,6 @@
         replyName.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
         replyName.font = [UIFont systemFontOfSize:14];
         
-        
         self.replyNameLabel = replyName;
         [self.contentView addSubview:replyName];
         [self.replyNameView addObject:replyName];

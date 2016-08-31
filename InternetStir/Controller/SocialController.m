@@ -33,7 +33,7 @@
     CGFloat space = (screenW - 5*30)/(5 + 1);
     
     self.bgView = [[UIView alloc] init];
-    self.bgView.frame = CGRectMake(0, 1, screenW, 40);
+    self.bgView.frame = CGRectMake(0, 1, screenW, 45);
     self.bgView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:self.bgView];
     
@@ -53,6 +53,11 @@
         }
         [self.view addSubview:self.btn];
     }
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 42, screenW/5,4)];
+    self.line.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+    [self.view addSubview:self.line];
+
+    
     NSURL *url = [NSURL URLWithString:@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
@@ -63,7 +68,7 @@
 - (void)creatActivityIndicat{
 
     self.backView = [[UIView alloc] init];
-    self.backView.frame = CGRectMake(0, 40, screenW,screenH - 40);
+    self.backView.frame = CGRectMake(0, 45, screenW,screenH - 45);
     self.backView.backgroundColor = [UIColor blackColor];
     self.backView.alpha = 0.5;
     self.backView.hidden = NO;
@@ -84,7 +89,7 @@
     [self.view addSubview:progressView];
     self.progressView = progressView;
     
-    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 40, screenW, screenH - 49 - 40)];
+    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 45, screenW, screenH - 49 - 45)];
     wkWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     wkWebView.backgroundColor = [UIColor whiteColor];
     wkWebView.navigationDelegate = self;
@@ -112,8 +117,9 @@
     [self.testActivityIndicato startAnimating];
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    self.backView.hidden = YES;
+    [self.backView setHidden:YES];
     [self.testActivityIndicato stopAnimating];
+    
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
 
@@ -143,6 +149,48 @@
         self.button = btn;
     }
     
+    switch (btn.tag) {
+        case 100:
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.line.frame = CGRectMake(0, 42, screenW/5,4);
+            }];
+        }
+            break;
+        case 101:
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.line.frame = CGRectMake(screenW/5, 42, screenW/5,4);
+            }];
+        }
+            break;
+        case 102:
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.line.frame = CGRectMake(screenW * 2/5, 42, screenW/5,4);
+            }];
+
+        }
+            break;
+        case 103:
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.line.frame = CGRectMake(screenW * 3/5, 42, screenW/5,4);
+            }];
+
+        }
+            break;
+        case 104:
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                self.line.frame = CGRectMake(screenW * 4/5, 42, screenW/5,4);
+            }];
+
+        }
+            break;
+        default:
+            break;
+    }
     NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:btn.tag - 100]];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }

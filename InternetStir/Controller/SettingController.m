@@ -312,7 +312,11 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     
     ConfigService *cs = [ConfigService get];
     tmpCell.title.textColor = [cs getSettingFontColor:cs.type];
+
     UIImage* defIcon = [UIImage imageNamed:setting.iconName];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:setting.iconName ofType:@"png"];
+//    UIImage *image = [UIImage imageWithContentsOfFile:path];
+//    tmpCell.icon.image = image;
     [tmpCell.icon setImage:defIcon];
     
     if (setting.type == SettingTypeButton){

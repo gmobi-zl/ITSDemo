@@ -18,5 +18,7 @@
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UILabel *userNameLabel;
+@property (nonatomic, strong) UIButton *but;
+@property (nonatomic, strong) UIButton *otherButton;
 //@property (nonatomic, strong) UIView *bgView;
 @end

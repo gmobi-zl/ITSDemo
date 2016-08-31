@@ -45,7 +45,6 @@
     self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.testActivityIndicato.frame = CGRectMake(0, 150, screenW, 50);
     [self.backView addSubview:self.testActivityIndicato];
-
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -69,16 +68,16 @@
     self.progressView = progressView;
     NSURL* url = [NSURL URLWithString:self.path];
 
-    WKWebView *wkWebView = [[WKWebView alloc] initWithFrame:self.view.bounds];
-    wkWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    wkWebView.backgroundColor = [UIColor whiteColor];
-    wkWebView.navigationDelegate = self;
-    [self.view insertSubview:wkWebView belowSubview:progressView];
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    self.webView.backgroundColor = [UIColor whiteColor];
+    self.webView.navigationDelegate = self;
+    [self.view insertSubview:self.webView belowSubview:progressView];
     
-    [wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [wkWebView loadRequest:request];
-    self.webView = wkWebView;
+    [self.webView loadRequest:request];
+//    self.webView = wkWebView;
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
     
