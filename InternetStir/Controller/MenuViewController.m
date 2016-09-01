@@ -93,9 +93,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.label.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:self.label];
     
-    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(self.label.frame.origin.x - 35, screenH - 225, 30, 30)];
-    imageview.image = [UIImage imageNamed:@"icon_tips"];
-    [self.view addSubview:imageview];
+    self.imageview = [[UIImageView alloc] initWithFrame:CGRectMake(self.label.frame.origin.x - 35, screenH - 225, 30, 30)];
+    self.imageview.image = [UIImage imageNamed:@"icon_tips"];
+    [self.view addSubview:self.imageview];
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
@@ -215,7 +215,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
         NSString *icon = ds.user.avatar; //[loginDic objectForKey:@"avatar"];
         [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
-        
+        self.imageview.hidden = YES;
         self.userNameLabel.hidden = NO;
         self.tableView.hidden = NO;
         self.label.hidden = YES;
@@ -226,6 +226,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
         self.userNameLabel.hidden = YES;
+        self.imageview.hidden = NO;
     }
     
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
@@ -256,7 +257,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
         self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
-
+        self.imageview.hidden = NO;
 //        if (ds.user != nil && ds.user.isLogin == YES) {
 //            
 //            [poApp.fbSvr facebookLogOut];
