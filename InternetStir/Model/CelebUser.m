@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Gmobi. All rights reserved.
 //
 
-#import "PopoUser.h"
+#import "CelebUser.h"
 
-@implementation PopoThirdUser
+@implementation CelebThirdUser
 
 @end
 
-@implementation PopoUser
+@implementation CelebUser
 - (void) initWithData{
     
     self.uId = nil;
@@ -26,7 +26,7 @@
 - (BOOL) isBindThirdAccount:(NSString*) type{
     if (self.primary != nil && type != nil){
         for (int i = 0; i < [self.primary count]; i++) {
-            PopoThirdUser* tempUser = [self.primary objectAtIndex:i];
+            CelebThirdUser* tempUser = [self.primary objectAtIndex:i];
             if (tempUser != nil && [tempUser.type isEqualToString:type]){
                 return YES;
             }
@@ -36,10 +36,10 @@
     return NO;
 }
 
-- (PopoThirdUser*) getBindThirdAccount:(NSString*) type{
+- (CelebThirdUser*) getBindThirdAccount:(NSString*) type{
     if (self.primary != nil && type != nil){
         for (int i = 0; i < [self.primary count]; i++) {
-            PopoThirdUser* tempUser = [self.primary objectAtIndex:i];
+            CelebThirdUser* tempUser = [self.primary objectAtIndex:i];
             if (tempUser != nil && [tempUser.type isEqualToString:type]){
                 return tempUser;
             }

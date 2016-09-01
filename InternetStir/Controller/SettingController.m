@@ -16,7 +16,6 @@
 #import "MMEventService.h"
 #import "SettingService.h"
 #import "AboutController.h"
-#import "EditionController.h"
 #import "FeedBackController.h"
 
 
@@ -377,8 +376,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     if (settingList != nil && index < [settingList count]){
         SettingItem* clickItem = [settingList objectAtIndex:index];
         if (clickItem.actionType == SETTING_ACTION_EDITION){
-            EditionController *editionPage = [[EditionController alloc] init];
-            [self.navigationController pushViewController:editionPage animated:NO];
+            //EditionController *editionPage = [[EditionController alloc] init];
+            //[self.navigationController pushViewController:editionPage animated:NO];
         } else if (clickItem.actionType == SETTING_ACTION_CLEAN_CACHE) {
             //self.cleanMask.hidden = NO;
             ITSApplication* poApp = [ITSApplication get];

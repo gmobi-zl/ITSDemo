@@ -75,7 +75,7 @@
     //[self startBGAnimation];
     ITSApplication* poApp = [ITSApplication get];
     DataService* ds = poApp.dataSvr;
-    [ds initUser];
+    
     [self delayToHome];
 }
 

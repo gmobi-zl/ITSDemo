@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PopoThirdUser : NSObject
+@interface CelebThirdUser : NSObject
 
 @property (nonatomic, copy) NSString *openid;//第三方唯一标示
 @property (nonatomic, copy) NSString *email;
@@ -16,7 +16,7 @@
 
 @end
 
-@interface PopoUser : NSObject
+@interface CelebUser : NSObject
 
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *userName;
@@ -37,7 +37,7 @@
 
 - (void) initWithData;
 - (BOOL) isBindThirdAccount:(NSString*) type;
-- (PopoThirdUser*) getBindThirdAccount:(NSString*) type;
+- (CelebThirdUser*) getBindThirdAccount:(NSString*) type;
 - (void) resetData;
 
 @end

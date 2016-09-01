@@ -325,17 +325,17 @@ NewsService* newsInstance = nil;
 
 -(void) saveReadNewsList: (NSMutableArray*) list {
     if (list != nil){
-        NSMutableArray* saveList = [NSMutableArray arrayWithCapacity:2];
-        for (ReadedNewsItem* item in list) {
-            if (item != nil){
-                NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:2];
-                [dic setObject:item.cId forKey:@"cid"];
-                [dic setObject:item.nId forKey:@"nid"];
-                [saveList addObject:dic];
-            }
-        }
-        
-        [_configCol set:READED_NEWS_LIST_KEY setData:saveList];
+//        NSMutableArray* saveList = [NSMutableArray arrayWithCapacity:2];
+//        for (ReadedNewsItem* item in list) {
+//            if (item != nil){
+//                NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:2];
+//                [dic setObject:item.cId forKey:@"cid"];
+//                [dic setObject:item.nId forKey:@"nid"];
+//                [saveList addObject:dic];
+//            }
+//        }
+//        
+//        [_configCol set:READED_NEWS_LIST_KEY setData:saveList];
     }
 }
 

@@ -63,6 +63,9 @@ NSString* customerLocal = nil;
     self.isUserOpen = NO;
     [self.reportSvr initService];
     
+    self.cbUserSvr = [CBUserService alloc];
+    [self.cbUserSvr initUser];
+    
     
     [[ConfigService get] initLocaleConfig];
     [[NewsService get] initLoadSavedData];

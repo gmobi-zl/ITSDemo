@@ -10,7 +10,6 @@
 #import "LoginViewController.h"
 #import "MMSystemHelper.h"
 #import "AboutController.h"
-#import "EditionController.h"
 #import "FeedBackController.h"
 #import "ITSApplication.h"
 #import "FacebookService.h"
@@ -116,20 +115,21 @@ didSignInForUser:(GIDGoogleUser *)user
         avatar = [NSString stringWithFormat:@"%@",imageURL];
     }
     
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CBUserService* us = itsApp.cbUserSvr;
     
-    ds.user.userName = user.profile.name;
-    ds.user.avatar = avatar;
-    ds.user.isLogin = YES;
-    ds.user.uId = user.userID;
+    us.user.userName = user.profile.name;
+    us.user.avatar = avatar;
+    us.user.isLogin = YES;
+    us.user.uId = user.userID;
 
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          @"google",@"type",
                          user.userID,@"openid",
                          user.profile.name ,@"name",
                          avatar,@"avatar",
-                         [[NSNumber alloc] initWithBool:ds.user.isLogin],@"isLogin",
+                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     
     SettingService* ss = [SettingService get];
@@ -143,19 +143,19 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 }
 - (void)getFacebookUserInfo{
     
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
     
-    FacebookService *facebook = poApp.fbSvr;
-    ds.user.userName = facebook.userName;
-    ds.user.avatar = facebook.icon;
-    ds.user.isLogin = YES;
+    FacebookService *facebook = itsApp.fbSvr;
+    us.user.userName = facebook.userName;
+    us.user.avatar = facebook.icon;
+    us.user.isLogin = YES;
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          @"facebook",@"type",
                          facebook.uId,@"openid",
                          facebook.userName ,@"name",
                          facebook.icon,@"avatar",
-                         [[NSNumber alloc] initWithBool:ds.user.isLogin],@"isLogin",
+                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     
     SettingService* ss = [SettingService get];
@@ -163,20 +163,20 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)getTwitterUserInfo{
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
     
-    TwitterService *twitter = poApp.tw;
+    TwitterService *twitter = itsApp.tw;
 
-    ds.user.avatar = twitter.icon;
-    ds.user.userName = twitter.name;
-    ds.user.isLogin = YES;
+    us.user.avatar = twitter.icon;
+    us.user.userName = twitter.name;
+    us.user.isLogin = YES;
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          @"twitter",@"type",
                          twitter.uId,@"openid",
                          twitter.name ,@"name",
                          twitter.icon ,@"avatar",
-                         [[NSNumber alloc] initWithBool:ds.user.isLogin],@"isLogin",
+                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     SettingService* ss = [SettingService get];
     [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];

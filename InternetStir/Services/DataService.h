@@ -25,141 +25,14 @@
 #import "NativeAdItem.h"
 
 #import "PNNativeAdItem.h"
-#import "PopoUser.h"
+
 //#import "CommentItem.h"
 //#import "CommentCellFrame.h"
 //#import "MyCommentCellFrame.h"
 //#import "MyCommentItem.h"
-@interface BaiduPlusUser : NSObject
-
-@property (copy) NSString* uId;
-@property (copy) NSString* name;
-@property (copy) NSString* link;
-@property (assign) BOOL isChecked;
-@property (retain) NSMutableArray* data;
-
-@end
-
-@interface PoPoBDuser : NSObject
-@property (retain) NSMutableArray *users;
-@end
-
-@interface WeiboUsers : NSObject
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *uId;
-@property (nonatomic, copy) NSString *followers_count;
-@property (assign) BOOL checked;
-@property (retain) NSMutableArray* data;
-@end
-
-@interface PoPoWEuser : NSObject
-@property (retain) NSMutableArray *friends;
-@end
-
-@interface TwitterUser : NSObject
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *uId;
-@property (nonatomic, copy) NSString *followers_count;
-@property (assign) BOOL checked;
-@property (retain) NSMutableArray* data;
-@end
-
-@interface PopoTWuser : NSObject
-@property (retain) NSMutableArray* friends;
-
-@end
-
-@interface GoolgePlusUser : NSObject
-
-@property (copy) NSString* uId;
-@property (copy) NSString* name;
-@property (copy) NSString* link;
-@property (retain) NSMutableArray* links;
-@property (assign) BOOL isChecked;
-@property (retain) NSMutableArray* data;
-
-@end
-
-@interface PopoGPUser: NSObject
-
-@property (retain) NSMutableArray* users;
-
-@end
-
-@interface FBPaging : NSObject
-
-@property (copy) NSString* previous;
-@property (copy) NSString* next;
-
-@end
-
-@interface FBUser : NSObject
-
-@property (copy) NSString* uId;
-@property (copy) NSString* name;
-@property (assign) int type;
-@property (retain) FBPaging* dataPaging;
-@property (assign) BOOL checked;
-
-@property (nonatomic) NSMutableArray* data;
-
-@end
-
-@interface PopoFBUser : NSObject
-
-@property (retain) FBPaging* likePaging;
-
-@property (assign) int friendTotalCount;
-@property (assign) int friendCurrentCount;
-@property (retain) FBPaging* friendPaging;
-
-@property (retain) NSMutableArray* users;
-
-@end
-
-@interface PopoSocialNewItem : NSObject
-
-@property (copy) NSString* nId;
-@property (assign) int type;
-@property (retain) id data;
-@property (assign) UInt64 ts;
-
-@end
-
-@interface PopoSocialDataItem : NSObject
-
-@property (assign) int type;
-@property (assign) BOOL isOpen;
-@property (retain) id socialData;
-
-@end
 
 
-@interface OfflineCategoryItem : NSObject
 
-@property (assign) BOOL checked;            // 是否被选中
-@property (retain) NewsCategory* category;  // 目录
-@property (assign) int progress;        // 下载进度
-@property (assign) int downloadStatus;  // 下载状态
-@property (retain) NSMutableArray* newsList;  // 离线新闻列表
-@property (retain) NSMutableArray* downloadList;  // 下载项列表
-@property (assign) BOOL isNewsSync; // 是否同步到阅读列表中
-@property (assign) BOOL isHideen;
-@end
-
-@interface FavourNewsItem : NSObject
-
-@property (assign) BOOL checked;
-@property (retain) PoPoNewsItem* data;
-
-@end
-
-@interface ReadedNewsItem : NSObject
-
-@property (copy) NSString* nId;
-@property (copy) NSString* cId;
-
-@end
 
 typedef enum{
     SettingTypeButton = 1,
@@ -192,7 +65,7 @@ typedef enum{
 @property (assign) BOOL isLogin;
 @end
 
-@interface PopoNewsChannelInfo : NSObject
+@interface CBChannelInfo : NSObject
 
 @property (copy) NSString* country;
 @property (copy) NSString* lang;
@@ -207,7 +80,7 @@ typedef enum{
 @property (retain) NSMutableArray *shareItem;
 @end
 
-@interface PopoNewsChannel : NSObject
+@interface CBChannel : NSObject
 
 @property (copy) NSString* country;
 @property (copy) NSString* lang;
@@ -216,16 +89,6 @@ typedef enum{
 @property (copy) NSString* name;
 
 @property (assign) BOOL isChecked;
-
-@end
-
-@interface StorageUserCategory : NSObject
-
-@property (retain) NSString* cid;
-@property (assign) BOOL hidden;
-
--(StorageUserCategory*) initWithDict: (NSDictionary*) dict;
--(NSDictionary*) toDict;
 
 @end
 
@@ -238,7 +101,7 @@ typedef enum{
 @property (retain) NSMutableArray* categoryList;
 @property (copy) NSString* fileBaseUrl;
 @property (copy) NSString* connectRspCh;
-@property (retain) PopoNewsChannelInfo* minikitCh;
+@property (retain) CBChannelInfo* minikitCh;
 @property (retain) NSMutableArray* popoNewChannelList;
 @property (copy) NSString* did;
 @property (copy) NSString* connectRspGroup;
@@ -262,12 +125,7 @@ typedef enum{
 @property (retain) NSMutableArray* myCommentNewsList;
 @property (retain) NSMutableArray* unLikeNewsList;
 
-//@property (retain) PopoFBUser* popFBUsers;
-@property (retain) PopoSocialDataItem* popoFBData;
-@property (retain) PopoSocialDataItem* popoGPData;
-@property (retain) PopoSocialDataItem* popoTWData;
-@property (retain) PopoSocialDataItem* popoWEData;
-@property (retain) PopoSocialDataItem* popoBDData;
+
 
 //@property (retain) NativeAdItem *fbAdData;
 //@property (retain) NativeAdItem *gmobiAdData;
@@ -281,7 +139,7 @@ typedef enum{
 @property (retain) NSString* offPushNewsId;
 @property (retain) PoPoNewsItem* pushNews;
 
-@property (retain) PopoUser *user;
+//@property (retain) CelebUser *user;
 
 -(NSString*) getServerDeviceId;
 
@@ -433,8 +291,7 @@ typedef enum{
          isShowDetailPage: (BOOL) isShowDetailPage;
 -(void) updatePushNewsToStorage: (PoPoNewsItem*) item;
 
-//user
--(void) initUser;
+
 
 //unlike
 -(void) initUnLikeNewsList;

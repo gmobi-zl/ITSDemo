@@ -27,75 +27,8 @@
 
 #define SAVED_USER_CATEGORY_LIST @"saved.user.category.data"
 
-@implementation BaiduPlusUser
-
-@end
-
-@implementation PoPoBDuser
-
-@end
-
-@implementation WeiboUsers
-
-@end
-
-@implementation PoPoWEuser
-
-@end
-
-@implementation TwitterUser
-
-@end
-
-@implementation PopoTWuser
-
-@end
-
-@implementation GoolgePlusUser
-
-@end
-
-@implementation PopoGPUser
-
-@end
-
-@implementation FBPaging
-
-@end
-
-@implementation FBUser
-
-@end
-
-@implementation PopoFBUser
-
-@end
-
-@implementation PopoSocialNewItem
-
-@end
-
-@implementation PopoSocialDataItem
-
-@end
-
-@implementation OfflineCategoryItem
-
-
-@end
-
-@implementation FavourNewsItem
-
-
-@end
-
-@implementation ReadedNewsItem
-
-
-@end
 
 @implementation SettingItem
-
 
 @end
 
@@ -107,38 +40,11 @@
 
 @end
 
-@implementation PopoNewsChannelInfo
+@implementation CBChannelInfo
 
 @end
 
-@implementation PopoNewsChannel
-
-@end
-
-
-@implementation StorageUserCategory
-
--(StorageUserCategory*) initWithDict: (NSDictionary*) dict{
-    if (dict != nil){
-        NSString* tmpCId = [dict objectForKey:@"cid"];
-        if (tmpCId != nil)
-            self.cid = tmpCId;
-        
-        NSNumber* tmpHidden = [dict objectForKey:@"hidden"];
-        self.hidden = [tmpHidden boolValue];
-    }
-    
-    return self;
-}
-
--(NSDictionary*) toDict{
-    NSMutableDictionary* resultDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    
-    [resultDict setObject:self.cid forKey:@"cid"];
-    [resultDict setObject:[NSNumber numberWithBool:self.hidden] forKey:@"hidden"];
-    
-    return resultDict;
-}
+@implementation CBChannel
 
 @end
 
@@ -273,97 +179,9 @@
     return nil;
 }
 
--(void) refreshShowCategoryList{
-    if (self.showCategoryList == nil)
-        self.showCategoryList = [NSMutableArray arrayWithCapacity:3];
-    else
-        [self.showCategoryList removeAllObjects];
-    
-//    SettingService* ss = [SettingService get];
-    ConfigService *cf = [ConfigService get];
-    NSString *ch = [cf getChannel];
-    NSString *savedKey = [NSString stringWithFormat:@"%@_%@", SAVED_USER_CATEGORY_LIST, ch];
-    NSArray* savedList = nil;//[ss getArrayValue:savedKey defValue:nil];  // close user set category order feature
-    
-    if (savedList == nil){
-        for (NewsCategory* item in self.categoryList) {
-            if (item != nil){
-                item.hidden = NO;
-                [self.showCategoryList addObject:item];
-            }
-        }
-    } else {
-        NSMutableArray* tmpCategoryList = [NSMutableArray arrayWithCapacity:1];
-        for (NewsCategory* item in self.categoryList) {
-            if (item != nil){
-                item.hidden = NO;
-                [tmpCategoryList addObject:item];
-            }
-        }
-        
-        for (int i = 0; i < [savedList count]; i++) {
-            NSDictionary* cData = [savedList objectAtIndex:i];
-            StorageUserCategory* tmpCate = [StorageUserCategory alloc];
-            [tmpCate initWithDict:cData];
-            
-            for (int j = 0; j < [tmpCategoryList count]; j++) {
-                NewsCategory* tItem = [tmpCategoryList objectAtIndex:j];
-                if ([tItem.cId isEqualToString:tmpCate.cid]){
-                    tItem.hidden = tmpCate.hidden;
-                    [tmpCategoryList removeObject:tItem];
-                    
-                    [self.showCategoryList addObject:tItem];
-                    break;
-                }
-            }
-            
-        }
-        
-        
-        for (NSInteger m = [tmpCategoryList count] - 1; m >= 0; m--) {
-            NewsCategory* tItem = [tmpCategoryList objectAtIndex:m];
-            
-            if (tItem != nil){
-                if ([tItem.type isEqualToString:@"social"]){
-                    [self.showCategoryList addObject:tItem];
-                } else {
-                    [self.showCategoryList insertObject:tItem atIndex:0];
-                }
-            }
-        }
-    }
-}
 
--(void) saveShowCategoryList{
-    if (self.showCategoryList != nil){
-        NSMutableArray* saveArray = nil;
-        StorageUserCategory* tmpCate = [StorageUserCategory alloc];
-        
-        for (NewsCategory* item in self.showCategoryList) {
-            if (item != nil){
-                if ([item.type isEqualToString:@"social"])
-                    continue;
-                
-                if (saveArray == nil)
-                    saveArray = [NSMutableArray arrayWithCapacity:1];
-                
-                tmpCate.cid = item.cId;
-                tmpCate.hidden = item.hidden;
-                
-                NSDictionary* tData = [tmpCate toDict];
-                [saveArray addObject:tData];
-            }
-        }
-        
-        if (saveArray != nil){
-            ConfigService *cf = [ConfigService get];
-            NSString *ch = [cf getChannel];
-            NSString *savedKey = [NSString stringWithFormat:@"%@_%@", SAVED_USER_CATEGORY_LIST, ch];
-            SettingService* ss = [SettingService get];
-            [ss setArrayValue:savedKey data:saveArray];
-        }
-    }
-}
+
+
 
 -(void) refreshLeftMenu{
     if (self.leftMenuList == nil)
@@ -516,7 +334,7 @@
             //[self initWEUsersData];
             //[app.weSvr initWBNewsData];
             
-            [self initUser];
+            //[self initUser];
 
         }
         
@@ -540,7 +358,7 @@
             NSDictionary *extra = [tmpChInfoList objectForKey:@"extra"];
             NSMutableArray *share = [extra objectForKey:@"share"];
             NSMutableArray *login = [tmpChInfoList objectForKey:@"three_login"];
-            PopoNewsChannelInfo* miniKitCh = [PopoNewsChannelInfo alloc];
+            CBChannelInfo* miniKitCh = [CBChannelInfo alloc];
             miniKitCh.shareItem = [[NSMutableArray alloc] init];
             miniKitCh.threeLogin = [[NSMutableArray alloc] init];
             if (login != nil) {
@@ -587,7 +405,7 @@
         }
         
         [self initNativeAds];
-        [self initUser];
+        //[self initUser];
         [self initDetailNativeAds];
         
         NSArray* tmpRspChList = [dicData objectForKey:@"channels"];
@@ -1479,7 +1297,7 @@
             }
             
             if (tmpId != nil && tmpName != nil && tmpCountry != nil && tmpIcon != nil && tmpLang != nil){
-                PopoNewsChannel* poCh = [PopoNewsChannel alloc];
+                CBChannel* poCh = [CBChannel alloc];
                 poCh.chId = tmpId;
                 poCh.name = tmpName;
                 poCh.icon = tmpIcon;
@@ -1526,47 +1344,6 @@
         }
         [self.poponewsList removeAllObjects];
         self.poponewsList = nil;
-    }
-    
-    if (self.downLoadList != nil){
-        ITSApplication* app = [ITSApplication get];
-        //[app.offlineSvr stopDwonload];
-        for (int i = 0; i < [self.downLoadList count]; i++) {
-            OfflineCategoryItem* item = [self.downLoadList objectAtIndex:i];
-            if (item.downloadList != nil)
-                [item.downloadList removeAllObjects];
-            if (item.newsList != nil)
-                [item.newsList removeAllObjects];
-        }
-        [self.downLoadList removeAllObjects];
-        self.downLoadList = nil;
-    }
-    
-    if (self.popoGPData != nil){
-        PopoGPUser* gpUsers = self.popoGPData.socialData;
-        if (gpUsers != nil && gpUsers.users != nil){
-            for (int i = 0; i < [gpUsers.users count]; i++) {
-                GoolgePlusUser* tmpGPUser = [gpUsers.users objectAtIndex:i];
-                if (tmpGPUser.data != nil)
-                    [tmpGPUser.data removeAllObjects];
-            }
-            [gpUsers.users removeAllObjects];
-        }
-        self.socialCategory = nil;
-        self.popoGPData = nil;
-    }
-    if (self.popoBDData != nil){
-        PoPoBDuser* gpUsers = self.popoBDData.socialData;
-        if (gpUsers != nil && gpUsers.users != nil){
-            for (int i = 0; i < [gpUsers.users count]; i++) {
-                BaiduPlusUser* tmpGPUser = [gpUsers.users objectAtIndex:i];
-                if (tmpGPUser.data != nil)
-                    [tmpGPUser.data removeAllObjects];
-            }
-            [gpUsers.users removeAllObjects];
-        }
-        self.socialCategory = nil;
-        self.popoBDData = nil;
     }
 }
 
@@ -1636,6 +1413,7 @@
         self.readNewsList = [NSMutableArray arrayWithCapacity:1];
     }
     
+    /*
     for (ReadedNewsItem* item in self.readNewsList) {
         if (item != nil){
             if ([item.nId compare:nId] == NSOrderedSame){
@@ -1660,13 +1438,14 @@
         NewsService* ns = [NewsService get];
         [ns saveReadNewsList:self.readNewsList];
     }
+     */
 }
 
 -(BOOL) isInReadList: (PoPoNewsItem*) item{
     BOOL isFind = NO;
     if (item == nil || self.readNewsList == nil)
         return isFind;
-    
+    /*
     for (ReadedNewsItem* readItem in self.readNewsList) {
         if (readItem != nil){
             if ([readItem.nId compare:item.nId] == NSOrderedSame){
@@ -1675,7 +1454,7 @@
             }
         }
     }
-    
+    */
     return isFind;
 }
 
@@ -1736,7 +1515,7 @@
     if (self.favourNewsList == nil){
         self.favourNewsList = [NSMutableArray arrayWithCapacity:1];
     }
-    
+    /*
     for (FavourNewsItem* tmpItem in self.favourNewsList) {
         if (tmpItem != nil){
             PoPoNewsItem* newsItem = tmpItem.data;
@@ -1777,6 +1556,7 @@
             }
         }
     }
+     */
 }
 
 -(void) removeFavourById: (PoPoNewsItem*) item{
@@ -1789,6 +1569,7 @@
         return;
     
     int index = 0;
+    /*
     for (FavourNewsItem* tmpItem in self.favourNewsList) {
         if (tmpItem != nil){
             PoPoNewsItem* newsItem = tmpItem.data;
@@ -1813,13 +1594,14 @@
         // update news
         [ns savePopoNewsItem:item.nId data:[item toDictionaryData]];
     }
+     */
 }
 
 -(BOOL) isInFavourList:(PoPoNewsItem*) item{
     BOOL isFind = NO;
     if (item == nil || self.favourNewsList == nil)
         return isFind;
-    
+    /*
     for (FavourNewsItem* tmpItem in self.favourNewsList) {
         if (tmpItem != nil){
             PoPoNewsItem* newsItem = tmpItem.data;
@@ -1829,7 +1611,7 @@
             }
         }
     }
-    
+    */
     return isFind;
 }
 
@@ -1842,7 +1624,7 @@
         return;
     
     long count = [self.favourNewsList count];
-    
+    /*
     for (int i = 0; i < count; i++) {
         FavourNewsItem* tmpItem = [self.favourNewsList objectAtIndex:i];
         if (tmpItem != nil){
@@ -1866,14 +1648,17 @@
             }
         }
     }
+     */
 }
 
 -(void) clearFavourAllSel{
+    /*
     for (FavourNewsItem* tmpItem in self.favourNewsList) {
         if (tmpItem != nil){
             tmpItem.checked = NO;
         }
     }
+     */
 }
 //回复的回复
 /*
@@ -2167,770 +1952,8 @@
 }
  
  */
-// download
--(void) refreshOfflineDownloadCategoryList{
-    if (self.downLoadList == nil)
-        self.downLoadList = [NSMutableArray arrayWithCapacity:3];
-    else
-        [self.downLoadList removeAllObjects];
-    
-    for (NewsCategory* item in self.categoryList) {
-        if (item != nil){
-            OfflineCategoryItem* offlineItem = [OfflineCategoryItem alloc];
-            offlineItem.category = item;
-            offlineItem.progress = 0;
-            offlineItem.checked = NO;
-            offlineItem.isHideen = YES;
-            offlineItem.downloadList = nil;
-            offlineItem.downloadStatus = DOWNLOAD_STATUS_INIT;
-            offlineItem.newsList = nil;
-            offlineItem.isNewsSync = NO;
-            
-            [self.downLoadList addObject:offlineItem];
-        }
-    }
-}
-
-- (NSMutableArray*) getDownLoadList {
-    if (self.downLoadList == nil)
-        [self refreshOfflineDownloadCategoryList];
-    return self.downLoadList;
-}
-
--(void) clearDownloadChecked{
-    if (self.downLoadList == nil)
-        return;
-    
-    for (int i =0; i < [self.downLoadList count]; i++) {
-        OfflineCategoryItem* offlineItem = [self.downLoadList objectAtIndex:i];
-        offlineItem.checked = NO;
-        offlineItem.downloadStatus = DOWNLOAD_STATUS_INIT;
-        offlineItem.progress = 0;
-    }
-}
-
--(void) setOfflineNews: (NSString*) cid
-              newsList: (NSArray*) dicData {
-    if (self.downLoadList == nil || cid == nil || dicData == nil)
-        return;
-    NewsService* ns = [NewsService get];
-    for (OfflineCategoryItem* item in self.downLoadList) {
-        if (item != nil) {
-            if ([item.category.cId compare:cid] == NSOrderedSame){
-                item.downloadStatus = DOWNLOAD_STATUS_GET_NEWS;
-                for (NSDictionary* newsDataItem in dicData) {
-                    PoPoNewsItem* tmpItem = [[PoPoNewsItem alloc] initWithDictionary:newsDataItem];
-                    tmpItem.isOfflineDL = YES;
-                    if (tmpItem != nil){
-                        if (item.newsList == nil)
-                            item.newsList = [NSMutableArray arrayWithCapacity:1];
-                        [item.newsList addObject:tmpItem];
-                        if (ns != nil)
-                            [ns savePopoNewsItem:tmpItem.nId data:[tmpItem toDictionaryData]];
-                    }
-                }
-            }
-        }
-    }
-}
-
--(NSInteger) getSocialUserCount: (int) type{
-    NSInteger userCount = 0;
-    if (type == SOCIAL_TYPE_FACEBOOK){
-        if (self.popoFBData != nil){
-            PopoFBUser* fbUsers = self.popoFBData.socialData;
-            if (fbUsers != nil && fbUsers.users != nil){
-                userCount = [fbUsers.users count];
-            }
-        }
-    } else if (type == SOCIAL_TYPE_GOOGLE){
-        if (self.popoGPData != nil){
-            PopoGPUser* gpUsers = self.popoGPData.socialData;
-            if (gpUsers != nil && gpUsers.users != nil){
-                userCount = [gpUsers.users count];
-            }
-        }
-    }else if (type == SOCIAL_TYPE_TWITTER){
-        if (self.popoTWData != nil) {
-            PopoTWuser *twUsers = self.popoTWData.socialData;
-            if (twUsers != nil && twUsers.friends != nil) {
-                 userCount = [twUsers.friends count];
-            }
-        }
-    }else if (type == SOCIAL_TYPE_WEIBO){
-    
-        if (self.popoWEData != nil) {
-            PoPoWEuser *weUsers = self.popoWEData.socialData;
-            if (weUsers != nil && weUsers.friends != nil) {
-                userCount = [weUsers.friends count];
-            }
-        }
-    }else if (type == SOCIAL_TYPE_BAIDU){
-        
-        if (self.popoBDData != nil) {
-            PoPoBDuser *bdUsers = self.popoBDData.socialData;
-            if (bdUsers != nil && bdUsers.users != nil) {
-                userCount = [bdUsers.users count];
-            }
-        }
-    }
-    
-    return userCount;
-}
-
--(void) setSocialSwitchStatus: (int) type
-                       status: (BOOL) status{
-    if (type == SOCIAL_TYPE_FACEBOOK){
-        if (self.popoFBData != nil){
-            self.popoFBData.isOpen = status;
-            SettingService* ss = [SettingService get];
-            [ss setBooleanValue:SOCIAL_FACEBOOK_SWITCH_ON_KEY data:status];
-        }
-    } else if (type == SOCIAL_TYPE_GOOGLE){
-        if (self.popoGPData != nil){
-            self.popoGPData.isOpen = status;
-            SettingService* ss = [SettingService get];
-            [ss setBooleanValue:SOCIAL_GOOGLE_SWITCH_ON_KEY data:status];
-        }
-    }else if (type == SOCIAL_TYPE_TWITTER){
-        if (self.popoTWData != nil) {
-            self.popoTWData.isOpen = status;
-            SettingService *ss = [SettingService get];
-            [ss setBooleanValue:SOCIAL_TWITTER_SWITCH_ON_KEY data:status];
-        }
-    }else if (type == SOCIAL_TYPE_WEIBO){
-        if (self.popoWEData != nil) {
-            self.popoWEData.isOpen = status;
-            SettingService *ss = [SettingService get];
-            [ss setBooleanValue:SOCIAL_WEIBO_SWITCH_ON_KEY data:status];
-        }
-    }else if (type == SOCIAL_TYPE_BAIDU){
-        if (self.popoBDData != nil) {
-            self.popoBDData.isOpen = status;
-            SettingService *ss = [SettingService get];
-            [ss setBooleanValue:SOCIAL_BAIDU_SWITCH_ON_KEY data:status];
-        }
-    }
-}
-
--(NSMutableArray*) getSocialUserList: (int) type{
-    NSMutableArray* userList = nil;
-    
-    if (type == SOCIAL_TYPE_FACEBOOK){
-        if (self.popoFBData != nil){
-            PopoFBUser* fbUsers = self.popoFBData.socialData;
-            if (fbUsers != nil){
-                userList= fbUsers.users;
-            }
-        }
-    } else if (type == SOCIAL_TYPE_GOOGLE){
-        if (self.popoGPData != nil){
-            PopoGPUser* gpUsers = self.popoGPData.socialData;
-            if (gpUsers != nil){
-                userList  = gpUsers.users;
-            }
-        }
-    }else if (type == SOCIAL_TYPE_TWITTER){
-        if (self.popoTWData != nil) {
-            PopoTWuser *twUsers = self.popoTWData.socialData;
-            if (twUsers != nil) {
-               
-                TwitterUser *t = [[TwitterUser alloc] init];
-                    for (int i = 0; i < twUsers.friends.count; i++) {
-                        for (int j = 0; j < twUsers.friends.count - i - 1; j++) {
-                            TwitterUser *user = [twUsers.friends objectAtIndex:j];
-                            TwitterUser *userNest = [twUsers.friends objectAtIndex:j+1];
-                            if ([user.followers_count  compare:userNest.followers_count] == NSOrderedAscending ) {
-                                t = twUsers.friends[j];
-                                twUsers.friends[j] = twUsers.friends[j + 1];
-                                twUsers.friends[j + 1] = t;
-                            }
-                        }
-                   }
-             }
-            userList = twUsers.friends;
-        }
-    }else if (type == SOCIAL_TYPE_WEIBO){
-        if (self.popoWEData != nil){
-            PoPoWEuser* weUsers = self.popoWEData.socialData;
-            if (weUsers != nil){
-                userList  = weUsers.friends;
-            }
-        }
-    }else if (type == SOCIAL_TYPE_BAIDU){
-        if (self.popoBDData != nil){
-            PoPoBDuser* bdUsers = self.popoBDData.socialData;
-            if (bdUsers != nil){
-                userList  = bdUsers.users;
-            }
-        }
-    }
-    
-    return userList;
-}
--(void) setTWSocial: (NSDictionary*) dic
-          isServer: (BOOL) isServer{
-    if (dic == nil)
-        return;
-    
-    if (self.popoTWData == nil){
-        self.popoTWData = [PopoSocialDataItem alloc];
-        self.popoTWData.type = SOCIAL_TYPE_TWITTER;
-        
-        SettingService* ss = [SettingService get];
-        self.popoTWData.isOpen = [ss getBooleanValue:SOCIAL_TWITTER_SWITCH_ON_KEY defValue:NO];
-        
-        //self.popoFBData.isOpen = NO;
-        if (self.popoTWData.socialData == nil){
-            PopoTWuser* popTWUsers = [PopoTWuser alloc];
-            popTWUsers.friends = [NSMutableArray arrayWithCapacity:1];
-            self.popoTWData.socialData = popTWUsers;
-        }
-    }
-    
-    SettingService* ss = [SettingService get];
-    
-    PopoTWuser* twUsers = self.popoTWData.socialData;
-    if (twUsers != nil && twUsers.friends != nil && [twUsers.friends count] > 0 && isServer == YES){
-        NSMutableArray* serverUsersList = [NSMutableArray arrayWithCapacity:1];
-    
-        NSArray* likeData = [dic objectForKey:@"users"];
-        if (likeData != nil){
-            for(NSDictionary* item in likeData){
-                TwitterUser* user = [TwitterUser alloc];
-                
-                NSString* tmpData = [item objectForKey:@"id_str"];
-                if (tmpData != nil)
-                    user.uId = tmpData;
-                
-                if (user.uId != nil){
-                    NSString* userKey = [NSString stringWithFormat:@"twitter_%@", user.uId];
-                    user.checked = [ss getBooleanValue:userKey defValue:YES];
-                } else {
-                    user.checked = YES;
-                }
-                
-                tmpData = [item objectForKey:@"name"];
-                if (tmpData != nil)
-                    user.name = tmpData;
-                tmpData = [item objectForKey:@"followers_count"];
-                if (tmpData != nil) {
-                    user.followers_count = tmpData;
-                }
-                [serverUsersList addObject:user];
-            }
-        }
-        
-        PopoTWuser* popTWUsers = self.popoTWData.socialData;
-        
-        for (int i = 0; i < [serverUsersList count]; i++) {
-            TwitterUser* tmpUser = [serverUsersList objectAtIndex:i];
-            for (int i = 0; i < [popTWUsers.friends count]; i++) {
-                TwitterUser* addedUser = [popTWUsers.friends objectAtIndex:i];
-                if ([addedUser.uId isEqualToString:tmpUser.uId]){
-                    tmpUser.data = addedUser.data;
-                    break;
-                }
-            }
-        }
-        
-        [popTWUsers.friends removeAllObjects];
-        popTWUsers.friends = nil;
-        popTWUsers.friends = serverUsersList;
-    } else {
-        
-        NSArray* likeData = [dic objectForKey:@"users"];
-        if (likeData != nil){
-            
-            long likesCount = [likeData count];
-            if (likesCount == 0){
-                ITSApplication* app = [ITSApplication get];
-            }
-            
-            for(NSDictionary* item in likeData){
-                TwitterUser* user = [TwitterUser alloc];
-                
-                NSString* tmpData = [item objectForKey:@"id_str"];
-                if (tmpData != nil)
-                    user.uId = tmpData;
-                
-                if (user.uId != nil){
-                    NSString* userKey = [NSString stringWithFormat:@"twitter_%@", user.uId];
-                    user.checked = [ss getBooleanValue:userKey defValue:YES];
-                } else {
-                    user.checked = YES;
-                }
-                
-                tmpData = [item objectForKey:@"name"];
-                if (tmpData != nil)
-                    user.name = tmpData;
-                
-                tmpData = [item objectForKey:@"followers_count"];{
-                    if (tmpData != nil) {
-                        user.followers_count = tmpData;
-                    }
-                }
-                PopoTWuser* popTWUsers = self.popoTWData.socialData;
-                BOOL isSame = NO;
-                for (int i = 0; i < [popTWUsers.friends count]; i++) {
-                    TwitterUser* addedUser = [popTWUsers.friends objectAtIndex:i];
-                    if ([addedUser.uId isEqualToString:user.uId]){
-                        isSame = YES;
-                        break;
-                    }
-                }
-                if (isSame == NO)
-                    [popTWUsers.friends addObject:user];
-            }
-        }
-    }
-   
-}
 
 
--(void) initFBUsersData{
-    if (self.popoFBData == nil){
-        self.popoFBData = [PopoSocialDataItem alloc];
-        self.popoFBData.type = SOCIAL_TYPE_FACEBOOK;
-        
-        SettingService* ss = [SettingService get];
-        self.popoFBData.isOpen = [ss getBooleanValue:SOCIAL_FACEBOOK_SWITCH_ON_KEY defValue:NO];
-        
-        if (self.popoFBData.socialData == nil){
-            PopoFBUser* popFBUsers = [PopoFBUser alloc];
-            popFBUsers.users = [NSMutableArray arrayWithCapacity:1];
-            self.popoFBData.socialData = popFBUsers;
-        }
-        
-        // if open init stroage data
-    }
-}
-
--(void) setFBSocial: (NSDictionary*) dic
-          isServer: (BOOL) isServer{
-    if (dic == nil)
-        return;
-    
-    if (self.popoFBData == nil){
-        self.popoFBData = [PopoSocialDataItem alloc];
-        self.popoFBData.type = SOCIAL_TYPE_FACEBOOK;
-        
-        SettingService* ss = [SettingService get];
-        self.popoFBData.isOpen = [ss getBooleanValue:SOCIAL_FACEBOOK_SWITCH_ON_KEY defValue:NO];
-        
-        //self.popoFBData.isOpen = NO;
-        if (self.popoFBData.socialData == nil){
-            PopoFBUser* popFBUsers = [PopoFBUser alloc];
-            popFBUsers.users = [NSMutableArray arrayWithCapacity:1];
-            self.popoFBData.socialData = popFBUsers;
-        }
-    }
-    
-    SettingService* ss = [SettingService get];
-    
-    PopoFBUser* fbUsers = self.popoFBData.socialData;
-    if (fbUsers != nil && fbUsers.users != nil && [fbUsers.users count] > 0 && isServer == YES){
-        NSMutableArray* serverUsersList = [NSMutableArray arrayWithCapacity:1];
-        
-        NSArray* likeData = [dic objectForKey:@"data"];
-        if (likeData != nil){
-            for(NSDictionary* item in likeData){
-                FBUser* user = [FBUser alloc];
-                
-                NSString* tmpData = [item objectForKey:@"id"];
-                if (tmpData != nil)
-                    user.uId = tmpData;
-                
-                if (user.uId != nil){
-                    NSString* userKey = [NSString stringWithFormat:@"Facebook_%@", user.uId];
-                    user.checked = [ss getBooleanValue:userKey defValue:YES];
-                } else {
-                    user.checked = YES;
-                }
-                
-                tmpData = [item objectForKey:@"name"];
-                if (tmpData != nil)
-                    user.name = tmpData;
-                
-                [serverUsersList addObject:user];
-            }
-        }
-        
-        PopoFBUser* popFBUsers = self.popoFBData.socialData;
-        
-        for (int i = 0; i < [serverUsersList count]; i++) {
-            FBUser* tmpUser = [serverUsersList objectAtIndex:i];
-            for (int j = 0; j < [popFBUsers.users count]; j++) {
-                FBUser* addedUser = [popFBUsers.users objectAtIndex:j];
-                if ([addedUser.uId isEqualToString:tmpUser.uId]){
-                    tmpUser.data = addedUser.data;
-                    break;
-                }
-            }
-        }
-        
-        [popFBUsers.users removeAllObjects];
-        popFBUsers.users = nil;
-        popFBUsers.users = serverUsersList;
-    } else {
-
-        NSArray* likeData = [dic objectForKey:@"data"];
-        if (likeData != nil){
-            
-            long likesCount = [likeData count];
-            if (likesCount == 0){
-                ITSApplication* app = [ITSApplication get];
-                //[app.fbSvr setIsUserInitialized:NO];
-            }
-            
-            for(NSDictionary* item in likeData){
-                FBUser* user = [FBUser alloc];
-               // [user setValuesForKeysWithDictionary:item];
-                NSString* tmpData = [item objectForKey:@"id"];
-                if (tmpData != nil)
-                    user.uId = tmpData;
-                
-                if (user.uId != nil){
-                    NSString* userKey = [NSString stringWithFormat:@"Facebook_%@", user.uId];
-                    user.checked = [ss getBooleanValue:userKey defValue:YES];
-                } else {
-                    user.checked = YES;
-                }
-                
-                tmpData = [item objectForKey:@"name"];
-                if (tmpData != nil)
-                    user.name = tmpData;
-                
-                PopoFBUser* popFBUsers = self.popoFBData.socialData;
-                BOOL isSame = NO;
-                for (int i = 0; i < [popFBUsers.users count]; i++) {
-                    FBUser* addedUser = [popFBUsers.users objectAtIndex:i];
-                    if ([addedUser.uId isEqualToString:user.uId]){
-                        isSame = YES;
-                        break;
-                    }
-                }
-                if (isSame == NO)
-                    [popFBUsers.users addObject:user];
-            }
-        }
-    }
-    
-    NSDictionary* pagingData = [dic objectForKey:@"paging"];
-    if (pagingData != nil){
-        NSDictionary* cursorsData = [pagingData objectForKey:@"cursors"];
-        if (cursorsData != nil){
-            FBPaging* fbPage = [FBPaging alloc];
-            NSString* tmpData = [cursorsData objectForKey:@"after"];
-            if (tmpData != nil)
-                fbPage.next = tmpData;
-            
-            tmpData = [cursorsData objectForKey:@"before"];
-            if (tmpData != nil)
-                fbPage.previous = tmpData;
-            
-            PopoFBUser* popFBUsers = self.popoFBData.socialData;
-            popFBUsers.likePaging = fbPage;
-            //self.popFBUsers.likePaging = fbPage;
-        }
-    }
-   
-}
-
--(void) setSocialNewsToList: (NSMutableArray*) list
-                     newsId: (NSString*) nId
-                   newsItem: (id) item
-                   newsType: (int) type
-                    addType: (BOOL) isTop{
-    if (list == nil || item == nil)
-        return;
-    BOOL isFind = NO;
-    long listCount = [list count];
-    for (int i = 0; i < listCount; i++) {
-        PopoSocialNewItem* tmp = [list objectAtIndex:i];
-        if (tmp != nil && [tmp.nId compare:nId] == NSOrderedSame){
-            isFind = YES;
-            break;
-        }
-    }
-    
-    PopoSocialNewItem* nItem = [PopoSocialNewItem alloc];
-    nItem.data = item;
-    nItem.nId = nId;
-    nItem.type = type;
-    
-    if (isFind == NO){
-        if (isTop){
-            [list insertObject:nItem atIndex:0];
-        } else
-            [list addObject:nItem];
-    }
-}
-
-
-
--(void) updateFBUserPaging: (NSString*) uId
-                      data: (NSDictionary*) dic
-               resetPaging: (BOOL) flag{
-    
-    if(uId == nil || dic == nil || self.popoFBData == nil)
-        return;
-    //if(uId == nil || dic == nil || self.popFBUsers == nil)
-    //    return;
-    long uCount = 0;
-//    if (self.popFBUsers.users != nil)
-//        uCount = [self.popFBUsers.users count];
-    
-    PopoFBUser* popFBUsers = self.popoFBData.socialData;
-    if (popFBUsers.users != nil)
-        uCount = [popFBUsers.users count];
-    
-    for(int i = 0; i < uCount; i++){
-        //FBUser* user = [self.popFBUsers.users objectAtIndex:i];
-        FBUser* user = [popFBUsers.users objectAtIndex:i];
-        if (user != nil && [user.uId compare:uId] == NSOrderedSame){
-            
-            if (user.dataPaging != nil && flag == NO)
-                return;
-            
-            if (user.dataPaging == nil)
-                user.dataPaging = [FBPaging alloc];
-            
-            NSString* tmpData = [dic objectForKey:@"next"];
-            if (tmpData != nil)
-                user.dataPaging.next = tmpData;
-            
-            tmpData = [dic objectForKey:@"previous"];
-            if (tmpData != nil)
-                user.dataPaging.previous = tmpData;
-            
-            break;
-        }
-    }
-}
--(NSString*) getTWCategoryId{
-    NSString* fbcId = @"notset";
-    if (self.categoryList != nil) {
-        for(NewsCategory* cate in self.categoryList){
-            if (cate != nil){
-                if ([cate.type compare:@"twitter"] == NSOrderedSame){
-                    fbcId = cate.cId;
-                }
-            }
-        }
-    }
-    
-    return fbcId;
-}
--(NSString*) getFBCategoryId{
-    NSString* fbcId = @"notset";
-    if (self.categoryList != nil) {
-        for(NewsCategory* cate in self.categoryList){
-            if (cate != nil){
-                if ([cate.type compare:@"facebook"] == NSOrderedSame){
-                    fbcId = cate.cId;
-                }
-            }
-        }
-    }
-    
-    return fbcId;
-}
--(NSString*) getWBCategoryId{
-    NSString* fbcId = @"notset";
-    if (self.categoryList != nil) {
-        for(NewsCategory* cate in self.categoryList){
-            if (cate != nil){
-                if ([cate.type compare:@"weibo"] == NSOrderedSame){
-                    fbcId = cate.cId;
-                }
-            }
-        }
-    }
-    
-    return fbcId;
-}
--(void) clearTWSocialNews{
-    if (self.popoTWData != nil){
-        PopoTWuser* popTWUsers = self.popoTWData.socialData;
-        if (popTWUsers.friends != nil){
-            [popTWUsers.friends removeAllObjects];
-            popTWUsers = nil;
-        }
-        self.popoTWData = nil;
-    }
-    if (self.poponewsList != nil){
-        for (PopoNewsData* data in self.poponewsList){
-            if (data != nil){
-                NewsCategory* cate = data.category;
-                if (cate.type != nil && [cate.type compare:@"social"] == NSOrderedSame){
-                    if (data.data != nil){
-                        [data.data removeAllObjects];
-                        data.data = nil;
-                    }
-                    return;
-                }
-            }
-        }
-    }
-}
-
--(void) clearWBSocialNews{
-    if (self.popoWEData != nil){
-        PoPoWEuser* popFBUsers = self.popoWEData.socialData;
-        if (popFBUsers.friends != nil){
-            [popFBUsers.friends removeAllObjects];
-            popFBUsers = nil;
-        }
-        self.popoWEData = nil;
-    }
-    if (self.poponewsList != nil){
-        for (PopoNewsData* data in self.poponewsList){
-            if (data != nil){
-                NewsCategory* cate = data.category;
-                if (cate.type != nil && [cate.type compare:@"weibo"] == NSOrderedSame){
-                    if (data.data != nil){
-                        [data.data removeAllObjects];
-                        data.data = nil;
-                    }
-                    
-                    return;
-                }
-            }
-        }
-    }
-}
-
--(void) initGPSocial{
-//    if (self.categoryList != nil){
-//        NewsCategory* gpCate = nil;
-//        for (NewsCategory* item in self.categoryList) {
-//            if ([item.type compare:@"social"] == NSOrderedSame){
-//                gpCate = item;
-//                break;
-//            }
-//        }
-    if (self.popoGPData == nil){
-        self.popoGPData = [PopoSocialDataItem alloc];
-        self.popoGPData.type = SOCIAL_TYPE_GOOGLE;
-        SettingService* ss = [SettingService get];
-        self.popoGPData.isOpen = [ss getBooleanValue:SOCIAL_GOOGLE_SWITCH_ON_KEY defValue:YES];
-        self.popoGPData.socialData = nil;
-    }
-    
-    if (self.socialCategory != nil){
-        NewsCategory* gpCate = self.socialCategory;
-    
-        if (gpCate != nil){
-            if (self.popoGPData != nil){
-//                self.popoGPData = [PopoSocialDataItem alloc];
-//                self.popoGPData.type = SOCIAL_TYPE_GOOGLE;
-//                SettingService* ss = [SettingService get];
-//                self.popoGPData.isOpen = [ss getBooleanValue:SOCIAL_GOOGLE_SWITCH_ON_KEY defValue:NO];
-//                //self.popoGPData.isOpen = NO;
-                if (self.popoGPData.socialData == nil && gpCate.extra != nil){
-                    PopoGPUser* popGPUsers = [PopoGPUser alloc];
-                    popGPUsers.users = [NSMutableArray arrayWithCapacity:1];
-                    self.popoGPData.socialData = popGPUsers;
-                    
-                    SocialCategoryItem* gpCateCh = nil;
-                    for (SocialCategoryItem* tmpCateCh in gpCate.extra) {
-                        if (tmpCateCh != nil && [tmpCateCh.name compare:@"google"] == NSOrderedSame){
-                            gpCateCh = tmpCateCh;
-                            break;
-                        }
-                    }
-                    SettingService* ss = [SettingService get];
-                    if (gpCateCh != nil && gpCateCh.channels != nil){
-                        for (GooglePlusChannelItem* chItem in gpCateCh.channels) {
-                            GoolgePlusUser* gpUser = [GoolgePlusUser alloc];
-                            gpUser.uId = [MMSystemHelper getMd5String:chItem.name];
-                            gpUser.name = chItem.name;
-                            gpUser.link = chItem.rssUrl;
-                            gpUser.links = chItem.rssUrls;
-                            if (gpUser.uId != nil){
-                                NSString* userKey = [NSString stringWithFormat:@"Google_%@", gpUser.uId];
-                                gpUser.isChecked = [ss getBooleanValue:userKey defValue:YES];
-                            } else
-                                gpUser.isChecked = YES;
-                            gpUser.data = nil;
-                            
-                            [popGPUsers.users addObject:gpUser];
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
--(NSString*) getGPNewsPicFromDesp: (NSString*) desp{
-    NSString* imgUrl = nil;
-    
-    if (desp != nil){
-        NSRange startRange = [desp rangeOfString:@"<img src=\""];
-        if (startRange.length == 0)
-            return nil;
-        NSString* tmpStr1 = [desp substringFromIndex:startRange.location+10];
-        
-        // @"\" alt=\"\" border=\"1\" width=\"80\" height=\"80\">"
-        NSRange endRange = [tmpStr1 rangeOfString:@"\""];
-        if (endRange.length == 0)
-            return nil;
-        NSString* tmpStr2 = [tmpStr1 substringToIndex:endRange.location];
-        
-        imgUrl = [NSString stringWithFormat:@"http:%@", tmpStr2];
-    }
-    
-    return imgUrl;
-}
--(NSString*) getBDNewsPicFromDesp: (NSString*) desp{
-    NSString* imgUrl = nil;
-    if (desp != nil){
-        if ([desp rangeOfString:@"img border"].location != NSNotFound) {
-            NSArray *arr = [desp componentsSeparatedByString:@"src="];
-            NSString *str = [arr objectAtIndex:1];
-            NSArray *http = [str componentsSeparatedByString:@">"];
-            NSString *picStr = [http objectAtIndex:0];
-            NSArray *pic = [picStr componentsSeparatedByString:@"http://"];
-            NSString *newStr = [pic objectAtIndex:1];
-            NSArray *lastStr = [newStr componentsSeparatedByString:@"=30"];
-            imgUrl = [NSString stringWithFormat:@"http://%@=30",[lastStr objectAtIndex:0]];
-        }
-
-    }
-    return imgUrl;
-}
-
--(void) updateCategoryShowType: (NSString*) cId
-                          type: (NSString*) type{
-    if (cId == nil || type == nil)
-        return;
-    
-    NewsCategory* category = [self getCategoryByID:cId];
-    category.layout = type;
-    
-    // save to db
-    SettingService* ss = [SettingService get];
-    NSString* customCId = [NSString stringWithFormat:@"%@_%@", CATEGORY_CUSTOM_LAYOUT_PERFIX, cId];
-    [ss setStringValue:customCId data:type];
-    
-    // refresh gridData
-    PopoNewsData* dataCate = nil;
-    if (self.poponewsList != nil && cId != nil){
-        for (PopoNewsData* item in self.poponewsList) {
-            if (item != nil){
-                if (item.category.cId == cId) {
-                    dataCate = item;
-                    break;
-                } else if ([item.category.cId compare:cId] == NSOrderedSame){
-                    dataCate = item;
-                    break;
-                }
-            }
-        }
-    }
-}
 
 - (void)getNewsNewsListWithAdList:(NSString* )cid :(int)type{
     
@@ -3089,47 +2112,6 @@
     //[[ITSApplication get].remoteSvr getNewsById:nId isShowDetailPage:isShowDetailPage];
 }
 
--(void) initUser{
-    
-    self.user = [[PopoUser alloc] init];
-    [self.user initWithData];
-    
-    // load last login user info;
-    SettingService* ss = [SettingService get];
-    NSDictionary *data = [ss getDictoryValue:CONFIG_USERLOGIN_INFO defValue:nil];
-    if (data == nil){
-        self.user.userName = @"高圆圆";
-        self.user.avatar = @"高圆圆";
-        self.user.isLogin = NO;
-//        self.user.uId = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/_id" def:nil];
-//        self.user.avatar = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/avatar" def:nil];
-//        self.user.userName = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/name" def:nil];
-//        self.user.email = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/email" def:nil];
-//        
-//        [self.user.primary removeAllObjects];
-//        NSArray* primaryData = [MMDictionaryHelper select:(NSMutableDictionary*)data path:@"data/primary" def:nil];
-//        if (primaryData != nil){
-//            for (int i = 0; i < [primaryData count]; i++) {
-//                NSDictionary* pData = [primaryData objectAtIndex:i];
-//                if (pData != nil){
-//                    PopoThirdUser* u = [PopoThirdUser alloc];
-//                    u.type = [MMDictionaryHelper selectString:(NSMutableDictionary*)pData path:@"type" def:nil];
-//                    u.openid = [MMDictionaryHelper selectString:(NSMutableDictionary*)pData path:@"open_id" def:nil];
-//                    u.email = [MMDictionaryHelper selectString:(NSMutableDictionary*)pData path:@"email" def:nil];
-//                    [self.user.primary addObject:u];
-//                }
-//            }
-//        }
-//        
-//        if (self.user.uId != nil)
-//            self.user.isLogin = YES;
-    }else{
-        
-        self.user.avatar = [data objectForKey:@"avatar"];
-        self.user.userName = [data objectForKey:@"name"];
-        self.user.uId = [data objectForKey:@"openid"];
-        self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
-    }
-}
+
 @end
 

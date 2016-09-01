@@ -16,6 +16,7 @@
 #import "ReportService.h"
 #import "FacebookService.h"
 #import "TwitterService.h"
+#import "CBUserService.h"
 
 #define ITS_NSLocalizedString(key, comment) \
     [ITSApplication getLocalString:(key) defVal:comment]
@@ -25,6 +26,7 @@
 //@property RemoteService* remoteSvr;
 @property DataService* dataSvr;
 @property ReportService* reportSvr;
+@property CBUserService* cbUserSvr;
 
 @property FacebookService* fbSvr;
 @property TwitterService* tw;

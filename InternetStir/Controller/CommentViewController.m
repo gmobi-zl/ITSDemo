@@ -172,8 +172,9 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 -(void)writeClick{
     
     UIKeyboardType type = UIKeyboardTypeDefault;
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CBUserService* userSvr = itsApp.cbUserSvr;
     SettingService* ss = [SettingService get];
 
     [UUInputAccessoryView showKeyboardType:type
@@ -181,7 +182,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         if (ds.user.isLogin == NO) {
+         if (userSvr.user.isLogin == NO) {
              LoginViewController *loginVc = [[LoginViewController alloc] init];
              [self.navigationController pushViewController:loginVc animated:YES];
              [ss setStringValue:@"login" data:contentStr];
@@ -189,8 +190,8 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
          }else{
              DetailCommentFrame *FrameNeedChanged = [[DetailCommentFrame alloc] init];
              DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
-             commentItem.name = ds.user.userName;
-             commentItem.icon = ds.user.avatar;
+             commentItem.name = userSvr.user.userName;
+             commentItem.icon = userSvr.user.avatar;
              //         commentItem.replys = 0;
              commentItem.comment = contentStr;
              FrameNeedChanged.detailCommentItem = commentItem;
@@ -252,8 +253,9 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 //回复的回复
 - (void)tapReply:(UIButton *)btn{
 
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CBUserService* userSvr = itsApp.cbUserSvr;
 //    SettingService* ss = [SettingService get];
 
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
@@ -262,7 +264,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                      Block:^(NSString *contentStr)
      {
          
-         if (ds.user.isLogin == NO) {
+         if (userSvr.user.isLogin == NO) {
              LoginViewController *loginVc = [[LoginViewController alloc] init];
              [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];
@@ -279,8 +281,8 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
              frameNeedChanged.replysF = nil;
              frameNeedChanged.replyPictureF = nil;
              frameNeedChanged.replyNameF = nil;
-             newsItem.name = ds.user.userName;
-             newsItem.icon = ds.user.avatar;
+             newsItem.name = userSvr.user.userName;
+             newsItem.icon = userSvr.user.avatar;
              [mutaArray addObject:newsItem];
              newReplyItem.replys = mutaArray;
              newsItem.type = 2;
@@ -302,8 +304,9 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
 //粉丝互相回复
 - (void)replyToreply :(NSInteger)index{
     
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CBUserService* userSvr = itsApp.cbUserSvr;
 //    SettingService* ss = [SettingService get];
 
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
@@ -312,7 +315,7 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
                                      Block:^(NSString *contentStr)
      {
          
-         if (ds.user.isLogin == NO) {
+         if (userSvr.user.isLogin == NO) {
              LoginViewController *loginVc = [[LoginViewController alloc] init];
              [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];
@@ -329,8 +332,8 @@ NSString *const DetailCommentTableViewCellIdentifier = @"DetailCommentCell";
              frameNeedChanged.replysF = nil;
              frameNeedChanged.replyPictureF = nil;
              frameNeedChanged.replyNameF = nil;
-             newsItem.name = ds.user.userName;
-             newsItem.icon = ds.user.avatar;
+             newsItem.name = userSvr.user.userName;
+             newsItem.icon = userSvr.user.avatar;
              [mutaArray addObject:newsItem];
              newReplyItem.replys = mutaArray;
              newsItem.type = 1;

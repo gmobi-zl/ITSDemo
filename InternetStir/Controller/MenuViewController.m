@@ -208,12 +208,13 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    ITSApplication* poApp = [ITSApplication get];
-    DataService* ds = poApp.dataSvr;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CBUserService* us = itsApp.cbUserSvr;
 
-    if (ds.user.isLogin == YES) {
+    if (us.user.isLogin == YES) {
         self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-        NSString *icon = ds.user.avatar; //[loginDic objectForKey:@"avatar"];
+        NSString *icon = us.user.avatar; //[loginDic objectForKey:@"avatar"];
         [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
         self.imageview.hidden = YES;
         self.userNameLabel.hidden = NO;
@@ -245,12 +246,13 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         
         self.bgImage.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
 
-        ITSApplication* poApp = [ITSApplication get];
-        DataService* ds = poApp.dataSvr;
-        [poApp.fbSvr facebookLogOut];
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        CBUserService* us = itsApp.cbUserSvr;
+        [itsApp.fbSvr facebookLogOut];
         SettingService* ss = [SettingService get];
         [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
-        [ds.user resetData];
+        [us.user resetData];
 
         self.userNameLabel.hidden = YES;
         self.tableView.hidden = YES;
