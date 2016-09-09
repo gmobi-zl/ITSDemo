@@ -16,7 +16,6 @@
 
 @property (retain) CelebUser *user;
 
-
 //user
 -(void) initUser;
 
