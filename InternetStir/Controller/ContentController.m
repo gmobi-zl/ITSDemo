@@ -60,7 +60,7 @@ NSString *const ContentCellIdentifier = @"ContentCell";
     [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
-
+    
 }
 - (void)pushMenu{
     

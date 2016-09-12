@@ -60,6 +60,7 @@
 //    ViewController *vc = [[ViewController alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
     TabBarController *tabBar = [[TabBarController alloc] init];
+    tabBar.selectedIndex = 1;
     [self.navigationController pushViewController:tabBar animated:YES];
 }
 

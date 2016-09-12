@@ -15,6 +15,8 @@
 #import "UUInputAccessoryView.h"
 #import "ITSAppConst.h"
 #import "DetailCommentFrame.h"
+
+#import "TestController.h"
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
@@ -146,7 +148,6 @@ NSString *const CommentCellIdentifier = @"CommentCell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.title = @"蔡阿嘎";
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
@@ -160,7 +161,19 @@ NSString *const CommentCellIdentifier = @"CommentCell";
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
     
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(screenW - 40, 20, 30, 30);
+    [button setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = right;
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+- (void)push {
+    
+    TestController *test = [[TestController alloc] init];
+    [self.navigationController pushViewController:test animated:YES];
 }
 - (void)pushMenu{
     

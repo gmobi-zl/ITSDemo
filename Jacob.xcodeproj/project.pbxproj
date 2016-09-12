@@ -55,6 +55,7 @@
 		E124AA031D6D6EFB00B5BE8F /* DownLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */; };
 		E124AA2C1D6D8DE600B5BE8F /* 404.html in Resources */ = {isa = PBXBuildFile; fileRef = E124AA2B1D6D8DE600B5BE8F /* 404.html */; };
 		E124AA2E1D6D8FE800B5BE8F /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = E124AA2D1D6D8FE800B5BE8F /* 404.png */; };
+		E13A7D681D7E995300305B64 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A7D671D7E995300305B64 /* TestController.m */; };
 		E181D12B1D669525005115E6 /* b-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E181D1271D669525005115E6 /* b-3.png */; };
 		E181D12C1D669525005115E6 /* b-6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D1281D669525005115E6 /* b-6.jpg */; };
 		E181D12D1D669525005115E6 /* b-9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D1291D669525005115E6 /* b-9.jpg */; };
@@ -164,7 +165,7 @@
 /* Begin PBXFileReference section */
 		1807B1E11D78124600CBD6FE /* CBUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBUserService.h; sourceTree = "<group>"; };
 		1807B1E21D78125D00CBD6FE /* CBUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBUserService.m; sourceTree = "<group>"; };
-		18F664961D59BA9B00BDB2E8 /* InternetStir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternetStir.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F664961D59BA9B00BDB2E8 /* Jacob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jacob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -243,6 +244,8 @@
 		E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadController.m; sourceTree = "<group>"; };
 		E124AA2B1D6D8DE600B5BE8F /* 404.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 404.html; sourceTree = "<group>"; };
 		E124AA2D1D6D8FE800B5BE8F /* 404.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 404.png; sourceTree = "<group>"; };
+		E13A7D661D7E995300305B64 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
+		E13A7D671D7E995300305B64 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 		E181D1271D669525005115E6 /* b-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-3.png"; sourceTree = "<group>"; };
 		E181D1281D669525005115E6 /* b-6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-6.jpg"; sourceTree = "<group>"; };
 		E181D1291D669525005115E6 /* b-9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-9.jpg"; sourceTree = "<group>"; };
@@ -452,7 +455,7 @@
 		18F664971D59BA9B00BDB2E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18F664961D59BA9B00BDB2E8 /* InternetStir.app */,
+				18F664961D59BA9B00BDB2E8 /* Jacob.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -666,6 +669,8 @@
 				E189F64C1D645D55008587CE /* FeedBackController.m */,
 				E181D1311D66F785005115E6 /* WebviewController.h */,
 				E181D1321D66F785005115E6 /* WebviewController.m */,
+				E13A7D661D7E995300305B64 /* TestController.h */,
+				E13A7D671D7E995300305B64 /* TestController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -825,9 +830,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18F664951D59BA9B00BDB2E8 /* InternetStir */ = {
+		18F664951D59BA9B00BDB2E8 /* Jacob */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "InternetStir" */;
+			buildConfigurationList = 18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Jacob" */;
 			buildPhases = (
 				18F664921D59BA9B00BDB2E8 /* Sources */,
 				18F664931D59BA9B00BDB2E8 /* Frameworks */,
@@ -838,9 +843,9 @@
 			);
 			dependencies = (
 			);
-			name = InternetStir;
+			name = Jacob;
 			productName = InternetStir;
-			productReference = 18F664961D59BA9B00BDB2E8 /* InternetStir.app */;
+			productReference = 18F664961D59BA9B00BDB2E8 /* Jacob.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -858,7 +863,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "InternetStir" */;
+			buildConfigurationList = 18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Jacob" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -873,7 +878,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18F664951D59BA9B00BDB2E8 /* InternetStir */,
+				18F664951D59BA9B00BDB2E8 /* Jacob */,
 			);
 		};
 /* End PBXProject section */
@@ -963,6 +968,7 @@
 				18F664CC1D5AC9FF00BDB2E8 /* MMEventService.m in Sources */,
 				18F665601D5C5E0700BDB2E8 /* DataService.m in Sources */,
 				E189F6121D6415DB008587CE /* FavourController.m in Sources */,
+				E13A7D681D7E995300305B64 /* TestController.m in Sources */,
 				18F664CB1D5AC9FF00BDB2E8 /* MMDownloadService.m in Sources */,
 				E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */,
 				18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */,
@@ -1188,8 +1194,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pub.celeb.tw001;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c001;
+				PRODUCT_NAME = Jacob;
 			};
 			name = Debug;
 		};
@@ -1217,15 +1223,15 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pub.celeb.tw001;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c001;
+				PRODUCT_NAME = Jacob;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "InternetStir" */ = {
+		18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Jacob" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18F664AB1D59BA9B00BDB2E8 /* Debug */,
@@ -1234,7 +1240,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "InternetStir" */ = {
+		18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Jacob" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18F664AE1D59BA9B00BDB2E8 /* Debug */,

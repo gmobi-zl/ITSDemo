@@ -20,6 +20,7 @@
 static NSString * const kClientID =
 @"1052945573217-6mlkd00jdq31bq4u28dijtp72hokgvmq.apps.googleusercontent.com";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // Override point for customization after application launch.
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 

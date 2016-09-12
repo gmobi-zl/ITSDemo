@@ -24,11 +24,10 @@
 }
 - (void)creatTabBarController{
 
-    NSArray *vcName = @[@"HomeViewController",@"ContentController",@"SocialController"];
+    NSArray *vcName = @[@"ContentController",@"HomeViewController",@"SocialController"];
     NSString* newsTitle = @"留言";//NSLocalizedString(@"test", nil);
     NSString* disTitle = @"内容";
     NSString* meTitle = @"社群";
-    //NSString* videoTitle = PPN_NSLocalizedString(@"PageVideo", @"Video");
     NSArray *title = @[newsTitle,disTitle,meTitle];
 
     NSArray *imageArr = @[@"icon_Comments",@"icon_Content",@"icon_Social"];
@@ -48,8 +47,6 @@
         nav.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nav.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageSelectArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBar.tintColor = [UIColor redColor];
-        //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav"] forBarMetrics:UIBarMetricsDefault];
-        //self.tabBar.tranlucent = NO;
         cnt++;
         [arr addObject:nav];
     }
@@ -59,7 +56,6 @@
     [self.tabBar insertSubview:backView atIndex:0];
     self.tabBar.opaque = YES;
     self.tabBar.tintColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    
     self.viewControllers = arr;
     self.delegate = self;
 }
