@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1807B1E31D78125D00CBD6FE /* CBUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1E21D78125D00CBD6FE /* CBUserService.m */; };
+		1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1E51D797AC300CBD6FE /* CelebComment.m */; };
+		1807B1E91D797AF900CBD6FE /* FansComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1E81D797AF900CBD6FE /* FansComment.m */; };
+		1807B1EC1D8261AF00CBD6FE /* AppStyleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */; };
 		18F6649B1D59BA9B00BDB2E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649A1D59BA9B00BDB2E8 /* main.m */; };
 		18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */; };
 		18F664A41D59BA9B00BDB2E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F664A21D59BA9B00BDB2E8 /* Main.storyboard */; };
@@ -165,7 +168,17 @@
 /* Begin PBXFileReference section */
 		1807B1E11D78124600CBD6FE /* CBUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBUserService.h; sourceTree = "<group>"; };
 		1807B1E21D78125D00CBD6FE /* CBUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBUserService.m; sourceTree = "<group>"; };
+<<<<<<< HEAD:Jacob.xcodeproj/project.pbxproj
 		18F664961D59BA9B00BDB2E8 /* Jacob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jacob.app; sourceTree = BUILT_PRODUCTS_DIR; };
+=======
+		1807B1E41D797AB200CBD6FE /* CelebComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CelebComment.h; sourceTree = "<group>"; };
+		1807B1E51D797AC300CBD6FE /* CelebComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CelebComment.m; sourceTree = "<group>"; };
+		1807B1E71D797AE700CBD6FE /* FansComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansComment.h; sourceTree = "<group>"; };
+		1807B1E81D797AF900CBD6FE /* FansComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansComment.m; sourceTree = "<group>"; };
+		1807B1EA1D82619300CBD6FE /* AppStyleConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStyleConfiguration.h; sourceTree = "<group>"; };
+		1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStyleConfiguration.m; sourceTree = "<group>"; };
+		18F664961D59BA9B00BDB2E8 /* InternetStir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternetStir.app; sourceTree = BUILT_PRODUCTS_DIR; };
+>>>>>>> origin/master:InternetStir.xcodeproj/project.pbxproj
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -475,6 +488,8 @@
 				18F665001D5B2A3E00BDB2E8 /* ITSAppConst.h */,
 				18F664F71D5B209300BDB2E8 /* ITSApplication.h */,
 				18F664FB1D5B20E600BDB2E8 /* ITSApplication.m */,
+				1807B1EA1D82619300CBD6FE /* AppStyleConfiguration.h */,
+				1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */,
 				18F664A21D59BA9B00BDB2E8 /* Main.storyboard */,
 				18F664A51D59BA9B00BDB2E8 /* Assets.xcassets */,
 				18F664A71D59BA9B00BDB2E8 /* LaunchScreen.storyboard */,
@@ -628,6 +643,10 @@
 				E189F6031D6415BF008587CE /* DetailCommentFrame.m */,
 				E1F6B1001D659ABC00822E8D /* ReplyItem.h */,
 				E1F6B1011D659ABC00822E8D /* ReplyItem.m */,
+				1807B1E41D797AB200CBD6FE /* CelebComment.h */,
+				1807B1E51D797AC300CBD6FE /* CelebComment.m */,
+				1807B1E71D797AE700CBD6FE /* FansComment.h */,
+				1807B1E81D797AF900CBD6FE /* FansComment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -988,6 +1007,7 @@
 				E1EB48341D6C4C93003C42BC /* TwitterService.m in Sources */,
 				E189F5FA1D6415A1008587CE /* CommentView.m in Sources */,
 				E189F5F91D6415A1008587CE /* UUInputAccessoryView.m in Sources */,
+				1807B1EC1D8261AF00CBD6FE /* AppStyleConfiguration.m in Sources */,
 				18F664F61D5ACFA100BDB2E8 /* SettingService.m in Sources */,
 				E189F6051D6415BF008587CE /* CommentFrame.m in Sources */,
 				E189F6101D6415DB008587CE /* CommentViewController.m in Sources */,
@@ -1008,6 +1028,7 @@
 				E189F6041D6415BF008587CE /* CommentItem.m in Sources */,
 				E1F030701D741C4100060559 /* SDWebImagePrefetcher.m in Sources */,
 				E1F030721D741C4100060559 /* UIImage+GIF.m in Sources */,
+				1807B1E91D797AF900CBD6FE /* FansComment.m in Sources */,
 				18F665131D5B311400BDB2E8 /* PoPoNewsItem.m in Sources */,
 				18F664FF1D5B29E900BDB2E8 /* NewsService.m in Sources */,
 				E189F6071D6415BF008587CE /* DetailCommentFrame.m in Sources */,
@@ -1032,6 +1053,7 @@
 				E181D1331D66F785005115E6 /* WebviewController.m in Sources */,
 				E1F0306E1D741C4100060559 /* SDWebImageDownloaderOperation.m in Sources */,
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
+				1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */,
 				18F664CA1D5AC9FF00BDB2E8 /* MMDictionaryHelper.m in Sources */,
 				E189F64D1D645D55008587CE /* FeedBackController.m in Sources */,
 				18F664FC1D5B20E600BDB2E8 /* ITSApplication.m in Sources */,

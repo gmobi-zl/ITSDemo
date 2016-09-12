@@ -116,14 +116,14 @@ typedef enum{
 
 @property (retain) NSMutableArray* readNewsList; // 已读新闻
 @property (retain) NSMutableArray* favourNewsList; // 收藏列表
-@property (retain) NSMutableArray* downLoadList;// 下载列表
 @property (retain) NSMutableArray* pushNewsList; // 推送新闻列表
 @property (retain) NSMutableArray* commentList;//评论列表
 @property (retain) NSMutableArray* hotCommentList;//热门评论
 @property (retain) NSMutableArray* myCommentList;
 @property (retain) NSMutableArray* detailHotCommentList;
 @property (retain) NSMutableArray* myCommentNewsList;
-@property (retain) NSMutableArray* unLikeNewsList;
+
+@property (retain) NSMutableArray* celebComments;
 
 
 
