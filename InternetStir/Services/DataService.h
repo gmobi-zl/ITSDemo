@@ -122,6 +122,7 @@ typedef enum{
 @property (retain) NSMutableArray* myCommentList;
 @property (retain) NSMutableArray* detailHotCommentList;
 @property (retain) NSMutableArray* myCommentNewsList;
+@property (retain) NSMutableArray* unLikeNewsList;
 
 @property (retain) NSMutableArray* celebComments;
 

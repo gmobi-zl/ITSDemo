@@ -127,7 +127,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
@@ -142,9 +142,9 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"] forBarMetrics:UIBarMetricsDefault];
     ConfigService *cs = [ConfigService get];
     if (cs.type == MODE_DAY) {
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"] forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"] forBarMetrics:UIBarMetricsDefault];
     }else if (cs.type == MODE_NIGHT){
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_night"] forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_night"] forBarMetrics:UIBarMetricsDefault];
     }
     self.headerBg.backgroundColor = [cs getTopBgViewRedColor:cs.type];
     

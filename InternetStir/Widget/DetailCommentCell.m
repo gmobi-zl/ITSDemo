@@ -1,42 +1,46 @@
 
+
 //
 //  DetailCommentCell.m
-//  InternetStir
+//  Jacob
 //
-//  Created by Apple on 16/8/15.
+//  Created by Apple on 16/9/19.
 //  Copyright © 2016年 Gmobi. All rights reserved.
 //
 
 #import "DetailCommentCell.h"
 #import "MMSystemHelper.h"
+#import "AppStyleConfiguration.h"
+//#import "CommentItem.h"
 #import "UIImageView+WebCache.h"
 
 @implementation DetailCommentCell
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
-
+        
         self.icon = [[UIImageView alloc] init];
+        self.icon.backgroundColor = [UIColor whiteColor];
         self.icon.layer.masksToBounds = YES;
         self.icon.layer.cornerRadius = 20;
         [self.contentView addSubview:self.icon];
         
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.font = [UIFont systemFontOfSize:14];
-        self.nameLabel.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
+        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.numberOfLines = 0;
         self.commentLabel.userInteractionEnabled = YES;
-        self.commentLabel.font = [UIFont systemFontOfSize:12];
+        self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
+        self.commentLabel.font = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
         self.replyLabel.numberOfLines = 0;
-        self.replyLabel.font = [UIFont systemFontOfSize:12];
+        self.replyLabel.font = [UIFont systemFontOfSize:14];
         [self.replyBackgroundView addSubview:self.replyLabel];
         
         self.replyIcon = [[UIImageView alloc] init];
@@ -45,7 +49,7 @@
         [self.contentView addSubview:self.replyIcon];
         
         self.replyBackgroundView = [[UIImageView alloc] init];
-//        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
+        //        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:self.replyBackgroundView];
         
         self.line = [[UILabel alloc] init];
@@ -58,6 +62,12 @@
         
         self.replyNameLabel = [[UILabel alloc] init];
         [self.contentView addSubview:self.replyNameLabel];
+        
+        self.timeLabel = [[UILabel alloc] init];
+        self.timeLabel.textAlignment = NSTextAlignmentLeft;
+        self.timeLabel.font = [UIFont systemFontOfSize:14];
+        self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
+        [self.contentView addSubview:self.timeLabel];
     }
     return self;
 }
@@ -96,18 +106,20 @@
 -(void)settingtData
 {
     DetailCommentItem *comment = self.detailCommentFrame.detailCommentItem;
-//    self.icon.image = [UIImage imageNamed:comment.icon];
+    //    self.icon.image = [UIImage imageNamed:comment.icon];
     [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:comment.icon] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.comment;
+    self.timeLabel.text = @"3小時前~回復";
     for (NSInteger i = 0; i < comment.replys.count; i++) {
         
         ReplyItem *item = [comment.replys objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
-        replyLabel.font = [UIFont systemFontOfSize:12];
-        replyLabel.numberOfLines = 0;        
+        replyLabel.font = [UIFont systemFontOfSize:14];
+        replyLabel.numberOfLines = 0;
         if (item.type == 1) {
             replyLabel.text = item.comment;
+            replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
         }else{
             NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
             NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
@@ -115,7 +127,7 @@
             [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
             
             NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:replyRange];
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
             [replyLabel setAttributedText:noteStr] ;
             [replyLabel sizeToFit];
         }
@@ -124,8 +136,9 @@
         [self.replysView addObject:replyLabel];
         
         UIImageView *replyIcon = [[UIImageView alloc] init];
-        replyIcon.layer.masksToBounds = YES;
+        replyIcon.backgroundColor = [UIColor redColor];
         replyIcon.layer.cornerRadius = 15;
+        replyIcon.layer.masksToBounds = YES;
         [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
         [self.contentView addSubview:replyIcon];
         self.replyIcon = replyIcon;
@@ -133,7 +146,7 @@
         
         UILabel *replyName = [[UILabel alloc] init];
         replyName.text = item.name;
-        replyName.textColor = [MMSystemHelper string2UIColor:@"#0079b1"];
+        replyName.textColor = [UIColor blackColor];
         replyName.font = [UIFont systemFontOfSize:14];
         
         self.replyNameLabel = replyName;
@@ -145,6 +158,7 @@
 {
     self.icon.frame = self.detailCommentFrame.iconF;
     self.nameLabel.frame = self.detailCommentFrame.nameF;
+    
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replysF objectAtIndex:i] CGRectValue];
     }
@@ -157,8 +171,9 @@
     self.commentLabel.frame = self.detailCommentFrame.contentF;
     self.replyBackgroundView.frame = self.detailCommentFrame.replyBackgroundF;
     self.line.frame = self.detailCommentFrame.lineF;
+    self.timeLabel.frame = self.detailCommentFrame.timeF;
     self.bgButton.frame = self.commentLabel.bounds;
-
+    
 }
 -(NSMutableArray *)replysView
 {

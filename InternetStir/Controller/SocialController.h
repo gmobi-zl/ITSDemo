@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
-@interface SocialController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
+@interface SocialController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) WKWebView *webView;
-@property (nonatomic, strong) UIProgressView *progressView;
+//@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, strong) NSArray *urlArr;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIButton *btn;
 @property (nonatomic, strong) UIView *bgView;

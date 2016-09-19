@@ -12,11 +12,12 @@
 #import "DetailContentController.h"
 #import "ITSAppConst.h"
 #import "MenuViewController.h"
+#import "AppStyleConfiguration.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
-NSString *const ContentCellIdentifier = @"ContentCell";
+//NSString *const ContentCellIdentifier = @"ContentCell";
 
 @interface ContentController ()
 
@@ -28,11 +29,11 @@ NSString *const ContentCellIdentifier = @"ContentCell";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 64);
+    self.tableView.frame = CGRectMake(0, 40, screenW, screenH - 40);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
+//    [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     [self.view addSubview:self.tableView];
     
     self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
@@ -42,8 +43,18 @@ NSString *const ContentCellIdentifier = @"ContentCell";
                     @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
     
     UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
-    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+//    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     [self.navigationController.navigationBar addSubview:statusBarView];
+    
+    self.bgView = [[UIView alloc] init];
+    self.bgView.frame = CGRectMake(0, 0, screenW, 40);
+    self.bgView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.bgView];
+    
+    [self initTapButton];
+    
+}
+- (void)initTapButton {
     
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -53,14 +64,13 @@ NSString *const ContentCellIdentifier = @"ContentCell";
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        
-       NSForegroundColorAttributeName:[UIColor blackColor]}];
-    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
-    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
-    self.navigationItem.leftBarButtonItem = left;
-    
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    Btn.frame = CGRectMake(0, 20, 30, 30);
+//    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
+//    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+//    self.navigationItem.leftBarButtonItem = left;
 }
 - (void)pushMenu{
     
@@ -79,9 +89,9 @@ NSString *const ContentCellIdentifier = @"ContentCell";
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell* cell = nil;
-    cell = [tableView dequeueReusableCellWithIdentifier:ContentCellIdentifier forIndexPath:indexPath];
+//    cell = [tableView dequeueReusableCellWithIdentifier:ContentCellIdentifier forIndexPath:indexPath];
     if (cell == nil){
-        cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentCellIdentifier];
+//        cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentCellIdentifier];
     }
     ContentViewCell* tmpCell = (ContentViewCell*)cell;
     [tmpCell showDataWithModel:indexPath.row];

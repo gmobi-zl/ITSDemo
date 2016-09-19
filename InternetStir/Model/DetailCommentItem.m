@@ -1,8 +1,9 @@
+
 //
 //  DetailCommentItem.m
-//  InternetStir
+//  Jacob
 //
-//  Created by Apple on 16/8/15.
+//  Created by Apple on 16/9/19.
 //  Copyright © 2016年 Gmobi. All rights reserved.
 //
 

@@ -9,6 +9,7 @@
 
 #import "CommentView.h"
 #import "MMSystemHelper.h"
+#import "AppStyleConfiguration.h"
 
 @implementation CommentView
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -30,18 +31,19 @@
     [self addSubview:line];
     
     self.icon = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.icon.frame = CGRectMake(10, 5, 30, 30);
-    [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo"] forState:UIControlStateNormal];
-    [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo_sel"] forState:UIControlStateHighlighted];
-//    [self addSubview:self.icon];
+    self.icon.frame = CGRectMake(15, 10, 20, 20);
+    [self.icon setBackgroundImage:[UIImage imageNamed:@"sticker"] forState:UIControlStateNormal];
+//    [self.icon setBackgroundImage:[UIImage imageNamed:@"icon_Photo_sel"] forState:UIControlStateHighlighted];
+    [self addSubview:self.icon];
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.button setTitle:@"留言..." forState:UIControlStateNormal];
-    self.button.frame = CGRectMake(50, 5, screenW - 80, 30);
+    [self.button setTitle:@"留言訊息..." forState:UIControlStateNormal];
+    self.button.frame = CGRectMake(50, 5, screenW - 114, 30);
     self.button.layer.masksToBounds = YES;
-    self.button.layer.cornerRadius = 5;
+    self.button.layer.cornerRadius = 10;
     self.button.layer.borderWidth = 1;
-    self.button.backgroundColor = [UIColor whiteColor];
+    self.button.layer.borderColor = [MMSystemHelper string2UIColor:COMMENT_BOTTOM_BUTTON_LINE_COLOR].CGColor;
+    self.button.backgroundColor = [MMSystemHelper string2UIColor:COMMENT_BOTTOM_BUTTON_BG_COLOR];
     [self.button setTitleColor:[MMSystemHelper string2UIColor:@"#ececec"]forState:UIControlStateNormal];
     [self.button addTarget:self action:@selector(pushKeyboard) forControlEvents:UIControlEventTouchUpInside];
     self.button.titleLabel.font = [UIFont systemFontOfSize: 14.0];
@@ -52,10 +54,14 @@
     UIImage* backIcon = [UIImage imageNamed:@"icon_Edit"];
     [self.button setImage:backIcon forState:UIControlStateNormal];
     [self addSubview:self.button];
-
-    
     [self addSubview:self.button];
 
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(screenW - 50, 10, 50, 20);
+    label.font = [UIFont systemFontOfSize:14];
+    label.text = @"發佈";
+    label.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+    [self addSubview:label];
 }
 - (void)pushKeyboard{
     if ([self.delegate respondsToSelector:@selector(writeNewComment)]) {

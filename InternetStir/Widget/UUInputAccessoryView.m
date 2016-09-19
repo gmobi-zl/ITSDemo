@@ -9,9 +9,12 @@
 #import "UUInputAccessoryView.h"
 #import "SettingService.h"
 #import "ConfigService.h"
+#import "AppStyleConfiguration.h"
+#import "MMSystemHelper.h"
+
 #define UUIAV_MAIN_W    CGRectGetWidth([UIScreen mainScreen].bounds)
 #define UUIAV_MAIN_H    CGRectGetHeight([UIScreen mainScreen].bounds)
-#define UUIAV_Edge_Hori 5
+#define UUIAV_Edge_Hori 50
 #define UUIAV_Edge_Vert 7
 #define UUIAV_Btn_W    40
 #define UUIAV_Btn_H    35
@@ -49,29 +52,34 @@
         
         UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, UUIAV_MAIN_W, UUIAV_Btn_H+2*UUIAV_Edge_Vert)];
         
-        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(UUIAV_Edge_Hori, UUIAV_Edge_Vert, UUIAV_MAIN_W-UUIAV_Btn_W-4*UUIAV_Edge_Hori, UUIAV_Btn_H)];
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(UUIAV_Edge_Hori, UUIAV_Edge_Vert,UUIAV_MAIN_W - 100, UUIAV_Btn_H)];
         textView.returnKeyType = UIReturnKeyDone;
         textView.enablesReturnKeyAutomatically = YES;
         textView.delegate = sharedView;
         textView.font = [UIFont systemFontOfSize:14];
-        textView.layer.cornerRadius = 5;
+        textView.layer.cornerRadius = 15;
         textView.layer.borderWidth = 0.5;
         [toolbar addSubview:textView];
 //
-
         UITextField *assistTxf = [UITextField new];
         assistTxf.returnKeyType = UIReturnKeyDone;
         assistTxf.enablesReturnKeyAutomatically = YES;
         [backgroundBtn addSubview:assistTxf];
         assistTxf.inputAccessoryView = toolbar;
         UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        saveBtn.frame = CGRectMake(UUIAV_MAIN_W-UUIAV_Btn_W-2*UUIAV_Edge_Hori, UUIAV_Edge_Vert, UUIAV_Btn_W, UUIAV_Btn_H);
+        saveBtn.frame = CGRectMake(UUIAV_MAIN_W-50, UUIAV_Edge_Vert, UUIAV_Btn_W, UUIAV_Btn_H);
+        saveBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         saveBtn.backgroundColor = [UIColor clearColor];
-        [saveBtn setTitle: @"send" forState:UIControlStateNormal];
-        [saveBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [saveBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        [saveBtn setTitle: @"發佈" forState:UIControlStateNormal];
+        [saveBtn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
+        [saveBtn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateDisabled];
         [saveBtn addTarget:sharedView action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
         [toolbar addSubview:saveBtn];
+        
+        UIImageView *imageview = [[UIImageView alloc] init];
+        imageview.frame = CGRectMake(15, 15, 20, 20);
+        imageview.image = [UIImage imageNamed:@"sticker"];
+        [toolbar addSubview:imageview];
 
         UILabel *label = [[UILabel alloc] initWithFrame:textView.frame];
         label.textAlignment = NSTextAlignmentLeft;

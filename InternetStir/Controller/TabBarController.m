@@ -10,6 +10,7 @@
 #import "ITSApplication.h"
 #import "MMSystemHelper.h"
 #import "ITSAppConst.h"
+#import "AppStyleConfiguration.h"
 
 @interface TabBarController ()
 
@@ -24,26 +25,26 @@
 }
 - (void)creatTabBarController{
 
-    NSArray *vcName = @[@"ContentController",@"HomeViewController",@"SocialController"];
-    NSString* newsTitle = @"留言";//NSLocalizedString(@"test", nil);
-    NSString* disTitle = @"内容";
-    NSString* meTitle = @"社群";
-    NSArray *title = @[newsTitle,disTitle,meTitle];
+    NSArray *vcName = @[@"SocialController",@"HomeViewController",@"MenuViewController"];
+//    NSString* newsTitle = @"留言";//NSLocalizedString(@"test", nil);
+//    NSString* disTitle = @"内容";
+//    NSString* meTitle = @"社群";
+//    NSArray *title = @[newsTitle,disTitle,meTitle];
 
-    NSArray *imageArr = @[@"icon_Comments",@"icon_Content",@"icon_Social"];
-    NSArray *imageSelectArr = @[@"icon_Comments_sel",@"icon_Content_sel",@"icon_Social_sel"];
+    NSArray *imageArr = @[@"social",@"home",@"more"];
+    NSArray *imageSelectArr = @[@"social_selected",@"home_selected",@"more_selected"];
 
-    NSArray *titleName = @[@"蔡阿嘎",@"蔡阿嘎",@"蔡阿嘎"];
+    NSArray *titleName = @[@"社群",@"蔡阿嘎",@"粉絲小幫手"];
     int cnt = 0;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (NSString *className in vcName) {
         Class MyClass = NSClassFromString(className);
         UIViewController *VC = [[MyClass alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:VC];
-        [nav.navigationBar setBackgroundImage:[UIImage imageNamed: @"nav_light"] forBarMetrics:UIBarMetricsDefault];
+//        [nav.navigationBar setBackgroundImage:[UIImage imageNamed: @"nav_light"] forBarMetrics:UIBarMetricsDefault];
         VC.title = titleName[cnt];
-        nav.tabBarItem.title = title[cnt];
-
+        nav.tabBarItem.title = nil;
+        nav.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0,-6, 0);
         nav.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nav.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageSelectArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBar.tintColor = [UIColor redColor];
@@ -52,10 +53,10 @@
     }
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenW, 49)];
-    backView.backgroundColor = [UIColor blackColor];
+    backView.backgroundColor = [UIColor whiteColor];
     [self.tabBar insertSubview:backView atIndex:0];
     self.tabBar.opaque = YES;
-    self.tabBar.tintColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+    self.tabBar.tintColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
     self.viewControllers = arr;
     self.delegate = self;
 }

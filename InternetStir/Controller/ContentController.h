@@ -11,4 +11,6 @@
 @interface ContentController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *urlArr;
+
+@property (nonatomic, strong) UIView *bgView;
 @end

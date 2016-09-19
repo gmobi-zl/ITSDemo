@@ -47,7 +47,7 @@ static NSString * const kClientID =
         button.layer.masksToBounds = YES;
         button.tag = i + 1;
         button.layer.cornerRadius = 6;
-        button.frame = CGRectMake(70, space + i * 100, screenW - 140, 40);
+        button.frame = CGRectMake(70, 64 + space + i * 100, screenW - 140, 40);
         [button setTitle:[titleArr objectAtIndex:i] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor cyanColor];
         [button addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
@@ -56,7 +56,7 @@ static NSString * const kClientID =
     
     CGSize size = [MMSystemHelper sizeWithString:@"未經允許，我們不會發布至您的Facebook,Twitter,Google" font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 140, MAXFLOAT)];
     UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(70, 310, screenW - 140, size.height);
+    label.frame = CGRectMake(70, 310 + 64, screenW - 140, size.height);
     label.text = @"未經允許，我們不會發布至您的Facebook,Twitter,Google";
     label.textAlignment = NSTextAlignmentLeft;
     label.numberOfLines = 0;
@@ -192,7 +192,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;

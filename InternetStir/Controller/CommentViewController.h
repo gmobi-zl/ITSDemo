@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CommentView.h"
 #import "PNMoodView.h"
-#import "DetailCommentItem.h"
+#import "CommentItem.h"
 @interface CommentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-@property (nonatomic, assign) int index;
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CommentView *commentView;
 @property (nonatomic, strong) NSMutableArray *commentData;
 @property (nonatomic, strong) NSMutableArray *replyData;
-@property (nonatomic, strong) DetailCommentItem *item;
+@property (nonatomic, strong) CommentItem *item;
 
 @end

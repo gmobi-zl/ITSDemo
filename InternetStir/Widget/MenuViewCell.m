@@ -17,29 +17,29 @@
         
 //        self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
         CGFloat screenW = [MMSystemHelper getScreenWidth];
-        CGFloat itemHeight = 60; //[[ConfigService get] getNewsListItemHeight:NEWS_TYPE_IMAGE]; //screenH / 7;
+        CGFloat itemHeight = 44; //[[ConfigService get] getNewsListItemHeight:NEWS_TYPE_IMAGE]; //screenH / 7;
         CGFloat itemWidth = screenW * 3 / 4;
         self.contentView.frame = CGRectMake(0, 0, itemWidth, itemHeight);
         self.icon = [[UIImageView alloc] init];
-        CGFloat iconW = 30;
-        CGFloat iconH = 30;
+        CGFloat iconW = 20;
+        CGFloat iconH = 20;
         
-        self.icon.frame = CGRectMake(16, 15, iconW, iconH);
+        self.icon.frame = CGRectMake(16, 12, iconW, iconH);
         [self.contentView addSubview:self.icon];
         
         self.title = [[UILabel alloc] init];
         CGFloat titleW = itemWidth - 16*3 - 42;
         CGFloat titleH = 20;
-        self.title.frame = CGRectMake(16 + 42 + 10, 20, titleW, titleH);
+        self.title.frame = CGRectMake(16 + 45 + 10, 12, titleW, titleH);
         //UIFont* titleFont = [UIFont fontWithName:@"Arial" size:18];
-        UIFont* titleFont = [UIFont systemFontOfSize:18];
+        UIFont* titleFont = [UIFont systemFontOfSize:16];
         [self.title setFont:titleFont];
         self.title.text = @"设置";
         [self.title setNumberOfLines:1];
         [self.contentView addSubview:self.title];
         
         self.line = [[UIView alloc] init];
-        self.line.frame = CGRectMake(0, 55, screenW, 5);
+        self.line.frame = CGRectMake(0, 43, screenW, 1);
         self.line.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];//[UIColor lightGrayColor];
         self.line.alpha = 0.5;
         [self.contentView addSubview:self.line];

@@ -22,7 +22,7 @@ static NSString * const kClientID =
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Override point for customization after application launch.
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
     [ITSApplication start];
     [[FBSDKApplicationDelegate sharedInstance] application:application

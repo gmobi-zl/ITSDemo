@@ -23,7 +23,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    self.profuctIdArr = @[@"pub.celeb.tw001"];
+    self.profuctIdArr = @[@"1152796738"];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(100, 100, 100, 100);

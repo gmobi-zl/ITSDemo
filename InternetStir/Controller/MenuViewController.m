@@ -19,6 +19,9 @@
 #import "UIImageView+WebCache.h"
 #import "FavourController.h"
 #import "DownLoadController.h"
+#import "AppStyleConfiguration.h"
+#import "FanController.h"
+#import "WebviewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -40,40 +43,42 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 //    self.headerBg = [[UIView alloc] init];
 //    self.headerBg.frame = CGRectMake(0, -20, self.view.bounds.size.width, 20);
 //    [self.navigationController.navigationBar addSubview:self.headerBg];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.headerBg.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
+//    self.headerBg.backgroundColor = [UIColor grayColor];
     self.bgImage = [[UIImageView alloc] init];
-    self.bgImage.frame = CGRectMake(0, 0, screenW, screenH/3);
+    self.bgImage.frame = CGRectMake(0, 64, screenW, MENU_LOGIN_GB_HEIGHT);
 //    self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
     self.bgImage.contentMode = UIViewContentModeScaleToFill;
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
     
     self.icon = [[UIImageView alloc] init];
-//    self.icon.backgroundColor = [UIColor redColor];
-    self.icon.frame = CGRectMake((screenW - 70) / 2, (screenH/3  - 70) / 2 - 20, 70, 70);
+    self.icon.backgroundColor = [UIColor redColor];
+    self.icon.frame = CGRectMake(20, (screenH/3  - 70) / 2, 72, 72);
     self.icon.layer.cornerRadius = 35;
     self.icon.layer.masksToBounds = YES;
     self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
     [self.bgImage addSubview:self.icon];
 
-    [self creatButton];
+//    [self creatButton];
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0,screenH/3 + 41, screenW, screenH - screenH/3-105);
-    self.tableView.rowHeight = 60;
+    self.tableView.frame = CGRectMake(0,MENU_LOGIN_GB_HEIGHT+ 64, screenW, screenH - MENU_LOGIN_GB_HEIGHT - 64 - 49 - 60);
+    self.tableView.rowHeight = 44;
+    self.tableView.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
     self.tableView.hidden = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.hidden = NO;
+//    self.tableView.scrollEnabled = NO;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView registerClass:[MenuViewCell class] forCellReuseIdentifier:MenuTableViewCellIdentifier];
     [self.view addSubview:self.tableView];
     
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.loginButton.frame = CGRectMake(120, screenH - 270, screenW - 240, 40);
+    self.loginButton.frame = CGRectMake(120, MENU_LOGIN_GB_HEIGHT + 64 + 60, screenW - 240, 40);
     [self.loginButton addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
-    self.loginButton.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    [self.loginButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.loginButton.backgroundColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.loginButton.layer.masksToBounds = YES;
     self.loginButton.layer.cornerRadius = 8;
     self.loginButton.layer.borderWidth = 0.5;
@@ -85,7 +90,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.label = [[UILabel alloc] init];
     NSString *name = @"登入後才能瀏覽粉絲小幫手~";
     CGSize size = [MMSystemHelper sizeWithString:name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
-    self.label.frame = CGRectMake(screenW/2 - size.width/2, screenH - 220, size.width, 20);
+    self.label.frame = CGRectMake(screenW/2 - size.width/2, self.loginButton.frame.origin.y + self.loginButton.frame.size.height + 20, size.width, 20);
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.text = name;
     self.label.textColor = [UIColor grayColor];
@@ -93,24 +98,26 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.label.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:self.label];
     
-    self.imageview = [[UIImageView alloc] initWithFrame:CGRectMake(self.label.frame.origin.x - 35, screenH - 225, 30, 30)];
+    self.imageview = [[UIImageView alloc] initWithFrame:CGRectMake(self.label.frame.origin.x - 35, self.label.frame.origin.y - 5, 30, 30)];
     self.imageview.image = [UIImage imageNamed:@"icon_tips"];
     [self.view addSubview:self.imageview];
     
-    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
-    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
-    self.navigationItem.leftBarButtonItem = left;
+//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    Btn.frame = CGRectMake(0, 20, 30, 30);
+//    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+//    [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
+//    self.navigationItem.leftBarButtonItem = left;
     
-    NSString *userName = @"點擊登出";
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:userName font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
-    CGFloat userNameX = ([UIScreen mainScreen].bounds.size.width - nameLabelSize.width)/2;
-    CGFloat userNmaeY = self.icon.frame.origin.y + 80;
-    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, userNmaeY,nameLabelSize.width, nameLabelSize.height)];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    
+    NSString *userName = us.user.userName;
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:userName font:[UIFont systemFontOfSize:20] maxSize:CGSizeMake(MAXFLOAT,30)];
+    CGFloat userNameX = self.icon.frame.origin.x + 80;
+    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, (screenH/3  - 70) / 2 + 20,nameLabelSize.width, 30)];
     self.userNameLabel.textColor = [UIColor whiteColor];
-    self.userNameLabel.font = [UIFont systemFontOfSize:16];
+    self.userNameLabel.font = [UIFont systemFontOfSize:20];
     self.userNameLabel.text = @"";
     self.userNameLabel.tag = 99;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -118,8 +125,20 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.userNameLabel.userInteractionEnabled = YES;
     [self.bgImage addSubview:self.userNameLabel];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginOut)];
-    [self.userNameLabel addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginOut)];
+//    [self.userNameLabel addGestureRecognizer:tap];
+    
+    UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
+    loginOut.frame = CGRectMake(0, screenH - 49 - 10 - 44, screenW, 44);
+    loginOut.backgroundColor = [UIColor whiteColor];
+    [loginOut setTitle:@"登出" forState:UIControlStateNormal];
+    [loginOut addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [loginOut setTitleColor:[MMSystemHelper string2UIColor:MENU_LOGINOUT_COLOUR] forState:UIControlStateNormal];
+    loginOut.hidden = YES;
+    loginOut.tag = 100;
+    [self.view addSubview:loginOut];
+//    self.loginOut = loginOut;
+//    self.loginOut.hidden = YES;
 }
 - (void)clickBack{
     
@@ -128,6 +147,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 - (void)pushLoginVc{
     
     LoginViewController *loginVc = [[LoginViewController alloc] init];
+    loginVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:loginVc animated:YES];
 }
 - (void)creatScrollView{
@@ -211,16 +231,23 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     CBUserService* us = itsApp.cbUserSvr;
+    
+    UIButton *button = (UIButton*)[self.view viewWithTag:100];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:19],
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
 
     if (us.user.isLogin == YES) {
-        self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
+        self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
         NSString *icon = us.user.avatar; //[loginDic objectForKey:@"avatar"];
         [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
         self.imageview.hidden = YES;
         self.userNameLabel.hidden = NO;
+        self.userNameLabel.text = us.user.userName;
         self.tableView.hidden = NO;
         self.label.hidden = YES;
         self.loginButton.hidden = YES;
+        button.hidden = NO;
     }else{
         self.bgImage.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
         self.tableView.hidden = YES;
@@ -228,12 +255,13 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.loginButton.hidden = NO;
         self.userNameLabel.hidden = YES;
         self.imageview.hidden = NO;
+        button.hidden = YES;
     }
     
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"]
-                       forBarPosition:UIBarPositionAny
-                           barMetrics:UIBarMetricsDefault];
+//    [navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_light"]
+//                       forBarPosition:UIBarPositionAny
+//                           barMetrics:UIBarMetricsDefault];
     [navigationBar setShadowImage:[UIImage new]];
 }
 - (void)loginOut{
@@ -242,6 +270,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
+    
+    UIButton *button = (UIButton *)[self.view viewWithTag:100];
     if (buttonIndex == 1) {
         
         self.bgImage.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
@@ -260,6 +290,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.loginButton.hidden = NO;
         self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
         self.imageview.hidden = NO;
+        button.hidden = YES;
 //        if (ds.user != nil && ds.user.isLogin == YES) {
 //            
 //            [poApp.fbSvr facebookLogOut];
@@ -300,24 +331,25 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     UIImage* defIcon = [UIImage imageNamed:menuItem.iconName];
     [tmpCell.icon setImage:defIcon];
 
-//    tmpCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    tmpCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return tmpCell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSInteger index = indexPath.row;
     if (index == 0) {
-        
-        FavourController *favour = [[FavourController alloc] init];
-        [self.navigationController pushViewController:favour animated:YES];
+        SettingController *setVc = [[SettingController alloc] init];
+        setVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:setVc animated:YES];
         
     }else if (index == 1){
     
+        FanController *fanVc = [[FanController alloc] init];
+        fanVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:fanVc animated:YES];
     }else if (index == 2){
     
-        DownLoadController *downLoad = [[DownLoadController alloc] init];
-        [self.navigationController pushViewController:downLoad animated:YES];
         
     }else if (index == 3){
     
@@ -325,6 +357,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     
     }else if (index == 5){
     
+        WebviewController *webVc = [[WebviewController alloc] init];
+        webVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVc animated:YES];
     }else if (index == 6){
     
     }

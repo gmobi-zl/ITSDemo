@@ -21,5 +21,6 @@
 @property (nonatomic, strong) UIButton *but;
 @property (nonatomic, strong) UIButton *otherButton;
 @property (nonatomic, strong) UIImageView *imageview;
+@property (nonatomic, strong) UIButton *loginOut;
 //@property (nonatomic, strong) UIView *bgView;
 @end

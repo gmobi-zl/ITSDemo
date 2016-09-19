@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import "MMSystemHelper.h"
 #import "ContentViewCell.h"
-#import "CommentItem.h"
-#import "CommentCell.h"
+#import "HomeCommentItem.h"
+#import "HomeCommentCell.h"
 #import "CommentViewController.h"
 #import "UUInputAccessoryView.h"
 #import "MenuViewController.h"
@@ -19,8 +19,8 @@
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
-NSString *const ContentTableViewCellIdentifier = @"ContentTableViewCell";
-NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
+//NSString *const ContentTableViewCellIdentifier = @"ContentTableViewCell";
+//NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
 
 @interface ViewController ()
 
@@ -60,8 +60,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentTableViewCellIdentifier];
-    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentTableViewCellIdentifier];
+//    [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentTableViewCellIdentifier];
+//    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentTableViewCellIdentifier];
     [self.scrollView addSubview:self.tableView];
     
     
@@ -70,8 +70,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
     //    self.RigthTableView.rowHeight = 280;
     self.RigthTableView.delegate = self;
     self.RigthTableView.dataSource = self;
-    [self.RigthTableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentTableViewCellIdentifier];
-    [self.RigthTableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentTableViewCellIdentifier];
+//    [self.RigthTableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentTableViewCellIdentifier];
+//    [self.RigthTableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentTableViewCellIdentifier];
     [self.scrollView addSubview:self.RigthTableView];
     
     CGFloat space = (screenW - 5*30)/(5 + 1);
@@ -96,7 +96,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
     
     CGFloat height;
     if (tableView == self.tableView) {
-        CommentFrame *frame = self.commentData[indexPath.row];
+        HomeCommentFrame *frame = self.commentData[indexPath.row];
         height = frame.cellHeight;
     }else{
         height = 280;
@@ -110,33 +110,33 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell* cell = nil;
-    if (tableView == self.tableView) {
-        cell = [tableView dequeueReusableCellWithIdentifier:CommentTableViewCellIdentifier forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
-        }
-        CommentCell *tmpCell = (CommentCell*)cell;
-        tmpCell.commentFrame = self.commentData[indexPath.row];
-        [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
-        for (int i = 0; i < [tmpCell.replysView count]; i++) {
-            ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
-            tmpCell.replyLabel = [tmpCell.replysView objectAtIndex:i];
-            tmpCell.replyLabel.userInteractionEnabled = YES;
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0, tmpCell.replyLabel.frame.size.width, tmpCell.replyLabel.frame .size.height);
-            [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
-            button.userInteractionEnabled = YES;
-            button.tag = indexPath.row;
-            [tmpCell.replyLabel addSubview:button];
-        }
-    }else {
-        cell = [tableView dequeueReusableCellWithIdentifier:ContentTableViewCellIdentifier forIndexPath:indexPath];
-        if (cell == nil){
-            cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentTableViewCellIdentifier];
-        }
-        ContentViewCell* tmpCell = (ContentViewCell*)cell;
-        [tmpCell showDataWithModel:indexPath.row];
-    }
+//    if (tableView == self.tableView) {
+//        cell = [tableView dequeueReusableCellWithIdentifier:CommentTableViewCellIdentifier forIndexPath:indexPath];
+//        if (cell == nil) {
+//            cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
+//        }
+//        CommentCell *tmpCell = (CommentCell*)cell;
+//        tmpCell.commentFrame = self.commentData[indexPath.row];
+//        [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
+//        for (int i = 0; i < [tmpCell.replysView count]; i++) {
+//            ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
+//            tmpCell.replyLabel = [tmpCell.replysView objectAtIndex:i];
+//            tmpCell.replyLabel.userInteractionEnabled = YES;
+//            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button.frame = CGRectMake(0, 0, tmpCell.replyLabel.frame.size.width, tmpCell.replyLabel.frame .size.height);
+//            [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
+//            button.userInteractionEnabled = YES;
+//            button.tag = indexPath.row;
+//            [tmpCell.replyLabel addSubview:button];
+//        }
+//    }else {
+//        cell = [tableView dequeueReusableCellWithIdentifier:ContentTableViewCellIdentifier forIndexPath:indexPath];
+//        if (cell == nil){
+//            cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentTableViewCellIdentifier];
+//        }
+//        ContentViewCell* tmpCell = (ContentViewCell*)cell;
+//        [tmpCell showDataWithModel:indexPath.row];
+//    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -198,8 +198,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentTableViewCell";
         NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dictArray count]];
         for (NSDictionary *dict in dictArray) {
-            CommentItem *commentItem = [CommentItem familyGroupWithDict:dict];
-            CommentFrame *commentFrame = [[CommentFrame alloc]init];
+            HomeCommentItem *commentItem = [HomeCommentItem familyGroupWithDict:dict];
+            HomeCommentFrame *commentFrame = [[HomeCommentFrame alloc]init];
             commentFrame.commentItem = commentItem;
             
             [models addObject:commentFrame];

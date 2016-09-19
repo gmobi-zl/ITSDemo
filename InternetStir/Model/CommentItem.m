@@ -1,8 +1,8 @@
 //
-//  CommentItem.m
+//  DetailCommentItem.m
 //  InternetStir
 //
-//  Created by Apple on 16/8/12.
+//  Created by Apple on 16/8/15.
 //  Copyright © 2016年 Gmobi. All rights reserved.
 //
 

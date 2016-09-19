@@ -180,48 +180,51 @@
 }
 
 
-
-
-
 -(void) refreshLeftMenu{
     if (self.leftMenuList == nil)
         self.leftMenuList = [NSMutableArray arrayWithCapacity:3];
     else
         [self.leftMenuList removeAllObjects];
     
-    LeftMenuItem* fav = [LeftMenuItem alloc];
-    fav.iconName = @"icon_collection";
-    fav.actionName = @"我的收藏";
-    [self.leftMenuList addObject:fav];
+    LeftMenuItem* set = [LeftMenuItem alloc];
+    set.iconName = @"icon_settings";
+    set.actionName = @"設定";
+    [self.leftMenuList addObject:set];
     
+//    LeftMenuItem* fav = [LeftMenuItem alloc];
+//    fav.iconName = @"icon_collection";
+//    fav.actionName = @"我的收藏";
+//    [self.leftMenuList addObject:fav];
+    
+    LeftMenuItem* settings = [LeftMenuItem alloc];
+    settings.iconName = @"trophy3";
+    settings.actionName = @"粉絲排行榜";
+    [self.leftMenuList addObject:settings];
+
     LeftMenuItem* comment = [LeftMenuItem alloc];
-    comment.iconName = @"icon_track";
+    comment.iconName = @"outbox";
     comment.actionName = @"留言追蹤";
     [self.leftMenuList addObject:comment];
     // fav
     LeftMenuItem* download = [LeftMenuItem alloc];
-    download.iconName = @"icon_pic";
-    download.actionName = @"貼圖下載";
+    download.iconName = @"forums";
+    download.actionName = @"獎品中心";
     [self.leftMenuList addObject:download];
     
     LeftMenuItem* feed = [LeftMenuItem alloc];
-    feed.iconName = @"icon_buydigital";
-    feed.actionName = @"買數位產品";
+    feed.iconName = @"purchases";
+    feed.actionName = @"購買紀錄";
     [self.leftMenuList addObject:feed];
     
     LeftMenuItem* histroy = [LeftMenuItem alloc];
-    histroy.iconName = @"icon_buypoint";
-    histroy.actionName = @"買點數";
+    histroy.iconName = @"star60";
+    histroy.actionName = @"其他網紅";
     [self.leftMenuList addObject:histroy];
         
-    LeftMenuItem* settings = [LeftMenuItem alloc];
-    settings.iconName = @"icon_fans";
-    settings.actionName = @"粉絲牆";
-    [self.leftMenuList addObject:settings];
     
     LeftMenuItem* menu = [LeftMenuItem alloc];
-    menu.iconName = @"icon_list";
-    menu.actionName = @"購買清單";
+    menu.iconName = @"like [#1385]";
+    menu.actionName = @"擁有個人網紅App";
     [self.leftMenuList addObject:menu];
 
 }

@@ -54,7 +54,6 @@
     [self.view addSubview:self.bgImage];
 }
 
-
 -(void) pushNextVc{
 
 //    ViewController *vc = [[ViewController alloc] init];

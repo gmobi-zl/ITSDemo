@@ -11,12 +11,11 @@
 #import "ConfigService.h"
 #import "MMSystemHelper.h"
 #import "ITSApplication.h"
+#import "AppStyleConfiguration.h"
 //#import "WKAlertView.h"
 
 static int height;
-@implementation FeedBackController{
-//    UIWindow *__sheetWindow ;//window必须为全局变量或成员变量
-}
+@implementation FeedBackController
 
 -(void) viewDidLoad{
     [super viewDidLoad];
@@ -25,7 +24,7 @@ static int height;
     [self initViews];
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 30, 30);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Back"] forState:UIControlStateNormal];
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
@@ -45,33 +44,8 @@ static int height;
     CGFloat headerHeight = [cs getPopoNewsHeaderBgHeight];
     self.headerBg.frame = CGRectMake(0, 0, screenW, headerHeight + screenTitleBarH);
     
-    //    UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //    backBtn.frame = CGRectMake(0, 20, 40, 40);
-    //    [backBtn setTitle:@"" forState:UIControlStateNormal];
-    //    UIImage* backIcon = [UIImage imageNamed:@"title_back"];
-    //    [backBtn setBackgroundImage:backIcon forState:UIControlStateNormal];
-    //    [backBtn ad dTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.headerBg addSubview:backBtn];
-    //
-    //    UILabel* title = [[UILabel alloc] init];
-    //    title.frame = CGRectMake(45, 30, 200, 20);
-    //    title.backgroundColor = [UIColor clearColor];
-    //    UIFont* titleFont = [UIFont boldSystemFontOfSize:20];
-    //    [title setFont:titleFont];
-    //    [title setNumberOfLines:1];
-    //    [title setTextColor:[UIColor whiteColor]];
-    //    [title setText:PPN_NSLocalizedString(@"SettingFeedBack", @"Feed back")];
-    //    [self.headerBg addSubview:title];
-    //    [self.view addSubview:self.headerBg];
-    //
-    //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBack)];
-    //    [title addGestureRecognizer:tap];
-    
-//    self.headerBg.frame = CGRectMake(0, -20, screenW,20);
-//    [self.navigationController.navigationBar addSubview:self.headerBg];
-    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
-    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    [self.navigationController.navigationBar addSubview:statusBarView];
+//    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
+//    [self.navigationController.navigationBar addSubview:statusBarView];
 
     NSString *str = ITS_NSLocalizedString(@"SettingFeedBack",nil);
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
@@ -91,7 +65,7 @@ static int height;
     self.navigationItem.leftBarButtonItem = back;
     CGFloat contentStartY = screenTitleBarH + headerHeight;
     UILabel* feedbackInfo = [[UILabel alloc] init];
-    feedbackInfo.frame = CGRectMake(8, contentStartY + 10 - 64, screenW - 16, 18);
+    feedbackInfo.frame = CGRectMake(8, contentStartY + 10 , screenW - 16, 18);
     [feedbackInfo setText:ITS_NSLocalizedString(@"FeedBackInfo", nil)];
     feedbackInfo.textAlignment = NSTextAlignmentLeft;
     feedbackInfo.backgroundColor = [UIColor clearColor];
@@ -102,19 +76,18 @@ static int height;
     
     UIView* sepLine = [[UIView alloc] init];
     sepLine.backgroundColor = [MMSystemHelper string2UIColor:COLOR_NEWSLIST_LINE_GREY];
-    sepLine.frame = CGRectMake(0, contentStartY + 10 + 20 + 10 - 64, screenW, 1);
+    sepLine.frame = CGRectMake(0, contentStartY + 10 + 20 + 10 , screenW, 1);
     [self.view addSubview:sepLine];
     
     self.feedbackMsg = [[UITextView alloc] init];
     if (screenH == 480) {
-        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5 - 64, screenW - 16, 80);
-        
+        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5, screenW - 16, 80);
     }else if (screenH == 568){
-        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5 - 64, screenW - 16, 170);
+        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5, screenW - 16, 170);
     }else if (screenH == 667){
-        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5 - 64, screenW - 16, 230);
+        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5, screenW - 16, 230);
     }else if (screenH == 736){
-        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5 - 64, screenW - 16, 250);
+        self.feedbackMsg.frame = CGRectMake(8, contentStartY + 10 + 20 + 10 + 5, screenW - 16, 250);
     }
     self.feedbackMsg.backgroundColor = [UIColor clearColor];
     self.feedbackMsg.font = [UIFont systemFontOfSize:20];
@@ -139,12 +112,9 @@ static int height;
                                                object:nil];
     
     self.sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //
-    //self.sendBtn.frame = CGRectMake(btnW/2, screenH / 2 - 10, btnW, 40);//contentStartY + 10 + 20 + 10 + 5 + 150 + 20
-    // self.sendBtn.frame = CGRectMake(screenW/4, screenH  - height  - 30, screenW/2, 40);
-    self.sendBtn.frame = CGRectMake(screenW/4, screenH - 100 - 64, screenW/2, 40);
+    self.sendBtn.frame = CGRectMake(screenW/4, screenH - 100 + 64, screenW/2, 40);
     [self.sendBtn setTitle:ITS_NSLocalizedString(@"FeedBackSend", @"Send") forState:UIControlStateNormal];
-    [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:NAV_BGCOLOR]];
+    [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]];
     [self.sendBtn addTarget:self action:@selector(sendBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.sendBtn addTarget:self action:@selector(sendBtnTouchDown) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.sendBtn];
@@ -162,17 +132,17 @@ static int height;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     height = keyboardRect.size.height;
-    self.sendBtn.frame = CGRectMake(screenW/4, screenH - height - 40 - 64, screenW/2, 40);
-    
+    self.sendBtn.frame = CGRectMake(screenW/4, screenH - height - 40, screenW/2, 40);
+
 }
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
     CGFloat screenH = [MMSystemHelper getScreenHeight];
     CGFloat screenW = [MMSystemHelper getScreenWidth];
-    self.sendBtn.frame = CGRectMake(screenW/4, screenH  - height  - 30, screenW/2, 40);
+    self.sendBtn.frame = CGRectMake(screenW/4, screenH - height - 30, screenW/2, 40);
     [UIView animateWithDuration:0.1 animations:^{
-        self.sendBtn.frame = CGRectMake(screenW/4, screenH - 100, screenW/2, 40);
+        self.sendBtn.frame = CGRectMake(screenW/4, screenH - 100 + 64, screenW/2, 40);
     }];
 }
 
@@ -189,39 +159,9 @@ static int height;
     
     [self.navigationController popViewControllerAnimated:NO];
 }
-//- (void)showAlertView :(int)type{
-//    NSString * title;
-//    NSString * detail;
-//    NSString * cancle;
-//    NSString * ok = @"确定";
-//    if (type == WKAlertViewStyleSuccess) {
-//        title = @"温馨提示";
-//        detail = @"发送成功";
-//        cancle = nil;
-//    }else if (type == WKAlertViewStyleFail){
-//        title = @"温馨提示";
-//        detail = @"发送内容不能为空";
-//        cancle = @"取消";
-//    }else if (type == WKAlertViewStyleWaring){
-//        title = @"温馨提示";
-//        detail = @"请连接网络";
-//        cancle = @"取消";
-//    }
-//    
-//    
-//    //为成员变量Window赋值则立即显示Window
-//    __sheetWindow = [WKAlertView showAlertViewWithStyle:WKAlertViewStyleDefalut type:NO title:title detail:detail canleButtonTitle:cancle okButtonTitle:ok callBlock:^(MyWindowClick buttonIndex) {
-//        
-//        //Window隐藏，并置为nil，释放内存 不能少
-//        __sheetWindow.hidden = YES;
-//        __sheetWindow = nil;
-//        
-//    }];
-//}
-
 -(void) sendBtnClicked{
     
-    [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:COLOR_BG_RED]];
+    [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]];
     NSString* msg = self.feedbackMsg.text;
     if (msg != nil && [msg length] >= 1){
         // send msg
