@@ -20,6 +20,7 @@ typedef void (^PoPoFBLoginCallback)(int resultCode);
 @property (copy) NSString *userName;
 @property (copy) NSString *icon;
 @property (copy) NSString *uId;
+@property (copy) NSString *email;
 @property (nonatomic, strong) FBSDKLoginManager *login;
 -(void) facebookLogin:(PoPoFBLoginCallback) cb
        viewController:(UIViewController *)view;

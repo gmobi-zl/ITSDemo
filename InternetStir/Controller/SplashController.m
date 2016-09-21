@@ -13,6 +13,10 @@
 #import "TabBarController.h"
 #import "ITSApplication.h"
 #import "DataService.h"
+#import "SettingService.h"
+
+#define screenW [MMSystemHelper getScreenWidth]
+#define screenH [MMSystemHelper getScreenHeight]
 
 @implementation SplashController
 
@@ -56,13 +60,81 @@
 
 -(void) pushNextVc{
 
-//    ViewController *vc = [[ViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == YES) {
+        TabBarController *tabBar = [[TabBarController alloc] init];
+        tabBar.selectedIndex = 1;
+        [self.navigationController pushViewController:tabBar animated:YES];
+    }else {
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
+        self.effectView.hidden = NO;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
+        
+        self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 60, 150)];
+        self.loginView.backgroundColor = [UIColor whiteColor];
+        self.loginView.alpha = 0.5;
+        self.loginView.layer.masksToBounds = YES;
+        self.loginView.layer.cornerRadius = 10;
+        self.loginView.center = self.view.center;
+        [self.loginView.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
+        [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+        [self.effectView addSubview:self.loginView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFacebookUserInfo) name:@"getFacebookUserInfo" object:[ITSApplication get].fbSvr];
+    }
+}
+- (void)cancelBtn {
+    self.effectView.hidden = YES;
+    TabBarController *tabBar = [[TabBarController alloc] init];
+    tabBar.selectedIndex = 1;
+    [self.navigationController pushViewController:tabBar animated:YES];
+}
+- (void)getFacebookUserInfo{
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    
+    FacebookService *facebook = itsApp.fbSvr;
+    us.user.userName = facebook.userName;
+    us.user.avatar = facebook.icon;
+    us.user.email = facebook.email;
+    us.user.isLogin = YES;
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"facebook",@"type",
+                         facebook.uId,@"openid",
+                         facebook.userName ,@"name",
+                         facebook.icon,@"avatar",
+                         facebook.email,@"email",
+                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
+                         nil];
+    
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    self.effectView.hidden = YES;
     TabBarController *tabBar = [[TabBarController alloc] init];
     tabBar.selectedIndex = 1;
     [self.navigationController pushViewController:tabBar animated:YES];
 }
 
+- (void)loginFB {
+    
+    ITSApplication* poApp = [ITSApplication get];
+    FacebookService *faceBook = poApp.fbSvr;
+    
+    [faceBook facebookLogin:^(int resultCode) {
+        if (resultCode == ITS_FB_LOGIN_SUCCESS) {
+            [faceBook facebookUserInfo];
+        } else {
+            
+            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            [al show];
+        }
+        
+    } viewController:self];
+}
 -(void) delayToHome{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self pushNextVc];

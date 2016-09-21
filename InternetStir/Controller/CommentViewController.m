@@ -10,7 +10,7 @@
 #import "CommentViewController.h"
 #import "MMSystemHelper.h"
 #import "CommentCell.h"
-//#import "CommentView.h"
+#import "CommentView.h"
 #import "ITSApplication.h"
 #import "SettingService.h"
 #import "UUInputAccessoryView.h"
@@ -80,7 +80,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [super viewWillAppear:animated];
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
+    Btn.frame = CGRectMake(0, 20, 15, 20);
     [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
@@ -92,8 +92,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         [self writeClick];
         [ss setStringValue:@"login" data:@""];
     }
-
-
 }
 - (void)clickBack{
     
@@ -137,6 +135,24 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
             item.comment = [dict objectForKey:@"comment"];
             commentFrame.detailCommentItem = item;
             [models addObject:commentFrame];
+//            commentItem.replys = [[NSMutableArray alloc] init];
+//            commentItem.name = [dict objectForKey:@"name"];
+//            commentItem.icon = [dict objectForKey:@"icon"];
+//            commentItem.pictures = [dict objectForKey:@"pictures"];
+//            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
+//            NSMutableArray *reply = [dict objectForKey:@"replys"];
+//            for (NSDictionary *dic in reply) {
+//                ReplyItem *item = [[ReplyItem alloc] init];
+//                item.name = [dic objectForKey:@"name"];
+//                item.comment = [dic objectForKey:@"comment"];
+//                item.icon = [dic objectForKey:@"icon"];
+//                [item setValuesForKeysWithDictionary:dic];
+//                commentItem.item = item;
+//                [commentItem.replys addObject:item];
+//            }
+//            commentFrame.detailCommentItem = commentItem;
+            
+//            [models addObject:commentFrame];
         }
         _commentData = [models copy];
         
@@ -204,8 +220,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
     }
     CommentCell *tmpCell = (CommentCell*)cell;
-    [tmpCell.bgButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
-    tmpCell.bgButton.tag = indexPath.row;
+    [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.replyButton.tag = indexPath.row;
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
 
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {

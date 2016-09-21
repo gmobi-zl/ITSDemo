@@ -101,6 +101,12 @@
 -(void)setCommentFrame:(HomeCommentFrame *)commentFrame{
 
     _commentFrame = commentFrame;
+    if (commentFrame.commentItem.isFavour == YES) {
+//        self.zanImageView.image = self.zanImage;
+        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+    }else{
+        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    }
     [self removeOldReplys];
     [self settingtData];
     [self settingFrame];

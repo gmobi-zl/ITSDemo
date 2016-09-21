@@ -64,7 +64,7 @@
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
 //    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    Btn.frame = CGRectMake(0, 20, 30, 30);
 //    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];

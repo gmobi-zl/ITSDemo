@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *comment;
 @property (strong,nonatomic)NSMutableArray *replys;
+@property (nonatomic, copy) NSString *time;
 //@property (strong,nonatomic)NSString *icon;  //头像
 //@property (strong,nonatomic)NSString *name;  //昵称
 //@property (strong,nonatomic)NSString *shuoshuoText; //说说

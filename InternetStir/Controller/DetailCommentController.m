@@ -52,7 +52,7 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
 }
 - (void)pushCommentVc:(UIButton* )button {
     CommentViewController *view = [[CommentViewController alloc] init];
-    view.index = button.tag;
+    view.index = self.index;
     [self.navigationController pushViewController:view animated:YES];
 }
 - (void)creatTableView {
@@ -112,7 +112,6 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
 - (void)tapReply:(UIButton *)btn{
     
     ITSApplication* itsApp = [ITSApplication get];
-    DataService* ds = itsApp.dataSvr;
     CBUserService* userSvr = itsApp.cbUserSvr;
     //    SettingService* ss = [SettingService get];
     
@@ -168,7 +167,6 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     
     UIKeyboardType type = UIKeyboardTypeDefault;
     ITSApplication* itsApp = [ITSApplication get];
-    DataService* ds = itsApp.dataSvr;
     CBUserService* userSvr = itsApp.cbUserSvr;
     SettingService* ss = [SettingService get];
     
@@ -189,6 +187,12 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
              commentItem.icon = userSvr.user.avatar;
              commentItem.comment = contentStr;
              FrameNeedChanged.detailCommentItem = commentItem;
+             
+             NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+             NSTimeInterval a = [dat timeIntervalSince1970]*1000;
+             NSString *timeString = [NSString stringWithFormat:@"%f", a];
+             commentItem.time = timeString;
+             
              NSMutableArray *mutaArray = [NSMutableArray arrayWithArray:self.commentData];
              [mutaArray insertObject:FrameNeedChanged atIndex:0];
              self.commentData = mutaArray;
@@ -200,7 +204,6 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
 - (void)replyToreply :(NSInteger)index{
     
     ITSApplication* itsApp = [ITSApplication get];
-    DataService* ds = itsApp.dataSvr;
     CBUserService* userSvr = itsApp.cbUserSvr;
     //    SettingService* ss = [SettingService get];
     
@@ -227,6 +230,7 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
              frameNeedChanged.replysF = nil;
              frameNeedChanged.replyPictureF = nil;
              frameNeedChanged.replyNameF = nil;
+             
              newsItem.name = userSvr.user.userName;
              newsItem.icon = userSvr.user.avatar;
              [mutaArray addObject:newsItem];
@@ -245,10 +249,10 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
+    Btn.frame = CGRectMake(0, 20, 15, 20);
     [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];

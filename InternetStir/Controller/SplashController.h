@@ -13,14 +13,15 @@
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
 //#import "GAITrackedViewController.h"
-
+#import "LoginView.h"
 
 //@interface SplashController : GAITrackedViewController
 @interface SplashController : UIViewController
 
 @property (nonatomic, strong) UIImageView *bgImage;
 
-
+@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) LoginView *loginView;
 @property (assign) BOOL isWaitMaxTime;
 @property (assign) BOOL isConnected;
 @property BOOL isReconnect;

@@ -12,5 +12,8 @@
 @property (strong, nonatomic) UIImageView* icon;
 @property (strong, nonatomic) UILabel* title;
 @property (strong, nonatomic) UIView* line;
+@property (strong, nonatomic) UIImageView* imageview;
+@property (strong, nonatomic) UILabel* loginLabel;
+@property (strong, nonatomic) UIView* bgView;
 
 @end

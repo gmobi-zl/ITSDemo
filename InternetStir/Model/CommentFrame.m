@@ -84,7 +84,10 @@
     
     self.cellHeight = CGRectGetMaxY(self.contentF) + padding/2;
     
-    self.timeF = CGRectMake(nameLabelX, self.cellHeight , 200, 20);
+    CGSize timeLabelSize = [MMSystemHelper sizeWithString:@"2016-7-9 " font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
+    self.timeF = CGRectMake(nameLabelX, self.cellHeight , timeLabelSize.width, 20);
+    self.replyBtnF = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.cellHeight, 40, 20);
+    
     self.cellHeight = CGRectGetMaxY(self.timeF) + padding + 5;
     
     //评论

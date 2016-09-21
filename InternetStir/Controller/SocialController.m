@@ -270,20 +270,18 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
                 self.line.frame = CGRectMake(screenW * 4/5, 42 + 64, screenW/5,4);
                 self.scrollView.contentOffset = CGPointMake(4 * screenW, 0);
             }];
-
         }
             break;
         default:
             break;
     }
-   
 }
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
     
 //    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    Btn.frame = CGRectMake(0, 20, 30, 30);

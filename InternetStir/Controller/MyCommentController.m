@@ -1,33 +1,35 @@
 
-
 //
-//  FanController.m
+//  MyCommentController.m
 //  Jacob
 //
-//  Created by Apple on 16/9/18.
+//  Created by Apple on 16/9/20.
 //  Copyright © 2016年 Gmobi. All rights reserved.
 //
 
-#import "FanController.h"
-#import "AppStyleConfiguration.h"
+#import "MyCommentController.h"
 #import "MMSystemHelper.h"
-#import "FanCell.h"
+#import "AppStyleConfiguration.h"
+#import "MyCommentCell.h"
+#import "UUInputAccessoryView.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
-NSString *const FanTableViewCellIdentifier = @"FanCell";
+NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 
-@interface FanController ()
+@interface MyCommentController ()
 
 @end
 
-@implementation FanController
+@implementation MyCommentController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"留言追蹤";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"粉絲排行榜";
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 15, 20);
@@ -37,29 +39,39 @@ NSString *const FanTableViewCellIdentifier = @"FanCell";
     self.navigationItem.leftBarButtonItem = left;
     
     self.tableView = [[UITableView alloc] init];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 62;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    [self.tableView registerClass:[FanCell class] forCellReuseIdentifier:FanTableViewCellIdentifier];
-    
+    [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return 6;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 270;
 }
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = nil;
-    cell = [tableView dequeueReusableCellWithIdentifier:FanTableViewCellIdentifier forIndexPath:indexPath];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell* cell = nil;
+    cell = [tableView dequeueReusableCellWithIdentifier:MyCommentTableViewCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
-        cell = [[FanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FanTableViewCellIdentifier];
+        cell = [[MyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCommentTableViewCellIdentifier];
     }
-    FanCell *tmpCell = (FanCell*)cell;
-
+    MyCommentCell *tmpCell = (MyCommentCell*)cell;
+    [tmpCell.replyButton addTarget:self action:@selector(replyBtn) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return tmpCell;
+}
+- (void)replyBtn {
+    
+    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+                                   content:@""
+                                      name:@""
+                                     Block:^(NSString *contentStr)
+     {
+     
+     }];
 }
 - (void)clickBack {
     [self.navigationController popViewControllerAnimated:YES];
@@ -69,7 +81,6 @@ NSString *const FanTableViewCellIdentifier = @"FanCell";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

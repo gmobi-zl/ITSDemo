@@ -17,7 +17,9 @@
 #import "CommentFrame.h"
 #import "AppStyleConfiguration.h"
 #import "TestController.h"
+#import "ITSApplication.h"
 #import "DetailCommentController.h"
+#import "SettingService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -41,7 +43,69 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.tableView registerClass:[HomeCommentCell class] forCellReuseIdentifier:HomeCommentCellIdentifier];
 
     [self.view addSubview:self.tableView];
+    
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
+    self.effectView.hidden = YES;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
+    
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 60, 150)];
+    self.loginView.backgroundColor = [UIColor whiteColor];
+    self.loginView.alpha = 0.5;
+    self.loginView.layer.masksToBounds = YES;
+    self.loginView.layer.cornerRadius = 10;
+    self.loginView.center = self.view.center;
+    [self.loginView.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.effectView addSubview:self.loginView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFacebookUserInfo) name:@"getFacebookUserInfo" object:[ITSApplication get].fbSvr];
 }
+- (void)loginFB {
+    
+    ITSApplication* poApp = [ITSApplication get];
+    FacebookService *faceBook = poApp.fbSvr;
+    self.effectView.hidden = YES;
+    [faceBook facebookLogin:^(int resultCode) {
+        if (resultCode == ITS_FB_LOGIN_SUCCESS) {
+            [faceBook facebookUserInfo];
+        } else {
+            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            [al show];
+        }
+    } viewController:self];
+}
+- (void)cancelBtn {
+    self.effectView.hidden = YES;
+}
+- (void)getFacebookUserInfo{
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    
+    FacebookService *facebook = itsApp.fbSvr;
+    us.user.userName = facebook.userName;
+    us.user.avatar = facebook.icon;
+    us.user.email = facebook.email;
+    us.user.isLogin = YES;
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"facebook",@"type",
+                         facebook.uId,@"openid",
+                         facebook.userName ,@"name",
+                         facebook.icon,@"avatar",
+                         facebook.email,@"email",
+                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
+                         nil];
+    
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    self.effectView.hidden = YES;
+    self.Btn.hidden = YES;
+//    [self.tableView reloadData];
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat height;
@@ -67,6 +131,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.commentBtn.tag = indexPath.row;
     [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.favBtn.tag = indexPath.row;
     tmpCell.btn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replysView count]; i++) {
         ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
@@ -82,6 +148,18 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
     
     return cell;
+}
+- (void)favBtnClick:(UIButton *)button {
+    
+    HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;
+
+    SettingService* ss = [SettingService get];
+    BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] defValue:NO];
+    if (isFav == NO) {
+        [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+        cell.commentFrame.commentItem.isFavour = YES;
+        [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:YES];
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -164,7 +242,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }
         _commentData = [models copy];
     }
-    
     return _commentData;
 }
 
@@ -174,23 +251,29 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
     
-//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    Btn.frame = CGRectMake(0, 20, 30, 30);
-//    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
-//    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
-//    self.navigationItem.leftBarButtonItem = left;
-//    
-//    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame = CGRectMake(screenW - 40, 20, 30, 30);
-//    [button setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = right;
-    
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    self.Btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.Btn.frame = CGRectMake(0, 20, 50, 30);
+    [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
+    [self.Btn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
+    [self.Btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
+    self.navigationItem.rightBarButtonItem = right;
+    if (us.user.isLogin == NO) {
+        self.Btn.hidden = NO;
+    }else {
+        self.Btn.hidden = YES;
+    }
+}
+- (void)login {
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == NO) {
+        self.effectView.hidden = NO;
+    }
 }
 - (void)push {
     

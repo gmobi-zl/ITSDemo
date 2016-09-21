@@ -25,6 +25,7 @@
         self.user.userName = @"高圆圆";
         self.user.avatar = @"高圆圆";
         self.user.isLogin = NO;
+        self.user.email = @"";
         //        self.user.uId = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/_id" def:nil];
         //        self.user.avatar = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/avatar" def:nil];
         //        self.user.userName = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/name" def:nil];
@@ -52,6 +53,7 @@
         self.user.avatar = [data objectForKey:@"avatar"];
         self.user.userName = [data objectForKey:@"name"];
         self.user.uId = [data objectForKey:@"openid"];
+        self.user.email = [data objectForKey:@"email"];
         self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
     }
 }

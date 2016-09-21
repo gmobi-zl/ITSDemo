@@ -13,6 +13,7 @@
 #import <netdb.h>
 #import <arpa/inet.h>
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
 
 static NetWorkType currentNetType = NoNet;
 
@@ -564,64 +565,63 @@ static NetWorkType currentNetType = NoNet;
 }
 
 
-//+ (NSString *) compareCurrentTime:(NSString *)str
-//{
-//    long long longTime = [str longLongValue];
-//    
-//    NSDate *d = [[NSDate alloc]initWithTimeIntervalSince1970:longTime/1000.0];
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *timeString = [formatter stringFromDate:d];
-//    
-//    //把字符串转为NSdate
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSDate *timeDate = [dateFormatter dateFromString:timeString];
-//    
-//    //得到与当前时间差
-//    NSTimeInterval  timeInterval = [timeDate timeIntervalSinceNow];
-//    timeInterval = -timeInterval;
-//    //标准时间和北京时间差8个小时
-//    //    timeInterval = timeInterval - 8*60*60;
-//    int temp = 0;
-//    NSString *result;
-//    NSArray *time = [timeString componentsSeparatedByString:@" "];
-//    if (timeInterval < 60) {
-//        result = PPN_NSLocalizedString(@"time_util_just", nil);
-//    }
-//    else if((temp = timeInterval/60) < 60){
-//        result = [NSString stringWithFormat:@"%d%@",temp,PPN_NSLocalizedString(@"time_util_minute", nil)];
-//    }
-//    
-//    else if((temp = temp/60) < 24){
-//        result = [NSString stringWithFormat:@"%d%@",temp,PPN_NSLocalizedString(@"time_util_hour", nil)];
-//    }
-//    
-//    else if((temp = temp/24) < 30){
-//        if (temp <= 2) {
-//            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
-////            if (temp == 1) {
-////                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_yesterday", nil)];
-////            }else{
-////                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_before_yesterday", nil)];
-////            }
-//        }else{
-//            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
-//        }
-//    }
-//    
-//    else if((temp = temp/30) < 12){
-//        result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
-//        //        result = [NSString stringWithFormat:@"%d月前",temp];
-//    }
-//    else{
-//        temp = temp/12;
-//        //        result = [NSString stringWithFormat:@"%d年前",temp];
-//        result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
-//    }
-//    return  result;
-//
-//}
-
++ (NSString *) compareCurrentTime:(NSString *)str
+{
+    long long longTime = [str longLongValue];
+    
+    NSDate *d = [[NSDate alloc]initWithTimeIntervalSince1970:longTime/1000.0];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *timeString = [formatter stringFromDate:d];
+    
+    //把字符串转为NSdate
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *timeDate = [dateFormatter dateFromString:timeString];
+    
+    //得到与当前时间差
+    NSTimeInterval  timeInterval = [timeDate timeIntervalSinceNow];
+    timeInterval = -timeInterval;
+    //标准时间和北京时间差8个小时
+    //    timeInterval = timeInterval - 8*60*60;
+    int temp = 0;
+    NSString *result;
+    NSArray *time = [timeString componentsSeparatedByString:@" "];
+    if (timeInterval < 60) {
+        result = [NSString stringWithFormat:@"剛剛"];
+    }
+    else if((temp = timeInterval/60) < 60){
+        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"分"]];
+    }
+    
+    else if((temp = temp/60) < 24){
+        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"小時"]];
+    }
+    
+    else if((temp = temp/24) < 30){
+        if (temp <= 2) {
+            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
+            //            if (temp == 1) {
+            //                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_yesterday", nil)];
+            //            }else{
+            //                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_before_yesterday", nil)];
+            //            }
+        }else{
+            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
+        }
+    }
+    
+    else if((temp = temp/30) < 12){
+        result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
+        //        result = [NSString stringWithFormat:@"%d月前",temp];
+    }
+    else{
+        temp = temp/12;
+        //        result = [NSString stringWithFormat:@"%d年前",temp];
+        result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
+    }
+    return  result;
+    
+}
 
 @end

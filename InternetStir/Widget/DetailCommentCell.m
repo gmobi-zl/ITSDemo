@@ -110,7 +110,7 @@
     [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:comment.icon] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.comment;
-    self.timeLabel.text = @"3小時前~回復";
+    self.timeLabel.text = [MMSystemHelper compareCurrentTime:comment.time];
     for (NSInteger i = 0; i < comment.replys.count; i++) {
         
         ReplyItem *item = [comment.replys objectAtIndex:i];

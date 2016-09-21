@@ -70,6 +70,8 @@ typedef enum{
 +(CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize;
 //根据字符串内容的多少  在固定宽度 下计算出实际的行高
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size;
++ (NSString *) compareCurrentTime:(NSString *)str;
+
 //获取 当前设备版本
 + (double)getCurrentIOS;
 

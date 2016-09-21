@@ -24,4 +24,5 @@
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIButton *bgButton;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIButton *replyButton;
 @end
