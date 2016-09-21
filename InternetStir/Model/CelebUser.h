@@ -18,6 +18,8 @@
 
 @interface CelebUser : NSObject
 
+@property (assign) BOOL isCBADM;
+
 @property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *uId;
