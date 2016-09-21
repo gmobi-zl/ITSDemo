@@ -20,6 +20,8 @@
 //#import "GAIDictionaryBuilder.h"
 #import "ITSApplication.h"
 
+@import FirebaseAnalytics;
+
 #define REPROT_COL_NAME  @"report_database"
 
 #define KEY_EMO @"mood"
@@ -348,6 +350,8 @@
     MMLogDebug(@"Report Event : id = %@, params = %@", category, params);
     
     if (eventId == nil) return;
+    
+    [FIRAnalytics logEventWithName:eventId parameters:params];
     
     // report to flurry
 //    if (params != nil){

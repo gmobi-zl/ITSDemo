@@ -91,15 +91,17 @@ static NSString * const kClientID =
             }
         }];
     }else {
-        GIDSignIn* signIn = [GIDSignIn sharedInstance];
-        signIn.clientID = kClientID;
-        signIn.scopes = @[ @"profile", @"email"];
-        signIn.delegate = self;
-        signIn.uiDelegate = self;
-        [[GIDSignIn sharedInstance] signIn];
+//        GIDSignIn* signIn = [GIDSignIn sharedInstance];
+//        signIn.clientID = kClientID;
+//        signIn.scopes = @[ @"profile", @"email"];
+//        signIn.delegate = self;
+//        signIn.uiDelegate = self;
+//        [[GIDSignIn sharedInstance] signIn];
 
     }
 }
+
+/*
 #pragma mark GIDSignInDelegate google
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
@@ -141,6 +143,7 @@ didSignInForUser:(GIDGoogleUser *)user
 didDisconnectWithUser:(GIDGoogleUser *)user
      withError:(NSError *)error {
 }
+ */
 - (void)getFacebookUserInfo{
     
     ITSApplication* itsApp = [ITSApplication get];

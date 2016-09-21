@@ -11,6 +11,11 @@
 #import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 
+#import "UIKit/UIKit.h"
+#import "Firebase.h"
+
+@import FirebaseAnalytics;
+
 @interface AppDelegate ()
 
 @end
@@ -31,17 +36,20 @@ static NSString * const kClientID =
     [[Twitter sharedInstance] startWithConsumerKey:@"lbF0Iu1RuUHbLxft64xbFeuFW" consumerSecret:@"DHzSxiPD5C0TvLvJkivgj3VsJyPBdbuzT7ZktaNSNEQljKuzpJ"];
 
     [Fabric with:@[[Twitter sharedInstance]]];
+    
+    [FIRApp configure];
 
     return YES;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     BOOL success = NO;
-    if ([[GIDSignIn sharedInstance] handleURL:url
-                            sourceApplication:sourceApplication
-                                   annotation:annotation]){
-        success = YES;
-    }
-   else if ( [[FBSDKApplicationDelegate sharedInstance] application:application
+//    if ([[GIDSignIn sharedInstance] handleURL:url
+//                            sourceApplication:sourceApplication
+//                                   annotation:annotation]){
+//        success = YES;
+//    }
+//   else
+    if ( [[FBSDKApplicationDelegate sharedInstance] application:application
                                                               openURL:url
                                                     sourceApplication:sourceApplication
                                                            annotation:annotation]){

@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F664951D59BA9B00BDB2E8"
-            BuildableName = "InternetStir.app"
-            BlueprintName = "InternetStir"
-            ReferencedContainer = "container:InternetStir.xcodeproj">
+            BuildableName = "Jacob.app"
+            BlueprintName = "Jacob"
+            ReferencedContainer = "container:Jacob.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F664951D59BA9B00BDB2E8"
-            BuildableName = "InternetStir.app"
-            BlueprintName = "InternetStir"
-            ReferencedContainer = "container:InternetStir.xcodeproj">
+            BuildableName = "Jacob.app"
+            BlueprintName = "Jacob"
+            ReferencedContainer = "container:Jacob.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
