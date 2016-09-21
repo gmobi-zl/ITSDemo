@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *comment;
+@property (nonatomic, copy) NSString *time;
 @property (strong,nonatomic)NSMutableArray *replys;
 @property (strong,nonatomic)ReplyItem *item;
 #pragma mark - 最后要考虑是暂存coredata里还是plist文件里

@@ -220,12 +220,20 @@
     histroy.iconName = @"star60";
     histroy.actionName = @"其他網紅";
     [self.leftMenuList addObject:histroy];
-        
     
     LeftMenuItem* menu = [LeftMenuItem alloc];
     menu.iconName = @"like [#1385]";
     menu.actionName = @"擁有個人網紅App";
     [self.leftMenuList addObject:menu];
+    
+    LeftMenuItem* item = [[LeftMenuItem alloc] init];
+    [self.leftMenuList addObject:item];
+    
+    LeftMenuItem* login = [[LeftMenuItem alloc] init];
+    [self.leftMenuList addObject:login];
+    
+    LeftMenuItem* item1 = [[LeftMenuItem alloc] init];
+    [self.leftMenuList addObject:item1];
 
 }
 
@@ -259,14 +267,6 @@
 //    edition.actionType = SETTING_ACTION_EDITION;
 //    [self.settingList addObject:edition];
 
-    
-    SettingItem* clearCache = [SettingItem alloc];
-    clearCache.iconName = @"set_clean";
-    clearCache.settingName = ITS_NSLocalizedString(@"SettingClearCache", nil);
-    clearCache.type = SettingTypeButton;
-    clearCache.actionType = SETTING_ACTION_CLEAN_CACHE;
-    [self.settingList addObject:clearCache];
-    
     SettingItem* video = [[SettingItem alloc] init];
     video.iconName = @"setting_autoplay";
     video.settingName = @"推播通知";
@@ -275,6 +275,13 @@
     video.isSwitch = NO;
     [self.settingList addObject:video];
     
+    SettingItem* clearCache = [SettingItem alloc];
+    clearCache.iconName = @"set_clean";
+    clearCache.settingName = ITS_NSLocalizedString(@"SettingClearCache", nil);
+    clearCache.type = SettingTypeButton;
+    clearCache.actionType = SETTING_ACTION_CLEAN_CACHE;
+    [self.settingList addObject:clearCache];
+    
     SettingItem* feedBack = [SettingItem alloc];
     feedBack.iconName = @"set_feed";
     feedBack.settingName = ITS_NSLocalizedString(@"SettingFeedBack", nil);
@@ -282,12 +289,12 @@
     feedBack.actionType = SETTING_ACTION_FEEDBACK;
     [self.settingList addObject:feedBack];
 
-    SettingItem* about = [SettingItem alloc];
-    about.iconName = @"set_about";
-    about.settingName = ITS_NSLocalizedString(@"SettingAbout", nil);
-    about.type = SettingTypeDetail;
-    about.actionType = SETTING_ACTION_ABOUT;
-    [self.settingList addObject:about];
+//    SettingItem* about = [SettingItem alloc];
+//    about.iconName = @"set_about";
+//    about.settingName = ITS_NSLocalizedString(@"SettingAbout", nil);
+//    about.type = SettingTypeDetail;
+//    about.actionType = SETTING_ACTION_ABOUT;
+//    [self.settingList addObject:about];
     
     return self.settingList;
 }

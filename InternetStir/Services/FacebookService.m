@@ -31,6 +31,7 @@
                 self.userName = [result objectForKey:@"name"];
                 self.uId = [result objectForKey:@"id"];
                 self.icon = [[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+                self.email = [result objectForKey:@"email"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"getFacebookUserInfo" object:self];
                 
                 SettingService* ss = [SettingService get];

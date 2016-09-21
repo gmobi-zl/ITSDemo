@@ -109,6 +109,11 @@
 		E18C13051D6AE6DF00E635D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13041D6AE6DF00E635D6 /* Foundation.framework */; };
 		E18C13071D6AE6EC00E635D6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13061D6AE6EC00E635D6 /* Security.framework */; };
 		E18C13091D6AE6FB00E635D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13081D6AE6FB00E635D6 /* SystemConfiguration.framework */; };
+		E19845061D90D66E006A3ED2 /* MyCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845051D90D66E006A3ED2 /* MyCommentController.m */; };
+		E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450B1D9111D4006A3ED2 /* LoginView.m */; };
+		E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450E1D9132FF006A3ED2 /* MyCommentCell.m */; };
+		E19845121D91389E006A3ED2 /* MyCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845111D91389E006A3ED2 /* MyCommentItem.m */; };
+		E19845151D91395A006A3ED2 /* MyCommentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845141D91395A006A3ED2 /* MyCommentFrame.m */; };
 		E19DFD0B1D8F87370042C777 /* DetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD0A1D8F87370042C777 /* DetailCommentCell.m */; };
 		E19DFD0E1D8F89220042C777 /* DetailCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD0D1D8F89220042C777 /* DetailCommentItem.m */; };
 		E19DFD111D8F893B0042C777 /* DetailCommentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD101D8F893B0042C777 /* DetailCommentFrame.m */; };
@@ -117,7 +122,6 @@
 		E1A2A5FE1D6AF04C005AA8DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A2A5FD1D6AF04C005AA8DA /* UIKit.framework */; };
 		E1A2A6321D6AF4DC005AA8DA /* GoogleService.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A2A6311D6AF4DC005AA8DA /* GoogleService.m */; };
 		E1AE627A1D73C91A007E9DBC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1AE627C1D73C91A007E9DBC /* Localizable.strings */; };
-		E1AFAF141D6EBE8100759969 /* MessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AFAF131D6EBE8100759969 /* MessageController.m */; };
 		E1AFAF4D1D6ED44200759969 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AFAF4C1D6ED44200759969 /* StoreKit.framework */; };
 		E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF671D6544030053F00D /* HomeViewController.m */; };
 		E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF6A1D6547D40053F00D /* TabBarController.m */; };
@@ -338,6 +342,16 @@
 		E197B2021D7036E0000B03FF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E197B2041D7037CF000B03FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		E197B2051D7037CF000B03FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		E19845041D90D66E006A3ED2 /* MyCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentController.h; sourceTree = "<group>"; };
+		E19845051D90D66E006A3ED2 /* MyCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentController.m; sourceTree = "<group>"; };
+		E198450A1D9111D4006A3ED2 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		E198450B1D9111D4006A3ED2 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		E198450D1D9132FF006A3ED2 /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
+		E198450E1D9132FF006A3ED2 /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
+		E19845101D91389E006A3ED2 /* MyCommentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentItem.h; sourceTree = "<group>"; };
+		E19845111D91389E006A3ED2 /* MyCommentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentItem.m; sourceTree = "<group>"; };
+		E19845131D91395A006A3ED2 /* MyCommentFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentFrame.h; sourceTree = "<group>"; };
+		E19845141D91395A006A3ED2 /* MyCommentFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentFrame.m; sourceTree = "<group>"; };
 		E19DFD091D8F87370042C777 /* DetailCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCommentCell.h; sourceTree = "<group>"; };
 		E19DFD0A1D8F87370042C777 /* DetailCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCommentCell.m; sourceTree = "<group>"; };
 		E19DFD0C1D8F89220042C777 /* DetailCommentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCommentItem.h; sourceTree = "<group>"; };
@@ -353,8 +367,6 @@
 		E1AE627B1D73C91A007E9DBC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E1AE627D1D73C91F007E9DBC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E1AE627E1D73C925007E9DBC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E1AFAF121D6EBE8100759969 /* MessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageController.h; sourceTree = "<group>"; };
-		E1AFAF131D6EBE8100759969 /* MessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageController.m; sourceTree = "<group>"; };
 		E1AFAF4C1D6ED44200759969 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E1E3CF661D6544030053F00D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E1E3CF671D6544030053F00D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -662,6 +674,10 @@
 				E19DFD0D1D8F89220042C777 /* DetailCommentItem.m */,
 				E19DFD0F1D8F893B0042C777 /* DetailCommentFrame.h */,
 				E19DFD101D8F893B0042C777 /* DetailCommentFrame.m */,
+				E19845101D91389E006A3ED2 /* MyCommentItem.h */,
+				E19845111D91389E006A3ED2 /* MyCommentItem.m */,
+				E19845131D91395A006A3ED2 /* MyCommentFrame.h */,
+				E19845141D91395A006A3ED2 /* MyCommentFrame.m */,
 				E1F6B1001D659ABC00822E8D /* ReplyItem.h */,
 				E1F6B1011D659ABC00822E8D /* ReplyItem.m */,
 				1807B1E41D797AB200CBD6FE /* CelebComment.h */,
@@ -697,8 +713,8 @@
 				E189F60D1D6415DB008587CE /* FavourController.m */,
 				E124AA011D6D6EFB00B5BE8F /* DownLoadController.h */,
 				E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */,
-				E1AFAF121D6EBE8100759969 /* MessageController.h */,
-				E1AFAF131D6EBE8100759969 /* MessageController.m */,
+				E19845041D90D66E006A3ED2 /* MyCommentController.h */,
+				E19845051D90D66E006A3ED2 /* MyCommentController.m */,
 				E189F60E1D6415DB008587CE /* LoginViewController.h */,
 				E189F60F1D6415DB008587CE /* LoginViewController.m */,
 				E189F6391D644B93008587CE /* DetailContentController.h */,
@@ -766,6 +782,8 @@
 				E189F6461D645B10008587CE /* ChannelSetCell.m */,
 				E1E4A44A1D8E729A00380026 /* FanCell.h */,
 				E1E4A44B1D8E729A00380026 /* FanCell.m */,
+				E198450D1D9132FF006A3ED2 /* MyCommentCell.h */,
+				E198450E1D9132FF006A3ED2 /* MyCommentCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -783,6 +801,8 @@
 				E1F6B0F81D65930200822E8D /* PNMoodView.m */,
 				E19DFD171D8FB70C0042C777 /* HeadView.h */,
 				E19DFD181D8FB70C0042C777 /* HeadView.m */,
+				E198450A1D9111D4006A3ED2 /* LoginView.h */,
+				E198450B1D9111D4006A3ED2 /* LoginView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1091,6 +1111,7 @@
 				E1F030641D741C4100060559 /* MJRefreshFooterView.m in Sources */,
 				E19DFD191D8FB70C0042C777 /* HeadView.m in Sources */,
 				18F664CF1D5AC9FF00BDB2E8 /* MMJsonDatabase.m in Sources */,
+				E19845061D90D66E006A3ED2 /* MyCommentController.m in Sources */,
 				E1E4A4431D8E233200380026 /* DetailCommentController.m in Sources */,
 				18F6649B1D59BA9B00BDB2E8 /* main.m in Sources */,
 				E189F5EF1D64158E008587CE /* ContentViewCell.m in Sources */,
@@ -1123,6 +1144,7 @@
 				E1A2A6321D6AF4DC005AA8DA /* GoogleService.m in Sources */,
 				E1F030631D741C4100060559 /* MJRefreshConst.m in Sources */,
 				E189F5FB1D6415A1008587CE /* PickerImageTools.m in Sources */,
+				E19845121D91389E006A3ED2 /* MyCommentItem.m in Sources */,
 				E1F6B0F91D65930200822E8D /* PNMoodView.m in Sources */,
 				E189F6041D6415BF008587CE /* HomeCommentItem.m in Sources */,
 				E1F030701D741C4100060559 /* SDWebImagePrefetcher.m in Sources */,
@@ -1132,6 +1154,7 @@
 				18F664FF1D5B29E900BDB2E8 /* NewsService.m in Sources */,
 				E189F6071D6415BF008587CE /* CommentFrame.m in Sources */,
 				E189F64A1D645C9D008587CE /* AboutController.m in Sources */,
+				E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */,
 				E19DFD111D8F893B0042C777 /* DetailCommentFrame.m in Sources */,
 				E189F6411D6450AE008587CE /* SettingCell.m in Sources */,
 				18F665151D5B311400BDB2E8 /* AdItem.m in Sources */,
@@ -1167,11 +1190,12 @@
 				E1F0306D1D741C4100060559 /* SDWebImageDownloader.m in Sources */,
 				18F665161D5B311400BDB2E8 /* NewsImage.m in Sources */,
 				E1F030711D741C4100060559 /* UIButton+WebCache.m in Sources */,
+				E19845151D91395A006A3ED2 /* MyCommentFrame.m in Sources */,
+				E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */,
 				E1E3CF711D6549140053F00D /* SocialController.m in Sources */,
 				18F664F31D5ACFA100BDB2E8 /* RemoteService.m in Sources */,
 				E1EB48211D6BE37B003C42BC /* FacebookService.m in Sources */,
 				E124AA031D6D6EFB00B5BE8F /* DownLoadController.m in Sources */,
-				E1AFAF141D6EBE8100759969 /* MessageController.m in Sources */,
 				E1F030621D741C4100060559 /* MJRefreshBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

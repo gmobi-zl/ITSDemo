@@ -72,7 +72,7 @@
         saveBtn.backgroundColor = [UIColor clearColor];
         [saveBtn setTitle: @"發佈" forState:UIControlStateNormal];
         [saveBtn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
-        [saveBtn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateDisabled];
+        [saveBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [saveBtn addTarget:sharedView action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
         [toolbar addSubview:saveBtn];
         

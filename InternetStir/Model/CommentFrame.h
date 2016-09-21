@@ -27,4 +27,5 @@
 @property (nonatomic, assign) CGRect replyName;
 
 @property (nonatomic, assign) CGRect timeF;
+@property (nonatomic, assign) CGRect replyBtnF;
 @end

@@ -152,12 +152,14 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     FacebookService *facebook = itsApp.fbSvr;
     us.user.userName = facebook.userName;
     us.user.avatar = facebook.icon;
+    us.user.email = facebook.email;
     us.user.isLogin = YES;
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          @"facebook",@"type",
                          facebook.uId,@"openid",
                          facebook.userName ,@"name",
                          facebook.icon,@"avatar",
+                         facebook.email,@"email",
                          [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     
@@ -194,7 +196,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     self.view.backgroundColor = [UIColor grayColor];
 
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
+    Btn.frame = CGRectMake(0, 20, 15, 20);
     [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];

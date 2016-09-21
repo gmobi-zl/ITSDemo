@@ -50,13 +50,12 @@
     [super viewWillAppear:animated];
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(0, 20, 30, 30);
+    Btn.frame = CGRectMake(0, 20, 15, 20);
     [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
     self.navigationController.navigationBarHidden = NO;
-
 }
 
 - (void)configUI {

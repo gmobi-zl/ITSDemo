@@ -67,6 +67,12 @@
         self.timeLabel.font = [UIFont systemFontOfSize:14];
         self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
         [self.contentView addSubview:self.timeLabel];
+        
+        self.replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.replyButton setTitle:@"回復" forState:UIControlStateNormal];
+        [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.replyButton];
     }
     return self;
 }
@@ -109,7 +115,7 @@
     [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:comment.icon] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.commentLabel.text = comment.comment;
-    self.timeLabel.text = @"3小時前~回復";
+    self.timeLabel.text = @"3小時前";
     for (NSInteger i = 0; i < comment.replys.count; i++) {
         
         ReplyItem *item = [comment.replys objectAtIndex:i];
@@ -171,6 +177,8 @@
     self.replyBackgroundView.frame = self.detailCommentFrame.replyBackgroundF;
     self.line.frame = self.detailCommentFrame.lineF;
     self.timeLabel.frame = self.detailCommentFrame.timeF;
+    self.replyButton.frame = self.detailCommentFrame.replyBtnF;
+    
     self.bgButton.frame = self.commentLabel.bounds;
 
 }

@@ -8,6 +8,8 @@
 
 #import "MenuViewCell.h"
 #import "MMSystemHelper.h"
+#import "AppStyleConfiguration.h"
+
 @implementation MenuViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -37,6 +39,24 @@
         self.title.text = @"设置";
         [self.title setNumberOfLines:1];
         [self.contentView addSubview:self.title];
+        
+        self.imageview = [[UIImageView alloc] init];
+        self.imageview.frame = CGRectMake(screenW - 30, 12, 10, 15);
+        self.imageview.image = [UIImage imageNamed:@"set_next"];
+        [self.contentView addSubview:self.imageview];
+        
+        self.loginLabel = [[UILabel alloc] init];
+        self.loginLabel.frame = CGRectMake(0, 0, screenW, 44);
+        self.loginLabel.textAlignment = NSTextAlignmentCenter;
+        self.loginLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+        self.loginLabel.font = [UIFont systemFontOfSize:16];
+        [self.contentView addSubview:self.loginLabel];
+        
+        self.bgView = [[UIView alloc] init];
+        self.bgView.frame = CGRectMake(0, 0, screenW, 44);
+        self.bgView.backgroundColor = [UIColor whiteColor];
+        self.bgView.alpha = 0.5;
+        [self.contentView addSubview:self.bgView];
         
         self.line = [[UIView alloc] init];
         self.line.frame = CGRectMake(0, 43, screenW, 1);
