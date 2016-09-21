@@ -54,43 +54,50 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     for (NSInteger i = 0; i < 5; i++) {
         self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.btn.frame = CGRectMake(space + i * (60 + space), 69, 60, 40);
+        self.btn.frame = CGRectMake(space + i * (60 + space), 20, 60, 40);
         [self.btn setTitle:[title objectAtIndex:i] forState:UIControlStateNormal];
         [self.btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        self.btn.backgroundColor = [UIColor whiteColor];
         self.btn.tag = i + 100;
         if (i == 0) {
             self.btn.selected  = YES;
         }
         [self.view addSubview:self.btn];
     }
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 42 + 64, screenW/5,3)];
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 57, screenW/5,3)];
     self.line.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
     [self.view addSubview:self.line];
 
+    UIView *view = [[UIView alloc] init];
+    view.frame = CGRectMake(0, 57, screenW, 3);
+    view.backgroundColor = [UIColor grayColor];
+    view.alpha = 0.3;
+    [self.view addSubview:view];
+    
     NSURL *url = [NSURL URLWithString:@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
     self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.frame = CGRectMake(0, 109, screenW, screenH - 109 - 49);
+    self.scrollView.frame = CGRectMake(0, 60, screenW, screenH - 60);
     self.scrollView.delegate = self;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.pagingEnabled = YES;
     self.scrollView.bounces = NO;
-    self.scrollView.contentSize = CGSizeMake(screenW * 5, screenH - 109 - 49);
+    self.scrollView.contentSize = CGSizeMake(screenW * 5, screenH - 60);
     [self.view addSubview:self.scrollView];
     
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 109 - 49);
+    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 60 - 49);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.scrollView addSubview:self.tableView];
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     
     for (NSInteger i = 0; i < 4; i++) {
-        self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 45 + 64, screenW, screenH - 49 - 45 - 64)];
+        self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, screenW, screenH - 49 - 60)];
         self.webView.backgroundColor = [UIColor whiteColor];
         self.webView.navigationDelegate = self;
-        self.webView.frame = CGRectMake(screenW + screenW * i, 0, screenW, screenH - 109 - 49);
+        self.webView.frame = CGRectMake(screenW + screenW * i, 0, screenW, screenH - 60 - 49);
         [self.scrollView addSubview:self.webView];
         NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:i]];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
@@ -196,7 +203,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     CGPoint curPoint = scrollVie.contentOffset;
     NSInteger current = curPoint.x/scrollVie.frame.size.width;
     [UIView animateWithDuration:0.3 animations:^{
-        self.line.frame = CGRectMake(screenW/5 * current, 42 + 64, screenW/5,4);
+        self.line.frame = CGRectMake(screenW/5 * current, 57, screenW/5,3);
     }];
 }
 
@@ -225,7 +232,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
             self.backView.hidden = YES;
             [self.testActivityIndicato stopAnimating];
             [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(0, 42 + 64, screenW/5,4);
+                self.line.frame = CGRectMake(0, 57, screenW/5,3);
                 self.scrollView.contentOffset = CGPointMake(0, 0);
             }];
         }
@@ -235,7 +242,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
             self.backView.hidden = NO;
             [self.testActivityIndicato startAnimating];
             [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW/5, 42 + 64, screenW/5,4);
+                self.line.frame = CGRectMake(screenW/5, 57, screenW/5,3);
                 self.scrollView.contentOffset = CGPointMake(screenW, 0);
             }];
         }
@@ -245,7 +252,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
             self.backView.hidden = NO;
             [self.testActivityIndicato startAnimating];
             [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 2/5, 42 + 64, screenW/5,4);
+                self.line.frame = CGRectMake(screenW * 2/5, 57, screenW/5,3);
                 self.scrollView.contentOffset = CGPointMake(2 * screenW, 0);
             }];
 
@@ -256,10 +263,9 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
             self.backView.hidden = NO;
             [self.testActivityIndicato startAnimating];
             [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 3/5, 42 + 64, screenW/5,4);
+                self.line.frame = CGRectMake(screenW * 3/5, 57, screenW/5,3);
                 self.scrollView.contentOffset = CGPointMake(3 * screenW, 0);
             }];
-
         }
             break;
         case 104:
@@ -267,7 +273,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
             self.backView.hidden = NO;
             [self.testActivityIndicato startAnimating];
             [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 4/5, 42 + 64, screenW/5,4);
+                self.line.frame = CGRectMake(screenW * 4/5, 57, screenW/5,3);
                 self.scrollView.contentOffset = CGPointMake(4 * screenW, 0);
             }];
         }
@@ -289,6 +295,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 //    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
 //    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
 //    self.navigationItem.leftBarButtonItem = left;
+    self.navigationController.navigationBar.hidden = YES;
     
 }
 - (void)pushMenu{
@@ -296,7 +303,6 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     MenuViewController *menu = [[MenuViewController alloc] init];
     menu.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:menu animated:YES];
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

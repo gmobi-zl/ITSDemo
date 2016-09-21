@@ -17,7 +17,7 @@
 #import "PickerImageTools.h"
 #import "LoginViewController.h"
 #import "UIImageView+WebCache.h"
-#import "MJRefresh.h"
+//#import "MJRefresh.h"
 #import "AppStyleConfiguration.h"
 
 NSString *const CommentTableViewCellIdentifier = @"CommentCell";
@@ -53,23 +53,23 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [self.view addSubview:self.commentView];
     [self writeClick];
     
-    [self setupRefresh];
+//    [self setupRefresh];
 
     
 //    self.replyData = [[NSMutableArray alloc] init];
 }
-- (void)setupRefresh
-{
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
-}
-- (void)footerRereshing
-{
-
-}
+//- (void)setupRefresh
+//{
+//    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+//    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+//    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+//    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+//    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+//}
+//- (void)footerRereshing
+//{
+//
+//}
 
 - (void)push{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择", nil];
