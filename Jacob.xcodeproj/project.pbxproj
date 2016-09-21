@@ -11,6 +11,7 @@
 		1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1E51D797AC300CBD6FE /* CelebComment.m */; };
 		1807B1E91D797AF900CBD6FE /* FansComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1E81D797AF900CBD6FE /* FansComment.m */; };
 		1807B1EC1D8261AF00CBD6FE /* AppStyleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */; };
+		1807B1EE1D926B8300CBD6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */; };
 		18F6649B1D59BA9B00BDB2E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649A1D59BA9B00BDB2E8 /* main.m */; };
 		18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */; };
 		18F664A41D59BA9B00BDB2E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F664A21D59BA9B00BDB2E8 /* Main.storyboard */; };
@@ -185,6 +186,7 @@
 		1807B1E81D797AF900CBD6FE /* FansComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansComment.m; sourceTree = "<group>"; };
 		1807B1EA1D82619300CBD6FE /* AppStyleConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStyleConfiguration.h; sourceTree = "<group>"; };
 		1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStyleConfiguration.m; sourceTree = "<group>"; };
+		1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		18F664961D59BA9B00BDB2E8 /* Jacob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jacob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 		18F664981D59BA9B00BDB2E8 /* InternetStir */ = {
 			isa = PBXGroup;
 			children = (
+				1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */,
 				18F664B21D5AC9ED00BDB2E8 /* Frameworks */,
 				18F664B71D5AC9FF00BDB2E8 /* Momock */,
 				18F664D31D5ACA1900BDB2E8 /* Resources */,
@@ -1005,6 +1008,7 @@
 				18F664E21D5ACA1900BDB2E8 /* style.css in Resources */,
 				E1F6B1041D65A1D900822E8D /* a-9.jpg in Resources */,
 				18F664A41D59BA9B00BDB2E8 /* Main.storyboard in Resources */,
+				1807B1EE1D926B8300CBD6FE /* GoogleService-Info.plist in Resources */,
 				E189F6281D641616008587CE /* list_2.png in Resources */,
 				E189F6301D641616008587CE /* location.png in Resources */,
 				18F664E01D5ACA1900BDB2E8 /* JSToNativeService.js in Resources */,
