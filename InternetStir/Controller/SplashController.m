@@ -73,9 +73,8 @@
         self.effectView.hidden = NO;
         [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
         
-        self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 60, 150)];
+        self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 40, 190)];
         self.loginView.backgroundColor = [UIColor whiteColor];
-        self.loginView.alpha = 0.5;
         self.loginView.layer.masksToBounds = YES;
         self.loginView.layer.cornerRadius = 10;
         self.loginView.center = self.view.center;

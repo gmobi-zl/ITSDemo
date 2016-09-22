@@ -50,7 +50,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.bgImage = [[UIImageView alloc] init];
     self.bgImage.frame = CGRectMake(0, 64, screenW, MENU_LOGIN_GB_HEIGHT);
 //    self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    self.bgImage.contentMode = UIViewContentModeScaleToFill;
+    self.bgImage.contentMode = UIViewContentModeScaleAspectFit;
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
     
@@ -76,34 +76,6 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.tableView registerClass:[MenuViewCell class] forCellReuseIdentifier:MenuTableViewCellIdentifier];
     self.tableView.tableHeaderView = self.bgImage;
     [self.view addSubview:self.tableView];
-    
-//    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    self.loginButton.frame = CGRectMake(120, MENU_LOGIN_GB_HEIGHT + 64 + 60, screenW - 240, 40);
-//    [self.loginButton addTarget:self action:@selector(pushLoginVc) forControlEvents:UIControlEventTouchUpInside];
-//    self.loginButton.backgroundColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
-//    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    self.loginButton.layer.masksToBounds = YES;
-//    self.loginButton.layer.cornerRadius = 8;
-//    self.loginButton.layer.borderWidth = 0.5;
-//    self.loginButton.hidden = YES;
-//    self.loginButton.layer.borderColor = [UIColor grayColor].CGColor;
-//    [self.loginButton setTitle:@"點擊登入" forState:UIControlStateNormal];
-//    [self.view addSubview:self.loginButton];
-//    
-//    self.label = [[UILabel alloc] init];
-//    NSString *name = @"登入後才能瀏覽粉絲小幫手~";
-//    CGSize size = [MMSystemHelper sizeWithString:name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
-//    self.label.frame = CGRectMake(screenW/2 - size.width/2, self.loginButton.frame.origin.y + self.loginButton.frame.size.height + 20, size.width, 20);
-//    self.label.textAlignment = NSTextAlignmentCenter;
-//    self.label.text = name;
-//    self.label.textColor = [UIColor grayColor];
-//    self.label.hidden = YES;
-//    self.label.font = [UIFont systemFontOfSize:14];
-//    [self.view addSubview:self.label];
-    
-//    self.imageview = [[UIImageView alloc] initWithFrame:CGRectMake(self.label.frame.origin.x - 35, self.label.frame.origin.y - 5, 30, 30)];
-//    self.imageview.image = [UIImage imageNamed:@"icon_tips"];
-//    [self.view addSubview:self.imageview];
     
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
@@ -141,17 +113,6 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.userNameLabel.text = @"登入";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
     }
-//    UIButton *loginOut = [UIButton buttonWithType:UIButtonTypeCustom];
-//    loginOut.frame = CGRectMake(0, screenH - 49 - 10 - 44, screenW, 44);
-//    loginOut.backgroundColor = [UIColor whiteColor];
-//    [loginOut setTitle:@"登出" forState:UIControlStateNormal];
-//    [loginOut addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
-//    [loginOut setTitleColor:[MMSystemHelper string2UIColor:MENU_LOGINOUT_COLOUR] forState:UIControlStateNormal];
-//    loginOut.hidden = YES;
-//    loginOut.tag = 100;
-//    [self.view addSubview:loginOut];
-//    self.loginOut = loginOut;
-//    self.loginOut.hidden = YES;
     
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
@@ -159,9 +120,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.effectView.hidden = YES;
     [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
     
-    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 60, 150)];
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(20, 0, screenW - 40, 190)];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.alpha = 0.5;
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
@@ -185,11 +145,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         if (resultCode == ITS_FB_LOGIN_SUCCESS) {
             [faceBook facebookUserInfo];
         } else {
-            
             UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [al show];
         }
-        
     } viewController:self];
 }
 - (void)getFacebookUserInfo{
@@ -385,6 +343,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     
     return [menuList count];
 }
+
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ITSApplication* itsApp = [ITSApplication get];

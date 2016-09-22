@@ -20,11 +20,13 @@
 #import "ITSApplication.h"
 #import "DetailCommentController.h"
 #import "SettingService.h"
+#import "WriteArticleController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
 NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
+#define  WEAKSELF  __weak typeof(self) weakSelf = self;
 
 @interface HomeViewController ()
 
@@ -50,7 +52,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     self.effectView.hidden = YES;
     [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
     
-    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 60, 150)];
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 40, 190)];
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.alpha = 0.5;
     self.loginView.layer.masksToBounds = YES;
@@ -101,7 +103,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     SettingService* ss = [SettingService get];
     [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
     self.effectView.hidden = YES;
-    self.Btn.hidden = YES;
+    [self.Btn setTitle:@"" forState:UIControlStateNormal];
+    self.Btn.userInteractionEnabled = NO;
 //    [self.tableView reloadData];
 }
 
@@ -134,6 +137,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
     tmpCell.btn.tag = indexPath.row;
+    [tmpCell.delBtn addTarget:self action:@selector(pushSheet:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.delBtn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replysView count]; i++) {
         ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
         tmpCell.replyLabel = [tmpCell.replysView objectAtIndex:i];
@@ -149,6 +154,37 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     return cell;
 }
+- (void)pushSheet:(UIButton *)button {
+     self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"置頂",@"編輯",@"刪除", nil];
+    self.sheet.tag = 80;
+    [self.sheet showInView:self.view];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+   
+    WEAKSELF
+    if (actionSheet.tag == 80) {
+        if (buttonIndex == 0) {
+            
+        }else if (buttonIndex == 1) {
+            
+        }else if (buttonIndex == 2) {
+
+        }
+    }else {
+        if (buttonIndex == 0) {
+            [[PickerImageTools ShareInstance] selectImageToolsWith:weakSelf];
+        }else if (buttonIndex == 1) {
+            [[PickerImageTools ShareInstance] selectPhotograph:weakSelf];
+        }
+        [PickerImageTools ShareInstance].pickerImageCameraBlock = ^(NSData *pickerImage){
+            WriteArticleController *vc = [[WriteArticleController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.data = pickerImage;
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+    }
+}
+
 - (void)favBtnClick:(UIButton *)button {
     
     HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;
@@ -163,12 +199,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    DetailCommentController *vc = [[DetailCommentController alloc] init];
-    HomeCommentFrame *frame = self.commentData[indexPath.row];
-    vc.headHeight = frame.headH;
-    vc.item = frame.commentItem;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+//    DetailCommentController *vc = [[DetailCommentController alloc] init];
+//    HomeCommentFrame *frame = self.commentData[indexPath.row];
+//    vc.headHeight = frame.headH;
+//    vc.item = frame.commentItem;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)pushDetailVc:(UIButton *)button {
     
@@ -214,9 +250,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 -(NSMutableArray *)commentData
 {
     if (!_commentData) {
+        SettingService* ss = [SettingService get];
+
         NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"FamilyGroup.plist" ofType:nil];
         NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dictArray count]];
+        NSInteger count = 0;
         for (NSDictionary *dict in dictArray) {
             HomeCommentItem *commentItem = [[HomeCommentItem alloc] init];
             HomeCommentFrame *commentFrame = [[HomeCommentFrame alloc]init];
@@ -237,7 +276,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
                 [commentItem.replys addObject:item];
             }
             commentFrame.commentItem = commentItem;
-            
+            commentItem.isFavour = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",count++] defValue:NO];
+
             [models addObject:commentFrame];
         }
         _commentData = [models copy];
@@ -256,23 +296,34 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     CBUserService* us = itsApp.cbUserSvr;
     
     self.Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.Btn.frame = CGRectMake(0, 20, 50, 30);
-    [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
+    self.Btn.frame = CGRectMake(0, 20, 25, 23);
     [self.Btn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
     [self.Btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    if (us.user.isCBADM == NO) {
+        [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
+    }else {
+        if (us.user.isLogin == NO) {
+            [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
+        }else {
+            [self.Btn setTitle:@"" forState:UIControlStateNormal];
+            self.Btn.userInteractionEnabled = NO;
+        }
+    }
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
     self.navigationItem.rightBarButtonItem = right;
-    if (us.user.isLogin == NO) {
-        self.Btn.hidden = NO;
-    }else {
-        self.Btn.hidden = YES;
-    }
+
 }
 - (void)login {
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isLogin == NO) {
-        self.effectView.hidden = NO;
+    if (us.user.isCBADM == NO) {
+        self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍張照",@"相機膠圈", nil];
+        [self.photoSheet showInView:self.view];
+
+    }else {
+        if (us.user.isLogin == NO) {
+            self.effectView.hidden = NO;
+        }
     }
 }
 - (void)push {

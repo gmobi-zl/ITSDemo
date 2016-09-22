@@ -36,6 +36,10 @@
 
 @end
 
+@implementation WriteArticleMenuItem
+
+@end
+
 @implementation loginOutMenuItem
 
 @end
@@ -122,6 +126,52 @@
     google.isLogin = NO;
     [self.loginOutList addObject:google];
     
+}
+-(NSMutableArray*) getWriteArticleMenuList {
+    [self refreshWriteArticle];
+    return self.writeArticleMenuList;
+}
+-(void)refreshWriteArticle {
+    if (self.writeArticleMenuList == nil)
+        self.writeArticleMenuList = [NSMutableArray arrayWithCapacity:3];
+    else
+        [self.writeArticleMenuList removeAllObjects];
+    
+    WriteArticleMenuItem* set = [WriteArticleMenuItem alloc];
+    set.iconName = @"location";
+    set.actionName = @"新增地點";
+    set.photo = @"set_next";
+    [self.writeArticleMenuList addObject:set];
+    
+    WriteArticleMenuItem* settings = [WriteArticleMenuItem alloc];
+    settings.iconName = @"tag";
+    settings.actionName = @"標註人名";
+    settings.photo = @"set_next";
+    [self.writeArticleMenuList addObject:settings];
+    
+    WriteArticleMenuItem* Facebook = [WriteArticleMenuItem alloc];
+    Facebook.iconName = @"Fb";
+    Facebook.actionName = @"Facebook";
+    Facebook.photo = @"switch_off";
+    [self.writeArticleMenuList addObject:Facebook];
+    
+    WriteArticleMenuItem* Instagram = [WriteArticleMenuItem alloc];
+    Instagram.iconName = @"ig";
+    Instagram.actionName = @"Instagram";
+    Instagram.photo = @"switch_off";
+    [self.writeArticleMenuList addObject:Instagram];
+    
+    WriteArticleMenuItem* twitter = [WriteArticleMenuItem alloc];
+    twitter.iconName = @"twitter";
+    twitter.actionName = @"Twitter";
+    twitter.photo = @"switch_off";
+    [self.writeArticleMenuList addObject:twitter];
+    
+    WriteArticleMenuItem* weibo = [WriteArticleMenuItem alloc];
+    weibo.iconName = @"weibo";
+    weibo.actionName = @"新浪微博";
+    weibo.photo = @"switch_off";
+    [self.writeArticleMenuList addObject:weibo];
 }
 -(NSMutableArray*) getLeftMenuList{
 

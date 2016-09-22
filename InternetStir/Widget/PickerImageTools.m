@@ -67,9 +67,6 @@ static PickerImageTools *_tools = nil;
 
     }
     [mySelf presentViewController:picker animated:YES completion:nil];
-
-
-
 }
 
 
