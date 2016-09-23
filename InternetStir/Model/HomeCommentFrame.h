@@ -33,4 +33,5 @@
 @property (nonatomic, assign) CGRect likeF;
 @property (nonatomic, assign) CGRect likeNumF;
 @property (nonatomic, assign) CGFloat headH;
+@property (nonatomic, assign) CGRect delBtnF;
 @end

@@ -34,4 +34,6 @@
 @property (nonatomic, strong) UIImageView *like;
 @property (nonatomic, strong) UILabel *likeNum;
 
+@property (nonatomic, strong) UIButton *delBtn;
+
 @end

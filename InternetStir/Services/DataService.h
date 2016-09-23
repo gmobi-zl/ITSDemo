@@ -48,7 +48,6 @@ typedef enum{
 @property (assign) int actionType;
 @property (assign) BOOL isSwitch;
 
-
 @end
 
 @interface LeftMenuItem: NSObject
@@ -57,6 +56,13 @@ typedef enum{
 @property (copy) NSString* actionName;
 @property (assign) BOOL isSelect;
 
+@end
+
+@interface WriteArticleMenuItem: NSObject
+
+@property (copy) NSString* iconName;
+@property (copy) NSString* actionName;
+@property (copy) NSString* photo;
 @end
 
 @interface loginOutMenuItem : NSObject
@@ -107,6 +113,7 @@ typedef enum{
 @property (copy) NSString* connectRspGroup;
 @property (assign) int update;
 @property (retain) id currentDetailNews;
+@property (retain) NSMutableArray* writeArticleMenuList;
 @property (retain) NSMutableArray* leftMenuList;
 @property (retain) NSMutableArray* showCategoryList;
 @property (retain) NSMutableArray* settingList;
@@ -180,6 +187,7 @@ typedef enum{
 -(NativeAdItem*)getNativeAdItem:(NSString*)cid;
 - (void)getNewsNewsListWithAdList:(NSString* )cid :(int)type;
 
+-(NSMutableArray*) getWriteArticleMenuList;
 -(NSMutableArray*) getLoginOutList;
 -(NSMutableArray*) getLeftMenuList;
 -(NSMutableArray*) getNewsCategoryList;

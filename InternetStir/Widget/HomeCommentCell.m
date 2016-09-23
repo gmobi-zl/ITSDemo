@@ -10,6 +10,7 @@
 #import "MMSystemHelper.h"
 #import "ITSAppConst.h"
 #import "AppStyleConfiguration.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 
@@ -95,6 +96,14 @@
         self.likeNum.textAlignment = NSTextAlignmentLeft;
         self.likeNum.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.likeNum];
+        
+        ITSApplication* itsApp = [ITSApplication get];
+        CBUserService* us = itsApp.cbUserSvr;
+        if (us.user.isCBADM == NO) {
+            self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
+            [self.contentView addSubview:self.delBtn];
+        }
     }
     return self;
 }
@@ -209,6 +218,7 @@
     self.line.frame = self.commentFrame.lineF;
     self.like.frame = self.commentFrame.likeF;
     self.likeNum.frame = self.commentFrame.likeNumF;
+    self.delBtn.frame = self.commentFrame.delBtnF;
     
     for (int i = 0; i < [self.commentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.commentFrame.replysF objectAtIndex:i] CGRectValue];

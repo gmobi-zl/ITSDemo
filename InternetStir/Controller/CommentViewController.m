@@ -113,10 +113,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         [[PickerImageTools ShareInstance] selectPhotograph:weakSelf];
     }
     
-    [PickerImageTools ShareInstance].pickerImageCameraBlock = ^(NSData *pickerImage){
-        
-       
-    };
+//    [PickerImageTools ShareInstance].pickerImageCameraBlock = ^(NSData *pickerImage){
+//        
+//       
+//    };
 }
 -(NSMutableArray *)commentData
 {

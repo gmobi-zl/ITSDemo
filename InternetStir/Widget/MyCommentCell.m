@@ -82,11 +82,8 @@
         self.bgView.frame = CGRectMake(80, CGRectGetMaxY(self.replyContent.frame)+10, screenW - 80 - 25, 92);
         self.bgView.layer.masksToBounds = YES;
         self.bgView.layer.cornerRadius = 10;
-        self.bgView.backgroundColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
+        self.bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
         [self.contentView addSubview:self.bgView];
-        
-        
-    
         
 //        size = [MMSystemHelper sizeWithString:@"15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 80 - 25 - 140,MAXFLOAT)];
         self.titleLabel = [[UILabel alloc] init];
@@ -107,6 +104,20 @@
         self.photo.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame)+10, 10, 100, 67);
         self.photo.image = [UIImage imageNamed:@"a-3.jpg"];
         [self.bgView addSubview:self.photo];
+        
+        self.readBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.readBtn.frame = CGRectMake(screenW - 80, 25, 60, 30);
+        self.readBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.readBtn setTitle:@"Read" forState:UIControlStateNormal];
+        self.readBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 3, 0, 0);
+        self.readBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        UIImage *btnIcon = [UIImage imageNamed:@"Rectangle.read"];
+        [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
+        self.readBtn.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+        self.readBtn.layer.masksToBounds = YES;
+        self.readBtn.layer.cornerRadius = 5;
+        [self.contentView addSubview:self.readBtn];
+        
         
     }
     return self;

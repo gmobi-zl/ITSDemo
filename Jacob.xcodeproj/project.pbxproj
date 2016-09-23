@@ -124,6 +124,8 @@
 		E1A2A6321D6AF4DC005AA8DA /* GoogleService.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A2A6311D6AF4DC005AA8DA /* GoogleService.m */; };
 		E1AE627A1D73C91A007E9DBC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1AE627C1D73C91A007E9DBC /* Localizable.strings */; };
 		E1AFAF4D1D6ED44200759969 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AFAF4C1D6ED44200759969 /* StoreKit.framework */; };
+		E1B9611E1D936E0C00B779A1 /* WriteArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B9611D1D936E0C00B779A1 /* WriteArticleCell.m */; };
+		E1BA8BE71D9282F6002758D1 /* WriteArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BA8BE61D9282F6002758D1 /* WriteArticleController.m */; };
 		E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF671D6544030053F00D /* HomeViewController.m */; };
 		E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF6A1D6547D40053F00D /* TabBarController.m */; };
 		E1E3CF6E1D6548FB0053F00D /* ContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF6D1D6548FB0053F00D /* ContentController.m */; };
@@ -370,6 +372,10 @@
 		E1AE627D1D73C91F007E9DBC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E1AE627E1D73C925007E9DBC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E1AFAF4C1D6ED44200759969 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		E1B9611C1D936E0C00B779A1 /* WriteArticleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteArticleCell.h; sourceTree = "<group>"; };
+		E1B9611D1D936E0C00B779A1 /* WriteArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteArticleCell.m; sourceTree = "<group>"; };
+		E1BA8BE51D9282F6002758D1 /* WriteArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteArticleController.h; sourceTree = "<group>"; };
+		E1BA8BE61D9282F6002758D1 /* WriteArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteArticleController.m; sourceTree = "<group>"; };
 		E1E3CF661D6544030053F00D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E1E3CF671D6544030053F00D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E1E3CF691D6547D40053F00D /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
@@ -734,6 +740,8 @@
 				E181D1321D66F785005115E6 /* WebviewController.m */,
 				E13A7D661D7E995300305B64 /* TestController.h */,
 				E13A7D671D7E995300305B64 /* TestController.m */,
+				E1BA8BE51D9282F6002758D1 /* WriteArticleController.h */,
+				E1BA8BE61D9282F6002758D1 /* WriteArticleController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -787,6 +795,8 @@
 				E1E4A44B1D8E729A00380026 /* FanCell.m */,
 				E198450D1D9132FF006A3ED2 /* MyCommentCell.h */,
 				E198450E1D9132FF006A3ED2 /* MyCommentCell.m */,
+				E1B9611C1D936E0C00B779A1 /* WriteArticleCell.h */,
+				E1B9611D1D936E0C00B779A1 /* WriteArticleCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1186,8 +1196,10 @@
 				E189F64D1D645D55008587CE /* FeedBackController.m in Sources */,
 				18F664FC1D5B20E600BDB2E8 /* ITSApplication.m in Sources */,
 				18F664D21D5AC9FF00BDB2E8 /* Reachability.m in Sources */,
+				E1B9611E1D936E0C00B779A1 /* WriteArticleCell.m in Sources */,
 				E189F6131D6415DB008587CE /* LoginViewController.m in Sources */,
 				18F665181D5B311400BDB2E8 /* PopoNewsData.m in Sources */,
+				E1BA8BE71D9282F6002758D1 /* WriteArticleController.m in Sources */,
 				18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */,
 				E19DFD0E1D8F89220042C777 /* DetailCommentItem.m in Sources */,
 				18F664D01D5AC9FF00BDB2E8 /* MMLogger.m in Sources */,

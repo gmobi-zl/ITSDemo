@@ -56,6 +56,7 @@
         textView.returnKeyType = UIReturnKeyDone;
         textView.enablesReturnKeyAutomatically = YES;
         textView.delegate = sharedView;
+//        textView.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         textView.font = [UIFont systemFontOfSize:14];
         textView.layer.cornerRadius = 15;
         textView.layer.borderWidth = 0.5;
@@ -79,7 +80,7 @@
         UIImageView *imageview = [[UIImageView alloc] init];
         imageview.frame = CGRectMake(15, 15, 20, 20);
         imageview.image = [UIImage imageNamed:@"sticker"];
-        [toolbar addSubview:imageview];
+       // [toolbar addSubview:imageview];
 
         UILabel *label = [[UILabel alloc] initWithFrame:textView.frame];
         label.textAlignment = NSTextAlignmentLeft;
