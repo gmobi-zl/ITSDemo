@@ -72,8 +72,13 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.label];
     
+    UIView *bgView = [[UIView alloc] init];
+    bgView.frame = CGRectMake(0, 174, screenW, 3);
+    bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    [self.view addSubview:bgView];
+    
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 174, screenW, screenH - 174);
+    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 50;

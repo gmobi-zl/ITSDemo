@@ -175,6 +175,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.tableView reloadData];
     self.userEmailLabel.text = us.user.email;
     self.userNameLabel.text = us.user.userName;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
 }
 
 - (void)cancelBtn {

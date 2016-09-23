@@ -21,5 +21,6 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *photo;
 @property (nonatomic, strong) UIButton *replyButton;
+@property (nonatomic, strong) UIButton *readBtn;
 
 @end
