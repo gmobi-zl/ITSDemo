@@ -109,8 +109,23 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
+<<<<<<< HEAD
 //    ITSApplication* poApp = [ITSApplication get];
 
+=======
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"launch.view",@"EventCategory",
+                         @"tomotoc001",@"EventAction",
+                         @"" ,@"name",
+                         nil];
+
+    [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
+    
+    [self delayToHome];
+>>>>>>> origin/master
 }
 
 -(void) viewWillAppear:(BOOL)animated{

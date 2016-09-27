@@ -347,7 +347,7 @@
              params: (NSDictionary*) params
       eventCategory:(NSString *)category{
     
-    MMLogDebug(@"Report Event : id = %@, params = %@", category, params);
+    MMLogDebug(@"Report Event : id = %@, params = %@", eventId, params);
     
     if (eventId == nil) return;
     

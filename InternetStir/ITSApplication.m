@@ -14,6 +14,7 @@
 #import "MMEventService.h"
 #import "NewsService.h"
 #import "ITSAppConst.h"
+#import "MMLogger.h"
 
 #define IOS_LOCAL_STRING 1
 
@@ -51,7 +52,7 @@ NSString* customerLocal = nil;
 }
 
 -(void) initServices {
-    //[MMLogger openLog:@"PoPoNews" logLevel:MM_LOG_I_LEVEL_DEBUG maxLogCount:5];
+    [MMLogger openLog:@"Celeb" logLevel:MM_LOG_I_LEVEL_DEBUG maxLogCount:5];
     
     //self.remoteSvr = [RemoteService alloc];
     self.dataSvr = [DataService alloc];
@@ -80,7 +81,7 @@ NSString* customerLocal = nil;
     if (customerLocal == nil)
         self.isFirstOpen = YES;
     
-    self.baseUrl = [MMSystemHelper getAppInfoPlistData:@"PoPoNewsBaseUrl" defValue:@"http://test.poponews.net/"];
+    self.baseUrl = [MMSystemHelper getAppInfoPlistData:@"CelebrityBaseUrl" defValue:@"http://test.poponews.net/"];
     //self.group = [MMSystemHelper getAppInfoPlistData:@"PoPoNewsChannelGroup" defValue:@"test"];
     
     //[self.dataSvr initPushNewsList];
