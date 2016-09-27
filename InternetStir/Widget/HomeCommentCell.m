@@ -203,7 +203,8 @@
 //        [self.replyNameView addObject:replyName];
     }
     self.timeLabel.text = comment.time;
-    self.likeNum.text = @"99999";
+    int fav = 99999;
+    self.likeNum.text = [NSString stringWithFormat:@"%d",fav];
 }
 -(void)settingFrame
 {

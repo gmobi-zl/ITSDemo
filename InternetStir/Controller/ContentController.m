@@ -42,9 +42,9 @@
                     @"https://www.youtube.com/watch?v=veBjTuLDzF0",
                     @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
     
-    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
+//    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
 //    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    [self.navigationController.navigationBar addSubview:statusBarView];
+//    [self.navigationController.navigationBar addSubview:statusBarView];
     
     self.bgView = [[UIView alloc] init];
     self.bgView.frame = CGRectMake(0, 0, screenW, 40);

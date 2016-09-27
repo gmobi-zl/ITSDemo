@@ -180,6 +180,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     SettingService* ss = [SettingService get];
     BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] defValue:NO];
     if (isFav == NO) {
+        cell.likeNum.text = [NSString stringWithFormat:@"%d",99999+1];
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
         [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:YES];

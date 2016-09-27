@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Widget/MMTabPagerView.m"
-            timestampString = "496636262.645259"
+            timestampString = "496649038.484434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "-resetTabView"
             landmarkType = "5">
          </BreakpointContent>

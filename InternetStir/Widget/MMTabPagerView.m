@@ -126,7 +126,7 @@ NSInteger num;
     self.pageViewController.delegate = self;
     
     self.heightOfTabView = 40.0;
-    self.yPositionOfTabView = 0.0;
+    self.yPositionOfTabView = 20.0;
     
     CGFloat r = 215.0 / 255.0;
     CGFloat g = 49.0 / 255.0;
@@ -205,7 +205,6 @@ NSInteger num;
     
     // Positioning
     self.tabsView.contentOffset = CGPointMake(0, 0);
-    
     // Add contentView in Superview
     self.contentView = [self.view viewWithTag:MC_TAB_CONTENT_TAG];
     if (!self.contentView) {
@@ -241,7 +240,6 @@ NSInteger num;
     [self.tabsView addSubview:self.tabIndicator];
     ConfigService *cs = [ConfigService get];
     self.tabIndicator.backgroundColor = [cs getYellowViewColor:cs.type];
-    
     //self.tabsView.backgroundColor = [UIColor blackColor];
     
     // Default Design
@@ -271,7 +269,6 @@ NSInteger num;
      // self.tabsView.backgroundColor = [cs getScrollViewBgColor:cs.type];
      // self.tabIndicator.backgroundColor = [cs getYellowViewColor:cs.type];
      // self.tabsView.backgroundColor = [cs getScrollViewBgColor:cs.type];
-
 }
 
 -(void)resetTabViewContent: (NSUInteger) index{
@@ -530,9 +527,9 @@ NSInteger num;
     [UIView animateWithDuration:0.3
                      animations:^{
                          if (tabWidth < screenWidth)
-                             self.tabsView.contentOffset = CGPointMake(0, 20);
+                             self.tabsView.contentOffset = CGPointMake(0, 0);
                          else
-                             self.tabsView.contentOffset = CGPointMake(offset + newOffsetX, 20);
+                             self.tabsView.contentOffset = CGPointMake(offset + newOffsetX, 0);
                          tabInd.frame = CGRectMake(itemOffsetX, self.tabIndicator.frame.origin.y
                                                    , itemRect.size.width, self.tabIndicator.frame.size.height);
                      }

@@ -64,7 +64,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 //    }
     
     self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 60 - 49);
+    self.tableView.frame = CGRectMake(0, 20, screenW, screenH - 60 - 49);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

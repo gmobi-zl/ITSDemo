@@ -69,6 +69,7 @@
 		E181D1301D66AB64005115E6 /* replyGroup.plist in Resources */ = {isa = PBXBuildFile; fileRef = E181D12F1D66AB64005115E6 /* replyGroup.plist */; };
 		E181D1331D66F785005115E6 /* WebviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E181D1321D66F785005115E6 /* WebviewController.m */; };
 		E187B6551D9A057D00A6D565 /* HomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B6541D9A057D00A6D565 /* HomePageController.m */; };
+		E187B6581D9A3EBB00A6D565 /* SocialWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B6571D9A3EBB00A6D565 /* SocialWebController.m */; };
 		E189F5EF1D64158E008587CE /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5E81D64158E008587CE /* ContentViewCell.m */; };
 		E189F5F01D64158E008587CE /* HomeCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5EA1D64158E008587CE /* HomeCommentCell.m */; };
 		E189F5F11D64158E008587CE /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5EC1D64158E008587CE /* CommentCell.m */; };
@@ -285,6 +286,8 @@
 		E181D1321D66F785005115E6 /* WebviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewController.m; sourceTree = "<group>"; };
 		E187B6531D9A057D00A6D565 /* HomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageController.h; sourceTree = "<group>"; };
 		E187B6541D9A057D00A6D565 /* HomePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageController.m; sourceTree = "<group>"; };
+		E187B6561D9A3EBB00A6D565 /* SocialWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialWebController.h; sourceTree = "<group>"; };
+		E187B6571D9A3EBB00A6D565 /* SocialWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialWebController.m; sourceTree = "<group>"; };
 		E189F5E71D64158E008587CE /* ContentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewCell.h; sourceTree = "<group>"; };
 		E189F5E81D64158E008587CE /* ContentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewCell.m; sourceTree = "<group>"; };
 		E189F5E91D64158E008587CE /* HomeCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCommentCell.h; sourceTree = "<group>"; };
@@ -721,6 +724,8 @@
 				E1E3CF6D1D6548FB0053F00D /* ContentController.m */,
 				E1E3CF6F1D6549140053F00D /* SocialController.h */,
 				E1E3CF701D6549140053F00D /* SocialController.m */,
+				E187B6561D9A3EBB00A6D565 /* SocialWebController.h */,
+				E187B6571D9A3EBB00A6D565 /* SocialWebController.m */,
 				18F665641D5DA94A00BDB2E8 /* SplashController.h */,
 				18F665651D5DA95B00BDB2E8 /* SplashController.m */,
 				E189F6081D6415DB008587CE /* CommentViewController.h */,
@@ -1180,6 +1185,7 @@
 				E189F6041D6415BF008587CE /* HomeCommentItem.m in Sources */,
 				E1F030701D741C4100060559 /* SDWebImagePrefetcher.m in Sources */,
 				E1F030721D741C4100060559 /* UIImage+GIF.m in Sources */,
+				E187B6581D9A3EBB00A6D565 /* SocialWebController.m in Sources */,
 				1807B1E91D797AF900CBD6FE /* FansComment.m in Sources */,
 				18F665131D5B311400BDB2E8 /* PoPoNewsItem.m in Sources */,
 				18F664FF1D5B29E900BDB2E8 /* NewsService.m in Sources */,

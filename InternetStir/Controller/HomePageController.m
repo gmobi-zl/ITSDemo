@@ -9,7 +9,8 @@
 #import "HomePageController.h"
 #import "ConfigService.h"
 #import "SocialController.h"
-#import "WebviewController.h"
+#import "SocialWebController.h"
+#import "MMSystemHelper.h"
 
 @interface HomePageController ()<MMTabPagerViewDataSource, MMTabPagerViewDelegate>
 
@@ -22,22 +23,26 @@
     self.delegate = self;
 
     [super viewDidLoad];
-//    self.title = @"社群";
-
 }
 - (void)viewWillAppear:(BOOL)animated{
     //
     [super viewWillAppear:animated];
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    CGFloat screenW = [MMSystemHelper getScreenWidth];
+    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenW, 20)];
+    statusBarView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:statusBarView];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
 }
 -(void) viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
-    self.navigationController.navigationBar.hidden = YES;
+//    [self.tabBarController.tabBar setHidden:NO];
+//    self.navigationController.navigationBar.hidden = YES;
     
     ConfigService *cs = [ConfigService get];
-    self.lbTitle.textColor = [cs getTopBgViewFontColor:cs.type];
+//    self.lbTitle.textColor = [cs getTopBgViewFontColor:cs.type];
     
     if (self.tabs != nil){
         for (int i = 0; i < [self.tabs count]; i++) {
@@ -67,12 +72,11 @@
     UIFont* font = [UIFont systemFontOfSize:16.0];
     CGSize size = [tabTitle sizeWithFont:font constrainedToSize:CGSizeMake(1000, 100)];
     
-    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, size.width + 40, 40)];
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 40, 40)];
     self.label.font = [UIFont systemFontOfSize:16.0];
     self.label.text = tabTitle;
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.textColor = [UIColor blackColor];
-    self.label.backgroundColor = [UIColor redColor];
     // self.label.textColor = [cs getScrollViewTitleColor:cs.type];
     return self.label;
 }
@@ -84,7 +88,9 @@
     if (index == 0) {
         vc = [[SocialController alloc] init];
     }else {
-        vc = [[WebviewController alloc] init];
+        vc = [[SocialWebController alloc] init];
+        SocialWebController *viewController = (SocialWebController*)vc;
+        viewController.viewIndex = index;
     }
     return vc;
 }

@@ -109,10 +109,6 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
-<<<<<<< HEAD
-//    ITSApplication* poApp = [ITSApplication get];
-
-=======
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     
@@ -124,8 +120,7 @@
 
     [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
     
-    [self delayToHome];
->>>>>>> origin/master
+//    [self delayToHome];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
