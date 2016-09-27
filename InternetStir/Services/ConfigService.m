@@ -51,7 +51,8 @@ ConfigService* configInstance = nil;
 }
 
 -(NSString*) getChannel{
-    return self.currentChannel;
+    //return self.currentChannel;
+    return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";
 }
 
 -(NSString*) getListArticleWidthHeight{

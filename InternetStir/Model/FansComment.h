@@ -11,15 +11,28 @@
 
 #import <Foundation/Foundation.h>
 
+#define FANS_COMMENT_ITEM_UUID @"uuid"
+#define FANS_COMMENT_ITEM_NAME @"u_name"
+#define FANS_COMMENT_ITEM_AVATAR @"u_avatar"
+#define FANS_COMMENT_ITEM_FORUMS_ID @"fid"
+#define FANS_COMMENT_ITEM_CID @"cid"
+#define FANS_COMMENT_ITEM_COMMENT @"comment"
+#define FANS_COMMENT_ITEM_PTS @"pts"
+#define FANS_COMMENT_ITEM_UTS @"uts"
+
 @interface FansComment : NSObject
 
-@property NSString* fcId;
+@property NSString* uuid;
 @property NSString* name;
 @property NSString* avator;
+@property NSString* fid;
+@property NSString* cid;
 @property NSString* comment;
-@property long releaseTime;
-@property NSString* pts;
-@property NSString* uts;
+@property UInt64 pts;
+@property UInt64 uts;
+
+
+-(FansComment*) initWithDictionary: (NSDictionary*) dic;
 
 @end
 

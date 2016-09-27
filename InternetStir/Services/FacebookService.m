@@ -45,6 +45,8 @@
                                      [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                                      nil];
                 
+                [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1];
+                
                 SettingService* ss = [SettingService get];
                 [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
                 if ([self.delegate respondsToSelector:@selector(passMessage)]) {
@@ -57,6 +59,14 @@
 -(void) facebookLogOut{
     
     [self.login logOut];
+}
+
+-(NSString*) getToken{
+    FBSDKAccessToken* fbToken = [FBSDKAccessToken currentAccessToken];
+    if (fbToken != nil){
+        return fbToken.tokenString;
+    }
+    return @"";
 }
 
 -(void) facebookLogin:(PoPoFBLoginCallback) cb viewController:(UIViewController *)view{

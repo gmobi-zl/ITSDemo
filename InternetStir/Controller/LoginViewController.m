@@ -163,6 +163,8 @@ didDisconnectWithUser:(GIDGoogleUser *)user
                          [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     
+    [itsApp.remoteSvr doLogin:facebook.email uid:facebook.uId accessToken:[facebook getToken] type:1];
+    
     SettingService* ss = [SettingService get];
     [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
     [self.navigationController popViewControllerAnimated:YES];

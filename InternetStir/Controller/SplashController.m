@@ -64,8 +64,8 @@
 -(void) pushNextVc{
 
     ITSApplication* itsApp = [ITSApplication get];
-    CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isLogin == YES) {
+    //CBUserService* us = itsApp.cbUserSvr;
+    if (itsApp.isFirstOpen == NO) {
         TabBarController *tabBar = [[TabBarController alloc] init];
         tabBar.selectedIndex = 1;
         [self.navigationController pushViewController:tabBar animated:YES];
@@ -112,6 +112,8 @@
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     
+    [itsApp.remoteSvr doConnect];
+    
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
                          @"launch.view",@"EventCategory",
                          @"tomotoc001",@"EventAction",
@@ -120,7 +122,6 @@
 
     [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
     
-//    [self delayToHome];
 }
 
 -(void) viewWillAppear:(BOOL)animated{

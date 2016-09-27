@@ -244,6 +244,32 @@
     return file;
 }
 
+
+-(void) doDelete: (NSString*) url
+     reqHeader: (NSMutableDictionary*) header
+       reqBody: (NSString*) body
+      callback: (MMHttpSessionCallback) cb{
+    
+    mmStatus = MM_HTTP_STATE_WAITING;
+    
+    [self initSession];
+    reqUrl = [NSURL URLWithString:url];
+    NSURLRequest* reqReq = [NSURLRequest requestWithURL:reqUrl];
+    
+    request = [reqReq mutableCopy];
+    if (header != nil){
+        [self setRequestHeader:header];
+    }
+    if (body != nil)
+        request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+    
+    request.HTTPMethod = @"DELETE";
+    
+    self.mmCallbackHandler = cb;
+    
+    [self execute];
+}
+
 -(void) URLSession:(NSURLSession*) session
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
       didWriteData:(int64_t)bytesWritten

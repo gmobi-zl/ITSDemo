@@ -40,7 +40,8 @@
         chParams = [[NSString alloc] initWithFormat:@"&channel=%@", ch];
     }
     
-    url = [[NSString alloc] initWithFormat:@"%@%@?group=%@%@" , [self getBaseUrl], CONNECT_PATH, [self getGroup], chParams];
+    //url = [[NSString alloc] initWithFormat:@"%@%@?group=%@%@" , [self getBaseUrl], CONNECT_PATH, [self getGroup], chParams];
+    url = [[NSString alloc] initWithFormat:@"%@%@" , [self getBaseUrl], CONNECT_PATH];
 
     return url;
 }
@@ -65,10 +66,19 @@
                             time: (NSString*) utc_time{
     NSString* url;
     
-    DataService* dataSvr = [ITSApplication get].dataSvr;
-    NSString* param = [[NSString alloc] initWithFormat:AFTER_TEMPLATE_URL, cid, utc_time, FETCH_COUNT, dataSvr.did];
+    ConfigService* cs = [ConfigService get];
+    NSString* param = [[NSString alloc] initWithFormat:AFTER_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
     
-    url = [[NSString alloc] initWithFormat:@"%@%@" , [self getBaseUrl], param];
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
     
     return url;
 }
@@ -77,10 +87,19 @@
                             time: (NSString*) utc_time{
     NSString* url;
     
-    DataService* dataSvr = [ITSApplication get].dataSvr;
-    NSString* param = [[NSString alloc] initWithFormat:BEFORE_TEMPLATE_URL, cid, utc_time, FETCH_COUNT, dataSvr.did];
+    ConfigService* cs = [ConfigService get];
+    NSString* param = [[NSString alloc] initWithFormat:BEFORE_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
     
-    url = [[NSString alloc] initWithFormat:@"%@%@" , [self getBaseUrl], param];
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
     
     return url;
 }
@@ -113,6 +132,50 @@
     
     return url;
 }
+
+
+-(NSString*) getLatesCelebCommentListUrl: (NSString*) utc_time{
+    NSString* url;
+    
+    ConfigService* cs = [ConfigService get];
+    NSString* param = [[NSString alloc] initWithFormat:AFTER_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
+    
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
+    
+    return url;
+}
+
+-(NSString*) getEarlyCelebCommentListUrl: (NSString*) utc_time{
+    NSString* url;
+    
+    ConfigService* cs = [ConfigService get];
+    NSString* param = [[NSString alloc] initWithFormat:BEFORE_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
+    
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
+    
+    return url;
+}
+
+
+
 
 -(NSMutableDictionary*) getDeviceInfo{
     NSMutableDictionary* devInfo = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -175,6 +238,11 @@
     NSMutableDictionary* dev = [NSMutableDictionary dictionaryWithCapacity:1];
     NSMutableDictionary* info = [self getDeviceInfo];
     [dev setValue:info forKey:@"device"];
+    
+    ConfigService* conf = [ConfigService get];
+    NSString* ch = [conf getChannel];
+    if (ch != nil)
+        [dev setValue:ch forKey:@"channel"];
     
     NSError *error;
     NSData* devInfoD = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:&error];
@@ -537,4 +605,159 @@
         }
     }];
 }
+
+-(void) doLogin: (NSString*) email
+            uid: (NSString*) uid
+    accessToken: (NSString*) accessToken
+           type: (int) type{
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/login",[self getBaseUrl]];
+    MMLogDebug(@"Login URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    [param setObject:[[NSNumber alloc] initWithInt:type] forKey:@"type"];
+    if (email != nil)
+        [param setObject:email forKey:@"email"];
+    if (uid != nil)
+        [param setObject:uid forKey:@"uid"];
+    [param setObject:accessToken forKey:@"access_token"];
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"Login RSP: %@",dataDic);
+         }
+     }];
+}
+
+-(void) doLogout {
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/logout",[self getBaseUrl]];
+    MMLogDebug(@"Logout URL: %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doDelete:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"Logout RSP: %@",dataDic);
+         }
+     }];
+}
+
+-(void) getCelebCommentListData: (NSString*) utc_time
+                       timeType: (int) type{
+    
+    NSString* dataTime = utc_time;
+    if (dataTime == nil)
+        dataTime = [MMSystemHelper getTimeStampSeconds];
+    
+    NSString* url = nil;
+    if (type == NEWS_REFRESH_TYPE_BEFORE)
+        url = [self getEarlyCelebCommentListUrl:dataTime];
+    else
+        url = [self getLatesCelebCommentListUrl:dataTime];
+    
+    MMLogDebug(@"Celeb Comment data refresh url = %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doGet:url reqHeader:nil callback:^(int status, int code, NSDictionary *resultData) {
+        MMLogDebug(@"Celeb Comment Data rsp: status = %d , code = %d", status, code);
+        
+        if (code == 200){
+            NSData* data = [resultData objectForKey:@"data"];
+            NSError* err;
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            
+            MMLogDebug(@"Celeb Comment Data rsp data: %@", dataStr);
+            
+            BOOL isClear = NO;
+            if (utc_time == nil && type == NEWS_REFRESH_TYPE_AFTER)
+                isClear = YES;
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear type:type];
+            
+            NSArray* commentArr = [dataDic objectForKey:@"contexts"];
+            
+            [itsApp.dataSvr setRefreshCelebComments:commentArr isClearData:isClear type:type];
+            
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+        } else {
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_ERROR];
+        }
+    }];
+}
+
+-(void) replayCelebComment: (NSString*) fid
+                   comment: (NSString*) comment {
+    
+    if (fid == nil || comment == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments",[self getBaseUrl], [cs getChannel], fid];
+    MMLogDebug(@"replayCelebComment URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (comment != nil)
+        [param setObject:comment forKey:@"comment"];
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"replayCelebComment RSP: %@",dataDic);
+         }
+     }];
+}
+
+
+-(void) replayFansComment: (NSString*) fid
+          replayCommendId: (NSString*) replayCommendId
+                  comment: (NSString*) comment {
+    
+    if (fid == nil || replayCommendId == nil || comment == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments/%@",[self getBaseUrl], [cs getChannel], fid, replayCommendId];
+    MMLogDebug(@"replayFansComment URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (comment != nil)
+        [param setObject:comment forKey:@"comment"];
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"replayFansComment RSP: %@",dataDic);
+         }
+     }];
+}
+
+
 @end

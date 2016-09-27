@@ -135,7 +135,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-
+    
     self.userEmailLabel.text = us.user.email;
     self.userNameLabel.text = us.user.userName;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
@@ -202,6 +202,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         SettingService* ss = [SettingService get];
         [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
         [us.user resetData];
+        
+        [itsApp.remoteSvr doLogout];
 
         self.userNameLabel.text = @"登入";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";

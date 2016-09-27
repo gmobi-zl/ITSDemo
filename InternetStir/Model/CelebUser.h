@@ -25,6 +25,8 @@
 @property (nonatomic, copy) NSString *uId;
 @property (nonatomic, copy) NSString *email;
 
+@property (nonatomic, copy) NSString *session;
+
 //@property (nonatomic, copy) NSString *openid;//第三方唯一标示
 //@property (nonatomic, copy) NSString *email;
 //@property (nonatomic, copy) NSString *gender;//性别

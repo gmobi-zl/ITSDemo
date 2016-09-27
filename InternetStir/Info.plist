@@ -14,10 +14,8 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CelebrityBaseUrl</key>
-	<string>http://test.poponews.net/</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -40,7 +38,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
+	<key>CelebrityBaseUrl</key>
+	<string>http://106.185.48.211:8080/</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -60,10 +60,19 @@
 			</dict>
 		</array>
 	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+  		<dict>
+  		<key>CFBundleURLSchemes</key>
+  			<array>
+    		<string>fb318717128488813</string>
+  			</array>
+  		</dict>
+	</array>
 	<key>FacebookAppID</key>
-	<string>101049733683003</string>
+	<string>318717128488813</string>
 	<key>FacebookDisplayName</key>
-	<string>celebtw001</string>
+	<string>Jaco­b­-­爾­賢­就­是愛生活</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
