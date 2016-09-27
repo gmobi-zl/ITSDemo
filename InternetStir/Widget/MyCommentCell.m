@@ -117,8 +117,6 @@
         self.readBtn.layer.masksToBounds = YES;
         self.readBtn.layer.cornerRadius = 5;
         [self.contentView addSubview:self.readBtn];
-        
-        
     }
     return self;
 }

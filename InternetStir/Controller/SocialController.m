@@ -16,12 +16,14 @@
 #import "AppStyleConfiguration.h"
 #import "ContentViewCell.h"
 #import "DetailContentController.h"
+#import "HomeViewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 NSString *const ContentCellIdentifier = @"ContentViewCell";
 
-@interface SocialController ()
+@interface SocialController () 
+
 
 @end
 
@@ -30,81 +32,43 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
-                    @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
-                    @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
-                    @"https://www.youtube.com/watch?v=veBjTuLDzF0",
-                    @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
+    self.urlArr = @[@"https://www.facebook.com/Jacob.ek07/",
+                    @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
+                    @"https://www.instagram.com/jacob.ek07/"];
+
 
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"社群";
     self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
     
-    CGFloat space = (screenW - 5*60)/(5 + 1);
+    NSArray *title = @[@"推薦",@"Facebook",@"You Tube",@"Instagram"];
+
+    CGFloat space = (screenW - title.count*80)/(title.count + 1);
     
-    self.bgView = [[UIView alloc] init];
-    self.bgView.frame = CGRectMake(0, 65, screenW, 45);
-    self.bgView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.bgView];
-    
+
 //    [self configUI];
-    NSArray *title = @[@"推薦",@"FB",@"Twitter",@"IG",@"Blog"];
 
-    for (NSInteger i = 0; i < 5; i++) {
-        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.btn.frame = CGRectMake(space + i * (60 + space), 20, 60, 40);
-        [self.btn setTitle:[title objectAtIndex:i] forState:UIControlStateNormal];
-        [self.btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        self.btn.backgroundColor = [UIColor whiteColor];
-        self.btn.tag = i + 100;
-        if (i == 0) {
-            self.btn.selected  = YES;
-        }
-        [self.view addSubview:self.btn];
-    }
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 57, screenW/5,3)];
-    self.line.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
-    [self.view addSubview:self.line];
-
-    UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(0, 57, screenW, 3);
-    view.backgroundColor = [UIColor grayColor];
-    view.alpha = 0.3;
-    [self.view addSubview:view];
-    
-    NSURL *url = [NSURL URLWithString:@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts"];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    
-    self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.frame = CGRectMake(0, 60, screenW, screenH - 60);
-    self.scrollView.delegate = self;
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.bounces = NO;
-    self.scrollView.contentSize = CGSizeMake(screenW * 5, screenH - 60);
-    [self.view addSubview:self.scrollView];
+//    for (NSInteger i = 0; i < title.count; i++) {
+//        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        self.btn.frame = CGRectMake(space + i * (80 + space), 20, 80, 40);
+//        [self.btn setTitle:[title objectAtIndex:i] forState:UIControlStateNormal];
+//        [self.btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        self.btn.backgroundColor = [UIColor whiteColor];
+//        self.btn.tag = i + 100;
+//        if (i == 0) {
+//            self.btn.selected  = YES;
+//        }
+//        [self.view addSubview:self.btn];
+//    }
     
     self.tableView = [[UITableView alloc] init];
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH - 60 - 49);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
-    
-    for (NSInteger i = 0; i < 4; i++) {
-        self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, screenW, screenH - 49 - 60)];
-        self.webView.backgroundColor = [UIColor whiteColor];
-        self.webView.navigationDelegate = self;
-        self.webView.frame = CGRectMake(screenW + screenW * i, 0, screenW, screenH - 60 - 49);
-        [self.scrollView addSubview:self.webView];
-        NSURL *url = [NSURL URLWithString:[self.dataArr objectAtIndex:i]];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    }
-    
-//    [self creatActivityIndicat];
-
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
@@ -132,20 +96,20 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
-- (void)creatActivityIndicat{
-
-    self.backView = [[UIView alloc] init];
-    self.backView.frame = CGRectMake(0, 45 + 64, screenW,screenH - 45 - 64);
-    self.backView.backgroundColor = [UIColor blackColor];
-    self.backView.alpha = 0.5;
-    self.backView.hidden = YES;
-    [self.view addSubview:self.backView];
-    
-    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.testActivityIndicato.frame = CGRectMake(0, 150+64, screenW, 50);
-    [self.backView addSubview:self.testActivityIndicato];
-
-}
+//- (void)creatActivityIndicat{
+//
+//    self.backView = [[UIView alloc] init];
+//    self.backView.frame = CGRectMake(0, 45 + 64, screenW,screenH - 45 - 64);
+//    self.backView.backgroundColor = [UIColor blackColor];
+//    self.backView.alpha = 0.5;
+//    self.backView.hidden = YES;
+//    [self.view addSubview:self.backView];
+//    
+//    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//    self.testActivityIndicato.frame = CGRectMake(0, 150+64, screenW, 50);
+//    [self.backView addSubview:self.testActivityIndicato];
+//
+//}
 //- (void)configUI {
 //    
 //    ConfigService *cs = [ConfigService get];
@@ -178,110 +142,107 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 //        }
 //    }
 //}
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+//- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+//
+//    self.backView.hidden = NO;
+//    [self.testActivityIndicato startAnimating];
+//}
+//- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+//    [self.backView setHidden:YES];
+//    [self.testActivityIndicato stopAnimating];
+//    
+//}
+//- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+//
+//}
 
-    self.backView.hidden = NO;
-    [self.testActivityIndicato startAnimating];
-}
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    [self.backView setHidden:YES];
-    [self.testActivityIndicato stopAnimating];
-    
-}
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-
-}
-- (void)dealloc {
-    
-    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollVie{
-    
-    if ([scrollVie isKindOfClass:[UITableView class]]) {
-        return;
-    }
-    CGPoint curPoint = scrollVie.contentOffset;
-    NSInteger current = curPoint.x/scrollVie.frame.size.width;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.line.frame = CGRectMake(screenW/5 * current, 57, screenW/5,3);
-    }];
-}
-
-- (void)btnClick:(UIButton *)btn{
-    
-//    [self configUI];
-//    [self creatActivityIndicat];
-//    UIButton *button = (UIButton *)[self.view viewWithTag:100];
-//    if (btn.tag != 0) {
-//        button.selected = NO;
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollVie{
+//    
+//    if ([scrollVie isKindOfClass:[UITableView class]]) {
+//        return;
 //    }
-//    if (self.button == nil) {
-//        btn.selected = YES;
-//        self.button = btn;
-//    }else if (self.button != nil && self.button == btn){
-//        btn.selected = YES;
-//    }else if (self.button != btn && self.button != nil){
-//        self.button.selected = NO;
-//        btn.selected = YES;
-//        self.button = btn;
-//    }
-    
-    switch (btn.tag) {
-        case 100:
-        {
-            self.backView.hidden = YES;
-            [self.testActivityIndicato stopAnimating];
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(0, 57, screenW/5,3);
-                self.scrollView.contentOffset = CGPointMake(0, 0);
-            }];
-        }
-            break;
-        case 101:
-        {
-            self.backView.hidden = NO;
-            [self.testActivityIndicato startAnimating];
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW/5, 57, screenW/5,3);
-                self.scrollView.contentOffset = CGPointMake(screenW, 0);
-            }];
-        }
-            break;
-        case 102:
-        {
-            self.backView.hidden = NO;
-            [self.testActivityIndicato startAnimating];
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 2/5, 57, screenW/5,3);
-                self.scrollView.contentOffset = CGPointMake(2 * screenW, 0);
-            }];
+//    CGPoint curPoint = scrollVie.contentOffset;
+//    NSInteger current = curPoint.x/scrollVie.frame.size.width;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.line.frame = CGRectMake(screenW/4 * current, 57, screenW/4,3);
+//    }];
+//}
 
-        }
-            break;
-        case 103:
-        {
-            self.backView.hidden = NO;
-            [self.testActivityIndicato startAnimating];
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 3/5, 57, screenW/5,3);
-                self.scrollView.contentOffset = CGPointMake(3 * screenW, 0);
-            }];
-        }
-            break;
-        case 104:
-        {
-            self.backView.hidden = NO;
-            [self.testActivityIndicato startAnimating];
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW * 4/5, 57, screenW/5,3);
-                self.scrollView.contentOffset = CGPointMake(4 * screenW, 0);
-            }];
-        }
-            break;
-        default:
-            break;
-    }
-}
+//- (void)btnClick:(UIButton *)btn{
+//    
+////    [self configUI];
+////    [self creatActivityIndicat];
+////    UIButton *button = (UIButton *)[self.view viewWithTag:100];
+////    if (btn.tag != 0) {
+////        button.selected = NO;
+////    }
+////    if (self.button == nil) {
+////        btn.selected = YES;
+////        self.button = btn;
+////    }else if (self.button != nil && self.button == btn){
+////        btn.selected = YES;
+////    }else if (self.button != btn && self.button != nil){
+////        self.button.selected = NO;
+////        btn.selected = YES;
+////        self.button = btn;
+////    }
+//    
+//    switch (btn.tag) {
+//        case 100:
+//        {
+//            self.backView.hidden = YES;
+//            [self.testActivityIndicato stopAnimating];
+//            [UIView animateWithDuration:0.1 animations:^{
+//                self.line.frame = CGRectMake(0, 57, screenW/4,3);
+//                self.scrollView.contentOffset = CGPointMake(0, 0);
+//            }];
+//        }
+//            break;
+//        case 101:
+//        {
+//            self.backView.hidden = NO;
+//            [self.testActivityIndicato startAnimating];
+//            [UIView animateWithDuration:0.1 animations:^{
+//                self.line.frame = CGRectMake(screenW/4, 57, screenW/4,3);
+//                self.scrollView.contentOffset = CGPointMake(screenW, 0);
+//            }];
+//        }
+//            break;
+//        case 102:
+//        {
+//            self.backView.hidden = NO;
+//            [self.testActivityIndicato startAnimating];
+//            [UIView animateWithDuration:0.1 animations:^{
+//                self.line.frame = CGRectMake(screenW * 2/4, 57, screenW/4,3);
+//                self.scrollView.contentOffset = CGPointMake(2 * screenW, 0);
+//            }];
+//
+//        }
+//            break;
+//        case 103:
+//        {
+//            self.backView.hidden = NO;
+//            [self.testActivityIndicato startAnimating];
+//            [UIView animateWithDuration:0.1 animations:^{
+//                self.line.frame = CGRectMake(screenW * 3/4, 57, screenW/4,3);
+//                self.scrollView.contentOffset = CGPointMake(3 * screenW, 0);
+//            }];
+//        }
+//            break;
+//        case 104:
+//        {
+//            self.backView.hidden = NO;
+//            [self.testActivityIndicato startAnimating];
+//            [UIView animateWithDuration:0.1 animations:^{
+//                self.line.frame = CGRectMake(screenW * 4/4, 57, screenW/4,3);
+//                self.scrollView.contentOffset = CGPointMake(4 * screenW, 0);
+//            }];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//}
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
@@ -296,7 +257,6 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 //    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
 //    self.navigationItem.leftBarButtonItem = left;
     self.navigationController.navigationBar.hidden = YES;
-    
 }
 - (void)pushMenu{
 
@@ -304,6 +264,10 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     menu.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:menu animated:YES];
 }
+
+
+
+//
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

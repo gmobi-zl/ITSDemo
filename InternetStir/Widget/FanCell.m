@@ -36,7 +36,7 @@
         
         self.line = [[UILabel alloc] init];
         self.line.frame = CGRectMake(self.nameLabel.frame.origin.x, 61, screenW - self.nameLabel.frame.origin.x - FAN_ICON_LEFT_PADDING, 1);
-        self.line.backgroundColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
     }
     return self;

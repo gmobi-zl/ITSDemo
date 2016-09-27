@@ -14,4 +14,7 @@
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) int type;
+@property (nonatomic, copy) NSString *photoStr;
 @end

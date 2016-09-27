@@ -13,4 +13,5 @@
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UIImageView *photo;
 @property (nonatomic, strong) UILabel *line;
+@property (nonatomic, strong) UISwitch *switchView;
 @end

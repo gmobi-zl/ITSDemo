@@ -60,8 +60,9 @@
         
         self.line = [[UIView alloc] init];
         self.line.frame = CGRectMake(0, 43, screenW, 1);
-        self.line.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];//[UIColor lightGrayColor];
-        self.line.alpha = 0.5;
+//        self.line.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];//[UIColor lightGrayColor];
+//        self.line.alpha = 0.5;
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
     }
     return self;

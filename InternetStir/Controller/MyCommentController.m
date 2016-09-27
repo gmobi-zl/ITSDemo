@@ -25,6 +25,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 @implementation MyCommentController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.title = @"留言追蹤";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -53,6 +54,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell* cell = nil;
     cell = [tableView dequeueReusableCellWithIdentifier:MyCommentTableViewCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
@@ -77,10 +79,11 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
+       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

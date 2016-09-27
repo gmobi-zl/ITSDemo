@@ -25,7 +25,7 @@
 }
 - (void)creatTabBarController{
 
-    NSArray *vcName = @[@"SocialController",@"HomeViewController",@"MenuViewController"];
+    NSArray *vcName = @[@"HomePageController",@"HomeViewController",@"MenuViewController"];
 //    NSString* newsTitle = @"留言";//NSLocalizedString(@"test", nil);
 //    NSString* disTitle = @"内容";
 //    NSString* meTitle = @"社群";

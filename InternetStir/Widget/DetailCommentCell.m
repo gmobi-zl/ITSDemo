@@ -53,8 +53,7 @@
         [self.contentView addSubview:self.replyBackgroundView];
         
         self.line = [[UILabel alloc] init];
-        self.line.backgroundColor = [UIColor grayColor];
-        self.line.alpha = 0.4;
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
         
         self.bgButton = [UIButton buttonWithType:UIButtonTypeCustom];

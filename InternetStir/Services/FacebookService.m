@@ -16,14 +16,13 @@
 
 -(void) facebookUserInfo{
     if ([FBSDKAccessToken currentAccessToken]){
-        ITSApplication* poApp = [ITSApplication get];
-        //        DataService* ds = poApp.dataSvr;
         
-        //@{@"fields": @"id,name,first_name,age_range,link,gender,locale,picture,timezone,update_time,verified"}
+        ITSApplication* itsApp = [ITSApplication get];
+        CBUserService* us = itsApp.cbUserSvr;
+        
         NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
         [params setValue:@"id,name,first_name,age_range,link,gender,locale,picture,timezone,updated_time,verified,email" forKey:@"fields"];
         
-        //@{@"fields": }   @"id,name,first_name,age_range,link,gender,locale,picture,timezone,update_time,verified"
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:params] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             
             if (error == nil){
@@ -32,10 +31,27 @@
                 self.uId = [result objectForKey:@"id"];
                 self.icon = [[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
                 self.email = [result objectForKey:@"email"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"getFacebookUserInfo" object:self];
+                
+                us.user.userName = self.userName;
+                us.user.avatar = self.icon;
+                us.user.email = self.email;
+                us.user.isLogin = YES;
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     @"facebook",@"type",
+                                     self.uId,@"openid",
+                                     self.userName ,@"name",
+                                     self.icon,@"avatar",
+                                     self.email,@"email",
+                                     [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
+                                     nil];
+                
+                [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1];
                 
                 SettingService* ss = [SettingService get];
-                [ss setDictoryValue:POPO_FB_USER_INFO data:result];
+                [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+                if ([self.delegate respondsToSelector:@selector(passMessage)]) {
+                    [self.delegate passMessage];
+                }
             }
         }];
     }

@@ -50,6 +50,7 @@
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
+        self.replyLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
         self.replyLabel.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:self.replyLabel];
         
@@ -59,11 +60,11 @@
         [self.button setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.button];
         
-        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.btn setTitle:@"繼續閱讀" forState:UIControlStateNormal];
-        [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.btn];
+//        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [self.btn setTitle:@"繼續閱讀" forState:UIControlStateNormal];
+//        [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
+//        [self.contentView addSubview:self.btn];
         
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
@@ -84,8 +85,7 @@
         [self.contentView addSubview:self.shareBtn];
         
         self.line = [[UILabel alloc] init];
-        self.line.backgroundColor = [UIColor grayColor];
-        self.line.alpha = 0.8;
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
         
         self.like = [[UIImageView alloc] init];
@@ -99,7 +99,7 @@
         
         ITSApplication* itsApp = [ITSApplication get];
         CBUserService* us = itsApp.cbUserSvr;
-        if (us.user.isCBADM == NO) {
+        if (us.user.isCBADM == YES) {
             self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
             [self.contentView addSubview:self.delBtn];
@@ -152,15 +152,15 @@
     self.nameLabel.text = comment.name;
     self.photo.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",comment.pictures]];
     
-    
     NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.shuoshuoText];
     
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
     NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
-    
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+
     NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
-    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_REPLY_COLOR] range:replyRange];
+    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
     [self.commentLabel setAttributedText:noteStr] ;
     [self.commentLabel sizeToFit];
 
@@ -168,17 +168,18 @@
     for (NSInteger i = 0; i < comment.replys.count; i++) {
         ReplyItem *item = [comment.replys objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
-        replyLabel.font = [UIFont systemFontOfSize:14];
+        replyLabel.font = [UIFont systemFontOfSize:16];
         replyLabel.numberOfLines = 0;
         NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.comment];
         
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
         NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
         
         NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-        [replyLabel setAttributedText:noteStr] ;
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
+        [replyLabel setAttributedText:noteStr];
         [replyLabel sizeToFit];
         
         self.replyLabel = replyLabel;

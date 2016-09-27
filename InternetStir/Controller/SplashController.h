@@ -14,13 +14,12 @@
 //#import "GAIDictionaryBuilder.h"
 //#import "GAITrackedViewController.h"
 #import "LoginView.h"
-
+#import "FacebookService.h"
 //@interface SplashController : GAITrackedViewController
-@interface SplashController : UIViewController
+@interface SplashController : UIViewController<FacebookDelegate>
 
 @property (nonatomic, strong) UIImageView *bgImage;
 
-@property (nonatomic, strong) UIVisualEffectView *effectView;
 @property (nonatomic, strong) LoginView *loginView;
 @property (assign) BOOL isWaitMaxTime;
 @property (assign) BOOL isConnected;
