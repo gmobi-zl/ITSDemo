@@ -28,14 +28,20 @@
         self.title.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.title];
         
-//        self.photo = [[UIImageView alloc] init];
-//        self.photo.frame = CGRectMake(screenW - 60, 5, 40, 40);
-//        [self.contentView addSubview:self.photo];
+        self.photo = [[UIImageView alloc] init];
+        self.photo.frame = CGRectMake(screenW - 40, 20, 10, 15);
+        self.photo.hidden = YES;
+        [self.contentView addSubview:self.photo];
+        
+        self.switchView = [[UISwitch alloc] init];
+        self.switchView.frame = CGRectMake(screenW - 70, 10, 0, 0);
+        self.switchView.on = NO;
+        self.switchView.hidden = YES;
+        [self.contentView addSubview:self.switchView];
         
         self.line = [[UILabel alloc] init];
         self.line.frame = CGRectMake(75, 49, screenW - 75, 1);
-        self.line.backgroundColor = [UIColor grayColor];
-        self.line.alpha = 0.8;
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
     }
     return self;

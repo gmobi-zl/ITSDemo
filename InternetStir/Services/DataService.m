@@ -152,25 +152,25 @@
     WriteArticleMenuItem* Facebook = [WriteArticleMenuItem alloc];
     Facebook.iconName = @"Fb";
     Facebook.actionName = @"Facebook";
-    Facebook.photo = @"switch_off";
+//    Facebook.photo = @"switch_off";
     [self.writeArticleMenuList addObject:Facebook];
     
     WriteArticleMenuItem* Instagram = [WriteArticleMenuItem alloc];
     Instagram.iconName = @"ig";
     Instagram.actionName = @"Instagram";
-    Instagram.photo = @"switch_off";
+//    Instagram.photo = @"switch_off";
     [self.writeArticleMenuList addObject:Instagram];
     
     WriteArticleMenuItem* twitter = [WriteArticleMenuItem alloc];
     twitter.iconName = @"twitter";
     twitter.actionName = @"Twitter";
-    twitter.photo = @"switch_off";
+//    twitter.photo = @"switch_off";
     [self.writeArticleMenuList addObject:twitter];
     
     WriteArticleMenuItem* weibo = [WriteArticleMenuItem alloc];
     weibo.iconName = @"weibo";
     weibo.actionName = @"新浪微博";
-    weibo.photo = @"switch_off";
+//    weibo.photo = @"switch_off";
     [self.writeArticleMenuList addObject:weibo];
 }
 -(NSMutableArray*) getLeftMenuList{

@@ -114,153 +114,38 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
     }
     
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
-    self.effectView.hidden = YES;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
-    
-    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(20, 0, screenW - 40, 190)];
+   
+    NSString *str = @"Content with Facebook";
+    CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
+    CGFloat width = size.width + 30 + 10 + 60;
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(20, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
-    [self.loginView.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.effectView addSubview:self.loginView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFacebookUserInfo) name:@"getFacebookUserInfo" object:[ITSApplication get].fbSvr];
-
+    [self.loginView.effectView addSubview:self.loginView];
 }
 - (void)clickBack{
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)loginFB {
-    
-    ITSApplication* poApp = [ITSApplication get];
-    FacebookService *faceBook = poApp.fbSvr;
-
-    [faceBook facebookLogin:^(int resultCode) {
-        if (resultCode == ITS_FB_LOGIN_SUCCESS) {
-            [faceBook facebookUserInfo];
-        } else {
-            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-            [al show];
-        }
-    } viewController:self];
-}
-- (void)getFacebookUserInfo{
+- (void)passMessage {
+    self.loginView.effectView.hidden = YES;
+    [self.tableView reloadData];
     
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    
-    FacebookService *facebook = itsApp.fbSvr;
-    us.user.userName = facebook.userName;
-    us.user.avatar = facebook.icon;
-    us.user.email = facebook.email;
-    us.user.isLogin = YES;
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         @"facebook",@"type",
-                         facebook.uId,@"openid",
-                         facebook.userName ,@"name",
-                         facebook.icon,@"avatar",
-                         facebook.email,@"email",
-                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
-                         nil];
-    
-    SettingService* ss = [SettingService get];
-    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
-    self.effectView.hidden = YES;
-    [self.tableView reloadData];
+
     self.userEmailLabel.text = us.user.email;
     self.userNameLabel.text = us.user.userName;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
 }
-
-- (void)cancelBtn {
-    self.effectView.hidden = YES;
-}
-- (void)pushLoginVc{
-    
-    LoginViewController *loginVc = [[LoginViewController alloc] init];
-    loginVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:loginVc animated:YES];
-}
-- (void)creatScrollView{
-    
-    self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.frame = CGRectMake(0, screenH/3 + 64 + 40, screenW, screenH - screenH/3 - 104);
-    self.scrollView.delegate = self;
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.bounces = NO;
-    
-    self.scrollView.contentSize = CGSizeMake(screenW * 3, screenH - screenH/3 - 104);
-    [self.view addSubview:self.scrollView];
-}
-- (void)creatButton{
-    
-    NSArray *titleArr = @[@"設定",@"加入網紅計畫",@"其他網紅"];
-    for(NSInteger i = 0;i < 3;i++)
-    {
-        self.but = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.but.frame = CGRectMake(screenW/3 * i , screenH/3 , screenW/3, 41);
-        [self.but setTitle:titleArr[i] forState:UIControlStateNormal];
-        self.but.tag = 100 + i;
-        if (i == 0) {
-            self.otherButton = self.but;
-            [self.but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        }else {
-            [self.but setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        }
-        self.but.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
-        [self.but addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.but];
-    }
-    //3 155 255
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, screenH/3 + 37, screenW/3,4)];
-    self.line.backgroundColor = [MMSystemHelper string2UIColor:NAV_BGCOLOR];
-    [self.view addSubview:self.line];
-}
-- (void)btnClick:(UIButton *)button{
-    
-    [self.otherButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.otherButton = button;
-    
-    switch (button.tag) {
-        case 100:
-        {
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(0, screenH/3 + 37, screenW/3, 4);
-            }completion:^(BOOL finished) {
-                SettingController *vc = [[SettingController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }];
-        }
-            break;
-        case 101:
-        {
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(screenW/3, screenH/3 + 37, screenW/3, 4);
-            } completion:^(BOOL finished) {
-                WebviewController *vc = [[WebviewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }];
-        }
-            break;
-        case 102:
-        {
-            [UIView animateWithDuration:0.1 animations:^{
-                self.line.frame = CGRectMake(2*screenW/3, screenH/3 + 37, screenW/3, 4);
-            }];
-        }
-            break;
-        default:
-            break;
-    }
-}
+//- (void)pushLoginVc{
+//    
+//    LoginViewController *loginVc = [[LoginViewController alloc] init];
+//    loginVc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:loginVc animated:YES];
+//}
 
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -393,36 +278,42 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
 
-    if (index == 0) {
-        SettingController *setVc = [[SettingController alloc] init];
-        setVc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:setVc animated:YES];
-        
-    }else if (index == 1){
-        if (us.user.isLogin == YES) {
-            FanController *fanVc = [[FanController alloc] init];
-            fanVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:fanVc animated:YES];
+    if (us.user.isLogin == NO) {
+        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 8) {
+            [self login];
         }
-    }else if (index == 2){
-        if (us.user.isLogin == YES) {
-            MyCommentController *Vc = [[MyCommentController alloc] init];
-            Vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:Vc animated:YES];
+    }else {
+        if (index == 0) {
+            SettingController *setVc = [[SettingController alloc] init];
+            setVc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:setVc animated:YES];
+            
+        }else if (index == 1){
+            if (us.user.isLogin == YES) {
+                FanController *fanVc = [[FanController alloc] init];
+                fanVc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:fanVc animated:YES];
+            }
+        }else if (index == 2){
+            if (us.user.isLogin == YES) {
+                MyCommentController *Vc = [[MyCommentController alloc] init];
+                Vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:Vc animated:YES];
+            }
+        }else if (index == 3){
+            
+        }else if (index == 4){
+            
+        }else if (index == 5){
+            
+            WebviewController *webVc = [[WebviewController alloc] init];
+            webVc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:webVc animated:YES];
+        }else if (index == 6){
+            
+        }else if (index == 8){
+            [self login];
         }
-    }else if (index == 3){
-    
-    }else if (index == 4){
-    
-    }else if (index == 5){
-    
-        WebviewController *webVc = [[WebviewController alloc] init];
-        webVc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:webVc animated:YES];
-    }else if (index == 6){
-    
-    }else if (index == 8){
-        [self login];
     }
 }
 - (void)login {
@@ -433,7 +324,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
         [al show];
     }else {
-        self.effectView.hidden = NO;
+        self.loginView.effectView.hidden = NO;
     }
 }
 - (void)didReceiveMemoryWarning {

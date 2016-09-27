@@ -17,6 +17,7 @@
 //#import "NewsGridItem.h"
 #import "UIImage+MultiFormat.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "AppStyleConfiguration.h"
 
 ConfigService* configInstance = nil;
 
@@ -541,12 +542,13 @@ ConfigService* configInstance = nil;
 //黄色视图
 -(UIColor*) getYellowViewColor:(int)mode{
     UIColor *color;
-    if (mode == MODE_DAY) {
-        color = [MMSystemHelper string2UIColor:COLOR_BG_RED];//[MMSystemHelper string2UIColor:COLOR_BG_YELLOW];
-    }
-    if (mode == MODE_NIGHT){
-        color = [MMSystemHelper string2UIColor:COLOR_BG_RED];//[MMSystemHelper string2UIColor:COLOR_BG_YELLOW_NIGHT];
-    }
+//    if (mode == MODE_DAY) {
+///[MMSystemHelper string2UIColor:COLOR_BG_YELLOW];
+//    }
+//    if (mode == MODE_NIGHT){
+//        color = [MMSystemHelper string2UIColor:COLOR_BG_RED];//[MMSystemHelper string2UIColor:COLOR_BG_YELLOW_NIGHT];
+//    }
+    color = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
     return color;
 }
 

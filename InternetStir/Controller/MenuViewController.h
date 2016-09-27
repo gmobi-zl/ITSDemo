@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginView.h"
+#import "FacebookService.h"
 
-@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate>
+@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate,FacebookDelegate>
 
 @property (nonatomic, strong) UIImageView *bgImage;
 @property (nonatomic, strong) UIImageView *icon;
@@ -27,5 +28,5 @@
 @property (nonatomic, strong) UIButton *loginOut;
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) LoginView *loginView;
-@property (nonatomic, strong) UIVisualEffectView *effectView;
+//@property (nonatomic, strong) UIVisualEffectView *effectView;
 @end

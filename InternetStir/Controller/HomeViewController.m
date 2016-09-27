@@ -21,6 +21,8 @@
 #import "DetailCommentController.h"
 #import "SettingService.h"
 #import "WriteArticleController.h"
+#import "ErrorController.h"
+#import "MJRefresh.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -43,71 +45,49 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[HomeCommentCell class] forCellReuseIdentifier:HomeCommentCellIdentifier];
-
     [self.view addSubview:self.tableView];
-    
-    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-    self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
-    self.effectView.hidden = YES;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
-    
-    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenW - 40, 190)];
+
+    NSString *str = @"Content with Facebook";
+    CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
+    CGFloat width = size.width + 30 + 10 + 60;
+
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.alpha = 0.5;
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
-    [self.loginView.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
-    [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.effectView addSubview:self.loginView];
+    [self.loginView.effectView addSubview:self.loginView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFacebookUserInfo) name:@"getFacebookUserInfo" object:[ITSApplication get].fbSvr];
+    [self setupRefresh];
 }
-- (void)loginFB {
+- (void)passMessage {
     
-    ITSApplication* poApp = [ITSApplication get];
-    FacebookService *faceBook = poApp.fbSvr;
-    self.effectView.hidden = YES;
-    [faceBook facebookLogin:^(int resultCode) {
-        if (resultCode == ITS_FB_LOGIN_SUCCESS) {
-            [faceBook facebookUserInfo];
-        } else {
-            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-            [al show];
-        }
-    } viewController:self];
-}
-- (void)cancelBtn {
-    self.effectView.hidden = YES;
-}
-- (void)getFacebookUserInfo{
-    
-    ITSApplication* itsApp = [ITSApplication get];
-    CBUserService* us = itsApp.cbUserSvr;
-    
-    FacebookService *facebook = itsApp.fbSvr;
-    us.user.userName = facebook.userName;
-    us.user.avatar = facebook.icon;
-    us.user.email = facebook.email;
-    us.user.isLogin = YES;
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         @"facebook",@"type",
-                         facebook.uId,@"openid",
-                         facebook.userName ,@"name",
-                         facebook.icon,@"avatar",
-                         facebook.email,@"email",
-                         [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
-                         nil];
-    
-    SettingService* ss = [SettingService get];
-    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
-    self.effectView.hidden = YES;
     [self.Btn setTitle:@"" forState:UIControlStateNormal];
     self.Btn.userInteractionEnabled = NO;
-//    [self.tableView reloadData];
-}
 
+}
+- (void)setupRefresh
+{
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+}
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+    
+}
+- (void)footerRereshing
+{
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -155,6 +135,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     return cell;
 }
 - (void)pushSheet:(UIButton *)button {
+    
+    self.index = button.tag;
      self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"置頂",@"編輯",@"刪除", nil];
     self.sheet.tag = 80;
     [self.sheet showInView:self.view];
@@ -166,7 +148,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         if (buttonIndex == 0) {
             
         }else if (buttonIndex == 1) {
-            
+            WriteArticleController *vc = [[WriteArticleController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.type = 2;
+            vc.photoStr = @"2.jpg";
+            [self.navigationController pushViewController:vc animated:YES];
+
         }else if (buttonIndex == 2) {
 
         }
@@ -179,6 +166,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [PickerImageTools ShareInstance].pickerImageCameraBlock = ^(NSData *pickerImage){
             WriteArticleController *vc = [[WriteArticleController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.type = 1;
             vc.data = pickerImage;
             [self.navigationController pushViewController:vc animated:YES];
         };
@@ -224,11 +212,17 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)pushComment:(UIButton*)button{
-    
-    CommentViewController *vc = [[CommentViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.index = button.tag;
-    [self.navigationController pushViewController:vc animated:YES];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == NO) {
+        self.loginView.effectView.hidden = NO;
+
+    }else {
+        CommentViewController *vc = [[CommentViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.index = button.tag;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 - (void)tapReply:(UIButton *)button{
     
@@ -292,16 +286,18 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        
        NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
-    ITSApplication* itsApp = [ITSApplication get];
-    CBUserService* us = itsApp.cbUserSvr;
-    
     self.Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.Btn.frame = CGRectMake(0, 20, 25, 23);
     [self.Btn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
     [self.Btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
-    if (us.user.isCBADM == NO) {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    
+    if (us.user.isCBADM == YES) {
         [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
     }else {
+        self.Btn.frame = CGRectMake(0, 20, 50, 30);
         if (us.user.isLogin == NO) {
             [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
         }else {
@@ -316,26 +312,25 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)login {
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isCBADM == NO) {
+    if (us.user.isCBADM == YES) {
         self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍張照",@"相機膠圈", nil];
         [self.photoSheet showInView:self.view];
 
     }else {
         if (us.user.isLogin == NO) {
-            self.effectView.hidden = NO;
+            self.loginView.effectView.hidden = NO;
         }
     }
+//
+//    ErrorController *error = [[ErrorController alloc] init];
+//    error.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:error animated:YES];
+//
 }
 - (void)push {
     
     TestController *test = [[TestController alloc] init];
     [self.navigationController pushViewController:test animated:YES];
-}
-- (void)pushMenu{
-    
-    MenuViewController *menu = [[MenuViewController alloc] init];
-    menu.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:menu animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

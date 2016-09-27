@@ -39,7 +39,7 @@
         
         self.replyLabel = [[UILabel alloc] init];
         self.replyLabel.numberOfLines = 0;
-        self.replyLabel.font = [UIFont systemFontOfSize:14];
+        self.replyLabel.font = [UIFont systemFontOfSize:16];
         [self.replyBackgroundView addSubview:self.replyLabel];
         
         self.replyIcon = [[UIImageView alloc] init];
@@ -52,8 +52,7 @@
         [self.contentView addSubview:self.replyBackgroundView];
         
         self.line = [[UILabel alloc] init];
-        self.line.backgroundColor = [UIColor grayColor];
-        self.line.alpha = 0.4;
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
         
         self.bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -120,11 +119,11 @@
         
         ReplyItem *item = [comment.replys objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
-        replyLabel.font = [UIFont systemFontOfSize:14];
+        replyLabel.font = [UIFont systemFontOfSize:16];
         replyLabel.numberOfLines = 0;        
         if (item.type == 1) {
             replyLabel.text = item.comment;
-            replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
+            replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
         }else{
             NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
             NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];

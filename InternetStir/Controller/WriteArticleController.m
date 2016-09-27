@@ -39,7 +39,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     
     UIButton* send = [UIButton buttonWithType:UIButtonTypeCustom];
     send.frame = CGRectMake(0, 20, 40, 20);
-    [send setTitle:@"發布" forState:UIControlStateNormal];
+//    [send setTitle:@"發布" forState:UIControlStateNormal];
     [send setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
     [send addTarget:self action:@selector(sendClick) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:send];
@@ -47,8 +47,15 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     
     self.photo = [[UIImageView alloc] init];
     self.photo.frame = CGRectMake(25, 90, 50, 50);
-    self.photo.image = [UIImage imageWithData:self.data];
-    self.photo.backgroundColor = [UIColor redColor];
+    if (self.type == 1) {
+        self.photo.image = [UIImage imageWithData:self.data];
+        [send setTitle:@"發布" forState:UIControlStateNormal];
+    }else {
+        if (self.photoStr != nil) {
+            self.photo.image = [UIImage imageNamed:self.photoStr];
+            [send setTitle:@"儲存" forState:UIControlStateNormal];
+        }
+    }
     [self.view addSubview:self.photo];
     
     self.textView = [[UITextView alloc] init];
@@ -108,10 +115,20 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         cell = [[WriteArticleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:WriteArticleCellIdentifier];
     }
     WriteArticleCell *tmpCell = (WriteArticleCell*)cell;
+    if (indexPath.row == 0 || indexPath.row == 1) {
+        tmpCell.photo.hidden = NO;
+    }else {
+        tmpCell.switchView.hidden = NO;
+        [tmpCell.switchView addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+        tmpCell.tag = indexPath.row;
+    }
     tmpCell.icon.image = [UIImage imageNamed:menuItem.iconName];
     tmpCell.title.text = menuItem.actionName;
     tmpCell.photo.image = [UIImage imageNamed:menuItem.photo];
     return tmpCell;
+}
+- (void)switchAction:(id)sender {
+    
 }
 #pragma mark TextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView {
@@ -134,7 +151,11 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)sendClick {
-
+    if (self.type == 1) {
+        // 发送
+    }else {
+        // 保存
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

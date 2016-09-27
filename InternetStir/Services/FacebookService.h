@@ -13,6 +13,9 @@
 #define ITS_FB_LOGIN_SUCCESS 0
 #define ITS_FB_LOGIN_ERROR 1
 #define ITS_FB_LOGIN_CANCEL 2
+@protocol FacebookDelegate <NSObject>
+- (void)passMessage;
+@end
 
 typedef void (^PoPoFBLoginCallback)(int resultCode);
 
@@ -21,6 +24,7 @@ typedef void (^PoPoFBLoginCallback)(int resultCode);
 @property (copy) NSString *icon;
 @property (copy) NSString *uId;
 @property (copy) NSString *email;
+@property (nonatomic, weak)id<FacebookDelegate>delegate;
 @property (nonatomic, strong) FBSDKLoginManager *login;
 -(void) facebookLogin:(PoPoFBLoginCallback) cb
        viewController:(UIViewController *)view;

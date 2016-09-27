@@ -52,7 +52,7 @@
         
         UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, UUIAV_MAIN_W, UUIAV_Btn_H+2*UUIAV_Edge_Vert)];
         
-        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(UUIAV_Edge_Hori, UUIAV_Edge_Vert,UUIAV_MAIN_W - 100, UUIAV_Btn_H)];
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(20, UUIAV_Edge_Vert,UUIAV_MAIN_W - 20 - 55, UUIAV_Btn_H)];
         textView.returnKeyType = UIReturnKeyDone;
         textView.enablesReturnKeyAutomatically = YES;
         textView.delegate = sharedView;
