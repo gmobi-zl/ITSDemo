@@ -26,4 +26,5 @@ typedef void (^PoPoFBLoginCallback)(int resultCode);
        viewController:(UIViewController *)view;
 -(void) facebookUserInfo;
 -(void) facebookLogOut;
+-(NSString*) getToken;
 @end

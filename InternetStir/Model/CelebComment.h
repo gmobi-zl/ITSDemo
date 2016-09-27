@@ -11,18 +11,31 @@
 
 #import <Foundation/Foundation.h>
 
+#define CB_COMMENT_ITEM_ID @"fid"
+#define CB_COMMENT_ITEM_CONTEXT @"context"
+#define CB_COMMENT_ITEM_ATTACHMENTS @"attachments"
+#define CB_COMMENT_ITEM_COMMENTS @"comments"
+#define CB_COMMENT_ITEM_PTS @"pts"
+#define CB_COMMENT_ITEM_UTS @"uts"
+
+
 @interface CelebComment : NSObject
 
 @property NSString* fid;
+@property NSString* context;
+@property NSArray* attachments;
+
 @property NSString* ccId;
 @property NSString* name;
 @property NSString* avator;
-@property NSString* context;
-@property NSString* image;
+
 @property NSArray* topFansComments;
-@property long releaseTime;
-@property NSString* pts;
-@property NSString* uts;
+@property NSArray* replayComments;
+
+@property UInt64 pts;
+@property UInt64 uts;
+
+-(CelebComment*) initWithDictionary: (NSDictionary*) dic;
 
 @end
 

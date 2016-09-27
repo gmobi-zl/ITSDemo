@@ -37,7 +37,7 @@ static NSString * const kClientID =
 
     [Fabric with:@[[Twitter sharedInstance]]];
     
-    [FIRApp configure];
+    //[FIRApp configure];
 
     return YES;
 }

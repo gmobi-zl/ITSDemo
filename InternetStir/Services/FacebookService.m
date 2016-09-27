@@ -45,6 +45,14 @@
     [self.login logOut];
 }
 
+-(NSString*) getToken{
+    FBSDKAccessToken* fbToken = [FBSDKAccessToken currentAccessToken];
+    if (fbToken != nil){
+        return fbToken.tokenString;
+    }
+    return @"";
+}
+
 -(void) facebookLogin:(PoPoFBLoginCallback) cb viewController:(UIViewController *)view{
     if ([FBSDKAccessToken currentAccessToken]){
         cb(ITS_FB_LOGIN_SUCCESS);

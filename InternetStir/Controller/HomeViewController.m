@@ -311,6 +311,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
     self.navigationItem.rightBarButtonItem = right;
+    
+    [itsApp.dataSvr refreshCelebComments:NEWS_REFRESH_TYPE_BEFORE];
 
 }
 - (void)login {

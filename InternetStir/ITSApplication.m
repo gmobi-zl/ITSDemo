@@ -54,7 +54,7 @@ NSString* customerLocal = nil;
 -(void) initServices {
     [MMLogger openLog:@"Celeb" logLevel:MM_LOG_I_LEVEL_DEBUG maxLogCount:5];
     
-    //self.remoteSvr = [RemoteService alloc];
+    self.remoteSvr = [RemoteService alloc];
     self.dataSvr = [DataService alloc];
     
     self.reportSvr = [ReportService alloc];
@@ -78,8 +78,11 @@ NSString* customerLocal = nil;
         customerLocal = [ss getStringValue:CUSTOMER_LOCAL_LANGUAGE_TYPE defValue:nil];
     }
     
-    if (customerLocal == nil)
+    if (customerLocal == nil){
         self.isFirstOpen = YES;
+        NSString* lang = [MMSystemHelper getLanguage];
+        [ss setStringValue:CUSTOMER_LOCAL_LANGUAGE_TYPE data:lang];
+    }
     
     self.baseUrl = [MMSystemHelper getAppInfoPlistData:@"CelebrityBaseUrl" defValue:@"http://test.poponews.net/"];
     //self.group = [MMSystemHelper getAppInfoPlistData:@"PoPoNewsChannelGroup" defValue:@"test"];

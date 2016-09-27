@@ -30,10 +30,10 @@
 #define TAG_EDITION_COUNTRY @"country"
 #define TAG_EDITION_AS_CHANNEL @"minikit"
 
-#define BEFORE_TEMPLATE_URL @"api/news/list?cid=%@&before=%@&count=%d&did=%@"
-#define AFTER_TEMPLATE_URL @"api/news/list?cid=%@&after=%@&count=%d&did=%@"
+#define BEFORE_TEMPLATE_URL @"v0/forums/%@?before=%@&size=%d"
+#define AFTER_TEMPLATE_URL @"v0/forums/%@?after=%@&size=%d"
 
-#define CONNECT_PATH @"api/news/connect"
+#define CONNECT_PATH @"v0/connector"
 
 typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 
@@ -73,6 +73,18 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 -(void) getComment: (NSDictionary *) param;
 -(void) doFavourData: (NSString *)id;
 -(void) postNewsComment: (NSDictionary *)param;
+
+-(void) doLogin: (NSString*) email
+            uid: (NSString*) uid
+    accessToken: (NSString*) accessToken
+           type: (int) type;
+-(void) doLogout;
+
+
+
+-(void) getCelebCommentListData: (NSString*) utc_time
+                       timeType: (int) type;
+
 @end
 
 #endif

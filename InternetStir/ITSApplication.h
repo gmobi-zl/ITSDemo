@@ -10,7 +10,7 @@
 #define ITSApplication_h
 
 #import <Foundation/Foundation.h>
-//#import "RemoteService.h"
+#import "RemoteService.h"
 #import "DataService.h"
 #import "MMLogger.h"
 #import "ReportService.h"
@@ -23,7 +23,7 @@
 
 @interface ITSApplication : NSObject
 
-//@property RemoteService* remoteSvr;
+@property RemoteService* remoteSvr;
 @property DataService* dataSvr;
 @property ReportService* reportSvr;
 @property CBUserService* cbUserSvr;

@@ -308,6 +308,13 @@ typedef enum{
 -(BOOL) insert2UnLikeNewsList: (PoPoNewsItem*) item
                    saveFlag: (BOOL) saved;
 
+
+// celeb comments list
+-(void) refreshCelebComments: (int) type;
+-(void) setRefreshCelebComments: (NSArray*) dicData
+                    isClearData: (BOOL) clear
+                           type:(int)type;
+
 @end
 
 #endif

@@ -17,6 +17,8 @@
 #import "NewsService.h"
 #import "SettingService.h"
 #import "MMDictionaryHelper.h"
+#import "CelebComment.h"
+#import "FansComment.h"
 
 //#import "Go2Reach.framework/Headers/GRAdService.h"
 
@@ -2172,6 +2174,119 @@
     //[[ITSApplication get].remoteSvr getNewsById:nId isShowDetailPage:isShowDetailPage];
 }
 
+
+
+-(void) refreshCelebComments: (int) type {
+    /*
+    BOOL isNetConnect = [MMSystemHelper isConnectedToNetwork];
+    if (isNetConnect == NO){
+        if (type == NEWS_REFRESH_TYPE_AFTER){
+            // do nothing
+        } else if (type == NEWS_REFRESH_TYPE_BEFORE){
+            // load storage data
+            NewsService* ns = [NewsService get];
+            NSMutableArray* storageData = [ns getStorageNewsListByCID:cid];
+            [self setRefreshCategoryNewsByStroage:cid newsList:storageData];
+        }
+        MMEventService *es = [MMEventService getInstance];
+        [es send:[[NSString alloc] initWithFormat:@"%@_%@", EVENT_NEWS_DATA_REFRESH_PREFIX, cid]  eventData:NEWS_REFRESH_SUCCESS];
+    } else */{
+
+//        NSMutableArray* datas = [self getCategoryDataByID:cid];
+//        NSString* newsTime = nil;
+//        if (datas != nil && [datas count] > 0){
+//            PoPoNewsItem* newsItem = nil;
+//            if (type == NEWS_REFRESH_TYPE_AFTER){
+//                newsItem = [datas objectAtIndex:0];
+//                if (newsItem.initType == NEWS_INIT_TYPE_CLIENT)
+//                    newsItem = nil;
+//            } else if (type == NEWS_REFRESH_TYPE_BEFORE){
+//                NSInteger dataCount = [datas count];
+//                newsItem = [datas objectAtIndex:dataCount-1];
+//                if (newsItem.initType == NEWS_INIT_TYPE_CLIENT){
+//                    // load storage data
+//                    NewsService* ns = [NewsService get];
+//                    NSMutableArray* storageData = [ns getStorageNewsListByCID:cid];
+//                    if (storageData != nil){
+//                        [self setRefreshCategoryNewsByStroage:cid newsList:storageData];
+//                        MMEventService *es = [MMEventService getInstance];
+//                        [es send:[[NSString alloc] initWithFormat:@"%@_%@", EVENT_NEWS_DATA_REFRESH_PREFIX, cid]  eventData:NEWS_REFRESH_SUCCESS];
+//                        return;
+//                    }
+//                }
+//            }
+//            
+//            if (newsItem != nil)
+//                newsTime = [[NSString alloc] initWithFormat:@"%llu", newsItem.releaseTime];
+//        }
+
+//        NewsCategory *cate = [self getCategoryByID:cid];
+//        NSString* newsTime = nil;
+//        if (type == NEWS_REFRESH_TYPE_AFTER) {
+//            newsTime = [NSString stringWithFormat:@"%llu",cate.afterTime];
+//        }else{
+//            newsTime = [NSString stringWithFormat:@"%llu",cate.beforeTime];
+//        }
+     
+        NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+        [[ITSApplication get].remoteSvr getCelebCommentListData:newsTime timeType:type];
+    }
+}
+
+
+-(void) setRefreshCelebComments: (NSArray*) dicData
+                    isClearData: (BOOL) clear
+                           type:(int)type{
+    if (dicData == nil)
+        return;
+    
+    for (NSDictionary* commentDataItem in dicData) {
+        CelebComment* tmpItem = [[CelebComment alloc] initWithDictionary:commentDataItem];
+        [self insertCelebCommentItem:tmpItem];
+    }
+}
+
+-(BOOL) insertCelebCommentItem: (CelebComment*) item{
+    BOOL same = NO;
+    BOOL ret = NO;
+    int i = 0;
+    
+    if (self.celebComments == nil || item == nil)
+        return ret;
+    
+    int listCount = (int)[self.celebComments count];
+    for (i = 0; i < listCount; i++) {
+        // PoPoNewsItem* newItem = [list objectAtIndex:i];
+        id cbComment = [self.celebComments objectAtIndex:i];
+        if ([cbComment isKindOfClass:[CelebComment class]]) {
+            CelebComment* comment = cbComment;
+            if (comment != nil){
+                if ([comment.fid compare:item.fid] == NSOrderedSame) {
+                    same = YES;
+                    
+                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                    //    newItem.isOfflineDL = YES;
+                    //}
+                    
+                    break;
+                }
+                
+                if (comment.pts < item.pts) {
+                    [self.celebComments insertObject:item atIndex:i];
+                    ret = YES;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (same == NO && ret == NO){
+        [self.celebComments addObject:item];
+        ret = YES;
+    }
+    
+    return ret;
+}
 
 @end
 

@@ -169,6 +169,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
                          [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
                          nil];
     
+    [itsApp.remoteSvr doLogin:facebook.email uid:facebook.uId accessToken:[facebook getToken] type:1];
+    
     SettingService* ss = [SettingService get];
     [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
     self.effectView.hidden = YES;
@@ -317,6 +319,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         SettingService* ss = [SettingService get];
         [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
         [us.user resetData];
+        
+        [itsApp.remoteSvr doLogout];
 
         self.userNameLabel.text = @"登入";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";

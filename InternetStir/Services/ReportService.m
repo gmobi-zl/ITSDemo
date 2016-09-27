@@ -351,7 +351,7 @@
     
     if (eventId == nil) return;
     
-    [FIRAnalytics logEventWithName:eventId parameters:params];
+    //[FIRAnalytics logEventWithName:eventId parameters:params];
     
     // report to flurry
 //    if (params != nil){

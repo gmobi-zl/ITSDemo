@@ -109,6 +109,9 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define NEWS_REFRESH_SUCCESS @"refresh_success"
 #define NEWS_REFRESH_ERROR   @"refresh_failed"
 
+#define CB_COMMENT_REFRESH_SUCCESS @"refresh_success"
+#define CB_COMMENT_REFRESH_ERROR   @"refresh_failed"
+
 // FACEBOOK news
 #define FB_ADD_NEWS_TOP    0
 #define FB_ADD_NEWS_END    1
@@ -134,6 +137,9 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define EVENT_REFRESH_SOCIAL_CATEGORY_STATUS @"social_category_refresh"
 
 #define EVENT_PUSH_NEWS_SHOW @"push_news_show"
+
+
+#define EVENT_CELEB_COMMENT_DATA_REFRESH  @"CELEB_COMMENT_REFRESH"
 
 // Color
 #define COLOR_MENU_ITEM_BACKGROUND @"#ffebebeb"

@@ -497,7 +497,7 @@
 			children = (
 				E124AA2A1D6D8DC300B5BE8F /* resources */,
 				E189F6141D6415FF008587CE /* image */,
-				18F664981D59BA9B00BDB2E8 /* InternetStir */,
+				18F664981D59BA9B00BDB2E8 /* Celebrity */,
 				18F664971D59BA9B00BDB2E8 /* Products */,
 				E6E034F60225741C8A60C41E /* Pods */,
 				3162DC3EC6447FAC92677B40 /* Frameworks */,
@@ -512,7 +512,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		18F664981D59BA9B00BDB2E8 /* InternetStir */ = {
+		18F664981D59BA9B00BDB2E8 /* Celebrity */ = {
 			isa = PBXGroup;
 			children = (
 				1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */,
@@ -537,6 +537,7 @@
 				18F664B01D59E4B000BDB2E8 /* Images.xcassets */,
 				18F664991D59BA9B00BDB2E8 /* Supporting Files */,
 			);
+			name = Celebrity;
 			path = InternetStir;
 			sourceTree = "<group>";
 		};

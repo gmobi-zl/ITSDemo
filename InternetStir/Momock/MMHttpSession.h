@@ -73,6 +73,11 @@ typedef void (^MMHttpSessionProgressCallback)(NSString* url, double progress);
              callback: (MMHttpSessionCallback) cb
      progressCallback: (MMHttpSessionProgressCallback) proCb;
 
+-(void) doDelete: (NSString*) url
+       reqHeader: (NSMutableDictionary*) header
+         reqBody: (NSString*) body
+        callback: (MMHttpSessionCallback) cb;
+
 @end
 
 
