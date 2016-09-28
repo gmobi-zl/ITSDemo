@@ -155,7 +155,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             [self.navigationController pushViewController:vc animated:YES];
 
         }else if (buttonIndex == 2) {
-
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"刪除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alert show];
         }
     }else {
         if (buttonIndex == 0) {
@@ -184,6 +185,11 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
         [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:YES];
+    }else {
+        cell.likeNum.text = [NSString stringWithFormat:@"%d",99999];
+        [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        cell.commentFrame.commentItem.isFavour = YES;
+        [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:NO];
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -206,18 +212,22 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.navigationController pushViewController:detail animated:YES];
 }
 - (void)pushNextVc:(UIButton *)button{
-    
-    CommentViewController *vc = [[CommentViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    vc.index = button.tag;
-    [self.navigationController pushViewController:vc animated:YES];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == NO) {
+        self.loginView.effectView.hidden = NO;
+    }else {
+        CommentViewController *vc = [[CommentViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.index = button.tag;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 - (void)pushComment:(UIButton*)button{
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == NO) {
         self.loginView.effectView.hidden = NO;
-
     }else {
         CommentViewController *vc = [[CommentViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -295,7 +305,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     
-    if (us.user.isCBADM == YES) {
+    if (us.user.isCBADM == NO) {
         [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
     }else {
         self.Btn.frame = CGRectMake(0, 20, 50, 30);
@@ -315,7 +325,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)login {
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isCBADM == YES) {
+    if (us.user.isCBADM == NO) {
         self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍張照",@"相機膠圈", nil];
         [self.photoSheet showInView:self.view];
 
