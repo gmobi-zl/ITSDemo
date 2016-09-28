@@ -41,15 +41,14 @@
         self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.loginButton.frame = CGRectMake(15, 20, frame.size.width - 30, 45);
         self.loginButton.layer.masksToBounds = YES;
-        self.loginButton.layer.cornerRadius = 20;
+        self.loginButton.layer.cornerRadius = 22;
         self.loginButton.layer.borderWidth = 2;
         self.loginButton.titleLabel.font = [UIFont systemFontOfSize:18];
         self.loginButton.layer.borderColor = [UIColor grayColor].CGColor;
         [self.loginButton setTitle:@"Content with Facebook" forState:UIControlStateNormal];
         [self.loginButton setImage:[UIImage imageNamed:@"icon_fb"] forState:UIControlStateNormal];
-        self.loginButton.titleEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 0);
-        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
-//        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        self.loginButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -22, 0, 0);
         [self.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
 
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Content with Facebook"];
@@ -76,7 +75,7 @@
         self.cancelButton.layer.masksToBounds = YES;
         self.cancelButton.layer.cornerRadius = 15;
         [self.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.cancelButton];
     }
     return self;

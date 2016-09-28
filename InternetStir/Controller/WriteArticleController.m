@@ -59,7 +59,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [self.view addSubview:self.photo];
     
     self.textView = [[UITextView alloc] init];
-    self.textView.frame = CGRectMake(85, 74, screenW - 100, 100);
+    self.textView.frame = CGRectMake(85, 74, screenW - 100, 90);
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.delegate = self;
     self.textView.font = [UIFont systemFontOfSize:18];

@@ -17,6 +17,8 @@
 #import "ContentViewCell.h"
 #import "DetailContentController.h"
 #import "HomeViewController.h"
+#import "MJRefresh.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -32,12 +34,12 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.urlArr = @[@"https://www.facebook.com/Jacob.ek07/",
-                    @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
-                    @"https://www.instagram.com/jacob.ek07/"];
+    self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
+                    @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
+                    @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
+                    @"https://www.youtube.com/watch?v=veBjTuLDzF0",
+                    @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
 
-
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"社群";
     self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
@@ -69,7 +71,32 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
+    
+    [self setupRefresh];
 }
+- (void)setupRefresh
+{
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+}
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+    
+}
+- (void)footerRereshing
+{
+    
+}
+
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }

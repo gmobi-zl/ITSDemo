@@ -55,10 +55,10 @@
         self.selBtn.frame = CGRectMake(itemWidth-32-16, 14, 32, 32);
         ConfigService *cs = [ConfigService get];
         if (cs.type == MODE_NIGHT) {
-            [self.selBtn setImage:[UIImage imageNamed:@"language_checkbox_normal_night"]];
+//            [self.selBtn setImage:[UIImage imageNamed:@"language_checkbox_normal_night"]];
         }else if (cs.type == MODE_DAY){
-            UIImage* defIcon = [[UIImage imageNamed:@"channel_def"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            [self.selBtn setImage:defIcon];
+//            UIImage* defIcon = [[UIImage imageNamed:@"channel_def"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//            [self.selBtn setImage:defIcon];
         }
        
         [self.contentView addSubview:self.selBtn];

@@ -15,7 +15,6 @@
 #import "SettingCell.h"
 #import "MMEventService.h"
 #import "SettingService.h"
-#import "AboutController.h"
 #import "FeedBackController.h"
 
 
@@ -387,15 +386,15 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
         } else if (clickItem.actionType == SETTING_ACTION_FEEDBACK) {
             FeedBackController *feedbackPage = [[FeedBackController alloc] init];
             [self.navigationController pushViewController:feedbackPage animated:NO];
-
-        } else if (clickItem.actionType == SETTING_ACTION_ABOUT) {
-            
-            AboutController *aboutPage = [[AboutController alloc] init];
-            
-            [self.navigationController pushViewController:aboutPage animated:NO];
-            //            PopoApplication* poApp = [PopoApplication get];
-            //            [poApp.reportSvr recordEvent:@"me.settings.about" params:nil];
         }
+//        else if (clickItem.actionType == SETTING_ACTION_ABOUT) {
+//            
+//            AboutController *aboutPage = [[AboutController alloc] init];
+//            
+//            [self.navigationController pushViewController:aboutPage animated:NO];
+//            //            PopoApplication* poApp = [PopoApplication get];
+//            //            [poApp.reportSvr recordEvent:@"me.settings.about" params:nil];
+//        }
     }
     
     
