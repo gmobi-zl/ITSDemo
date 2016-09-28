@@ -2288,5 +2288,139 @@
     return ret;
 }
 
+-(void) setCurrentCelebComment: (CelebComment*) item{
+    self.currentCelebComment = item;
+}
+
+-(CelebComment*) getCurrentCelebComment{
+    return self.currentCelebComment;
+}
+
+-(void) refreshUserComments: (int) type{
+    NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+    [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
+}
+
+-(void) setRefreshUserComments: (NSArray*) dicData
+                   isClearData: (BOOL) clear
+                          type: (int) type{
+    
+    if (dicData == nil)
+        return;
+    
+    for (NSDictionary* commentDataItem in dicData) {
+        FansComment* tmpItem = [[FansComment alloc] initWithDictionary:commentDataItem];
+        [self insertUserCommentItem:tmpItem];
+    }
+}
+
+-(BOOL) insertUserCommentItem: (FansComment*) item{
+    BOOL same = NO;
+    BOOL ret = NO;
+    int i = 0;
+    
+    if (self.userComments == nil || item == nil)
+        return ret;
+    
+    int listCount = (int)[self.userComments count];
+    for (i = 0; i < listCount; i++) {
+        
+        id uComment = [self.userComments objectAtIndex:i];
+        if ([uComment isKindOfClass:[FansComment class]]) {
+            FansComment* comment = uComment;
+            if (comment != nil){
+                if ([comment.fid compare:item.fid] == NSOrderedSame) {
+                    same = YES;
+                    
+                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                    //    newItem.isOfflineDL = YES;
+                    //}
+                    
+                    break;
+                }
+                
+                if (comment.pts < item.pts) {
+                    [self.userComments insertObject:item atIndex:i];
+                    ret = YES;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (same == NO && ret == NO){
+        [self.userComments addObject:item];
+        ret = YES;
+    }
+    
+    return ret;
+}
+
+-(void) refreshReplyComments: (int) type
+                         fid: (NSString*) fid{
+    NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+    [[ITSApplication get].remoteSvr getCelebReplyCommentListData:newsTime timeType:type fid:fid];
+}
+
+-(void) setRefreshReplyComments: (NSArray*) dicData
+                            fid: (NSString*) fid
+                    isClearData: (BOOL) clear
+                           type: (int) type{
+    if (dicData == nil || fid == nil)
+        return;
+    
+    for (NSDictionary* commentDataItem in dicData) {
+        FansComment* tmpItem = [[FansComment alloc] initWithDictionary:commentDataItem];
+        [self insertUserCommentItem:tmpItem];
+    }
+}
+
+-(BOOL) insertCurrentReplyCommentItem: (FansComment*) item{
+    BOOL same = NO;
+    BOOL ret = NO;
+    int i = 0;
+    
+    if (self.currentCelebComment == nil || item == nil)
+        return ret;
+    
+    if (self.currentCelebComment.replayComments == nil)
+        self.currentCelebComment.replayComments = [NSMutableArray arrayWithCapacity:1];
+    
+    NSMutableArray* replayList = (NSMutableArray*)self.currentCelebComment.replayComments;
+    
+    int listCount = (int)[replayList count];
+    for (i = 0; i < listCount; i++) {
+        
+        id uComment = [replayList objectAtIndex:i];
+        if ([uComment isKindOfClass:[FansComment class]]) {
+            FansComment* comment = uComment;
+            if (comment != nil){
+                if ([comment.fid compare:item.fid] == NSOrderedSame) {
+                    same = YES;
+                    
+                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                    //    newItem.isOfflineDL = YES;
+                    //}
+                    
+                    break;
+                }
+                
+                if (comment.pts < item.pts) {
+                    [replayList insertObject:item atIndex:i];
+                    ret = YES;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (same == NO && ret == NO){
+        [replayList addObject:item];
+        ret = YES;
+    }
+    
+    return ret;
+}
+
 @end
 

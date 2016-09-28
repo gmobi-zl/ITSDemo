@@ -15,30 +15,20 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb101049733683003</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.972637543371-5t6ssr6qj1vfff0m55rfc91qskdivbtf</string>
+				<string>fb318717128488813</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>CelebrityBaseUrl</key>
 	<string>http://106.185.48.211:8080/</string>
 	<key>Fabric</key>
@@ -60,15 +50,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>CFBundleURLTypes</key>
-	<array>
-  		<dict>
-  		<key>CFBundleURLSchemes</key>
-  			<array>
-    		<string>fb318717128488813</string>
-  			</array>
-  		</dict>
-	</array>
 	<key>FacebookAppID</key>
 	<string>318717128488813</string>
 	<key>FacebookDisplayName</key>

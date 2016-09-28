@@ -33,6 +33,12 @@
 #define BEFORE_TEMPLATE_URL @"v0/forums/%@?before=%@&size=%d"
 #define AFTER_TEMPLATE_URL @"v0/forums/%@?after=%@&size=%d"
 
+#define BEFORE_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?before=%@&size=%d"
+#define AFTER_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?after=%@&size=%d"
+
+#define BEFORE_USERC_TEMPLATE_URL @"v0/user/%@/comments?before=%@&size=%d"
+#define AFTER_USERC_TEMPLATE_URL @"v0/user/%@/comments?after=%@&size=%d"
+
 #define CONNECT_PATH @"v0/connector"
 
 typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
@@ -80,10 +86,37 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
            type: (int) type;
 -(void) doLogout;
 
-
-
 -(void) getCelebCommentListData: (NSString*) utc_time
                        timeType: (int) type;
+
+-(void) replayCelebComment: (NSString*) fid
+                   comment: (NSString*) comment
+                  callback: (RemoteCallback) callback;
+
+-(void) replayFansComment: (NSString*) fid
+          replayCommendId: (NSString*) replayCommendId
+                  comment: (NSString*) comment
+                 callback: (RemoteCallback) callback;
+
+-(void) userLike: (NSString*) fid;
+-(void) userUnlike: (NSString*) fid;
+
+-(void) getFavoriteNews;
+-(void) add2FavoriteNews: (NSString*) uid
+                     fid: (NSString*) fid;
+-(void) del4FavoriteNews: (NSString*) fid;
+-(void) delAllFavoriteNews;
+
+
+-(void) getUserCommentListData: (NSString*) utc_time
+                       timeType: (int) type;
+-(void) getUserCommentById: (NSString*) cid
+                  callback: (RemoteCallback) callback;
+
+
+-(void) getCelebReplyCommentListData: (NSString*) utc_time
+                            timeType: (int) type
+                                 fid: (NSString*) fid;
 
 @end
 

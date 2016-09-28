@@ -109,8 +109,20 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define NEWS_REFRESH_SUCCESS @"refresh_success"
 #define NEWS_REFRESH_ERROR   @"refresh_failed"
 
-#define CB_COMMENT_REFRESH_SUCCESS @"refresh_success"
-#define CB_COMMENT_REFRESH_ERROR   @"refresh_failed"
+#define CB_COMMENT_REFRESH_TYPE_BEFORE  1
+#define CB_COMMENT_REFRESH_TYPE_AFTER   2
+#define CB_COMMENT_REFRESH_SUCCESS @"cb_refresh_success"
+#define CB_COMMENT_REFRESH_ERROR   @"cb_refresh_failed"
+
+#define CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE  1
+#define CB_COMMENT_REPLY_REFRESH_TYPE_AFTER   2
+#define CB_COMMENT_REPLY_REFRESH_SUCCESS @"cb_reply_refresh_success"
+#define CB_COMMENT_REPLY_REFRESH_ERROR   @"cb_reply_refresh_failed"
+
+#define USER_COMMENT_REFRESH_TYPE_BEFORE  1
+#define USER_COMMENT_REFRESH_TYPE_AFTER   2
+#define USER_COMMENT_REFRESH_SUCCESS @"user_refresh_success"
+#define USER_COMMENT_REFRESH_ERROR   @"user_refresh_failed"
 
 // FACEBOOK news
 #define FB_ADD_NEWS_TOP    0
@@ -140,6 +152,8 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 
 
 #define EVENT_CELEB_COMMENT_DATA_REFRESH  @"CELEB_COMMENT_REFRESH"
+#define EVENT_USER_COMMENT_DATA_REFRESH  @"USER_COMMENT_REFRESH"
+#define EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH  @"CELEB_REPLY_COMMENT_REFRESH"
 
 // Color
 #define COLOR_MENU_ITEM_BACKGROUND @"#ffebebeb"

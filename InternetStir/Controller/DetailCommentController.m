@@ -19,6 +19,7 @@
 #import "SettingService.h"
 #import "CommentView.h"
 #import "CommentViewController.h"
+#import "CelebComment.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -197,6 +198,13 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
              [mutaArray insertObject:FrameNeedChanged atIndex:0];
              self.commentData = mutaArray;
              [self.tableView reloadData];
+             
+             // send to server
+             ITSApplication* itsApp = [ITSApplication get];
+             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+             }];
          }
      }];
 }
@@ -206,6 +214,8 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* userSvr = itsApp.cbUserSvr;
     //    SettingService* ss = [SettingService get];
+    
+    NSString* commentId = @"";
     
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
                                    content:@""
@@ -238,6 +248,13 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
              newsItem.type = 1;
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
+             
+             // send to server
+             ITSApplication* itsApp = [ITSApplication get];
+             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+             [itsApp.remoteSvr replayFansComment:cbComment.fid replayCommendId:commentId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+             }];
              
          }
      }];

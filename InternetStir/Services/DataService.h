@@ -25,6 +25,7 @@
 #import "NativeAdItem.h"
 
 #import "PNNativeAdItem.h"
+#import "CelebComment.h"
 
 //#import "CommentItem.h"
 //#import "CommentCellFrame.h"
@@ -132,8 +133,8 @@ typedef enum{
 @property (retain) NSMutableArray* unLikeNewsList;
 
 @property (retain) NSMutableArray* celebComments;
-
-
+@property (retain) CelebComment* currentCelebComment;
+@property (retain) NSMutableArray* userComments;
 
 //@property (retain) NativeAdItem *fbAdData;
 //@property (retain) NativeAdItem *gmobiAdData;
@@ -310,10 +311,25 @@ typedef enum{
 
 
 // celeb comments list
+-(void) setCurrentCelebComment: (CelebComment*) item;
+-(CelebComment*) getCurrentCelebComment;
 -(void) refreshCelebComments: (int) type;
 -(void) setRefreshCelebComments: (NSArray*) dicData
                     isClearData: (BOOL) clear
-                           type:(int)type;
+                           type: (int) type;
+
+
+-(void) refreshUserComments: (int) type;
+-(void) setRefreshUserComments: (NSArray*) dicData
+                    isClearData: (BOOL) clear
+                           type: (int) type;
+
+-(void) refreshReplyComments: (int) type
+                        fid: (NSString*) fid;
+-(void) setRefreshReplyComments: (NSArray*) dicData
+                           fid: (NSString*) fid
+                   isClearData: (BOOL) clear
+                          type: (int) type;
 
 @end
 

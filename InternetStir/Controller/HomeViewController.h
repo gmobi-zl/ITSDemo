@@ -23,4 +23,7 @@
 
 @property (nonatomic, assign) NSInteger index;//编辑的第几行的文章
 
+@property (assign) int refreshType;
+@property (assign) BOOL isRefreshing;
+
 @end

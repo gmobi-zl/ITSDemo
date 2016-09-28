@@ -23,6 +23,7 @@
 #import "WriteArticleController.h"
 #import "ErrorController.h"
 #import "MJRefresh.h"
+#import "MMEventService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -60,6 +61,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.loginView.effectView addSubview:self.loginView];
     
     [self setupRefresh];
+    
+    MMEventService* es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_DATA_REFRESH selector:@selector(celebCommentsDataRefreshListener:)];
 }
 - (void)passMessage {
     
@@ -67,26 +71,85 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     self.Btn.userInteractionEnabled = NO;
 
 }
+
+-(void)celebCommentsDataRefreshListener: (id) data{
+    if (self.view.hidden == NO){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            //[self.tableView reloadData];
+            
+            [self.tableView footerEndRefreshing];
+            [self.tableView headerEndRefreshing];
+            //ITSApplication* itsApp = [ITSApplication get];
+            //[itsApp.reportSvr recordCategory:self.cid];
+            
+            // report event
+//            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+//            [eParams setObject:self.cid forKey:@"id"];
+//            NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
+//            if (cate != nil) {
+//                [eParams setObject:cate.name forKey:@"name"];
+//                if (self.refreshType == NEWS_REFRESH_TYPE_BEFORE){
+//                    [poApp.reportSvr recordEndTimedEvent:@"news.list.prev" params:eParams];
+//                } else {
+//                    [poApp.reportSvr recordEndTimedEvent:@"news.list.next" params:eParams];
+//                }
+//            }
+            self.isRefreshing = NO;
+        });
+    }
+}
+
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
     self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
     self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
     self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    
+    if (self.isRefreshing == NO){
+        self.refreshType = CB_COMMENT_REFRESH_TYPE_AFTER;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_AFTER];
+        
+//        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+//        [eParams setObject:self.cid forKey:@"id"];
+//        NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
+//        [eParams setObject:cate.name forKey:@"name"];
+//        [poApp.reportSvr recordEvent:cate.name params:eParams timed:YES eventCategory:@"news.list.next"];
+        
+        self.isRefreshing = YES;
+    }
+    //self.goTopButton.hidden = YES;
 }
+
+
 - (void)footerRereshing
 {
-    
+    if (self.isRefreshing == NO){
+        self.refreshType = CB_COMMENT_REFRESH_TYPE_BEFORE;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_BEFORE];
+        
+//        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+//        [eParams setObject:self.cid forKey:@"id"];
+//        NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
+//        [eParams setObject:cate.name forKey:@"name"];
+//        [poApp.reportSvr recordEvent:cate.name params:eParams timed:YES eventCategory:@"news.list.prev"];
+        
+        self.isRefreshing = YES;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
