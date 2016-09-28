@@ -99,7 +99,7 @@
         
         ITSApplication* itsApp = [ITSApplication get];
         CBUserService* us = itsApp.cbUserSvr;
-        if (us.user.isCBADM == NO) {
+        if (us.user.isCBADM == YES) {
             self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
             [self.contentView addSubview:self.delBtn];

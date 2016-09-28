@@ -53,7 +53,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
-    self.loginView.alpha = 0.5;
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
@@ -305,7 +304,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     
-    if (us.user.isCBADM == NO) {
+    if (us.user.isCBADM == YES) {
         [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
     }else {
         self.Btn.frame = CGRectMake(0, 20, 50, 30);
@@ -325,7 +324,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)login {
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isCBADM == NO) {
+    if (us.user.isCBADM == YES) {
         self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍張照",@"相機膠圈", nil];
         [self.photoSheet showInView:self.view];
 
