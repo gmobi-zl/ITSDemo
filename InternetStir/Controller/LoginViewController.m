@@ -9,7 +9,6 @@
 
 #import "LoginViewController.h"
 #import "MMSystemHelper.h"
-#import "AboutController.h"
 #import "FeedBackController.h"
 #import "ITSApplication.h"
 #import "FacebookService.h"

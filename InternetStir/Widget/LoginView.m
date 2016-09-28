@@ -76,7 +76,7 @@
         self.cancelButton.layer.masksToBounds = YES;
         self.cancelButton.layer.cornerRadius = 15;
         [self.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.cancelButton];
     }
     return self;

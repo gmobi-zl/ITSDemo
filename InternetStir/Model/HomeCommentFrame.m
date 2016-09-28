@@ -50,12 +50,12 @@
 
     NSString *str = self.commentItem.shuoshuoText;
     UILabel *label = [[UILabel alloc]init];
-    label.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING, screenW - 50, 0);
-    label.numberOfLines = 3;
+    label.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING, screenW - 30, 0);
+    label.numberOfLines = 4;
     label.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-    label.text = str;
-    CGSize size = [label sizeThatFits:CGSizeMake(screenW - 50, MAXFLOAT)];
-    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING,screenW - 50, size.height);
+    label.text = [NSString stringWithFormat:@"%@   %@",self.commentItem.name,str];
+    CGSize size = [label sizeThatFits:CGSizeMake(screenW - 30, MAXFLOAT)];
+    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING,screenW - 30, size.height);
 
     CGSize sizeH = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@   %@",self.commentItem.name,commentItem.shuoshuoText] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
     CGFloat contentH = sizeH.height;

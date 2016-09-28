@@ -62,6 +62,8 @@
 		E124AA2E1D6D8FE800B5BE8F /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = E124AA2D1D6D8FE800B5BE8F /* 404.png */; };
 		E12C27841D952AB4001003AF /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12C27831D952AB4001003AF /* ErrorController.m */; };
 		E13A7D681D7E995300305B64 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A7D671D7E995300305B64 /* TestController.m */; };
+		E16212C51D9B647700D64E56 /* FeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F64C1D645D55008587CE /* FeedBackController.m */; };
+		E16212C81D9B687E00D64E56 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16212C71D9B687E00D64E56 /* ArticleController.m */; };
 		E181D12B1D669525005115E6 /* b-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E181D1271D669525005115E6 /* b-3.png */; };
 		E181D12C1D669525005115E6 /* b-6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D1281D669525005115E6 /* b-6.jpg */; };
 		E181D12D1D669525005115E6 /* b-9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D1291D669525005115E6 /* b-9.jpg */; };
@@ -106,8 +108,6 @@
 		E189F63E1D644CC2008587CE /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F63D1D644CC2008587CE /* SettingController.m */; };
 		E189F6411D6450AE008587CE /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F6401D6450AE008587CE /* SettingCell.m */; };
 		E189F6471D645B10008587CE /* ChannelSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F6461D645B10008587CE /* ChannelSetCell.m */; };
-		E189F64A1D645C9D008587CE /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F6491D645C9D008587CE /* AboutController.m */; };
-		E189F64D1D645D55008587CE /* FeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F64C1D645D55008587CE /* FeedBackController.m */; };
 		E18C12FD1D6AE67600E635D6 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C12FC1D6AE67500E635D6 /* SafariServices.framework */; };
 		E18C13031D6AE6CC00E635D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13021D6AE6CC00E635D6 /* CoreData.framework */; };
 		E18C13051D6AE6DF00E635D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13041D6AE6DF00E635D6 /* Foundation.framework */; };
@@ -277,6 +277,8 @@
 		E12C27831D952AB4001003AF /* ErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorController.m; sourceTree = "<group>"; };
 		E13A7D661D7E995300305B64 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		E13A7D671D7E995300305B64 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
+		E16212C61D9B687E00D64E56 /* ArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleController.h; sourceTree = "<group>"; };
+		E16212C71D9B687E00D64E56 /* ArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleController.m; sourceTree = "<group>"; };
 		E181D1271D669525005115E6 /* b-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-3.png"; sourceTree = "<group>"; };
 		E181D1281D669525005115E6 /* b-6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-6.jpg"; sourceTree = "<group>"; };
 		E181D1291D669525005115E6 /* b-9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "b-9.jpg"; sourceTree = "<group>"; };
@@ -343,8 +345,6 @@
 		E189F6401D6450AE008587CE /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		E189F6451D645B10008587CE /* ChannelSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelSetCell.h; sourceTree = "<group>"; };
 		E189F6461D645B10008587CE /* ChannelSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSetCell.m; sourceTree = "<group>"; };
-		E189F6481D645C9D008587CE /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
-		E189F6491D645C9D008587CE /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
 		E189F64B1D645D55008587CE /* FeedBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackController.h; sourceTree = "<group>"; };
 		E189F64C1D645D55008587CE /* FeedBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackController.m; sourceTree = "<group>"; };
 		E18C12FC1D6AE67500E635D6 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -725,6 +725,8 @@
 				E1E3CF6D1D6548FB0053F00D /* ContentController.m */,
 				E1E3CF6F1D6549140053F00D /* SocialController.h */,
 				E1E3CF701D6549140053F00D /* SocialController.m */,
+				E16212C61D9B687E00D64E56 /* ArticleController.h */,
+				E16212C71D9B687E00D64E56 /* ArticleController.m */,
 				E187B6561D9A3EBB00A6D565 /* SocialWebController.h */,
 				E187B6571D9A3EBB00A6D565 /* SocialWebController.m */,
 				18F665641D5DA94A00BDB2E8 /* SplashController.h */,
@@ -749,8 +751,6 @@
 				E189F63D1D644CC2008587CE /* SettingController.m */,
 				E1E4A4471D8E70E000380026 /* FanController.h */,
 				E1E4A4481D8E70E000380026 /* FanController.m */,
-				E189F6481D645C9D008587CE /* AboutController.h */,
-				E189F6491D645C9D008587CE /* AboutController.m */,
 				E189F64B1D645D55008587CE /* FeedBackController.h */,
 				E189F64C1D645D55008587CE /* FeedBackController.m */,
 				E181D1311D66F785005115E6 /* WebviewController.h */,
@@ -1142,6 +1142,7 @@
 				18F664CB1D5AC9FF00BDB2E8 /* MMDownloadService.m in Sources */,
 				E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */,
 				18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */,
+				E16212C81D9B687E00D64E56 /* ArticleController.m in Sources */,
 				E1F0306A1D741C4100060559 /* SDImageCache.m in Sources */,
 				E1F030641D741C4100060559 /* MJRefreshFooterView.m in Sources */,
 				E19DFD191D8FB70C0042C777 /* HeadView.m in Sources */,
@@ -1157,6 +1158,7 @@
 				E1F030691D741C4100060559 /* NSData+ImageContentType.m in Sources */,
 				18F664CE1D5AC9FF00BDB2E8 /* MMImageHolder.m in Sources */,
 				18F664F51D5ACFA100BDB2E8 /* ConfigService.m in Sources */,
+				E16212C51D9B647700D64E56 /* FeedBackController.m in Sources */,
 				E1E3CF6E1D6548FB0053F00D /* ContentController.m in Sources */,
 				E1EB48341D6C4C93003C42BC /* TwitterService.m in Sources */,
 				E189F5FA1D6415A1008587CE /* CommentView.m in Sources */,
@@ -1191,7 +1193,6 @@
 				18F665131D5B311400BDB2E8 /* PoPoNewsItem.m in Sources */,
 				18F664FF1D5B29E900BDB2E8 /* NewsService.m in Sources */,
 				E189F6071D6415BF008587CE /* CommentFrame.m in Sources */,
-				E189F64A1D645C9D008587CE /* AboutController.m in Sources */,
 				E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */,
 				E19DFD111D8F893B0042C777 /* DetailCommentFrame.m in Sources */,
 				E189F6411D6450AE008587CE /* SettingCell.m in Sources */,
@@ -1217,7 +1218,6 @@
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
 				1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */,
 				18F664CA1D5AC9FF00BDB2E8 /* MMDictionaryHelper.m in Sources */,
-				E189F64D1D645D55008587CE /* FeedBackController.m in Sources */,
 				18F664FC1D5B20E600BDB2E8 /* ITSApplication.m in Sources */,
 				18F664D21D5AC9FF00BDB2E8 /* Reachability.m in Sources */,
 				E1B9611E1D936E0C00B779A1 /* WriteArticleCell.m in Sources */,

@@ -46,7 +46,7 @@
         
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.commentLabel.numberOfLines = 3;
+        self.commentLabel.numberOfLines = 4;
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
@@ -160,8 +160,9 @@
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
 
     NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:replyRange];
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
-    [self.commentLabel setAttributedText:noteStr] ;
+    [self.commentLabel setAttributedText:noteStr];
     [self.commentLabel sizeToFit];
 
 //    self.name.text = comment.name;

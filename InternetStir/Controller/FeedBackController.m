@@ -28,7 +28,6 @@ static int height;
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
-
 }
 -(void) clickBack{
     [self.navigationController popViewControllerAnimated:YES];
@@ -58,8 +57,8 @@ static int height;
     
     backBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 15);
     backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 30);
-    UIImage* backIcon = [UIImage imageNamed:@"title_back"];
-    [backBtn setImage:backIcon forState:UIControlStateNormal];
+//    UIImage* backIcon = [UIImage imageNamed:@"title_back"];
+//    [backBtn setImage:backIcon forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = back;

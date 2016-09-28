@@ -32,12 +32,12 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.urlArr = @[@"https://www.facebook.com/Jacob.ek07/",
-                    @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
-                    @"https://www.instagram.com/jacob.ek07/"];
+    self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
+                    @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
+                    @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
+                    @"https://www.youtube.com/watch?v=veBjTuLDzF0",
+                    @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
 
-
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"社群";
     self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
