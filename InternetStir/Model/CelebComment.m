@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CelebComment.h"
 #import "FansComment.h"
+#import "ITSApplication.h"
 
 @implementation CelebComment
 
@@ -17,7 +18,7 @@
     
     if (dic == nil)
         return nil;
-    
+
     NSString* tmpData = [dic objectForKey:CB_COMMENT_ITEM_ID];
     if (tmpData != nil)
         self.fid = tmpData;

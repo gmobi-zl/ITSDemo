@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CelebComment.h"
 #import "HomeCommentFrame.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+
 @interface HomeCommentCell : UITableViewCell
 @property (nonatomic, strong) HomeCommentFrame *commentFrame;
 @property (nonatomic, strong) UIImageView *imageview;
@@ -35,5 +38,7 @@
 @property (nonatomic, strong) UILabel *likeNum;
 
 @property (nonatomic, strong) UIButton *delBtn;
+
+-(void) setShowData: (CelebComment*) data;
 
 @end

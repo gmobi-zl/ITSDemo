@@ -10,6 +10,7 @@
 #define CelebComment_h
 
 #import <Foundation/Foundation.h>
+#import "HomeCommentFrame.h"
 
 #define CB_COMMENT_ITEM_ID @"fid"
 #define CB_COMMENT_ITEM_CONTEXT @"context"
@@ -34,6 +35,8 @@
 
 @property UInt64 pts;
 @property UInt64 uts;
+
+@property HomeCommentFrame* uiFrame;
 
 -(CelebComment*) initWithDictionary: (NSDictionary*) dic;
 

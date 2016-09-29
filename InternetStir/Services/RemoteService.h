@@ -43,7 +43,10 @@
 
 typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 
-@interface RemoteService : NSObject 
+@interface RemoteService : NSObject
+
+-(NSString*) getBaseUrl;
+-(NSString*) getBaseFileUrl;
 
 -(NSString*) getConnectUrl;
 -(NSString*) getDefaultReportUrl;
@@ -83,8 +86,9 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 -(void) doLogin: (NSString*) email
             uid: (NSString*) uid
     accessToken: (NSString*) accessToken
-           type: (int) type;
--(void) doLogout;
+           type: (int) type
+       callback: (RemoteCallback) callback;
+-(void) doLogout: (RemoteCallback) callback;
 
 -(void) getCelebCommentListData: (NSString*) utc_time
                        timeType: (int) type;

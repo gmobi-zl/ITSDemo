@@ -32,26 +32,72 @@
                 self.icon = [[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
                 self.email = [result objectForKey:@"email"];
                 
-                us.user.userName = self.userName;
-                us.user.avatar = self.icon;
-                us.user.email = self.email;
-                us.user.isLogin = YES;
-                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                     @"facebook",@"type",
-                                     self.uId,@"openid",
-                                     self.userName ,@"name",
-                                     self.icon,@"avatar",
-                                     self.email,@"email",
-                                     [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
-                                     nil];
                 
-                [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1];
+//                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                     @"facebook",@"type",
+//                                     self.uId,@"openid",
+//                                     self.userName ,@"name",
+//                                     self.icon,@"avatar",
+//                                     self.email,@"email",
+//                                     [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
+//                                     nil];
                 
-                SettingService* ss = [SettingService get];
-                [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
-                if ([self.delegate respondsToSelector:@selector(passMessage)]) {
-                    [self.delegate passMessage];
-                }
+                [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1 callback:^(int status, int code, NSDictionary *resultData) {
+                    if (resultData != nil){
+                        NSDictionary* profile = [resultData objectForKey:@"profile"];
+                        if (profile != nil){
+                            NSString* name = [profile objectForKey:@"name"];
+                            NSString* email = [profile objectForKey:@"email"];
+                            NSString* avator = [profile objectForKey:@"avatar"];
+                            NSString* session = [profile objectForKey:@"session"];
+                            NSString* uuid = [profile objectForKey:@"uuid"];
+                            
+                            NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:1];
+                            
+                            if (name != nil)
+                                us.user.userName = name;
+                            else
+                                us.user.userName = self.userName;
+                            
+                            if (avator != nil)
+                                us.user.avatar = avator;
+                            else
+                                us.user.avatar = self.icon;
+                            
+                            if (email != nil)
+                                us.user.email = email;
+                            else
+                                us.user.email = self.email;
+                            
+                            if (session != nil)
+                                us.user.session = session;
+                            
+                            if (uuid != nil)
+                                us.user.uId = uuid;
+                            else
+                                us.user.uId = self.uId;
+                            
+                            us.user.isLogin = YES;
+                            
+                            [dic setObject:self.uId forKey:@"openid"];
+                            [dic setObject:@"facebook" forKey:@"type"];
+                            [dic setObject:us.user.userName forKey:@"name"];
+                            [dic setObject:us.user.avatar forKey:@"avatar"];
+                            [dic setObject:us.user.email forKey:@"email"];
+                            [dic setObject:us.user.uId forKey:@"uuid"];
+                            [dic setObject:us.user.session forKey:@"session"];
+                            [dic setObject:[[NSNumber alloc] initWithBool:us.user.isLogin] forKey:@"isLogin"];
+                            
+                            SettingService* ss = [SettingService get];
+                            [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+                            if ([self.delegate respondsToSelector:@selector(passMessage)]) {
+                                [self.delegate passMessage];
+                            }
+                        }
+                    }
+                }];
+                
+                
             }
         }];
     }

@@ -99,6 +99,15 @@ typedef enum{
 
 @end
 
+@interface CelebInfo : NSObject
+
+@property (copy) NSString* name;
+@property (copy) NSString* avator;
+@property (copy) NSString* title;
+@property (copy) NSString* lanuchPage;
+
+@end
+
 
 @interface DataService : NSObject
 @property (assign) int comment_count;
@@ -135,6 +144,7 @@ typedef enum{
 @property (retain) NSMutableArray* celebComments;
 @property (retain) CelebComment* currentCelebComment;
 @property (retain) NSMutableArray* userComments;
+@property (retain) CelebInfo* celebInfo;
 
 //@property (retain) NativeAdItem *fbAdData;
 //@property (retain) NativeAdItem *gmobiAdData;

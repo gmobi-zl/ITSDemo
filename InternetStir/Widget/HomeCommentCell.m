@@ -11,6 +11,7 @@
 #import "ITSAppConst.h"
 #import "AppStyleConfiguration.h"
 #import "ITSApplication.h"
+#import "FansComment.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 
@@ -116,8 +117,11 @@
     }else{
         [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     }
+
+#ifdef DEMO_TEST
     [self removeOldReplys];
     [self settingtData];
+#endif
     [self settingFrame];
 }
 //防止cell重叠
@@ -207,6 +211,80 @@
     int fav = 99999;
     self.likeNum.text = [NSString stringWithFormat:@"%d",fav];
 }
+
+-(void) setShowData: (CelebComment*) data{
+    [self removeOldReplys];
+    
+    self.icon.image = [UIImage imageNamed:data.avator];
+    self.nameLabel.text = data.name;
+    
+    //self.photo.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",comment.pictures]];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+    NSString* image = [data.attachments objectAtIndex:0];
+    
+    NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
+    
+    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+    
+    NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
+    
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+    
+    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:replyRange];
+    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
+    [self.commentLabel setAttributedText:noteStr];
+    [self.commentLabel sizeToFit];
+    
+    //    self.name.text = comment.name;
+    for (NSInteger i = 0; i < data.topFansComments.count; i++) {
+        FansComment *item = [data.topFansComments objectAtIndex:i];
+        UILabel *replyLabel = [[UILabel alloc]init];
+        replyLabel.font = [UIFont systemFontOfSize:16];
+        replyLabel.numberOfLines = 0;
+        NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.comment];
+        
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+        NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+        
+        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
+        [replyLabel setAttributedText:noteStr];
+        [replyLabel sizeToFit];
+        
+        self.replyLabel = replyLabel;
+        [self.contentView addSubview:replyLabel];
+        [self.replysView addObject:replyLabel];
+        
+        //        UIImageView *imageView = [[UIImageView alloc] init];
+        //        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",item.icon]];
+        ////        self.replyIcon = imageView;
+        //        imageView.layer.cornerRadius = 15;
+        //        imageView.layer.masksToBounds = YES;
+        //        [self.contentView addSubview:imageView];
+        ////        [self.replyIconView addObject:imageView];
+        
+        //        UILabel *replyName = [[UILabel alloc] init];
+        //        replyName.font = [UIFont systemFontOfSize:12];
+        //        replyName.text = item.name;
+        //        replyName.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+        //        self.replyName = replyName;
+        //        [self.contentView addSubview:replyName];
+        //        [self.replyNameView addObject:replyName];
+    }
+    NSString* time = [NSString stringWithFormat:@"%lld", data.pts];
+    self.timeLabel.text = time;
+    int fav = 99999;
+    self.likeNum.text = [NSString stringWithFormat:@"%d",fav];
+}
+
 -(void)settingFrame
 {
     self.icon.frame = self.commentFrame.iconF;

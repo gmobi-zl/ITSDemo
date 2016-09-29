@@ -50,6 +50,10 @@
     if (numData != nil)
         self.uts = [numData longLongValue];
     
+    numData = [dic objectForKey:FANS_COMMENT_ITEM_CBREAD];
+    if (numData != nil)
+        self.isCelebRead = [numData boolValue];
+    
     return self;
 }
 

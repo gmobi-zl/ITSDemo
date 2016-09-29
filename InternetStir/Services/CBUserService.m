@@ -22,8 +22,8 @@
     SettingService* ss = [SettingService get];
     NSDictionary *data = [ss getDictoryValue:CONFIG_USERLOGIN_INFO defValue:nil];
     if (data == nil){
-        self.user.userName = @"高圆圆";
-        self.user.avatar = @"高圆圆";
+        self.user.userName = @"";
+        self.user.avatar = @"";
         self.user.isLogin = NO;
         self.user.email = @"";
         //        self.user.uId = [MMDictionaryHelper selectString:(NSMutableDictionary*)data path:@"data/user/_id" def:nil];
@@ -52,9 +52,10 @@
         
         self.user.avatar = [data objectForKey:@"avatar"];
         self.user.userName = [data objectForKey:@"name"];
-        self.user.uId = [data objectForKey:@"openid"];
+        self.user.uId = [data objectForKey:@"uid"];
         self.user.email = [data objectForKey:@"email"];
         self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
+        self.user.session = [data objectForKey:@"session"];
     }
 }
 

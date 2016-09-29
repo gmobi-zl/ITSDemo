@@ -26,6 +26,8 @@
 
 #define SYSTEM_STATUSBAR_HEIGHT  20
 
+//#define DEMO_DATA 1
+
 //mode
 #define MODE_NIGHT 2
 #define MODE_DAY 1
@@ -249,6 +251,7 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define LOGIN_IMAGE @"login_image"
 //comment
 #define CONFIG_USERLOGIN_INFO @"user_login_info"
+#define CONFIG_GMOBI_USERLOGIN_INFO @"gmobi_user_login_info"
 // config
 #define CONFIG_LAST_CONNECT_INFO @"last_connect_info"
 #define CONFIG_DETAIL_FONT_SIZE @"detail_font_size"

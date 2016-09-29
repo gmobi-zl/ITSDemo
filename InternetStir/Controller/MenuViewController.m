@@ -203,7 +203,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
         [us.user resetData];
         
-        [itsApp.remoteSvr doLogout];
+        [itsApp.remoteSvr doLogout:^(int status, int code, NSDictionary *resultData) {
+            SettingService* ss = [SettingService get];
+            [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
+        }];
 
         self.userNameLabel.text = @"登入";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";

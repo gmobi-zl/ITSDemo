@@ -202,7 +202,12 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
              // send to server
              ITSApplication* itsApp = [ITSApplication get];
              CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
-             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61
+//             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+//                 
+//             }];
+             
+             [itsApp.remoteSvr replayCelebComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
                  
              }];
          }

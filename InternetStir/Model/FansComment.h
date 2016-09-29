@@ -19,6 +19,7 @@
 #define FANS_COMMENT_ITEM_COMMENT @"comment"
 #define FANS_COMMENT_ITEM_PTS @"pts"
 #define FANS_COMMENT_ITEM_UTS @"uts"
+#define FANS_COMMENT_ITEM_CBREAD @"read"
 
 @interface FansComment : NSObject
 
@@ -30,6 +31,7 @@
 @property NSString* comment;
 @property UInt64 pts;
 @property UInt64 uts;
+@property BOOL isCelebRead;
 
 
 -(FansComment*) initWithDictionary: (NSDictionary*) dic;

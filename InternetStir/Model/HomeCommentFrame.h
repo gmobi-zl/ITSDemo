@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "HomeCommentItem.h"
+
+
 @interface HomeCommentFrame : NSObject
 @property (nonatomic, assign) CGRect imageF;
 @property (nonatomic, assign) CGRect userNameF;
@@ -34,4 +36,7 @@
 @property (nonatomic, assign) CGRect likeNumF;
 @property (nonatomic, assign) CGFloat headH;
 @property (nonatomic, assign) CGRect delBtnF;
+
+-(void) initWithCommentData: (id) data;
+
 @end

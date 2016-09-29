@@ -54,6 +54,10 @@
 
 @end
 
+@implementation CelebInfo
+
+@end
+
 
 @implementation DataService
 
@@ -359,9 +363,21 @@
         SettingService* ss = [SettingService get];
         [ss setDictoryValue:CONFIG_LAST_CONNECT_INFO data:dicData];
         
+        if (self.celebInfo == nil)
+            self.celebInfo = [CelebInfo alloc];
+        
         NSString* tmpData = [dicData objectForKey:@"baseUrl"];
         if (tmpData != nil)
             self.fileBaseUrl = tmpData;
+        
+        tmpData = [dicData objectForKey:@"name"];
+        if (tmpData != nil)
+            self.celebInfo.name = tmpData;
+        
+        tmpData = [dicData objectForKey:@"avatar"];
+        if (tmpData != nil)
+            self.celebInfo.avator = tmpData;
+        
         
         NSArray* tmpCateList = [dicData objectForKey:@"categories"];
         if (tmpCateList != nil){
@@ -2239,9 +2255,13 @@
                            type:(int)type{
     if (dicData == nil)
         return;
-    
+    ITSApplication* itsApp = [ITSApplication get];
     for (NSDictionary* commentDataItem in dicData) {
         CelebComment* tmpItem = [[CelebComment alloc] initWithDictionary:commentDataItem];
+    
+        tmpItem.name = itsApp.dataSvr.celebInfo.name;
+        tmpItem.avator = itsApp.dataSvr.celebInfo.avator;
+        
         [self insertCelebCommentItem:tmpItem];
     }
 }
@@ -2250,6 +2270,9 @@
     BOOL same = NO;
     BOOL ret = NO;
     int i = 0;
+    
+    if (self.celebComments == nil)
+        self.celebComments = [NSMutableArray arrayWithCapacity:1];
     
     if (self.celebComments == nil || item == nil)
         return ret;
@@ -2318,6 +2341,9 @@
     BOOL same = NO;
     BOOL ret = NO;
     int i = 0;
+    
+    if (self.userComments == nil)
+        self.userComments = [NSMutableArray arrayWithCapacity:1];
     
     if (self.userComments == nil || item == nil)
         return ret;

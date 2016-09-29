@@ -202,6 +202,18 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              self.commentData = mutaArray;
              
              [self.tableView reloadData];
+             
+             // send to server
+             ITSApplication* itsApp = [ITSApplication get];
+             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61
+             //             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+             //
+             //             }];
+             
+             [itsApp.remoteSvr replayCelebComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+             }];
          }
      }];
 }
@@ -257,6 +269,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     DataService* ds = itsApp.dataSvr;
     CBUserService* userSvr = itsApp.cbUserSvr;
 //    SettingService* ss = [SettingService get];
+    
+    NSString* commentId = @"";
 
     [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
                                    content:@""
@@ -288,6 +302,19 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              newsItem.type = 2;
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
+             
+             // send to server
+             // eef31e8e-65ea-417b-8994-a48618716f1d  cid
+             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61  fid
+             ITSApplication* itsApp = [ITSApplication get];
+             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+//             [itsApp.remoteSvr replayFansComment:cbComment.fid replayCommendId:commentId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+//                 
+//             }];
+             
+             [itsApp.remoteSvr replayFansComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" replayCommendId:@"eef31e8e-65ea-417b-8994-a48618716f1d" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+             }];
 
          }
     }];
@@ -340,6 +367,18 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
 
+             // send to server
+             // eef31e8e-65ea-417b-8994-a48618716f1d  cid
+             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61  fid
+             ITSApplication* itsApp = [ITSApplication get];
+             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+             //             [itsApp.remoteSvr replayFansComment:cbComment.fid replayCommendId:commentId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+             //
+             //             }];
+             
+             [itsApp.remoteSvr replayFansComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" replayCommendId:@"eef31e8e-65ea-417b-8994-a48618716f1d" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+             }];
          }
     }];
 

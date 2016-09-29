@@ -25,6 +25,13 @@
     return app.baseUrl;
 }
 
+-(NSString*) getBaseFileUrl{
+    NSString* baseUrl = [self getBaseUrl];
+    NSString* fileBaseUrl = [NSString stringWithFormat:@"%@v0/files", baseUrl];
+    
+    return fileBaseUrl;
+}
+
 -(NSString*) getGroup{
     ITSApplication* app = [ITSApplication  get];
     return @"";//app.group;
@@ -690,7 +697,8 @@
 -(void) doLogin: (NSString*) email
             uid: (NSString*) uid
     accessToken: (NSString*) accessToken
-           type: (int) type{
+           type: (int) type
+       callback: (RemoteCallback) callback{
     
     NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/login",[self getBaseUrl]];
     MMLogDebug(@"Login URL: %@", url);
@@ -710,13 +718,14 @@
              NSData* data = [resultData objectForKey:@"data"];
              NSError* err;
              //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             NSMutableDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
              MMLogDebug(@"Login RSP: %@",dataDic);
+             callback(1, 1, dataDic);
          }
      }];
 }
 
--(void) doLogout {
+-(void) doLogout: (RemoteCallback) callback{
     
     NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/logout",[self getBaseUrl]];
     MMLogDebug(@"Logout URL: %@", url);
@@ -790,8 +799,13 @@
         return;
     
     ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments",[self getBaseUrl], [cs getChannel], fid];
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
     MMLogDebug(@"replayCelebComment URL: %@", url);
     
     NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -821,8 +835,13 @@
         return;
     
     ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments/%@",[self getBaseUrl], [cs getChannel], fid, replayCommendId];
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments/%@?_s=%@",[self getBaseUrl], [cs getChannel], fid, replayCommendId, user.session];
     MMLogDebug(@"replayFansComment URL: %@", url);
     
     NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];

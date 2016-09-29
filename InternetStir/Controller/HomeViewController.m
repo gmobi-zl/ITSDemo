@@ -75,8 +75,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     if (self.view.hidden == NO){
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            
-            //[self.tableView reloadData];
+            [self.tableView reloadData];
             
             [self.tableView footerEndRefreshing];
             [self.tableView headerEndRefreshing];
@@ -154,13 +153,42 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CGFloat height;
+#ifdef DEMO_DATA
     HomeCommentFrame *frame = self.commentData[indexPath.row];
     height = frame.cellHeight;
+#else
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    
+    if (dataArr != nil){
+        CelebComment* cbComment = [dataArr objectAtIndex:indexPath.row];
+        
+        if (cbComment.uiFrame == nil){
+            HomeCommentFrame* frame = [HomeCommentFrame alloc];
+            [frame initWithCommentData:cbComment];
+            cbComment.uiFrame = frame;
+            height = frame.cellHeight;
+        }
+    }
+#endif
     return height;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+
+#ifdef DEMO_DATA
     return self.commentData.count;
+#else
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    NSInteger count = 0;
+    if (dataArr != nil)
+        count = [dataArr count];
+    
+    return count;
+#endif
+    
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -170,7 +198,22 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         cell = [[HomeCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HomeCommentCellIdentifier];
     }
     HomeCommentCell *tmpCell = (HomeCommentCell*)cell;
-    tmpCell.commentFrame = self.commentData[indexPath.row];
+    //tmpCell.commentFrame = self.commentData[indexPath.row];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    
+    if (dataArr != nil){
+        CelebComment* cbComment = [dataArr objectAtIndex:indexPath.row];
+        if (cbComment.uiFrame == nil){
+            HomeCommentFrame* frame = [HomeCommentFrame alloc];
+            [frame initWithCommentData:cbComment];
+            cbComment.uiFrame = frame;
+        }
+        [tmpCell setShowData:cbComment];
+        tmpCell.commentFrame = cbComment.uiFrame;
+    }
+    
     tmpCell.button.tag = indexPath.row;
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
@@ -264,7 +307,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)pushDetailVc:(UIButton *)button {
-    
+#ifdef DEMO_TEST
     DetailCommentController *detail = [[DetailCommentController alloc] init];
     HomeCommentFrame *frame = self.commentData[button.tag];
     detail.hidesBottomBarWhenPushed = YES;
@@ -272,6 +315,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     detail.headHeight = frame.headH;
     detail.item = frame.commentItem;
     [self.navigationController pushViewController:detail animated:YES];
+#else
+    
+#endif
 }
 - (void)pushNextVc:(UIButton *)button{
     ITSApplication* itsApp = [ITSApplication get];
@@ -314,6 +360,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //     }];
 }
 
+#ifdef DEMO_DATA
 -(NSMutableArray *)commentData
 {
     if (!_commentData) {
@@ -351,6 +398,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
     return _commentData;
 }
+#endif
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -381,7 +429,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
     self.navigationItem.rightBarButtonItem = right;
     
-    [itsApp.dataSvr refreshCelebComments:NEWS_REFRESH_TYPE_BEFORE];
+    if (itsApp.dataSvr.celebComments == nil){
+        [self headerRereshing];
+        [self.tableView headerBeginRefreshing];
+    }
+    
+    //[itsApp.dataSvr refreshCelebComments:NEWS_REFRESH_TYPE_BEFORE];
 
 }
 - (void)login {

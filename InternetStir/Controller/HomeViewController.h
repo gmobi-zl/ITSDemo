@@ -10,10 +10,13 @@
 #import "LoginView.h"
 #import "PickerImageTools.h"
 #import "FacebookService.h"
+#import "ITSAppConst.h"
 
 @interface HomeViewController : UIViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+#ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;
+#endif
 //@property (nonatomic, strong) UIVisualEffectView *effectView;
 @property (nonatomic, strong) LoginView *loginView;
 @property (nonatomic, strong) UIButton* Btn;
