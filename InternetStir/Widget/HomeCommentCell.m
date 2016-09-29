@@ -11,6 +11,7 @@
 #import "ITSAppConst.h"
 #import "AppStyleConfiguration.h"
 #import "ITSApplication.h"
+#import "UIImageView+WebCache.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 
@@ -46,7 +47,7 @@
         
         self.commentLabel = [[UILabel alloc] init];
         self.commentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.commentLabel.numberOfLines = 4;
+        self.commentLabel.numberOfLines = 0;
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
@@ -149,21 +150,38 @@
 {
     HomeCommentItem *comment = self.commentFrame.commentItem;
     self.icon.image = [UIImage imageNamed:comment.icon];
+//    [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:@"loading"] options:SDWebImageRefreshCached];
     self.nameLabel.text = comment.name;
     self.photo.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",comment.pictures]];
     
+    [self.photo sd_setImageWithURL:[NSURL URLWithString:comment.pictures] placeholderImage:[UIImage imageNamed:@"loading"] options:SDWebImageRefreshCached];
+    
     NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.shuoshuoText];
     
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineSpacing = 0.5;
+    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
     NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
-
+    
     NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
-    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:replyRange];
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
     [self.commentLabel setAttributedText:noteStr];
-    [self.commentLabel sizeToFit];
+
+    
+    
+//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+//    NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+//    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+//    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+//
+//    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
+//    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:replyRange];
+//    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
+//    [self.commentLabel setAttributedText:noteStr];
+//    [self.commentLabel sizeToFit];
 
 //    self.name.text = comment.name;
     for (NSInteger i = 0; i < comment.replys.count; i++) {

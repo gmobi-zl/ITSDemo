@@ -11,6 +11,7 @@
 #import "MMLogger.h"
 #import "ConfigService.h"
 #import "SettingService.h"
+#import "MMSystemHelper.h"
 #define MC_TAB_VIEW_TAG 100
 #define MC_TAB_CONTENT_TAG 101
 
@@ -158,15 +159,15 @@ NSInteger num;
         self.tabsView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, self.yPositionOfTabView, CGRectGetWidth(self.view.frame), self.heightOfTabView)];
         self.tabsView.userInteractionEnabled = YES;
         self.tabsView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-       
+        self.tabsView.backgroundColor = [UIColor whiteColor];
         //self.tabsView.backgroundColor = [UIColor cyanColor];
         self.tabsView.scrollsToTop = NO;
-        self.tabsView.showsHorizontalScrollIndicator = NO;
-        self.tabsView.showsVerticalScrollIndicator = NO;
+//        self.tabsView.showsHorizontalScrollIndicator = NO;
+//        self.tabsView.showsVerticalScrollIndicator = NO;
         self.tabsView.tag = MC_TAB_VIEW_TAG;
         self.tabsView.delegate = self;
-        self.tabsView.bounces = NO;
-        self.tabsView.scrollEnabled = YES;
+//        self.tabsView.bounces = NO;
+        self.tabsView.scrollEnabled = NO;
         
         [self.view insertSubview:self.tabsView atIndex:0];
     }
@@ -235,13 +236,12 @@ NSInteger num;
     
     self.tabIndicator = [[UIView alloc] init];
    
-    self.tabIndicator.frame = CGRectMake(0, firstItemRect.origin.y + 36, firstItemRect.size.width, 4);
+    self.tabIndicator.frame = CGRectMake(0, firstItemRect.origin.y + 38, firstItemRect.size.width, 2);
     [self.tabIndicator setTag:989];
     [self.tabsView addSubview:self.tabIndicator];
     ConfigService *cs = [ConfigService get];
     self.tabIndicator.backgroundColor = [cs getYellowViewColor:cs.type];
     //self.tabsView.backgroundColor = [UIColor blackColor];
-    
     // Default Design
     if ([self.delegate respondsToSelector:@selector(viewPager:didSwitchAtIndex:withTabs:)]) {
         [self.delegate viewPager:self didSwitchAtIndex:self.activeContentIndex withTabs:self.tabs];
@@ -260,8 +260,9 @@ NSInteger num;
 }
   - (void)viewWillAppear:(BOOL)animated{
       [super viewWillAppear:animated];
-      ConfigService *cs = [ConfigService get];
-      self.tabsView.backgroundColor = [cs getScrollViewBgColor:cs.type];;
+     
+      self.tabsView.backgroundColor = [MMSystemHelper string2UIColor:@"#FAFAFA"];
+//      self.tabsView.backgroundColor = [cs getScrollViewBgColor:cs.type];;
       //self.tabsView.backgroundColor = [UIColor cyanColor];
      // self.tabsView.backgroundColor = [cs getScrollViewBgColor:cs.type];
       //self.tabIndicator.backgroundColor = [cs getYellowViewColor:cs.type];
@@ -340,7 +341,7 @@ NSInteger num;
         self.tabsView.tag = MC_TAB_VIEW_TAG;
         self.tabsView.delegate = self;
         self.tabsView.bounces = NO;
-        self.tabsView.scrollEnabled = YES;
+        self.tabsView.scrollEnabled = NO;
         
         [self.view insertSubview:self.tabsView atIndex:0];
     }

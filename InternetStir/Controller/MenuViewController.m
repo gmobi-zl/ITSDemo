@@ -114,7 +114,6 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
     }
     
-   
     NSString *str = @"Content with Facebook";
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
     CGFloat width = size.width + 30 + 10 + 60;
@@ -130,7 +129,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)passMessage {
-    self.loginView.effectView.hidden = YES;
+    [UIView animateWithDuration:1 animations:^{
+        self.loginView.effectView.alpha = 0;
+    }];
     [self.tableView reloadData];
     
     ITSApplication* itsApp = [ITSApplication get];
@@ -283,6 +284,17 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     if (us.user.isLogin == NO) {
         if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 8) {
             [self login];
+        }else if (index == 0) {
+            SettingController *setVc = [[SettingController alloc] init];
+            setVc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:setVc animated:YES];
+        }else if (index == 5){
+            
+            WebviewController *webVc = [[WebviewController alloc] init];
+            webVc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:webVc animated:YES];
+        }else if (index == 6) {
+        
         }
     }else {
         if (index == 0) {
@@ -326,7 +338,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
         [al show];
     }else {
-        self.loginView.effectView.hidden = NO;
+        self.loginView.effectView.alpha = 1;
     }
 }
 - (void)didReceiveMemoryWarning {

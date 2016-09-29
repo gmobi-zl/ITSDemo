@@ -9,6 +9,7 @@
 #import "ContentViewCell.h"
 #import "MMSystemHelper.h"
 #import "ITSAppConst.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ContentViewCell
 

@@ -30,7 +30,7 @@
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenW, 20)];
-    statusBarView.backgroundColor = [UIColor whiteColor];
+    statusBarView.backgroundColor = [MMSystemHelper string2UIColor:@"#FAFAFA"];
     [self.view addSubview:statusBarView];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
@@ -71,9 +71,15 @@
     
     UIFont* font = [UIFont systemFontOfSize:16.0];
     CGSize size = [tabTitle sizeWithFont:font constrainedToSize:CGSizeMake(1000, 100)];
-    
-    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 40, 40)];
-    self.label.font = [UIFont systemFontOfSize:16.0];
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    if (screenW == 320) {
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 20, 40)];
+    }else if (screenW == 375){
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 35, 40)];
+    }else {
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width + 45, 40)];
+    }
+    self.label.font = [UIFont systemFontOfSize:14.0];
     self.label.text = tabTitle;
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.textColor = [UIColor blackColor];

@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *commentData;
 @property (nonatomic, strong) NSMutableArray *replyData;
 @property (nonatomic, strong) CommentItem *item;
+@property (nonatomic, assign) NSInteger type;
 
 @end

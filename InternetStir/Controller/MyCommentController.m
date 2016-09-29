@@ -43,7 +43,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
 }
