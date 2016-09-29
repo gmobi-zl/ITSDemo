@@ -81,22 +81,29 @@
         self.loginView.layer.cornerRadius = 10;
         self.loginView.center = self.view.center;
         [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        self.loginView.effectView.hidden = NO;
+        self.loginView.effectView.alpha = 1;
         [self.loginView.effectView addSubview:self.loginView];
     }
 }
 - (void)cancelBtn {
-    self.loginView.effectView.hidden = YES;
-    TabBarController *tabBar = [[TabBarController alloc] init];
-    tabBar.selectedIndex = 1;
-    [self.navigationController pushViewController:tabBar animated:YES];
-}
-- (void)passMessage {
     
-        self.loginView.effectView.hidden = YES;
+    [UIView animateWithDuration:1 animations:^{
+        self.loginView.effectView.alpha = 0;
+
+    } completion:^(BOOL finished) {
         TabBarController *tabBar = [[TabBarController alloc] init];
         tabBar.selectedIndex = 1;
         [self.navigationController pushViewController:tabBar animated:YES];
+    }];
+}
+- (void)passMessage {
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.loginView.effectView.alpha = 0;
+    }];
+    TabBarController *tabBar = [[TabBarController alloc] init];
+    tabBar.selectedIndex = 1;
+    [self.navigationController pushViewController:tabBar animated:YES];
 }
 
 -(void) delayToHome{

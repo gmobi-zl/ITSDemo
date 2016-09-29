@@ -27,7 +27,7 @@
         UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
-        self.effectView.hidden = YES;
+        self.effectView.alpha = 0;
         [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -44,18 +44,18 @@
         self.loginButton.layer.cornerRadius = 22;
         self.loginButton.layer.borderWidth = 2;
         self.loginButton.titleLabel.font = [UIFont systemFontOfSize:18];
-        self.loginButton.layer.borderColor = [UIColor grayColor].CGColor;
+        self.loginButton.layer.borderColor = [MMSystemHelper string2UIColor:@"#4A4a4a"].CGColor;
         [self.loginButton setTitle:@"Content with Facebook" forState:UIControlStateNormal];
         [self.loginButton setImage:[UIImage imageNamed:@"icon_fb"] forState:UIControlStateNormal];
         self.loginButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -22, 0, 0);
+        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 0);
         [self.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
 
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Content with Facebook"];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Connect with Facebook"];
         
         NSRange Range = NSMakeRange(0, [[str string] rangeOfString:@"Facebook"].location);
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:Range];
-        Range = NSMakeRange([[str string] rangeOfString:@"Facebook"].location, [[str string] rangeOfString:@"Content with Facebook"].length - [[str string] rangeOfString:@"Facebook"].location);
+        Range = NSMakeRange([[str string] rangeOfString:@"Facebook"].location, [[str string] rangeOfString:@"Connect with Facebook"].length - [[str string] rangeOfString:@"Facebook"].location);
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
         [self.loginButton setAttributedTitle:str forState:(UIControlStateNormal)];
         [self addSubview:self.loginButton];
@@ -73,21 +73,26 @@
         self.cancelButton.backgroundColor = [MMSystemHelper string2UIColor:@"#ADACAC"];
         [self.cancelButton setTitle:@"稍後" forState:UIControlStateNormal];
         self.cancelButton.layer.masksToBounds = YES;
-        self.cancelButton.layer.cornerRadius = 15;
+        self.cancelButton.layer.cornerRadius = 22;
         [self.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.cancelButton setTitleColor:[MMSystemHelper string2UIColor:@"#ffffff"] forState:UIControlStateNormal];
         [self addSubview:self.cancelButton];
     }
     return self;
 }
 - (void)cancelBtn {
-    self.effectView.hidden = YES;
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.effectView.alpha = 0;
+    }];
 }
 - (void)loginFB {
     
     ITSApplication* poApp = [ITSApplication get];
     FacebookService *faceBook = poApp.fbSvr;
-    self.effectView.hidden = YES;
+    [UIView animateWithDuration:1 animations:^{
+        self.effectView.alpha = 0;
+    }];
     faceBook.delegate = self.viewController;
     [faceBook facebookLogin:^(int resultCode) {
         if (resultCode == ITS_FB_LOGIN_SUCCESS) {

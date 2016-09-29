@@ -25,6 +25,10 @@
         self.icon.layer.cornerRadius = 20;
         [self.contentView addSubview:self.icon];
         
+        self.iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.iconBtn.backgroundColor = [UIColor clearColor];
+        [self.icon addSubview:self.iconBtn];
+        
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.font = [UIFont systemFontOfSize:14];
         self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
@@ -162,7 +166,8 @@
 {
     self.icon.frame = self.detailCommentFrame.iconF;
     self.nameLabel.frame = self.detailCommentFrame.nameF;
-    
+    self.iconBtn.frame = self.icon.frame;
+
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replysF objectAtIndex:i] CGRectValue];
     }

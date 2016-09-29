@@ -51,7 +51,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //    [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
     self.commentView.delegate = self;
     [self.view addSubview:self.commentView];
-//    [self writeClick];
+    if (self.type == 1) {
+        [self writeClick];
+    }
     
     [self setupRefresh];
 }
@@ -95,6 +97,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //    NSString *str = [ss getStringValue:@"login" defValue:nil];
 //    if (str.length > 0) {
 //        [self writeClick];
+//    }
 }
 - (void)clickBack{
     
@@ -237,7 +240,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.replyButton.tag = indexPath.row;
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
-
+    [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.iconBtn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
         ((UIImageView *)[tmpCell.replyIconView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.detailCommentFrame.replyPictureF objectAtIndex:i] CGRectValue];
         tmpCell.replyIcon = [tmpCell.replyIconView objectAtIndex:i];

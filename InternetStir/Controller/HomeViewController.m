@@ -323,11 +323,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == NO) {
-        self.loginView.effectView.hidden = NO;
+        self.loginView.effectView.alpha = 1;
     }else {
         CommentViewController *vc = [[CommentViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.index = button.tag;
+        vc.type = 1;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -335,11 +336,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == NO) {
-        self.loginView.effectView.hidden = NO;
+        self.loginView.effectView.alpha = 1;
     }else {
         CommentViewController *vc = [[CommentViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.index = button.tag;
+        vc.type = 2;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -446,7 +448,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     }else {
         if (us.user.isLogin == NO) {
-            self.loginView.effectView.hidden = NO;
+            self.loginView.effectView.alpha = 1;
         }
     }
 //
