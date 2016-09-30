@@ -21,6 +21,7 @@
 #define FANS_COMMENT_ITEM_PTS @"pts"
 #define FANS_COMMENT_ITEM_UTS @"uts"
 #define FANS_COMMENT_ITEM_CBREAD @"read"
+#define FANS_COMMENT_ITEM_RID @"rid"
 
 @interface FansComment : NSObject
 
@@ -30,9 +31,12 @@
 @property NSString* fid;
 @property NSString* cid;
 @property NSString* comment;
+@property NSString* rid;
 @property UInt64 pts;
 @property UInt64 uts;
 @property BOOL isCelebRead;
+
+@property NSArray* replayComments;
 
 @property CommentFrame* uiFrame;
 

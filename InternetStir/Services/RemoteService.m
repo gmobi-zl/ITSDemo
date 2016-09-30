@@ -819,8 +819,11 @@
              NSData* data = [resultData objectForKey:@"data"];
              NSError* err;
              //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
              MMLogDebug(@"replayCelebComment RSP: %@",dataDic);
+             
+             if (callback != nil)
+                 callback(1,1,dataDic);
          }
      }];
 }
@@ -855,8 +858,10 @@
              NSData* data = [resultData objectForKey:@"data"];
              NSError* err;
              //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
              MMLogDebug(@"replayFansComment RSP: %@",dataDic);
+             if (callback != nil)
+                 callback(1,1,dataDic);
          }
      }];
 }

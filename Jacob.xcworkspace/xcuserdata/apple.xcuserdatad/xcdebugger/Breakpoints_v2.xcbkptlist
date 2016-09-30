@@ -58,7 +58,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496899692.88175"
+                  timestampString = "496915961.669482"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -73,7 +73,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496899692.882784"
+                  timestampString = "496915961.670057"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"
@@ -144,22 +144,6 @@
             startingLineNumber = "198"
             endingLineNumber = "198"
             landmarkName = "-setState:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InternetStir/Controller/HomeViewController.m"
-            timestampString = "496899599.539797"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
-            landmarkName = "-pushComment:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

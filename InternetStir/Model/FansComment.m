@@ -38,6 +38,11 @@
     if (tmpData != nil)
         self.cid = tmpData;
     
+    
+    tmpData = [dic objectForKey:FANS_COMMENT_ITEM_RID];
+    if (tmpData != nil)
+        self.rid = tmpData;
+    
     tmpData = [dic objectForKey:FANS_COMMENT_ITEM_COMMENT];
     if (tmpData != nil)
         self.comment = tmpData;

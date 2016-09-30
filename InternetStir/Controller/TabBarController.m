@@ -34,7 +34,9 @@
     NSArray *imageArr = @[@"social",@"home",@"more"];
     NSArray *imageSelectArr = @[@"social_selected",@"home_selected",@"more_selected"];
 
-    NSArray *titleName = @[@"社群",@"蔡阿嘎",@"粉絲小幫手"];
+    ITSApplication* itsApp = [ITSApplication get];
+    NSString* appTitleName = itsApp.dataSvr.celebInfo.name == nil ? @"" : itsApp.dataSvr.celebInfo.name;
+    NSArray *titleName = @[@"社群",appTitleName,@"粉絲小幫手"];
     int cnt = 0;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (NSString *className in vcName) {

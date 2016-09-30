@@ -26,6 +26,7 @@
 
 #import "PNNativeAdItem.h"
 #import "CelebComment.h"
+#import "FansComment.h"
 
 //#import "CommentItem.h"
 //#import "CommentCellFrame.h"
@@ -340,6 +341,7 @@ typedef enum{
                            fid: (NSString*) fid
                    isClearData: (BOOL) clear
                           type: (int) type;
+-(BOOL) insertCurrentReplyCommentItem: (FansComment*) item;
 
 @end
 

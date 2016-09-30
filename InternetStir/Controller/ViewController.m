@@ -15,6 +15,7 @@
 #import "UUInputAccessoryView.h"
 #import "MenuViewController.h"
 #import "DetailContentController.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -31,9 +32,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    ITSApplication* itsApp = [ITSApplication get];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-    self.title = @"蔡阿嘎";
+    self.title = itsApp.dataSvr.celebInfo.name == nil ? @"" : itsApp.dataSvr.celebInfo.name; //@"蔡阿嘎";
     NSArray *arr = @[@"留言",@"内容",@"社群"];
     self.segment = [[UISegmentedControl alloc] initWithItems:arr];
     self.segment.frame = CGRectMake(20, 70, screenW - 40, 30);

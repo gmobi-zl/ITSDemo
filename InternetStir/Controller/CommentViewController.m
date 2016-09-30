@@ -275,32 +275,38 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              ITSApplication* itsApp = [ITSApplication get];
              DataService* ds = itsApp.dataSvr;
              CelebComment* currentComment = ds.currentCelebComment;
-             NSArray* replyList = currentComment.replayComments;
-             if (replyList != nil){
-                 NSInteger count = [replyList count];
-                 for (int i = 0; i < count; i++) {
-                     FansComment* c = [replyList objectAtIndex:i];
-                     if (c.uiFrame == nil){
-                         CommentFrame* frame = [CommentFrame alloc];
-                         [frame initWithCommentData:c];
-                         c.uiFrame = frame;
+             
+             [itsApp.remoteSvr replayCelebComment:currentComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 
+                 if (resultData != nil){
+                     NSNumber* retNum = [resultData objectForKey:@"success"];
+                     if (retNum != nil){
+                         BOOL ret = [retNum boolValue];
+                         if (ret == YES){
+                             CelebUser* user = itsApp.cbUserSvr.user;
+                             FansComment* sendComment = [FansComment alloc];
+                             sendComment.name = user.userName;
+                             sendComment.avator = user.avatar;
+                             sendComment.comment = contentStr;
+                             NSString* retuuid = [resultData objectForKey:@"uuid"];
+                             NSString* retfid = [resultData objectForKey:@"fid"];
+                             NSString* retcid = [resultData objectForKey:@"cid"];
+                             
+                             sendComment.uuid = retuuid;
+                             sendComment.fid = retfid;
+                             sendComment.cid = retcid;
+                             sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                             sendComment.uts = sendComment.pts;
+                             
+                             [ds insertCurrentReplyCommentItem:sendComment];
+                             
+                             [self.tableView reloadData];
+                         }
                      }
                  }
-             }
-             
-             
-             // send to server
-             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61
-             //             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-             //
-             //             }];
-             
-             [itsApp.remoteSvr replayCelebComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-                 
              }];
              
 #endif
-             
          }
      }];
 }
@@ -499,16 +505,49 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [self.tableView reloadData];
 #else
              // send to server
-             // eef31e8e-65ea-417b-8994-a48618716f1d  cid
-             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61  fid
              ITSApplication* itsApp = [ITSApplication get];
-             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
-             //             [itsApp.remoteSvr replayFansComment:cbComment.fid replayCommendId:commentId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-             //
-             //             }];
+             DataService* ds = itsApp.dataSvr;
+             CelebComment* currentComment = ds.currentCelebComment;
+             FansComment* currentFansComment = nil;
+             NSArray* replyList = currentComment.replayComments;
+             if (replyList != nil){
+                 if (index < [replyList count]){
+                     currentFansComment = [replyList objectAtIndex:index];
+                 }
+             }
              
-             [itsApp.remoteSvr replayFansComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" replayCommendId:@"eef31e8e-65ea-417b-8994-a48618716f1d" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-                 
+             if (currentFansComment == nil){
+                 return;
+             }
+
+             [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:currentFansComment.cid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 if (resultData != nil){
+                     NSNumber* retNum = [resultData objectForKey:@"success"];
+                     if (retNum != nil){
+                         BOOL ret = [retNum boolValue];
+                         if (ret == YES){
+                             CelebUser* user = itsApp.cbUserSvr.user;
+                             FansComment* sendComment = [FansComment alloc];
+                             sendComment.name = user.userName;
+                             sendComment.avator = user.avatar;
+                             sendComment.comment = contentStr;
+                             NSString* retuuid = [resultData objectForKey:@"uuid"];
+                             NSString* retfid = [resultData objectForKey:@"fid"];
+                             NSString* retcid = [resultData objectForKey:@"cid"];
+                             NSString* retrid = [resultData objectForKey:@"rid"];
+                             sendComment.uuid = retuuid;
+                             sendComment.fid = retfid;
+                             sendComment.cid = retcid;
+                             sendComment.rid = retrid;
+                             sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                             sendComment.uts = sendComment.pts;
+                             
+                             [ds insertCurrentReplyCommentItem:sendComment];
+                             
+                             [self.tableView reloadData];
+                         }
+                     }
+                 }
              }];
 
 #endif
