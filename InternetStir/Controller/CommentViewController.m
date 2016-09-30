@@ -541,8 +541,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              FansComment* currentFansComment = nil;
              NSArray* replyList = currentComment.replayComments;
              if (replyList != nil){
-                 if (index < [replyList count]){
-                     currentFansComment = [replyList objectAtIndex:index];
+                 if (index-1 < [replyList count]){
+                     currentFansComment = [replyList objectAtIndex:index-1];
                  }
              }
              
@@ -574,7 +574,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                              
                              [ds insertCurrentReplyCommentItem:sendComment];
                              
-                             [self.tableView reloadData];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self.tableView reloadData];
+                             });
                          }
                      }
                  }

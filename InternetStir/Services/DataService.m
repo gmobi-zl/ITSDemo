@@ -2529,6 +2529,10 @@
             ret = YES;
         }
         
+        if (fsComment.uiFrame != nil){
+            [fsComment.uiFrame refreshFrame:fsComment];
+        }
+        
     } else {
         if (cbComment.replayComments == nil)
             cbComment.replayComments = [NSMutableArray arrayWithCapacity:1];

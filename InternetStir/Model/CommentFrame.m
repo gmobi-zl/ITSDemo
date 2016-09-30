@@ -155,7 +155,7 @@
 }
 -(void) initWithCommentData: (id) data{
     
-    [self initWithCommentData:data];
+    [self initWithDataFrame:data];
 }
 -(void) initWithDataFrame: (id)data{
     FansComment* fansComment = data;
@@ -198,16 +198,16 @@
         CGFloat replyLabelX = nameLabelX + padding/2;
         for (int i = 0; i < [fansComment.replayComments count]; i++) {
             
-            ReplyItem *item = [fansComment.replayComments objectAtIndex:i];
+            FansComment *item = [fansComment.replayComments objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight - 5, 30, 30);
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, 100, 20);
             self.cellHeight += 30 + padding/2;
             CGSize replyLabelSize;
-            if (item.type == 1) {
+            //if (item.type == 1) {
                 replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
-            }else{
-                replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@回复啊%@：%@",item.name,item.name,item.comment ] font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
-            }
+//            }else{
+//                replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@回复啊%@：%@",item.name,item.name,item.comment ] font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+//            }
             
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
