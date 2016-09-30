@@ -571,12 +571,12 @@ static NetWorkType currentNetType = NoNet;
     
     NSDate *d = [[NSDate alloc]initWithTimeIntervalSince1970:longTime/1000.0];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *timeString = [formatter stringFromDate:d];
     
     //把字符串转为NSdate
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSDate *timeDate = [dateFormatter dateFromString:timeString];
     
     //得到与当前时间差
@@ -607,7 +607,7 @@ static NetWorkType currentNetType = NoNet;
             //                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_before_yesterday", nil)];
             //            }
         }else{
-            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
+            result = [NSString stringWithFormat:@"%@ %@",[time objectAtIndex:0],[time objectAtIndex:1]];
         }
     }
     

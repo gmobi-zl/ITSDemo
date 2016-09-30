@@ -76,6 +76,15 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            ITSApplication* itsApp = [ITSApplication get];
+            NSArray* dataArr = itsApp.dataSvr.celebComments;
+            for (NSInteger i = 0; i < dataArr.count; i++) {
+                CelebComment *comment = [dataArr objectAtIndex:i];
+                HomeCommentFrame *frame = [[HomeCommentFrame alloc] init];
+                [frame initWithCommentData:comment];
+                comment.uiFrame = frame;
+            }
+            
             [self.tableView reloadData];
             
             [self.tableView footerEndRefreshing];
@@ -161,16 +170,15 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     ITSApplication* itsApp = [ITSApplication get];
     NSArray* dataArr = itsApp.dataSvr.celebComments;
-    
     if (dataArr != nil){
         CelebComment* cbComment = [dataArr objectAtIndex:indexPath.row];
-        
-        if (cbComment.uiFrame == nil){
-            HomeCommentFrame* frame = [HomeCommentFrame alloc];
-            [frame initWithCommentData:cbComment];
-            cbComment.uiFrame = frame;
-            height = frame.cellHeight;
-        }
+        height = cbComment.uiFrame.cellHeight;
+//        if (cbComment.uiFrame == nil){
+//            HomeCommentFrame* frame = [HomeCommentFrame alloc];
+//            [frame initWithCommentData:cbComment];
+//            cbComment.uiFrame = frame;
+//            height = frame.cellHeight;
+//        }
     }
 #endif
     return height;
@@ -232,13 +240,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         ((UILabel *)[tmpCell.replysView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.commentFrame.replysF objectAtIndex:i] CGRectValue];
         tmpCell.replyLabel = [tmpCell.replysView objectAtIndex:i];
         tmpCell.replyLabel.userInteractionEnabled = YES;
-//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame = CGRectMake(0, 0, tmpCell.replyLabel.frame.size.width, tmpCell.replyLabel.frame .size.height);
-        
-//        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
-//        button.userInteractionEnabled = YES;
-//        button.tag = indexPath.row;
-//        [tmpCell.replyLabel addSubview:button];
     }
     
     return cell;

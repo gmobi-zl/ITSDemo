@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "HomeCommentItem.h"
 
-
 @interface HomeCommentFrame : NSObject
 @property (nonatomic, assign) CGRect imageF;
 @property (nonatomic, assign) CGRect userNameF;

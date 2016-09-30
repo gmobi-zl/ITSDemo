@@ -170,7 +170,7 @@
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
     
-    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
+    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
     [self.commentLabel setAttributedText:noteStr];
 
@@ -233,10 +233,8 @@
 -(void) setShowData: (CelebComment*) data{
     [self removeOldReplys];
     
-    self.icon.image = [UIImage imageNamed:data.avator];
     self.nameLabel.text = data.name;
-    
-    //self.photo.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",comment.pictures]];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
     
     ITSApplication* itsApp = [ITSApplication get];
     NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
@@ -248,16 +246,17 @@
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
     
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineSpacing = 0.5;
+    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
     NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
     
     NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
-    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:replyRange];
     [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
     [self.commentLabel setAttributedText:noteStr];
-    [self.commentLabel sizeToFit];
     
     //    self.name.text = comment.name;
     NSInteger maxHotCommentCount = data.topFansComments.count;
@@ -300,7 +299,8 @@
         //        [self.contentView addSubview:replyName];
         //        [self.replyNameView addObject:replyName];
     }
-    NSString* time = [NSString stringWithFormat:@"%lld", data.pts];
+    NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
+    
     self.timeLabel.text = time;
     int fav = 99999;
     self.likeNum.text = [NSString stringWithFormat:@"%d",fav];

@@ -14,7 +14,7 @@
 //#define padding 10
 
 @implementation HomeCommentFrame
-- (void) setCommentItem:(HomeCommentItem *)commentItem{
+- (void) setCommentItem:(CelebComment *)commentItem{
 
     _commentItem = commentItem;
     CGFloat screenW = [MMSystemHelper getScreenWidth];
@@ -51,11 +51,9 @@
     self.cellHeight = CGRectGetMaxY(self.lineF) + HOME_FAV_CONTENT_PADDING;
 
     NSString *str = [NSString stringWithFormat:@"%@   %@",self.commentItem.name,self.commentItem.shuoshuoText];
-//    CGSize sizeH = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@   %@",self.commentItem.name,str] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 30, MAXFLOAT)];
     CGFloat height = [self height:str];
     self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, [self height:str]);
 
-//    CGSize sizeH = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@   %@",self.commentItem.name,commentItem.shuoshuoText] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
     CGFloat contentH = height;
     self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 20;
 
@@ -110,7 +108,7 @@
     [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:Range];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
 
-    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
+    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor cyanColor] range:replyRange];
     [dataLabel setAttributedText:noteStr];
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
@@ -160,7 +158,7 @@
     CGFloat nameLabelHeight = nameLabelSize.height;
     self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 30);
     
-    NSString* time = [NSString stringWithFormat:@"%lld", comment.pts];
+    NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", comment.pts]];
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
     self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight + 10 , timeLabelSize.width, 20);
     
@@ -177,27 +175,22 @@
     self.likeNumF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 20 + 5, self.cellHeight + HOME_LINE_FAV_PADDING, 200, 20);
     self.cellHeight = CGRectGetMaxY(self.lineF) + HOME_FAV_CONTENT_PADDING;
     
-    NSString *str = comment.context;
-    UILabel *label = [[UILabel alloc]init];
-    label.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING, screenW - 30, 0);
-    label.numberOfLines = 4;
-    label.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-    label.text = [NSString stringWithFormat:@"%@   %@",comment.name, str];
-    CGSize size = [label sizeThatFits:CGSizeMake(screenW - 30, MAXFLOAT)];
-    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING,screenW - 30, size.height);
     
-    CGSize sizeH = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@   %@",comment.name,comment.context] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
-    CGFloat contentH = sizeH.height;
+    NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.context];
+    CGFloat height = [self height:str];
+    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, [self height:str]);
+    
+    CGFloat contentH = height;
     self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 20;
     
     self.userNameF = CGRectMake(50, self.cellHeight + HOME_CONTENT_LEFT_PADDING/2 + 2, 50, 20);
     //    self.imageF = CGRectMake(10, self.cellHeight, 30, 30);
     self.cellHeight = CGRectGetMaxY(self.contentF);
     CGFloat btnW = [MMSystemHelper sizeWithString:@"繼續閱讀" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
-    self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + size.height + 5, btnW, 25);
+    self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
     
     CGFloat buttonW = [MMSystemHelper sizeWithString:@"查看更多留言" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
-    self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + size.height + 5, buttonW, 25);
+    self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);
     self.cellHeight = CGRectGetMaxY(self.buttonF);
     
     
