@@ -119,7 +119,7 @@
         [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     }
 
-#ifdef DEMO_TEST
+#ifdef DEMO_DATA
     [self removeOldReplys];
     [self settingtData];
 #endif
@@ -260,7 +260,10 @@
     [self.commentLabel sizeToFit];
     
     //    self.name.text = comment.name;
-    for (NSInteger i = 0; i < data.topFansComments.count; i++) {
+    NSInteger maxHotCommentCount = data.topFansComments.count;
+    if (maxHotCommentCount > 3)
+        maxHotCommentCount = 3;
+    for (NSInteger i = 0; i < maxHotCommentCount; i++) {
         FansComment *item = [data.topFansComments objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:16];

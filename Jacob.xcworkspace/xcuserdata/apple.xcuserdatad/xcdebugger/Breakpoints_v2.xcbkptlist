@@ -58,7 +58,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496837333.840904"
+                  timestampString = "496891409.913266"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -73,7 +73,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496837333.841562"
+                  timestampString = "496891409.91382"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"
@@ -106,11 +106,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.843753"
+                  timestampString = "496891409.917757"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
+                  startingLineNumber = "217"
+                  endingLineNumber = "217"
                   offsetFromSymbolStart = "1164">
                </Location>
                <Location
@@ -121,11 +121,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.844089"
+                  timestampString = "496891409.918202"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
+                  startingLineNumber = "219"
+                  endingLineNumber = "219"
                   offsetFromSymbolStart = "68">
                </Location>
             </Locations>
@@ -154,11 +154,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.849401"
+                  timestampString = "496891409.921547"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "315"
-                  endingLineNumber = "315"
+                  startingLineNumber = "319"
+                  endingLineNumber = "319"
                   offsetFromSymbolStart = "1352">
                </Location>
                <Location
@@ -169,11 +169,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.849812"
+                  timestampString = "496891409.923306"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "317"
-                  endingLineNumber = "317"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
                   offsetFromSymbolStart = "68">
                </Location>
             </Locations>
@@ -202,11 +202,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.851745"
+                  timestampString = "496891409.934059"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "379"
-                  endingLineNumber = "379"
+                  startingLineNumber = "383"
+                  endingLineNumber = "383"
                   offsetFromSymbolStart = "1320">
                </Location>
                <Location
@@ -217,11 +217,11 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496837333.85212"
+                  timestampString = "496891409.949461"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "381"
-                  endingLineNumber = "381"
+                  startingLineNumber = "385"
+                  endingLineNumber = "385"
                   offsetFromSymbolStart = "68">
                </Location>
             </Locations>
@@ -249,20 +249,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Widget/HomeCommentCell.m"
-            timestampString = "496837333.351268"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "InternetStir/Model/HomeCommentFrame.m"
             timestampString = "496836311.473383"
             startingColumnNumber = "9223372036854775807"
@@ -279,12 +265,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Widget/HomeCommentCell.m"
-            timestampString = "496837333.351268"
+            filePath = "InternetStir/Controller/HomeViewController.m"
+            timestampString = "496854827.734391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246">
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-celebCommentsDataRefreshListener:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -293,12 +281,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Widget/HomeCommentCell.m"
-            timestampString = "496837333.351268"
+            filePath = "InternetStir/Widget/SDWebImage/MJRefresh/MJRefreshHeaderView.m"
+            timestampString = "496855021.024796"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238">
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-setState:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

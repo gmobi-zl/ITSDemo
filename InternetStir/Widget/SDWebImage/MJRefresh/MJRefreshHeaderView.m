@@ -196,7 +196,9 @@
 //#warning 这句代码修复了，top值不断累加的bug
 //                    self.scrollView.mj_contentInsetTop -= self.mj_height;
                     if (self.mj_height == 64) {
-                        if (self.scrollView.mj_contentInsetTop == 64) {
+                        //NSLog(@"mj_contentInsetTop = %f", self.scrollView.mj_contentInsetTop);
+                        //if (self.scrollView.mj_contentInsetTop == 64) {
+                        if (self.scrollView.mj_contentInsetTop >= 64) {
                             self.scrollView.mj_contentInsetTop -= self.mj_height;
                         }
                     }
@@ -228,7 +230,7 @@
                 self.scrollView.mj_contentInsetTop = top;
                 
                 // 2.设置滚动位置
-                self.scrollView.mj_contentOffsetY = - top;
+                self.scrollView.mj_contentOffsetY = -top;
             }];
 			break;
         }

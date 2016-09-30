@@ -200,8 +200,13 @@
     self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + size.height + 5, buttonW, 25);
     self.cellHeight = CGRectGetMaxY(self.buttonF);
     
+    
+    
     if ([comment.topFansComments count]) {
-        for (int i = 0; i < [comment.topFansComments count]; i++) {
+        NSInteger maxHotCommentCount = comment.topFansComments.count;
+        if (maxHotCommentCount > 3)
+            maxHotCommentCount = 3;
+        for (int i = 0; i < maxHotCommentCount; i++) {
             
             FansComment *item = [comment.topFansComments objectAtIndex:i];
             
