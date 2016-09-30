@@ -332,7 +332,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     if (replyList != nil){
         if (indexPath.row == 0) {
             CGSize size = [MMSystemHelper sizeWithString:currentComment.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-            height = 13 + 4 + size.height + 4 + 20 + 10;
+             //13 + 30 + 4 + h + 4 + 20 + 10
+            height = 13 + 20 + 4 + size.height + 4 + 20 + 10;
         }else {
             FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
             height = c.uiFrame.cellHeight;
@@ -413,6 +414,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         [tmpCell.replyNameLabel addSubview:button];
     }
     return tmpCell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+
 }
 //回复的回复
 - (void)tapReply:(UIButton *)btn{
