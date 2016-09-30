@@ -196,13 +196,13 @@
     self.cellHeight = CGRectGetMaxY(self.timeF) + padding + 5;
     
     //评论
-    /*
-    if([self.detailCommentItem.replys count])
+    
+    if([fansComment.replayComments count])
     {
         CGFloat replyLabelX = nameLabelX + padding/2;
-        for (int i = 0; i < [self.detailCommentItem.replys count]; i++) {
+        for (int i = 0; i < [fansComment.replayComments count]; i++) {
             
-            ReplyItem *item = [self.detailCommentItem.replys objectAtIndex:i];
+            ReplyItem *item = [fansComment.replayComments objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight - 5, 30, 30);
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, 100, 20);
             self.cellHeight += 30 + padding/2;
@@ -230,7 +230,7 @@
         self.replyBackgroundF = CGRectMake(nameLabelX, CGRectGetMaxY(self.contentF) + padding, replyBackgroundWidth, replyBackgroundHeight);
         
     }
-     */
+     
     self.lineF = CGRectMake(nameLabelX, self.cellHeight - 0.5, screenW - nameLabelX - 10, 0.5);
 }
 @end

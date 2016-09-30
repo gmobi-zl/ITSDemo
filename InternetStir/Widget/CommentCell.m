@@ -262,45 +262,45 @@
         self.timeLabel.text = time;
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
-//            ReplyItem *item = [comment.replys objectAtIndex:i];
-//            UILabel *replyLabel = [[UILabel alloc]init];
-//            replyLabel.font = [UIFont systemFontOfSize:16];
-//            replyLabel.numberOfLines = 0;
-//            if (item.type == 1) {
-//                replyLabel.text = item.comment;
-//                replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
-//            }else{
-//                NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
-//                NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
-//                NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"："].location);
-//                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
-//                
-//                NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
-//                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-//                [replyLabel setAttributedText:noteStr] ;
-//                [replyLabel sizeToFit];
-//            }
-//            self.replyLabel = replyLabel;
-//            [self.contentView addSubview:replyLabel];
-//            [self.replysView addObject:replyLabel];
-//            
-//            UIImageView *replyIcon = [[UIImageView alloc] init];
-//            replyIcon.backgroundColor = [UIColor redColor];
-//            replyIcon.layer.cornerRadius = 15;
-//            replyIcon.layer.masksToBounds = YES;
-//            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
-//            [self.contentView addSubview:replyIcon];
-//            self.replyIcon = replyIcon;
-//            [self.replyIconView addObject:replyIcon];
-//            
-//            UILabel *replyName = [[UILabel alloc] init];
-//            replyName.text = item.name;
-//            replyName.textColor = [UIColor blackColor];
-//            replyName.font = [UIFont systemFontOfSize:14];
-//            
-//            self.replyNameLabel = replyName;
-//            [self.contentView addSubview:replyName];
-//            [self.replyNameView addObject:replyName];
+            ReplyItem *item = [data.replayComments objectAtIndex:i];
+            UILabel *replyLabel = [[UILabel alloc]init];
+            replyLabel.font = [UIFont systemFontOfSize:16];
+            replyLabel.numberOfLines = 0;
+            if (item.type == 1) {
+                replyLabel.text = item.comment;
+                replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
+            }else{
+                NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
+                NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
+                NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"："].location);
+                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
+                
+                NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
+                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
+                [replyLabel setAttributedText:noteStr] ;
+                [replyLabel sizeToFit];
+            }
+            self.replyLabel = replyLabel;
+            [self.contentView addSubview:replyLabel];
+            [self.replysView addObject:replyLabel];
+            
+            UIImageView *replyIcon = [[UIImageView alloc] init];
+            replyIcon.backgroundColor = [UIColor redColor];
+            replyIcon.layer.cornerRadius = 15;
+            replyIcon.layer.masksToBounds = YES;
+            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+            [self.contentView addSubview:replyIcon];
+            self.replyIcon = replyIcon;
+            [self.replyIconView addObject:replyIcon];
+            
+            UILabel *replyName = [[UILabel alloc] init];
+            replyName.text = item.name;
+            replyName.textColor = [UIColor blackColor];
+            replyName.font = [UIFont systemFontOfSize:14];
+            
+            self.replyNameLabel = replyName;
+            [self.contentView addSubview:replyName];
+            [self.replyNameView addObject:replyName];
         }
     }
 }
