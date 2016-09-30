@@ -342,11 +342,26 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     if (us.user.isLogin == NO) {
         self.loginView.effectView.alpha = 1;
     }else {
+#ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.index = button.tag;
         vc.type = 1;
         [self.navigationController pushViewController:vc animated:YES];
+#else
+        ITSApplication* itsApp = [ITSApplication get];
+        NSArray* dataArr = itsApp.dataSvr.celebComments;
+        
+        if (dataArr != nil){
+            CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
+            [itsApp.dataSvr setCurrentCelebComment:cbComment];
+            CommentViewController *vc = [[CommentViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.index = button.tag;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+#endif
     }
 }
 - (void)pushComment:(UIButton*)button{
@@ -355,11 +370,27 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     if (us.user.isLogin == NO) {
         self.loginView.effectView.alpha = 1;
     }else {
+#ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.index = button.tag;
         vc.type = 2;
         [self.navigationController pushViewController:vc animated:YES];
+    
+#else
+        ITSApplication* itsApp = [ITSApplication get];
+        NSArray* dataArr = itsApp.dataSvr.celebComments;
+        
+        if (dataArr != nil){
+            CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
+            [itsApp.dataSvr setCurrentCelebComment:cbComment];
+            CommentViewController *vc = [[CommentViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.index = button.tag;
+            vc.type = 2;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+#endif
     }
 }
 - (void)tapReply:(UIButton *)button{

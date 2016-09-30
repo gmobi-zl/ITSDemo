@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommentFrame.h"
+#import "FansComment.h"
+#import "SDWebImage/UIImageView+WebCache.h"
+
 @interface CommentCell : UITableViewCell
 
 @property (nonatomic, strong) CommentFrame *detailCommentFrame;
@@ -26,4 +29,7 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *replyButton;
 @property (nonatomic, strong) UIButton *iconBtn;
+
+-(void) setShowData: (FansComment*) data;
+
 @end

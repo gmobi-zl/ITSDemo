@@ -2396,7 +2396,7 @@
     
     for (NSDictionary* commentDataItem in dicData) {
         FansComment* tmpItem = [[FansComment alloc] initWithDictionary:commentDataItem];
-        [self insertUserCommentItem:tmpItem];
+        [self insertCurrentReplyCommentItem:tmpItem];
     }
 }
 

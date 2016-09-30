@@ -14,9 +14,14 @@
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CommentView *commentView;
+#ifdef DEMO_DATA
 @property (nonatomic, strong) NSMutableArray *commentData;
 @property (nonatomic, strong) NSMutableArray *replyData;
 @property (nonatomic, strong) CommentItem *item;
+#endif
 @property (nonatomic, assign) NSInteger type;
+
+@property (assign) int refreshType;
+@property (assign) BOOL isRefreshing;
 
 @end

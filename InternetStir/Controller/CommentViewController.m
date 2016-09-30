@@ -19,6 +19,8 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "AppStyleConfiguration.h"
+#import "MMEventService.h"
+#import "FansComment.h"
 
 NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 
@@ -56,7 +58,42 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }
     
     [self setupRefresh];
+    
+    MMEventService* es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH selector:@selector(celebReplyCommentsDataRefreshListener:)];
 }
+
+-(void)celebReplyCommentsDataRefreshListener: (id) data{
+    if (self.view.hidden == NO){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            DataService* ds = itsApp.dataSvr;
+            CelebComment* currentComment = ds.currentCelebComment;
+            NSArray* replyList = currentComment.replayComments;
+            if (replyList != nil){
+                NSInteger count = [replyList count];
+                for (int i = 0; i < count; i++) {
+                    FansComment* c = [replyList objectAtIndex:i];
+                    if (c.uiFrame == nil){
+                        CommentFrame* frame = [CommentFrame alloc];
+                        [frame initWithCommentData:c];
+                        c.uiFrame = frame;
+                    }
+                }
+            }
+            
+            [self.tableView reloadData];
+            
+            [self.tableView footerEndRefreshing];
+            [self.tableView headerEndRefreshing];
+            
+            self.isRefreshing = NO;
+        });
+    }
+}
+
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
@@ -72,12 +109,33 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
+    if (self.isRefreshing == NO){
+        self.refreshType = CB_COMMENT_REPLY_REFRESH_TYPE_AFTER;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        CelebComment* currentComment = ds.currentCelebComment;
+        
+        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_AFTER fid:currentComment.fid];
+        
+        self.isRefreshing = YES;
+    }
 
 }
+
 - (void)footerRereshing
 {
-
+    if (self.isRefreshing == NO){
+        self.refreshType = CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        CelebComment* currentComment = ds.currentCelebComment;
+        
+        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE fid:currentComment.fid];
+        
+        self.isRefreshing = YES;
+    }
 }
+
 - (void)push{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择", nil];
     [sheet showInView:self.view];
@@ -124,6 +182,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //       
 //    };
 }
+#ifdef DEMO_DATA
 -(NSMutableArray *)commentData
 {
     if (!_commentData) {
@@ -166,6 +225,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 
     return _commentData;
 }
+#endif
 
 - (void)writeNewComment{
     
@@ -191,6 +251,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [ss setStringValue:@"login" data:contentStr];
 
          }else{
+             
+#ifdef DEMO_DATA
              CommentFrame *FrameNeedChanged = [[CommentFrame alloc] init];
              CommentItem *commentItem = [[CommentItem alloc] init];
              commentItem.name = userSvr.user.userName;
@@ -206,9 +268,27 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              
              [self.tableView reloadData];
              
-             // send to server
+             
+#else
+             
              ITSApplication* itsApp = [ITSApplication get];
-             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
+             DataService* ds = itsApp.dataSvr;
+             CelebComment* currentComment = ds.currentCelebComment;
+             NSArray* replyList = currentComment.replayComments;
+             if (replyList != nil){
+                 NSInteger count = [replyList count];
+                 for (int i = 0; i < count; i++) {
+                     FansComment* c = [replyList objectAtIndex:i];
+                     if (c.uiFrame == nil){
+                         CommentFrame* frame = [CommentFrame alloc];
+                         [frame initWithCommentData:c];
+                         c.uiFrame = frame;
+                     }
+                 }
+             }
+             
+             
+             // send to server
              // cb8123f6-5ebb-4788-ab3f-96ed053fdf61
              //             [itsApp.remoteSvr replayCelebComment:cbComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
              //
@@ -217,17 +297,47 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [itsApp.remoteSvr replayCelebComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
                  
              }];
+             
+#endif
+             
          }
      }];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
+    CGFloat height = 0;
+#ifdef DEMO_DATA
     CommentFrame *frame = self.commentData[indexPath.row];
     return frame.cellHeight;
+#else 
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    NSArray* replyList = currentComment.replayComments;
+    if (replyList != nil){
+        FansComment* c = [replyList objectAtIndex:indexPath.row];
+        height = c.uiFrame.cellHeight;
+    }
+    
+    return height;
+#endif
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-
+#ifdef DEMO_DATA
     return self.commentData.count;
+#else
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    NSArray* replyList = currentComment.replayComments;
+    if (replyList != nil){
+        return [replyList count];
+    }
+    
+    return 0;
+#endif
+    
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -239,7 +349,22 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     CommentCell *tmpCell = (CommentCell*)cell;
     [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.replyButton.tag = indexPath.row;
+    
+#ifdef DEMO_DATA
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
+    
+#else
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    NSArray* replyList = currentComment.replayComments;
+    if (replyList != nil){
+        FansComment* c = [replyList objectAtIndex:indexPath.row];
+        [tmpCell setShowData:c];
+        [tmpCell setDetailCommentFrame:c.uiFrame];
+    }
+#endif
+    
     [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.iconBtn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
@@ -288,6 +413,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //             [ss setStringValue:@"login" data:contentStr];
 
          }else {
+             
+#ifdef DEMO_DATA
              CommentFrame *frameNeedChanged = [self.commentData objectAtIndex:btn.tag];
              CommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
              
@@ -307,18 +434,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
              
-             // send to server
-             // eef31e8e-65ea-417b-8994-a48618716f1d  cid
-             // cb8123f6-5ebb-4788-ab3f-96ed053fdf61  fid
-             ITSApplication* itsApp = [ITSApplication get];
-             CelebComment* cbComment = [itsApp.dataSvr getCurrentCelebComment];
-//             [itsApp.remoteSvr replayFansComment:cbComment.fid replayCommendId:commentId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-//                 
-//             }];
-             
-             [itsApp.remoteSvr replayFansComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" replayCommendId:@"eef31e8e-65ea-417b-8994-a48618716f1d" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-                 
-             }];
+#endif
 
          }
     }];
@@ -352,6 +468,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //             [ss setStringValue:@"login" data:contentStr];
 
          }else {
+#ifdef DEMO_DATA
              CommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];
              CommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
              
@@ -370,7 +487,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              newsItem.type = 1;
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
-
+#else
              // send to server
              // eef31e8e-65ea-417b-8994-a48618716f1d  cid
              // cb8123f6-5ebb-4788-ab3f-96ed053fdf61  fid
@@ -383,7 +500,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [itsApp.remoteSvr replayFansComment:@"cb8123f6-5ebb-4788-ab3f-96ed053fdf61" replayCommendId:@"eef31e8e-65ea-417b-8994-a48618716f1d" comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
                  
              }];
-         }
+
+#endif
+        }
     }];
 
 }

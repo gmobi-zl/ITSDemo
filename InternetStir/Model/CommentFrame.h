@@ -11,7 +11,9 @@
 #import "CommentItem.h"
 @interface CommentFrame : NSObject
 //@property (nonatomic, strong) ReplyItem *item;
+#ifdef DEMO_DATA
 @property (nonatomic, strong) CommentItem *detailCommentItem;
+#endif
 @property (nonatomic, assign) CGRect iconF;
 @property (nonatomic, assign) CGRect nameF;
 @property (nonatomic, assign) CGRect lineF;
@@ -28,4 +30,7 @@
 
 @property (nonatomic, assign) CGRect timeF;
 @property (nonatomic, assign) CGRect replyBtnF;
+
+-(void) initWithCommentData: (id) data;
+
 @end

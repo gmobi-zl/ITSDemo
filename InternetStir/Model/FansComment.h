@@ -10,6 +10,7 @@
 #define FansComment_h
 
 #import <Foundation/Foundation.h>
+#import "CommentFrame.h"
 
 #define FANS_COMMENT_ITEM_UUID @"uuid"
 #define FANS_COMMENT_ITEM_NAME @"u_name"
@@ -32,6 +33,8 @@
 @property UInt64 pts;
 @property UInt64 uts;
 @property BOOL isCelebRead;
+
+@property CommentFrame* uiFrame;
 
 
 -(FansComment*) initWithDictionary: (NSDictionary*) dic;
