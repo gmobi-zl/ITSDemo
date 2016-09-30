@@ -149,12 +149,16 @@
     }
     return _replysF;
 }
-
+-(void) refreshFrame: (id)data {
+    
+    [self initWithDataFrame:data];
+}
 -(void) initWithCommentData: (id) data{
-
+    
+    [self initWithCommentData:data];
+}
+-(void) initWithDataFrame: (id)data{
     FansComment* fansComment = data;
-    //    ITSApplication* poApp = [ITSApplication get];
-    //    DataService* ds = poApp.dataSvr;
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat iconViewX = HOME_CONTENT_LEFT_PADDING;
@@ -171,14 +175,6 @@
     CGFloat nameLabelHeight = nameLabelSize.height;
     self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight);
     
-    //    //时间戳
-    //    CGFloat timeLabelWidth = 200;
-    //    CGFloat timeLabelHeight = 15;
-    //    CGFloat timeLabelX = nameLabelX;
-    //    CGFloat timeLabelY = nameLabelY + nameLabelHeight;
-    //    self.timeF = CGRectMake(timeLabelX, timeLabelY, timeLabelWidth, timeLabelHeight);
-    //
-    //shuoshuotextF正文
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
     CGSize contentLabelSize = [MMSystemHelper sizeWithString:fansComment.comment font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
@@ -230,7 +226,7 @@
         self.replyBackgroundF = CGRectMake(nameLabelX, CGRectGetMaxY(self.contentF) + padding, replyBackgroundWidth, replyBackgroundHeight);
         
     }
-     
+    
     self.lineF = CGRectMake(nameLabelX, self.cellHeight - 0.5, screenW - nameLabelX - 10, 0.5);
 }
 @end

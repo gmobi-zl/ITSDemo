@@ -338,7 +338,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     if (replyList != nil){
         if (indexPath.row == 0) {
             CGSize size = [MMSystemHelper sizeWithString:currentComment.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-             //13 + 30 + 4 + h + 4 + 20 + 10
             height = 13 + 20 + 4 + size.height + 4 + 20 + 10;
         }else {
             FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
@@ -374,7 +373,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }else {
         return 1;
     }
-    return 0;
+//    return 0;
 #endif
     
 }
