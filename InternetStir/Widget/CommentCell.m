@@ -79,6 +79,9 @@
     }
     return self;
 }
+
+
+
 -(void)setDetailCommentFrame:(CommentFrame *)detailCommentFrame{
     
     _detailCommentFrame = detailCommentFrame;
@@ -170,8 +173,8 @@
 {
     self.icon.frame = self.detailCommentFrame.iconF;
     self.nameLabel.frame = self.detailCommentFrame.nameF;
-    self.iconBtn.frame = self.icon.frame;
-
+    self.iconBtn.frame = self.icon.bounds;
+    
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replysF objectAtIndex:i] CGRectValue];
     }
@@ -188,7 +191,6 @@
     self.replyButton.frame = self.detailCommentFrame.replyBtnF;
     
     self.bgButton.frame = self.commentLabel.bounds;
-
 }
 -(NSMutableArray *)replysView
 {
@@ -219,13 +221,49 @@
     // Configure the view for the selected state
 }
 
--(void) setShowData: (FansComment*) data{
+-(void) setShowData: (id) comment{
     [self removeOldReplys];
+    
+    if ([comment isKindOfClass:[CelebComment class]]) {
+        CelebComment *data = comment;
+        self.icon.frame = CGRectMake(15, 13, 40, 40);
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.nameLabel.text = data.name;
+        CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
+        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+        CGFloat nameLabelY = 13;
+        CGFloat nameLabelWidth = nameLabelSize.width;
+        CGFloat nameLabelHeight = nameLabelSize.height;
+        self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight);
+
+        CGFloat contentLabelX = nameLabelX;
+        CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
+        CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
+        CGFloat contentLabelWidth = contentLabelSize.width;
+        CGFloat contentLabelHeight = contentLabelSize.height;
+        self.commentLabel.frame = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
+        self.commentLabel.text = data.context;
+        
+        NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
+        CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
+        self.timeLabel.frame = CGRectMake(nameLabelX, self.commentLabel.frame.origin.y + self.commentLabel.frame.size.height + 4 , timeLabelSize.width, 20);
+        self.timeLabel.text = time;
+        
+        self.replyButton.frame = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.timeLabel.frame.origin.y, 40, 20);
+        self.line.frame = CGRectMake(nameLabelX, self.timeLabel.frame.size.height + self.timeLabel.frame.origin.y + 10 - 0.5, [MMSystemHelper getScreenWidth] - nameLabelX - 10, 0.5);
+
+        self.iconBtn.frame = self.icon.bounds;
+    }else if ([comment isKindOfClass:[FansComment class]]) {
+        FansComment *data = comment;
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.nameLabel.text = data.name;
+        self.commentLabel.text = data.comment;
+        self.timeLabel.text = @"3小時前";
+    }
+    
     //  self.icon.image = [UIImage imageNamed:comment.icon];
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
-    self.nameLabel.text = data.name;
-    self.commentLabel.text = data.comment;
-    self.timeLabel.text = @"3小時前";
+  
+
     /*
     for (NSInteger i = 0; i < comment.replys.count; i++) {
         

@@ -72,6 +72,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
             DataService* ds = itsApp.dataSvr;
             CelebComment* currentComment = ds.currentCelebComment;
             NSArray* replyList = currentComment.replayComments;
+    
             if (replyList != nil){
                 NSInteger count = [replyList count];
                 for (int i = 0; i < count; i++) {
@@ -316,10 +317,14 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     CelebComment* currentComment = ds.currentCelebComment;
     NSArray* replyList = currentComment.replayComments;
     if (replyList != nil){
-        FansComment* c = [replyList objectAtIndex:indexPath.row];
-        height = c.uiFrame.cellHeight;
+        if (indexPath.row == 0) {
+            CGSize size = [MMSystemHelper sizeWithString:currentComment.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
+            height = 13 + 4 + size.height + 4 + 20 + 10;
+        }else {
+            FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
+            height = c.uiFrame.cellHeight;
+        }
     }
-    
     return height;
 #endif
 }
@@ -332,9 +337,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     CelebComment* currentComment = ds.currentCelebComment;
     NSArray* replyList = currentComment.replayComments;
     if (replyList != nil){
-        return [replyList count];
+        return replyList.count + 1;
+    }else {
+        return 1;
     }
-    
     return 0;
 #endif
     
@@ -347,8 +353,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
     }
     CommentCell *tmpCell = (CommentCell*)cell;
-    [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
-    tmpCell.replyButton.tag = indexPath.row;
     
 #ifdef DEMO_DATA
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
@@ -357,14 +361,20 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     CelebComment* currentComment = ds.currentCelebComment;
-    NSArray* replyList = currentComment.replayComments;
-    if (replyList != nil){
-        FansComment* c = [replyList objectAtIndex:indexPath.row];
-        [tmpCell setShowData:c];
-        [tmpCell setDetailCommentFrame:c.uiFrame];
+    if (indexPath.row == 0) {
+        [tmpCell setShowData:currentComment];
+    }else {
+        NSArray* replyList = currentComment.replayComments;
+        if (replyList != nil){
+            FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
+            [tmpCell setShowData:c];
+            [tmpCell setDetailCommentFrame:c.uiFrame];
+        }
     }
+   
 #endif
-    
+    [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.replyButton.tag = indexPath.row;
     [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.iconBtn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
