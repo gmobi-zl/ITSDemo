@@ -305,6 +305,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                              sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
                              sendComment.uts = sendComment.pts;
                              
+                             CommentFrame* frame = [CommentFrame alloc];
+                             [frame initWithCommentData:sendComment];
+                             sendComment.uiFrame = frame;
+                             
                              [ds insertCurrentReplyCommentItem:sendComment];
                              
                              [self.tableView reloadData];
@@ -350,6 +354,19 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     DataService* ds = itsApp.dataSvr;
     CelebComment* currentComment = ds.currentCelebComment;
     NSArray* replyList = currentComment.replayComments;
+    
+    if (replyList != nil){
+        NSInteger count = [replyList count];
+        for (int i = 0; i < count; i++) {
+            FansComment* c = [replyList objectAtIndex:i];
+            if (c.uiFrame == nil){
+                CommentFrame* frame = [CommentFrame alloc];
+                [frame initWithCommentData:c];
+                c.uiFrame = frame;
+            }
+        }
+    }
+    
     if (replyList != nil){
         return replyList.count + 1;
     }else {

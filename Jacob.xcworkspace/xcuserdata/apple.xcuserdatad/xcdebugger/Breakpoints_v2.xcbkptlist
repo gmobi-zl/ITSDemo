@@ -58,7 +58,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496917160.365243"
+                  timestampString = "496919833.845992"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -73,7 +73,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496917160.366015"
+                  timestampString = "496919833.846374"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"
@@ -170,7 +170,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496917160.38664"
+                  timestampString = "496919833.849009"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "286"
@@ -185,7 +185,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
-                  timestampString = "496917160.387028"
+                  timestampString = "496919833.849577"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "288"
@@ -214,7 +214,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Services/DataService.m"
@@ -230,16 +230,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Services/RemoteService.m"
-            timestampString = "496916716.897667"
+            filePath = "InternetStir/Services/DataService.m"
+            timestampString = "496916788.269762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1103"
-            endingLineNumber = "1103"
-            landmarkName = "-getCelebReplyCommentListData:timeType:fid:"
+            startingLineNumber = "2451"
+            endingLineNumber = "2451"
+            landmarkName = "-setRefreshReplyComments:fid:isClearData:type:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -249,13 +249,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Services/RemoteService.m"
-            timestampString = "496916719.949444"
+            filePath = "InternetStir/Controller/CommentViewController.m"
+            timestampString = "496919833.346525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1087"
-            endingLineNumber = "1087"
-            landmarkName = "-getCelebReplyCommentListData:timeType:fid:"
+            startingLineNumber = "547"
+            endingLineNumber = "547"
+            landmarkName = "-replyToreply:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__38-[CommentViewController replyToreply:]_block_invoke"
+                  moduleName = "Jacob"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
+                  timestampString = "496919833.853516"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "547"
+                  endingLineNumber = "547"
+                  offsetFromSymbolStart = "616">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__38-[CommentViewController replyToreply:]_block_invoke_2"
+                  moduleName = "Jacob"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/CommentViewController.m"
+                  timestampString = "496919833.853865"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "548"
+                  endingLineNumber = "548"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Controller/CommentViewController.m"
+            timestampString = "496919833.346525"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "-replyToreply:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -266,12 +314,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Services/DataService.m"
-            timestampString = "496916788.269762"
+            timestampString = "496919056.867483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2451"
-            endingLineNumber = "2451"
-            landmarkName = "-setRefreshReplyComments:fid:isClearData:type:"
+            startingLineNumber = "2461"
+            endingLineNumber = "2461"
+            landmarkName = "-insertCurrentReplyCommentItem:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Services/DataService.m"
+            timestampString = "496919068.872002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2477"
+            endingLineNumber = "2477"
+            landmarkName = "-insertCurrentReplyCommentItem:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Services/DataService.m"
+            timestampString = "496919092.795602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2496"
+            endingLineNumber = "2496"
+            landmarkName = "-insertCurrentReplyCommentItem:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Controller/CommentViewController.m"
+            timestampString = "496919833.346525"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

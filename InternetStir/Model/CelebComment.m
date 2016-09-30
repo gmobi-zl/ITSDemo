@@ -47,7 +47,7 @@
             FansComment* fansCM = [[FansComment alloc] initWithDictionary:item];
             [tmpArray addObject:fansCM];
         }
-        self.topFansComments = tmpArray;
+        self.replayComments = tmpArray;
     }
     
     return self;

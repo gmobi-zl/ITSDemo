@@ -195,13 +195,13 @@
     
     
     
-    if ([comment.topFansComments count]) {
-        NSInteger maxHotCommentCount = comment.topFansComments.count;
+    if ([comment.replayComments count]) {
+        NSInteger maxHotCommentCount = comment.replayComments.count;
         if (maxHotCommentCount > 3)
             maxHotCommentCount = 3;
         for (int i = 0; i < maxHotCommentCount; i++) {
             
-            FansComment *item = [comment.topFansComments objectAtIndex:i];
+            FansComment *item = [comment.replayComments objectAtIndex:i];
             
             CGRect pictureF = CGRectMake(10, self.cellHeight, 30, 30);
             CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT, 20)];
