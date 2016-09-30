@@ -2310,14 +2310,6 @@
     return ret;
 }
 
--(void) setCurrentCelebComment: (CelebComment*) item{
-    self.currentCelebComment = item;
-}
-
--(CelebComment*) getCurrentCelebComment{
-    return self.currentCelebComment;
-}
-
 -(void) refreshUserComments: (int) type{
     NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
     [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
