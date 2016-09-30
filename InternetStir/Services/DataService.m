@@ -2462,13 +2462,25 @@
     BOOL ret = NO;
     int i = 0;
     
-    if (self.currentCelebComment == nil || item == nil)
+    if (item == nil)
         return ret;
     
-    if (self.currentCelebComment.replayComments == nil)
-        self.currentCelebComment.replayComments = [NSMutableArray arrayWithCapacity:1];
+    NSInteger count = [self.celebComments count];
+    CelebComment* cbComment = nil;
+    for (int i = 0; i < count; i++) {
+        CelebComment* tmp = [self.celebComments objectAtIndex:i];
+        if (tmp != nil && [tmp.fid isEqualToString:item.fid]){
+            cbComment = tmp;
+            break;
+        }
+    }
+    if (cbComment == nil)
+        return ret;
     
-    NSMutableArray* replayList = (NSMutableArray*)self.currentCelebComment.replayComments;
+    if (cbComment.replayComments == nil)
+        cbComment.replayComments = [NSMutableArray arrayWithCapacity:1];
+    
+    NSMutableArray* replayList = (NSMutableArray*)cbComment.replayComments;
     
     int listCount = (int)[replayList count];
     for (i = 0; i < listCount; i++) {
@@ -2477,7 +2489,7 @@
         if ([uComment isKindOfClass:[FansComment class]]) {
             FansComment* comment = uComment;
             if (comment != nil){
-                if ([comment.fid compare:item.fid] == NSOrderedSame) {
+                if ([comment.cid compare:item.cid] == NSOrderedSame) {
                     same = YES;
                     
                     //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){

@@ -152,6 +152,13 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
     
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    if (currentComment.replayComments == nil){
+        [self headerRereshing];
+    }
+    
 //    SettingService* ss = [SettingService get];
 //    NSString *str = [ss getStringValue:@"login" defValue:nil];
 //    if (str.length > 0) {
