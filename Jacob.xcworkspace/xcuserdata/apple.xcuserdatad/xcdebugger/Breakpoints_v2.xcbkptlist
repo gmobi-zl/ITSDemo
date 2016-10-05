@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InternetStir/Controller/MenuViewController.m"
-            timestampString = "496823574.408826"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "InternetStir/Controller/DetailCommentController.m"
             timestampString = "496810971.443465"
             startingColumnNumber = "9223372036854775807"
@@ -58,7 +42,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496922498.004626"
+                  timestampString = "497324328.082789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -73,7 +57,7 @@
                   moduleName = "Jacob"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "496922498.005258"
+                  timestampString = "497324328.083175"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"

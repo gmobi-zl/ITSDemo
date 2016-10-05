@@ -10,6 +10,7 @@
 #import "MMLogger.h"
 #import "SettingService.h"
 #import "ITSApplication.h"
+#import "ConfigService.h"
 
 @implementation FacebookService
 
@@ -76,6 +77,15 @@
                                 us.user.uId = uuid;
                             else
                                 us.user.uId = self.uId;
+                            
+                            ConfigService* cs = [ConfigService get];
+                            NSString* ch = [cs getChannel];
+                            
+                            if ([uuid isEqualToString:ch]){
+                                us.user.isCBADM = YES;
+                            } else {
+                                us.user.isCBADM = NO;
+                            }
                             
                             us.user.isLogin = YES;
                             
