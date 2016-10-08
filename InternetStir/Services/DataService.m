@@ -252,30 +252,30 @@
 //    fav.actionName = @"我的收藏";
 //    [self.leftMenuList addObject:fav];
     
-    LeftMenuItem* settings = [LeftMenuItem alloc];
-    settings.iconName = @"trophy3";
-    settings.actionName = @"粉絲排行榜";
-    [self.leftMenuList addObject:settings];
+//    LeftMenuItem* settings = [LeftMenuItem alloc];
+//    settings.iconName = @"trophy3";
+//    settings.actionName = @"粉絲排行榜";
+//    [self.leftMenuList addObject:settings];
 
     LeftMenuItem* comment = [LeftMenuItem alloc];
     comment.iconName = @"outbox";
     comment.actionName = @"留言追蹤";
     [self.leftMenuList addObject:comment];
     // fav
-    LeftMenuItem* download = [LeftMenuItem alloc];
-    download.iconName = @"forums";
-    download.actionName = @"獎品中心";
-    [self.leftMenuList addObject:download];
+//    LeftMenuItem* download = [LeftMenuItem alloc];
+//    download.iconName = @"forums";
+//    download.actionName = @"獎品中心";
+//    [self.leftMenuList addObject:download];
     
-    LeftMenuItem* feed = [LeftMenuItem alloc];
-    feed.iconName = @"purchases";
-    feed.actionName = @"購買紀錄";
-    [self.leftMenuList addObject:feed];
+//    LeftMenuItem* feed = [LeftMenuItem alloc];
+//    feed.iconName = @"purchases";
+//    feed.actionName = @"購買紀錄";
+//    [self.leftMenuList addObject:feed];
     
-    LeftMenuItem* histroy = [LeftMenuItem alloc];
-    histroy.iconName = @"star60";
-    histroy.actionName = @"其他網紅";
-    [self.leftMenuList addObject:histroy];
+//    LeftMenuItem* histroy = [LeftMenuItem alloc];
+//    histroy.iconName = @"star60";
+//    histroy.actionName = @"其他網紅";
+//    [self.leftMenuList addObject:histroy];
     
     LeftMenuItem* menu = [LeftMenuItem alloc];
     menu.iconName = @"like [#1385]";

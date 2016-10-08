@@ -56,6 +56,9 @@
         NSRange Range = NSMakeRange(0, [[str string] rangeOfString:@"Facebook"].location);
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:Range];
         Range = NSMakeRange([[str string] rangeOfString:@"Facebook"].location, [[str string] rangeOfString:@"Connect with Facebook"].length - [[str string] rangeOfString:@"Facebook"].location);
+        
+        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+        
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
         [self.loginButton setAttributedTitle:str forState:(UIControlStateNormal)];
         [self addSubview:self.loginButton];

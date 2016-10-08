@@ -65,7 +65,7 @@
 - (UIView *)viewPager:(MMTabPagerView *)viewPager viewForTabAtIndex:(NSUInteger)index
 {
     
-    NSArray *title = @[@"推薦",@"Facebook",@"You Tube",@"Instagram"];
+    NSArray *title = @[@"推薦",@"Facebook",@"YouTube",@"Instagram"];
     
     NSString* tabTitle = title[index];
     

@@ -155,7 +155,7 @@
 }
 -(void) initWithCommentData: (id) data{
     
-    [self initWithCommentData:data];
+    [self initWithDataFrame:data];
 }
 -(void) initWithDataFrame: (id)data{
     FansComment* fansComment = data;
@@ -169,9 +169,9 @@
     
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:fansComment.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:fansComment.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
     CGFloat nameLabelY = iconViewY;
-    CGFloat nameLabelWidth = nameLabelSize.width;
+    CGFloat nameLabelWidth = nameLabelSize.width + 20;
     CGFloat nameLabelHeight = nameLabelSize.height;
     self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, nameLabelHeight);
     

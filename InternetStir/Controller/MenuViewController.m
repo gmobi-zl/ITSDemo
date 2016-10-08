@@ -220,7 +220,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 7 || indexPath.row == 9) {
+    if (indexPath.row == 3 || indexPath.row == 5) {
         return 35;
     }else {
         return 44;
@@ -252,13 +252,13 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     }
     MenuViewCell *tmpCell = (MenuViewCell*)cell;
     tmpCell.bgView.hidden = YES;
-    if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4){
-        if (us.user.isLogin == NO) {
-            tmpCell.bgView.hidden = NO;
-        }
-    }
-    if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
-        if (indexPath.row == 8) {
+//    if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4){
+//        if (us.user.isLogin == NO) {
+//            tmpCell.bgView.hidden = NO;
+//        }
+//    }
+    if (indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 3) {
+        if (indexPath.row == 4) {
             if (us.user.isLogin == YES) {
                 tmpCell.loginLabel.text = @"登出";
             }else {
@@ -283,55 +283,76 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     NSInteger index = indexPath.row;
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-
-    if (us.user.isLogin == NO) {
-        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 8) {
-            [self login];
-        }else if (index == 0) {
-            SettingController *setVc = [[SettingController alloc] init];
-            setVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:setVc animated:YES];
-        }else if (index == 5){
-            
-            WebviewController *webVc = [[WebviewController alloc] init];
-            webVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:webVc animated:YES];
-        }else if (index == 6) {
+    if (index == 0) {
+        SettingController *setVc = [[SettingController alloc] init];
+        setVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:setVc animated:YES];
         
+    }else if (index == 1){
+        if (us.user.isLogin == YES) {
+            MyCommentController *Vc = [[MyCommentController alloc] init];
+            Vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:Vc animated:YES];
         }
-    }else {
-        if (index == 0) {
-            SettingController *setVc = [[SettingController alloc] init];
-            setVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:setVc animated:YES];
-            
-        }else if (index == 1){
-            if (us.user.isLogin == YES) {
-                FanController *fanVc = [[FanController alloc] init];
-                fanVc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:fanVc animated:YES];
-            }
-        }else if (index == 2){
-            if (us.user.isLogin == YES) {
-                MyCommentController *Vc = [[MyCommentController alloc] init];
-                Vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:Vc animated:YES];
-            }
-        }else if (index == 3){
-            
-        }else if (index == 4){
-            
-        }else if (index == 5){
-            
-            WebviewController *webVc = [[WebviewController alloc] init];
-            webVc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:webVc animated:YES];
-        }else if (index == 6){
-            
-        }else if (index == 8){
-            [self login];
-        }
+    }else if (index == 2){
+        WebviewController *webVc = [[WebviewController alloc] init];
+        webVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVc animated:YES];
+
+    }else if (index == 3){
+        
+    }else if (index == 4){
+         [self login];
     }
+
+//    if (us.user.isLogin == NO) {
+//        if (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 8) {
+//            [self login];
+//        }else if (index == 0) {
+//            SettingController *setVc = [[SettingController alloc] init];
+//            setVc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:setVc animated:YES];
+//        }else if (index == 5){
+//            
+//            WebviewController *webVc = [[WebviewController alloc] init];
+//            webVc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:webVc animated:YES];
+//        }else if (index == 6) {
+//        
+//        }
+//    }else {
+//        if (index == 0) {
+//            SettingController *setVc = [[SettingController alloc] init];
+//            setVc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:setVc animated:YES];
+//            
+//        }else if (index == 1){
+//            if (us.user.isLogin == YES) {
+//                FanController *fanVc = [[FanController alloc] init];
+//                fanVc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:fanVc animated:YES];
+//            }
+//        }else if (index == 2){
+//            if (us.user.isLogin == YES) {
+//                MyCommentController *Vc = [[MyCommentController alloc] init];
+//                Vc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:Vc animated:YES];
+//            }
+//        }else if (index == 3){
+//            
+//        }else if (index == 4){
+//            
+//        }else if (index == 5){
+//            
+//            WebviewController *webVc = [[WebviewController alloc] init];
+//            webVc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:webVc animated:YES];
+//        }else if (index == 6){
+//            
+//        }else if (index == 8){
+//            [self login];
+//        }
+//    }
 }
 - (void)login {
     
