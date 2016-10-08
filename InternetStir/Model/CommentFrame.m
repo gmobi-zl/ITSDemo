@@ -192,7 +192,8 @@
     self.cellHeight = CGRectGetMaxY(self.timeF) + padding + 5;
     
     //评论
-    
+//    self.replysF = [[NSMutableArray alloc] init];
+
     if([fansComment.replayComments count])
     {
         CGFloat replyLabelX = nameLabelX + padding/2;
@@ -212,7 +213,7 @@
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;
-            self.cellHeight += padding +replyLabelHeight;
+            self.cellHeight += padding + replyLabelHeight;
             CGRect replyF = CGRectMake(replyLabelX, replyLabelY, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
             [self.replyPictureF addObject:[NSValue valueWithCGRect:pictureF]];
@@ -221,10 +222,9 @@
         
         //评论的背景
         self.cellHeight = CGRectGetMaxY([(NSValue *)[self.replysF lastObject] CGRectValue]) + padding;
-        CGFloat replyBackgroundWidth = screenW - 1.5*padding -nameLabelX;
+        CGFloat replyBackgroundWidth = screenW - 1.5*padding - nameLabelX;
         CGFloat replyBackgroundHeight = self.cellHeight - padding*2 - CGRectGetMaxY(self.contentF);
         self.replyBackgroundF = CGRectMake(nameLabelX, CGRectGetMaxY(self.contentF) + padding, replyBackgroundWidth, replyBackgroundHeight);
-        
     }
     
     self.lineF = CGRectMake(nameLabelX, self.cellHeight - 0.5, screenW - nameLabelX - 10, 0.5);

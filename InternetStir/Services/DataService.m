@@ -2530,6 +2530,9 @@
         }
         
         if (fsComment.uiFrame != nil){
+            fsComment.uiFrame.replysF = nil;
+            fsComment.uiFrame.replyNameF = nil;
+            fsComment.uiFrame.replyPictureF = nil;
             [fsComment.uiFrame refreshFrame:fsComment];
         }
         
