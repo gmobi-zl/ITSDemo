@@ -10,6 +10,7 @@
 #import "CBUserService.h"
 #import "SettingService.h"
 #import "ITSAppConst.h"
+#import "ConfigService.h"
 
 @implementation CBUserService
 
@@ -56,6 +57,14 @@
         self.user.email = [data objectForKey:@"email"];
         self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
         self.user.session = [data objectForKey:@"session"];
+        
+        ConfigService* cs = [ConfigService get];
+        NSString* ch = [cs getChannel];
+        if ([self.user.uId isEqualToString:ch]){
+            self.user.isCBADM = YES;
+        } else {
+            self.user.isCBADM = NO;
+        }
     }
 }
 

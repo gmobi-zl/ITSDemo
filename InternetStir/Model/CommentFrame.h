@@ -33,5 +33,5 @@
 
 -(void) initWithCommentData: (id) data;
 -(void) refreshFrame: (id)data;
--(void) initWithDataFrame: (id)data;
+
 @end
