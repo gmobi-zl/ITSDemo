@@ -5,7 +5,7 @@
 
 target 'Jacob' do
 
-pod 'Firebase'
+pod 'Google/Analytics'
 
 end
 

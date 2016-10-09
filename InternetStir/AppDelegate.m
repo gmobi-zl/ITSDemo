@@ -12,7 +12,8 @@
 #import <TwitterKit/TwitterKit.h>
 
 #import "UIKit/UIKit.h"
-#import "Firebase.h"
+//#import "Firebase.h"
+#import <Google/Analytics.h>
 
 @import FirebaseAnalytics;
 
@@ -38,7 +39,15 @@ static NSString * const kClientID =
     [Fabric with:@[[Twitter sharedInstance]]];
     
     //[FIRApp configure];
+    
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services : %@", configureError);
 
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;
+    gai.logger.logLevel = kGAILogLevelVerbose;
+    
     return YES;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

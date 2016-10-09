@@ -87,6 +87,7 @@
                                 us.user.isCBADM = NO;
                             }
                             
+                            //us.user.isCBADM = YES;
                             us.user.isLogin = YES;
                             
                             [dic setObject:self.uId forKey:@"openid"];

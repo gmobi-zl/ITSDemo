@@ -122,6 +122,8 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
                             timeType: (int) type
                                  fid: (NSString*) fid;
 
+-(void) uploadFileToServer;
+
 @end
 
 #endif
