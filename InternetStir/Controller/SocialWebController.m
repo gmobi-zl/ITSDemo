@@ -9,6 +9,7 @@
 
 #import "SocialWebController.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -21,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"social.web";
     self.view.backgroundColor = [UIColor whiteColor];
     self.arr = @[@"https://www.facebook.com/Jacob.ek07/",
                     @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
@@ -34,6 +36,10 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     [self.view addSubview:self.webView];
+
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"name" params:eParams eventCategory:@"social.web.view"];
 
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {

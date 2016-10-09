@@ -33,7 +33,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.screenName = @"recommendation";
     self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
                     @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
                     @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
@@ -89,11 +89,15 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.up" params:eParams eventCategory:@"recommendation.view"];
 }
 - (void)footerRereshing
 {
-    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.down" params:eParams eventCategory:@"recommendation.view"];
 }
 
 

@@ -94,14 +94,6 @@
     
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     ITSApplication* poApp = [ITSApplication get];
-    NSString* autoplay;
-    if (button.selected == NO){
-        [eParams setObject:@"false" forKey:@"autoplay"];
-        autoplay = @"false";
-    } else {
-        [eParams setObject:@"true" forKey:@"autoplay"];
-        autoplay = @"true";
-    }
-//    [poApp.reportSvr recordEvent:autoplay params:eParams eventCategory:@"me.settings.autoplay"];
+    [poApp.reportSvr recordEvent:@"push" params:eParams eventCategory:@"setting.click"];
 }
 @end

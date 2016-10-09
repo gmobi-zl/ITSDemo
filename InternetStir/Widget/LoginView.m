@@ -22,6 +22,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        ITSApplication* poApp = [ITSApplication get];
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [poApp.reportSvr recordEvent:@"select" params:eParams eventCategory:@"login.view"];
+        
         self.viewController = view;
         
         UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
@@ -85,6 +89,10 @@
 }
 - (void)cancelBtn {
     
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"cancel" params:eParams eventCategory:@"login.click"];
+
     [UIView animateWithDuration:1 animations:^{
         self.effectView.alpha = 0;
     }];
@@ -101,7 +109,9 @@
         if (resultCode == ITS_FB_LOGIN_SUCCESS) {
             [faceBook facebookUserInfo];
         } else {
-            
+            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+            [poApp.reportSvr recordEvent:@"fail" params:eParams eventCategory:@"login.click"];
+
             UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [al show];
         }

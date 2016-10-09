@@ -12,11 +12,11 @@
 #import <UIKit/UIKit.h>
 //#import "GAI.h"
 //#import "GAIDictionaryBuilder.h"
-//#import "GAITrackedViewController.h"
+#import "GAITrackedViewController.h"
 #import "LoginView.h"
 #import "FacebookService.h"
 //@interface SplashController : GAITrackedViewController
-@interface SplashController : UIViewController<FacebookDelegate>
+@interface SplashController : GAITrackedViewController<FacebookDelegate>
 
 @property (nonatomic, strong) UIImageView *bgImage;
 

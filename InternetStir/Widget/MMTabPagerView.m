@@ -12,6 +12,7 @@
 #import "ConfigService.h"
 #import "SettingService.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
 #define MC_TAB_VIEW_TAG 100
 #define MC_TAB_CONTENT_TAG 101
 
@@ -537,6 +538,11 @@ NSInteger num;
                      completion:^(BOOL finished) {
                          self.tapAnimatingToTab = NO;
                      }];
+    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"name" params:eParams eventCategory:@"recommendation.click"];
+
 }
 
 //- (void)trasitionTabViewWithView:(UIView *)view

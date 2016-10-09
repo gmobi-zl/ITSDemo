@@ -10,7 +10,9 @@
 #import "CommentView.h"
 #import "PNMoodView.h"
 #import "CommentItem.h"
-@interface CommentViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+#import "GAITrackedViewController.h"
+
+@interface CommentViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CommentView *commentView;
@@ -20,6 +22,7 @@
 @property (nonatomic, strong) CommentItem *item;
 #endif
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, copy) NSString *context;
 
 @property (assign) int refreshType;
 @property (assign) BOOL isRefreshing;

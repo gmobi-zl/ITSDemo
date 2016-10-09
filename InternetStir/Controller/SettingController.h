@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface SettingController : UIViewController<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
+
+@interface SettingController : GAITrackedViewController<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
 @property UITableView* tableView;
 @property UIView* cleanMask;
 @property UIView* cleanPanel;

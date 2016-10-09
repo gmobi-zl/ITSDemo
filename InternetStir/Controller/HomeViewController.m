@@ -40,6 +40,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.screenName = @"comment";
     self.tableView = [[UITableView alloc] init];
     self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
     self.tableView.delegate = self;
@@ -63,6 +64,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_DATA_REFRESH selector:@selector(celebCommentsDataRefreshListener:)];
+    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"comment" params:eParams eventCategory:@"tabbar.click"];
 }
 - (void)passMessage {
     
@@ -124,6 +129,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.up" params:eParams eventCategory:@"comment.view"];
+    
     if (self.isRefreshing == NO){
         self.refreshType = CB_COMMENT_REFRESH_TYPE_AFTER;
         ITSApplication* itsApp = [ITSApplication get];
@@ -144,6 +153,11 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
 - (void)footerRereshing
 {
+    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.down" params:eParams eventCategory:@"comment.view"];
+
     if (self.isRefreshing == NO){
         self.refreshType = CB_COMMENT_REFRESH_TYPE_BEFORE;
         ITSApplication* itsApp = [ITSApplication get];
@@ -233,6 +247,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
+    [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.shareBtn.tag = indexPath.row;
     tmpCell.btn.tag = indexPath.row;
     [tmpCell.delBtn addTarget:self action:@selector(pushSheet:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.delBtn.tag = indexPath.row;
@@ -283,10 +299,27 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         };
     }
 }
+- (void)shareBtn: (UIButton *)button {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:button.tag];
+    NSString *content = item.context;
+    
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:content forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
 
+}
 - (void)favBtnClick:(UIButton *)button {
     
     HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;
+    ITSApplication* poApp = [ITSApplication get];
+
+    NSArray* dataArr = poApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:button.tag];
+    NSString *content = item.context;
 
     SettingService* ss = [SettingService get];
     BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] defValue:NO];
@@ -295,11 +328,21 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
         [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:YES];
+        
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [eParams setObject:@"forumid" forKey:@"fid"];
+        [eParams setObject:content forKey:@"context"];
+        [poApp.reportSvr recordEvent:@"+heart" params:eParams eventCategory:@"comment.click"];
+
     }else {
         cell.likeNum.text = [NSString stringWithFormat:@"%d",99999];
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
         [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:NO];
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [eParams setObject:@"forumid" forKey:@"fid"];
+        [eParams setObject:content forKey:@"context"];
+        [poApp.reportSvr recordEvent:@"-heart" params:eParams eventCategory:@"comment.click"];
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -338,6 +381,15 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 }
 - (void)pushNextVc:(UIButton *)button{
     ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:button.tag];
+    NSString *content = item.context;
+
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:content forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.click"];
+    
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == NO) {
         self.loginView.effectView.alpha = 1;
@@ -359,14 +411,27 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             vc.hidesBottomBarWhenPushed = YES;
             vc.index = button.tag;
             vc.type = 1;
+            vc.context = cbComment.context;
             [self.navigationController pushViewController:vc animated:YES];
         }
 #endif
     }
 }
+//more
 - (void)pushComment:(UIButton*)button{
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
+    
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:button.tag];
+    NSString *content = item.context;
+    
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:content forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"more" params:eParams eventCategory:@"comment.click"];
+
+    
     if (us.user.isLogin == NO) {
         self.loginView.effectView.alpha = 1;
     }else {
@@ -387,6 +452,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             CommentViewController *vc = [[CommentViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.index = button.tag;
+            vc.context = cbComment.context;
             vc.type = 2;
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -452,6 +518,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.view"];
     [self.navigationController.navigationBar setTitleTextAttributes:
      
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],

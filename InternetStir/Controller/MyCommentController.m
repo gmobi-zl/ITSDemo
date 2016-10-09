@@ -12,6 +12,7 @@
 #import "AppStyleConfiguration.h"
 #import "MyCommentCell.h"
 #import "UUInputAccessoryView.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -28,6 +29,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     
     [super viewDidLoad];
     self.title = @"留言追蹤";
+    self.screenName = @"comment.track";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -46,6 +48,11 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 270;
@@ -73,6 +80,11 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
                                      Block:^(NSString *contentStr)
      {
      
+         ITSApplication* itsApp = [ITSApplication get];
+         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+         [eParams setObject:@"reply" forKey:@"fid"];
+         [eParams setObject:contentStr forKey:@"reply"];
+         [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.track.click"];
      }];
 }
 - (void)clickBack {

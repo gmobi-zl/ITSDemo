@@ -33,15 +33,10 @@
                 self.icon = [[[result objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
                 self.email = [result objectForKey:@"email"];
                 
-                
-//                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                                     @"facebook",@"type",
-//                                     self.uId,@"openid",
-//                                     self.userName ,@"name",
-//                                     self.icon,@"avatar",
-//                                     self.email,@"email",
-//                                     [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
-//                                     nil];
+                ITSApplication* poApp = [ITSApplication get];
+                NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+                [eParams setObject:self.uId forKey:@"userId"];
+                [poApp.reportSvr recordEvent:@"ok" params:eParams eventCategory:@"login.click"];
                 
                 [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1 callback:^(int status, int code, NSDictionary *resultData) {
                     if (resultData != nil){

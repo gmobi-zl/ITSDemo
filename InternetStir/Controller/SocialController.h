@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "MMTabPagerView.h"
+#import "GAITrackedViewController.h"
 
-@interface SocialController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface SocialController : GAITrackedViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataArr;

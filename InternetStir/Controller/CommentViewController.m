@@ -34,6 +34,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"comment.more";
     self.title = @"留言";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -61,6 +62,12 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH selector:@selector(celebReplyCommentsDataRefreshListener:)];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:self.context forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"本文" params:eParams eventCategory:@"comment.more.view"];
 }
 
 -(void)celebReplyCommentsDataRefreshListener: (id) data{
@@ -492,6 +499,12 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }else{
         [self replyToreply:btn.tag];
     }
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:self.context forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.more.click"];
+
 }
 
 //粉丝互相回复

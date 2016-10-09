@@ -11,11 +11,13 @@
 
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
+
 
 @protocol MMTabPagerViewDataSource;
 @protocol MMTabPagerViewDelegate;
 
-@interface MMTabPagerView : UIViewController
+@interface MMTabPagerView : GAITrackedViewController
 
 @property NSMutableArray *tabs;
 @property NSMutableArray *contents;

@@ -38,6 +38,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"fans.tool";
     self.title = @"粉絲小幫手";
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -80,19 +81,19 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     
-    NSString *userName = us.user.userName;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:userName font:[UIFont systemFontOfSize:20] maxSize:CGSizeMake(MAXFLOAT,30)];
+//    NSString *userName = us.user.userName;
+//    CGSize nameLabelSize = [MMSystemHelper sizeWithString:userName font:[UIFont systemFontOfSize:20] maxSize:CGSizeMake(MAXFLOAT,30)];
     CGFloat userNameX = self.icon.frame.origin.x + 80;
-    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, (screenH/3  - 70) / 2 + 10,nameLabelSize.width, 30)];
+    self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(userNameX, (screenH/3  - 70) / 2 + 10,screenW - userNameX - 10, 30)];
     self.userNameLabel.textColor = [UIColor whiteColor];
     self.userNameLabel.font = [UIFont systemFontOfSize:20];
     self.userNameLabel.text = @"";
     self.userNameLabel.tag = 99;
     self.userNameLabel.textAlignment = NSTextAlignmentLeft;
-    self.userNameLabel.text = userName;
+//    self.userNameLabel.text = userName
     self.userNameLabel.userInteractionEnabled = YES;
     [self.bgImage addSubview:self.userNameLabel];
-    
+
     UIButton *bgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     bgBtn.frame = self.userNameLabel.bounds;
     bgBtn.backgroundColor = [UIColor clearColor];
@@ -123,6 +124,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
     [self.loginView.effectView addSubview:self.loginView];
+    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"fans.tool" params:eParams eventCategory:@"tabbar.click"];
 }
 - (void)clickBack{
     
@@ -153,6 +158,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [super viewWillAppear:animated];
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
+    
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"fans.tool.view"];
+
     
     UIButton *button = (UIButton*)[self.view viewWithTag:100];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -217,6 +226,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.imageview.hidden = NO;
         button.hidden = YES;
         [self.tableView reloadData];
+        
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [itsApp.reportSvr recordEvent:@"logout.click" params:eParams eventCategory:@"fans.tool.click"];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -287,22 +299,30 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         SettingController *setVc = [[SettingController alloc] init];
         setVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:setVc animated:YES];
+        ITSApplication* itsApp = [ITSApplication get];
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [itsApp.reportSvr recordEvent:@"setting" params:eParams eventCategory:@"fans.tool.click"];
         
     }else if (index == 1){
-        if (us.user.isLogin == YES) {
+//        if (us.user.isLogin == YES) {
             MyCommentController *Vc = [[MyCommentController alloc] init];
             Vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:Vc animated:YES];
-        }
+//        }
     }else if (index == 2){
         WebviewController *webVc = [[WebviewController alloc] init];
         webVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVc animated:YES];
+        
+        ITSApplication* itsApp = [ITSApplication get];
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [itsApp.reportSvr recordEvent:@"join" params:eParams eventCategory:@"fans.tool.click"];
 
     }else if (index == 3){
         
     }else if (index == 4){
          [self login];
+
     }
 
 //    if (us.user.isLogin == NO) {
@@ -363,6 +383,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         [al show];
     }else {
         self.loginView.effectView.alpha = 1;
+        ITSApplication* itsApp = [ITSApplication get];
+        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+        [itsApp.reportSvr recordEvent:@"login.click" params:eParams eventCategory:@"fans.tool.click"];
     }
 }
 - (void)didReceiveMemoryWarning {
