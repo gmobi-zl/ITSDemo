@@ -30,7 +30,7 @@
         [self.icon addSubview:self.iconBtn];
         
         self.nameLabel = [[UILabel alloc] init];
-        self.nameLabel.font = [UIFont systemFontOfSize:14];
+        self.nameLabel.font = [UIFont systemFontOfSize:16];
         self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.nameLabel];
         

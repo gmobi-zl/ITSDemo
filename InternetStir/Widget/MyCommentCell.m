@@ -56,7 +56,7 @@
         [self.contentView addSubview:self.replyButton];
         
         self.replyIcon = [[UIImageView alloc] init];
-        self.replyIcon.frame = CGRectMake(80, CGRectGetMaxY(self.timeLabel.frame) + 10, 30, 30);
+        self.replyIcon.frame = CGRectMake(self.timeLabel.frame.origin.x, CGRectGetMaxY(self.timeLabel.frame) + 10, 30, 30);
         self.replyIcon.image = [UIImage imageNamed:@"a-1"];
         self.replyIcon.layer.masksToBounds = YES;
         self.replyIcon.layer.cornerRadius = 15;
@@ -80,7 +80,7 @@
         [self.contentView addSubview:self.replyContent];
         
         self.bgView = [[UIView alloc] init];
-        self.bgView.frame = CGRectMake(80, CGRectGetMaxY(self.replyContent.frame)+10, screenW - 80 - 15, 92);
+        self.bgView.frame = CGRectMake(self.timeLabel.frame.origin.x, CGRectGetMaxY(self.replyContent.frame)+10, screenW - self.timeLabel.frame.origin.x - 15, 92);
         self.bgView.layer.masksToBounds = YES;
         self.bgView.layer.cornerRadius = 10;
         self.bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
@@ -88,7 +88,7 @@
         
 //        size = [MMSystemHelper sizeWithString:@"15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 80 - 25 - 140,MAXFLOAT)];
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.frame = CGRectMake(10, 10, screenW - 80 - 25 - 140, 0);
+        self.titleLabel.frame = CGRectMake(10, 10, screenW - self.timeLabel.frame.origin.x - 15 - 140, 0);
         self.titleLabel.numberOfLines = 2;
         self.titleLabel.text = @"15年前，狂吃波卡蒐集裡面的神奇寶貝，15年後，在手機上狂收集Pokemon Go寶可夢。欸欸!! 這才不是玩物喪志!! 是在緬懷那段回不去的童年啊!!! 哈哈哈 XDDD";
         self.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -102,7 +102,7 @@
         self.titleLabel.frame = frame;
         
         self.photo = [[UIImageView alloc] init];
-        self.photo.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame)+10, 10, 100, 67);
+        self.photo.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame) + 5, 10, 120, 67);
         self.photo.image = [UIImage imageNamed:@"a-3.jpg"];
         [self.bgView addSubview:self.photo];
         
@@ -120,7 +120,7 @@
         [self.contentView addSubview:self.readBtn];
         
         UILabel *line = [[UILabel alloc] init];
-        line.frame = CGRectMake(80, CGRectGetMaxY(self.bgView.frame)+15, screenW - 80 - 15, 1);
+        line.frame = CGRectMake(self.timeLabel.frame.origin.x, CGRectGetMaxY(self.bgView.frame)+15, screenW - 80 - 15, 1);
         line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:line];
     }

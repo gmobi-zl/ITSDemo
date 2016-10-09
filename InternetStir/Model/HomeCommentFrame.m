@@ -165,13 +165,13 @@
     self.photoF = CGRectMake(0, iconViewY + iconViewHeight + HOME_ICON_PHOTO_PADDING, screenW, 9 * (screenW - 20) / 16);
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;
     
-    self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 25, 25);
-    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 25 + HOME_ICON_PADDING, self.cellHeight, 25, 25);
-    self.shareF = CGRectMake(self.commentF.origin.x + 2 * HOME_ICON_PADDING, self.cellHeight, 25, 25);
+    self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 28, 24);
+    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 25 + HOME_ICON_PADDING, self.cellHeight, 25, 22);
+    self.shareF = CGRectMake(self.commentF.origin.x + 2 * HOME_ICON_PADDING, self.cellHeight, 21, 24);
     self.cellHeight = self.photoF.origin.y + self.photoF.size.height + 50;
     self.lineF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight - 1, screenW - 2*HOME_CONTENT_LEFT_PADDING, 1);
     
-    self.likeF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_LINE_FAV_PADDING, 20, 20);
+    self.likeF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 5, self.cellHeight + HOME_LINE_FAV_PADDING + 3, 16, 13);
     self.likeNumF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 20 + 5, self.cellHeight + HOME_LINE_FAV_PADDING, 200, 20);
     self.cellHeight = CGRectGetMaxY(self.lineF) + HOME_FAV_CONTENT_PADDING;
     
