@@ -12,6 +12,7 @@
 #import "SocialWebController.h"
 #import "MMSystemHelper.h"
 #import "ITSApplication.h"
+#import "NewsCategory.h"
 
 @interface HomePageController ()<MMTabPagerViewDataSource, MMTabPagerViewDelegate>
 
@@ -74,9 +75,15 @@
 - (UIView *)viewPager:(MMTabPagerView *)viewPager viewForTabAtIndex:(NSUInteger)index
 {
     
-    NSArray *title = @[@"推薦",@"Facebook",@"YouTube",@"Instagram"];
-    
-    NSString* tabTitle = title[index];
+//    NSArray *title = @[@"推薦",@"Facebook",@"YouTube",@"Instagram"];
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableArray* arr = itsApp.dataSvr.categoryList;
+    NSMutableArray *titleArr = [[NSMutableArray alloc] initWithObjects:@"推薦", nil];
+    for (NewsCategory *cate in arr) {
+        [titleArr addObject:cate.name];
+    }
+   
+    NSString* tabTitle = titleArr[index];
     
     UIFont* font = [UIFont systemFontOfSize:16.0];
     CGSize size = [tabTitle sizeWithFont:font constrainedToSize:CGSizeMake(1000, 100)];

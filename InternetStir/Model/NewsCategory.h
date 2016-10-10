@@ -17,6 +17,7 @@
 #define NEWS_CATEGORY_LAYOUT @"layout"
 #define NEWS_CATEGORY_TYPE @"type"
 #define NEWS_CATEGORY_EXTRA @"extra"
+#define NEWS_CATEGORY_URL @"url"
 
 
 #define NEWS_CATEGORY_EXTRA_SOURCES @"sources"
@@ -61,6 +62,7 @@
 @property (copy) NSString* name;
 @property (copy) NSString* layout;
 @property (copy) NSString* type;
+@property (copy) NSString* url;
 
 @property (assign) unsigned long long afterTime;
 @property (assign) unsigned long long beforeTime;

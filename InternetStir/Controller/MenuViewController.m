@@ -134,7 +134,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)passMessage {
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.loginView.effectView.alpha = 0;
     }];
     [self.tableView reloadData];

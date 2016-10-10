@@ -239,6 +239,15 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         tmpCell.commentFrame = cbComment.uiFrame;
     }
 #endif
+    SettingService* ss = [SettingService get];
+    BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",indexPath.row] defValue:NO];
+
+    if (isFav == YES) {
+        //        self.zanImageView.image = self.zanImage;
+        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+    }else{
+        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    }
     
     tmpCell.button.tag = indexPath.row;
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];

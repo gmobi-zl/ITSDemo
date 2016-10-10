@@ -157,6 +157,10 @@
     tmpData = [dic objectForKey:NEWS_CATEGORY_NAME];
     if (tmpData != nil)
         self.name = tmpData;
+    tmpData = [dic objectForKey:NEWS_CATEGORY_URL];
+    if (tmpData != nil) {
+        self.url = tmpData;
+    }
     
     tmpData = [dic objectForKey:NEWS_CATEGORY_LAYOUT];
     if (tmpData != nil)

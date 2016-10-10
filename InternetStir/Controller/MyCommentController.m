@@ -13,6 +13,7 @@
 #import "MyCommentCell.h"
 #import "UUInputAccessoryView.h"
 #import "ITSApplication.h"
+#import "MJRefresh.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -49,11 +50,35 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
     
+    [self setupRefresh];
+    
     ITSApplication* itsApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
 
 }
+- (void)setupRefresh
+{
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+}
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+
+}
+- (void)footerRereshing
+{
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 270;
 }

@@ -93,7 +93,7 @@
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"cancel" params:eParams eventCategory:@"login.click"];
 
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.effectView.alpha = 0;
     }];
 }
@@ -101,7 +101,7 @@
     
     ITSApplication* poApp = [ITSApplication get];
     FacebookService *faceBook = poApp.fbSvr;
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.effectView.alpha = 0;
     }];
     faceBook.delegate = self.viewController;

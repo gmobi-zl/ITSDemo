@@ -96,7 +96,7 @@
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"cancel" params:eParams eventCategory:@"login.click"];
 
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.loginView.effectView.alpha = 0;
 
     } completion:^(BOOL finished) {
@@ -107,7 +107,7 @@
 }
 - (void)passMessage {
     
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.loginView.effectView.alpha = 0;
     }];
     TabBarController *tabBar = [[TabBarController alloc] init];

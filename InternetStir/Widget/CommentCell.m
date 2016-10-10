@@ -30,8 +30,8 @@
         [self.icon addSubview:self.iconBtn];
         
         self.nameLabel = [[UILabel alloc] init];
-        self.nameLabel.font = [UIFont systemFontOfSize:16];
-        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+//        self.nameLabel.font = [UIFont systemFontOfSize:16];
+        self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:16];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
@@ -232,10 +232,10 @@
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
         CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
         CGFloat nameLabelY = 13;
-        CGFloat nameLabelWidth = nameLabelSize.width;
+        CGFloat nameLabelWidth = nameLabelSize.width + 20;
         CGFloat nameLabelHeight = nameLabelSize.height;
         self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 20);
-        
+        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         CGFloat contentLabelX = nameLabelX;
         CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
         CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
@@ -260,6 +260,7 @@
         self.commentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
+        self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
             FansComment *item = [data.replayComments objectAtIndex:i];
