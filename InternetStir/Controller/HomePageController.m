@@ -11,6 +11,8 @@
 #import "SocialController.h"
 #import "SocialWebController.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
+#import "NewsCategory.h"
 
 @interface HomePageController ()<MMTabPagerViewDataSource, MMTabPagerViewDelegate>
 
@@ -22,11 +24,19 @@
     self.dataSource = self;
     self.delegate = self;
 
+    self.screenName = @"recommendation";
     [super viewDidLoad];
+    
+    ITSApplication* poApp = [ITSApplication get];
+     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"recommendation" params:eParams eventCategory:@"tabbar.click"];
 }
 - (void)viewWillAppear:(BOOL)animated{
     //
     [super viewWillAppear:animated];
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"recommendation.view"];
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenW, 20)];
@@ -65,9 +75,15 @@
 - (UIView *)viewPager:(MMTabPagerView *)viewPager viewForTabAtIndex:(NSUInteger)index
 {
     
-    NSArray *title = @[@"推薦",@"Facebook",@"YouTube",@"Instagram"];
-    
-    NSString* tabTitle = title[index];
+//    NSArray *title = @[@"推薦",@"Facebook",@"YouTube",@"Instagram"];
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableArray* arr = itsApp.dataSvr.categoryList;
+    NSMutableArray *titleArr = [[NSMutableArray alloc] initWithObjects:@"推薦", nil];
+    for (NewsCategory *cate in arr) {
+        [titleArr addObject:cate.label];
+    }
+   
+    NSString* tabTitle = titleArr[index];
     
     UIFont* font = [UIFont systemFontOfSize:16.0];
     CGSize size = [tabTitle sizeWithFont:font constrainedToSize:CGSizeMake(1000, 100)];

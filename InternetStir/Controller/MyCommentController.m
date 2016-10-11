@@ -12,6 +12,8 @@
 #import "AppStyleConfiguration.h"
 #import "MyCommentCell.h"
 #import "UUInputAccessoryView.h"
+#import "ITSApplication.h"
+#import "MJRefresh.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -28,6 +30,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     
     [super viewDidLoad];
     self.title = @"留言追蹤";
+    self.screenName = @"comment.track";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -46,7 +49,35 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
+    
+    [self setupRefresh];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
 }
+- (void)setupRefresh
+{
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+}
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+
+}
+- (void)footerRereshing
+{
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 270;
 }
@@ -73,6 +104,11 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
                                      Block:^(NSString *contentStr)
      {
      
+         ITSApplication* itsApp = [ITSApplication get];
+         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+         [eParams setObject:@"reply" forKey:@"fid"];
+         [eParams setObject:contentStr forKey:@"reply"];
+         [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.track.click"];
      }];
 }
 - (void)clickBack {

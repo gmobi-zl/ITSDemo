@@ -33,7 +33,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.screenName = @"recommendation";
     self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
                     @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
                     @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
@@ -41,12 +41,11 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
                     @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
 
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"社群";
     self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
     
-    NSArray *title = @[@"推薦",@"Facebook",@"You Tube",@"Instagram"];
-
-    CGFloat space = (screenW - title.count*80)/(title.count + 1);
+//    NSArray *title = @[@"推薦",@"Facebook",@"You Tube",@"Instagram"];
+//
+//    CGFloat space = (screenW - title.count*80)/(title.count + 1);
     
 
 //    [self configUI];
@@ -89,13 +88,16 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.up" params:eParams eventCategory:@"recommendation.view"];
 }
 - (void)footerRereshing
 {
-    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"list.loading.down" params:eParams eventCategory:@"recommendation.view"];
 }
-
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;

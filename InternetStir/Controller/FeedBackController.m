@@ -160,6 +160,11 @@ static int height;
 }
 -(void) sendBtnClicked{
     
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:self.feedbackMsg.text forKey:@"feedback"];
+    [poApp.reportSvr recordEvent:@"feedback" params:eParams eventCategory:@"setting.click"];
+    
     [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]];
     NSString* msg = self.feedbackMsg.text;
     if (msg != nil && [msg length] >= 1){

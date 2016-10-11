@@ -11,8 +11,9 @@
 #import "PickerImageTools.h"
 #import "FacebookService.h"
 #import "ITSAppConst.h"
+#import "GAITrackedViewController.h"
 
-@interface HomeViewController : UIViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 #ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;

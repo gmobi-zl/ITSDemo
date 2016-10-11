@@ -9,6 +9,8 @@
 
 #import "SocialWebController.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
+#import "NewsCategory.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -21,19 +23,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"social.web";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.arr = @[@"https://www.facebook.com/Jacob.ek07/",
-                    @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
-                    @"https://www.instagram.com/jacob.ek07/"];
-
+//    self.arr = @[@"https://www.facebook.com/Jacob.ek07/",
+//                    @"https://www.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg",
+//                    @"https://www.instagram.com/jacob.ek07/"];
+    self.arr = [[NSMutableArray alloc] init];
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableArray* arr = itsApp.dataSvr.categoryList;
+    for (NewsCategory *cate in arr) {
+        if (cate.url != nil) {
+            [self.arr addObject:cate.url];
+        }
+    }
     self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 20, screenW, screenH - 60 )];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.navigationDelegate = self;
-    NSURL* url = [NSURL URLWithString:self.arr[self.viewIndex - 1]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+    if (self.viewIndex - 1 < self.arr.count) {
+        NSURL* url = [NSURL URLWithString:self.arr[self.viewIndex - 1]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self.webView loadRequest:request];
+    }
+   
     [self.view addSubview:self.webView];
+
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"name" params:eParams eventCategory:@"social.web.view"];
 
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {

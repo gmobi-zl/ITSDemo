@@ -8,6 +8,7 @@
 //
 
 #import "ArticleController.h"
+#import "ITSApplication.h"
 
 @interface ArticleController ()
 
@@ -19,6 +20,7 @@
     
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.screenName = @"article";
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 15, 20);
@@ -26,6 +28,10 @@
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
+    
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"title" params:eParams eventCategory:@"article.view"];
 }
 - (void)clickBack {
     [self.navigationController popViewControllerAnimated:YES];

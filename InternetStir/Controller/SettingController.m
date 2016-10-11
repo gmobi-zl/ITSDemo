@@ -24,12 +24,14 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
 
 -(void) viewDidLoad{
     [super viewDidLoad];
+    self.screenName = @"setting";
     [self.tabBarController.tabBar setHidden:YES];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     self.title = @"設定";
     [self initViews];
+   
 }
 
 -(void) initViews{
@@ -146,6 +148,11 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
 //        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_night"] forBarMetrics:UIBarMetricsDefault];
     }
     self.headerBg.backgroundColor = [cs getTopBgViewRedColor:cs.type];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [itsApp.reportSvr recordEvent:@"" params:eParams eventCategory:@"setting.view"];
+
     
 }
 - (void)tapBack{
@@ -362,8 +369,6 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //MJTestViewController *test = [[MJTestViewController alloc] init];
-    //[self.navigationController pushViewController:test animated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     NSInteger index = indexPath.row;
@@ -371,30 +376,24 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     ITSApplication* poApp = [ITSApplication get];
     DataService* ds = poApp.dataSvr;
     NSMutableArray* settingList = [ds getSettingList];
-//    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     if (settingList != nil && index < [settingList count]){
         SettingItem* clickItem = [settingList objectAtIndex:index];
         if (clickItem.actionType == SETTING_ACTION_EDITION){
-            //EditionController *editionPage = [[EditionController alloc] init];
-            //[self.navigationController pushViewController:editionPage animated:NO];
+
         } else if (clickItem.actionType == SETTING_ACTION_CLEAN_CACHE) {
             //self.cleanMask.hidden = NO;
             ITSApplication* poApp = [ITSApplication get];
             [poApp.dataSvr clearCacheFolder];
             self.clearFinish = NO;
             [self showCleanPanel];
+            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+            [poApp.reportSvr recordEvent:@"cache" params:eParams eventCategory:@"setting.click"];
+            
         } else if (clickItem.actionType == SETTING_ACTION_FEEDBACK) {
             FeedBackController *feedbackPage = [[FeedBackController alloc] init];
             [self.navigationController pushViewController:feedbackPage animated:NO];
+        
         }
-//        else if (clickItem.actionType == SETTING_ACTION_ABOUT) {
-//            
-//            AboutController *aboutPage = [[AboutController alloc] init];
-//            
-//            [self.navigationController pushViewController:aboutPage animated:NO];
-//            //            PopoApplication* poApp = [PopoApplication get];
-//            //            [poApp.reportSvr recordEvent:@"me.settings.about" params:nil];
-//        }
     }
     
     

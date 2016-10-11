@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface MyCommentController : UIViewController<UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MyCommentController : GAITrackedViewController<UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 
 

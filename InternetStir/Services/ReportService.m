@@ -16,8 +16,8 @@
 #import "MMEventService.h"
 #import "MMLogger.h"
 //#import "AppsFlyerTracker.h"
-//#import "GAI.h"
-//#import "GAIDictionaryBuilder.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 #import "ITSApplication.h"
 
 @import FirebaseAnalytics;
@@ -382,6 +382,12 @@
 //    //if (params != nil)
 //    //    [b set:params forKey:newsEventId];
 //    [tracker send:[b build]];
+    // report to GA
+    NSString* pLabel = [MMSystemHelper DictTOjsonString:params];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-83420163-6"];
+    GAIDictionaryBuilder* b = [GAIDictionaryBuilder createEventWithCategory:category action:eventId label:pLabel value:nil];
+    [tracker send:[b build]];
+
 }
 
 

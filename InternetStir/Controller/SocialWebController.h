@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-
-@interface SocialWebController : UIViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
+#import "GAITrackedViewController.h"
+@interface SocialWebController : GAITrackedViewController<WKNavigationDelegate,WKUIDelegate,WKNavigationDelegate>
 @property (nonatomic, assign) NSUInteger viewIndex;
 @property (nonatomic, strong) WKWebView *webView;
-@property (nonatomic, strong) NSArray *arr;
+@property (nonatomic, strong) NSMutableArray *arr;
 @end

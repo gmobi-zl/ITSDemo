@@ -112,13 +112,7 @@
 -(void)setCommentFrame:(HomeCommentFrame *)commentFrame{
 
     _commentFrame = commentFrame;
-    if (commentFrame.commentItem.isFavour == YES) {
-//        self.zanImageView.image = self.zanImage;
-        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
-    }else{
-        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-    }
-
+ 
 #ifdef DEMO_DATA
     [self removeOldReplys];
     [self settingtData];
@@ -290,7 +284,7 @@
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
         
-        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
+        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location + 1);
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
         [replyLabel setAttributedText:noteStr];
         [replyLabel sizeToFit];

@@ -82,26 +82,23 @@
 }
 - (void)btnClick :(UIButton*)button{
     
+//    NSString *switchStr;;
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     if (button.selected == NO) {
         button.selected = YES;
         [button setImage:[UIImage imageNamed:@"switch_on"] forState:UIControlStateNormal];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"switch"];
+        [eParams setObject:@"on" forKey:@"switch"];
+//        switchStr = @"on";
     }else {
         [button setImage:[UIImage imageNamed:@"switch_off"] forState:UIControlStateNormal];
         button.selected = NO;
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"switch"];
+        [eParams setObject:@"off" forKey:@"switch"];
+//        switchStr = @"off";
     }
     
-    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     ITSApplication* poApp = [ITSApplication get];
-    NSString* autoplay;
-    if (button.selected == NO){
-        [eParams setObject:@"false" forKey:@"autoplay"];
-        autoplay = @"false";
-    } else {
-        [eParams setObject:@"true" forKey:@"autoplay"];
-        autoplay = @"true";
-    }
-//    [poApp.reportSvr recordEvent:autoplay params:eParams eventCategory:@"me.settings.autoplay"];
+    [poApp.reportSvr recordEvent:@"push" params:eParams eventCategory:@"setting.click"];
 }
 @end

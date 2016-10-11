@@ -154,9 +154,13 @@
     if (tmpData != nil)
         self.cId = tmpData;
     
-    tmpData = [dic objectForKey:NEWS_CATEGORY_NAME];
+    tmpData = [dic objectForKey:NEWS_CATEGORY_LABEL];
     if (tmpData != nil)
-        self.name = tmpData;
+        self.label = tmpData;
+    tmpData = [dic objectForKey:NEWS_CATEGORY_URL];
+    if (tmpData != nil) {
+        self.url = tmpData;
+    }
     
     tmpData = [dic objectForKey:NEWS_CATEGORY_LAYOUT];
     if (tmpData != nil)

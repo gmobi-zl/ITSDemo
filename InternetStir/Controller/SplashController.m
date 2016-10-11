@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.screenName = @"launch";
+    self.screenName = @"launch";
     //    PopoApplication *poApp = [PopoApplication get];
     
     self.navigationController.navigationBarHidden = YES;
@@ -59,6 +59,11 @@
     
     [self delayToHome];
 
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"tomotoc001" forKey:@"ch"];
+    [eParams setObject:@"" forKey:@"cid"];
+    [poApp.reportSvr recordEvent:@"ch" params:eParams eventCategory:@"launch.view"];
 }
 
 -(void) pushNextVc{
@@ -87,7 +92,11 @@
 }
 - (void)cancelBtn {
     
-    [UIView animateWithDuration:1 animations:^{
+    ITSApplication* poApp = [ITSApplication get];
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [poApp.reportSvr recordEvent:@"cancel" params:eParams eventCategory:@"login.click"];
+
+    [UIView animateWithDuration:0.5 animations:^{
         self.loginView.effectView.alpha = 0;
 
     } completion:^(BOOL finished) {
@@ -98,7 +107,7 @@
 }
 - (void)passMessage {
     
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.loginView.effectView.alpha = 0;
     }];
     TabBarController *tabBar = [[TabBarController alloc] init];
@@ -121,13 +130,13 @@
     
     [itsApp.remoteSvr doConnect];
     
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         @"launch.view",@"EventCategory",
-                         @"tomotoc001",@"EventAction",
-                         @"" ,@"name",
-                         nil];
-
-    [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
+//    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                         @"launch.view",@"EventCategory",
+//                         @"tomotoc001",@"EventAction",
+//                         @"" ,@"name",
+//                         nil];
+//
+//    [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
     
 }
 

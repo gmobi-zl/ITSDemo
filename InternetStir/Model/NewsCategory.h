@@ -13,10 +13,11 @@
 #import <Foundation/Foundation.h>
 #import "AdItem.h"
 #define NEWS_CATEGORY_ID @"id"
-#define NEWS_CATEGORY_NAME @"name"
+#define NEWS_CATEGORY_LABEL @"label"
 #define NEWS_CATEGORY_LAYOUT @"layout"
 #define NEWS_CATEGORY_TYPE @"type"
 #define NEWS_CATEGORY_EXTRA @"extra"
+#define NEWS_CATEGORY_URL @"url"
 
 
 #define NEWS_CATEGORY_EXTRA_SOURCES @"sources"
@@ -58,9 +59,10 @@
 @interface NewsCategory : NSObject
 
 @property (copy) NSString* cId;
-@property (copy) NSString* name;
+@property (copy) NSString* label;
 @property (copy) NSString* layout;
 @property (copy) NSString* type;
+@property (copy) NSString* url;
 
 @property (assign) unsigned long long afterTime;
 @property (assign) unsigned long long beforeTime;

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LoginView.h"
 #import "FacebookService.h"
+#import "GAITrackedViewController.h"
 
-@interface MenuViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate,FacebookDelegate>
+@interface MenuViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIGestureRecognizerDelegate,FacebookDelegate>
 
 @property (nonatomic, strong) UIImageView *bgImage;
 @property (nonatomic, strong) UIImageView *icon;

@@ -30,8 +30,8 @@
         [self.icon addSubview:self.iconBtn];
         
         self.nameLabel = [[UILabel alloc] init];
-        self.nameLabel.font = [UIFont systemFontOfSize:16];
-        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+//        self.nameLabel.font = [UIFont systemFontOfSize:16];
+        self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:16];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
@@ -230,12 +230,12 @@
         [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
-        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
+        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,20)];
         CGFloat nameLabelY = 13;
-        CGFloat nameLabelWidth = nameLabelSize.width;
+        CGFloat nameLabelWidth = nameLabelSize.width + 20;
         CGFloat nameLabelHeight = nameLabelSize.height;
         self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 20);
-        
+        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         CGFloat contentLabelX = nameLabelX;
         CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
         CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
@@ -260,6 +260,8 @@
         self.commentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
+//        self.timeLabel.backgroundColor = [UIColor redColor];
+        self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
             FansComment *item = [data.replayComments objectAtIndex:i];
@@ -277,7 +279,7 @@
 //                
 //                NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
 //                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-//                [replyLabel setAttributedText:noteStr] ;
+//                [replyLabel setAttributedText:noteStr];
 //                [replyLabel sizeToFit];
 //            }
             self.replyLabel = replyLabel;
