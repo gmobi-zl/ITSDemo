@@ -15,7 +15,7 @@
 #import "SettingService.h"
 #import "UUInputAccessoryView.h"
 #import "PickerImageTools.h"
-#import "LoginViewController.h"
+//#import "LoginViewController.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "AppStyleConfiguration.h"
@@ -59,6 +59,17 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }
     
     [self setupRefresh];
+    
+    NSString *str = @"Content with Facebook";
+    CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
+    CGFloat width = size.width + 30 + 10 + 60;
+    self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
+    self.loginView.backgroundColor = [UIColor whiteColor];
+    self.loginView.layer.masksToBounds = YES;
+    self.loginView.layer.cornerRadius = 10;
+    self.loginView.center = self.view.center;
+    [self.loginView.effectView addSubview:self.loginView];
+
     
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH selector:@selector(celebReplyCommentsDataRefreshListener:)];
@@ -260,9 +271,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         if (userSvr.user.isLogin == NO) {
-             LoginViewController *loginVc = [[LoginViewController alloc] init];
-             [self.navigationController pushViewController:loginVc animated:YES];
+         if (userSvr.user.isLogin == YES) {
+//             LoginViewController *loginVc = [[LoginViewController alloc] init];
+//             [self.navigationController pushViewController:loginVc animated:YES];
+             self.loginView.effectView.alpha = 1;
              [ss setStringValue:@"login" data:contentStr];
 
          }else{
@@ -461,8 +473,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
      {
          
          if (userSvr.user.isLogin == NO) {
-             LoginViewController *loginVc = [[LoginViewController alloc] init];
-             [self.navigationController pushViewController:loginVc animated:YES];
+             self.loginView.effectView.alpha = 1;
+
+//             LoginViewController *loginVc = [[LoginViewController alloc] init];
+//             [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];
 
          }else {
@@ -522,8 +536,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
      {
          
          if (userSvr.user.isLogin == NO) {
-             LoginViewController *loginVc = [[LoginViewController alloc] init];
-             [self.navigationController pushViewController:loginVc animated:YES];
+             self.loginView.effectView.alpha = 1;
+//             LoginViewController *loginVc = [[LoginViewController alloc] init];
+//             [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];
 
          }else {

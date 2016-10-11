@@ -55,7 +55,6 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
-
 }
 - (void)setupRefresh
 {

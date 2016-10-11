@@ -392,10 +392,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
         } else if (clickItem.actionType == SETTING_ACTION_FEEDBACK) {
             FeedBackController *feedbackPage = [[FeedBackController alloc] init];
             [self.navigationController pushViewController:feedbackPage animated:NO];
-            
-            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-            [poApp.reportSvr recordEvent:@"feedback" params:eParams eventCategory:@"setting.click"];
-
+        
         }
     }
     

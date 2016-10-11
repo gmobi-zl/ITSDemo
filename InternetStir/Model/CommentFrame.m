@@ -186,7 +186,7 @@
     
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", fansComment.pts]];
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
-    self.timeF = CGRectMake(nameLabelX, self.cellHeight , timeLabelSize.width, 20);
+    self.timeF = CGRectMake(nameLabelX, self.cellHeight , timeLabelSize.width + 10, 20);
     self.replyBtnF = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.cellHeight, 40, 20);
     
     self.cellHeight = CGRectGetMaxY(self.timeF) + padding + 5;

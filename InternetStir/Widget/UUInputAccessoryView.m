@@ -132,6 +132,10 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:btnBack];
 
+    BtnSave.hidden = NO;
+    inputView.hidden = NO;
+    bar.hidden = NO;
+
     inputBlock = block;
     inputView.text = content;
 //    inputView.text = @"mm";
@@ -190,6 +194,12 @@
     shouldDismiss = YES;
     [inputView resignFirstResponder];
     [btnBack removeFromSuperview];
+    BtnSave.hidden = YES;
+    inputView.hidden = YES;
+    bar.hidden = YES;
+//    [BtnSave removeFromSuperview];
+//    [inputView removeFromSuperview];
+//    [bar removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

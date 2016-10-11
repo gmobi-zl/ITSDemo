@@ -80,7 +80,7 @@
     NSMutableArray* arr = itsApp.dataSvr.categoryList;
     NSMutableArray *titleArr = [[NSMutableArray alloc] initWithObjects:@"推薦", nil];
     for (NewsCategory *cate in arr) {
-        [titleArr addObject:cate.name];
+        [titleArr addObject:cate.label];
     }
    
     NSString* tabTitle = titleArr[index];

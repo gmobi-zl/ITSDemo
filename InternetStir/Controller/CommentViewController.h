@@ -11,6 +11,7 @@
 #import "PNMoodView.h"
 #import "CommentItem.h"
 #import "GAITrackedViewController.h"
+#import "LoginView.h"
 
 @interface CommentViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, assign) NSInteger index;
@@ -26,5 +27,7 @@
 
 @property (assign) int refreshType;
 @property (assign) BOOL isRefreshing;
+@property (nonatomic, strong) LoginView *loginView;
+
 
 @end

@@ -230,7 +230,7 @@
         [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
-        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
+        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,20)];
         CGFloat nameLabelY = 13;
         CGFloat nameLabelWidth = nameLabelSize.width + 20;
         CGFloat nameLabelHeight = nameLabelSize.height;
@@ -260,6 +260,7 @@
         self.commentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
+//        self.timeLabel.backgroundColor = [UIColor redColor];
         self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
@@ -278,7 +279,7 @@
 //                
 //                NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
 //                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-//                [replyLabel setAttributedText:noteStr] ;
+//                [replyLabel setAttributedText:noteStr];
 //                [replyLabel sizeToFit];
 //            }
             self.replyLabel = replyLabel;
