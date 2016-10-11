@@ -85,6 +85,8 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 
 -(void) doLogin: (NSString*) email
             uid: (NSString*) uid
+           name: (NSString*) name
+         avator: (NSString*) avator
     accessToken: (NSString*) accessToken
            type: (int) type
        callback: (RemoteCallback) callback;

@@ -144,7 +144,7 @@ typedef enum{
 
 @property (retain) NSMutableArray* celebComments;
 @property (retain) CelebComment* currentCelebComment;
-@property (retain) NSMutableArray* userComments;
+@property (retain) NSMutableArray* userTrackComments;
 @property (retain) CelebInfo* celebInfo;
 
 //@property (retain) NativeAdItem *fbAdData;
@@ -330,8 +330,8 @@ typedef enum{
                            type: (int) type;
 
 
--(void) refreshUserComments: (int) type;
--(void) setRefreshUserComments: (NSArray*) dicData
+-(void) refreshUserTrackComments: (int) type;
+-(void) setRefreshUserTrackComments: (NSArray*) dicData
                     isClearData: (BOOL) clear
                            type: (int) type;
 

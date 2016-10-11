@@ -65,6 +65,8 @@
         } else {
             self.user.isCBADM = NO;
         }
+        
+        self.user.isCBADM = YES;
     }
 }
 

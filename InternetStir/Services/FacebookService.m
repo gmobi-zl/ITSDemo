@@ -43,7 +43,8 @@
 //                                     [[NSNumber alloc] initWithBool:us.user.isLogin],@"isLogin",
 //                                     nil];
                 
-                [itsApp.remoteSvr doLogin:self.email uid:self.uId accessToken:[self getToken] type:1 callback:^(int status, int code, NSDictionary *resultData) {
+                [itsApp.remoteSvr doLogin:self.email uid:self.uId name:self.userName
+                                   avator:self.icon accessToken:[self getToken] type:1 callback:^(int status, int code, NSDictionary *resultData) {
                     if (resultData != nil){
                         NSDictionary* profile = [resultData objectForKey:@"profile"];
                         if (profile != nil){
@@ -87,7 +88,7 @@
                                 us.user.isCBADM = NO;
                             }
                             
-                            //us.user.isCBADM = YES;
+                            us.user.isCBADM = YES;
                             us.user.isLogin = YES;
                             
                             [dic setObject:self.uId forKey:@"openid"];

@@ -19,6 +19,7 @@
 #import "MMDictionaryHelper.h"
 #import "CelebComment.h"
 #import "FansComment.h"
+#import "UserTrackComment.h"
 
 //#import "Go2Reach.framework/Headers/GRAdService.h"
 
@@ -2330,12 +2331,38 @@
     return ret;
 }
 
--(void) refreshUserComments: (int) type{
-    NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
-    [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
+-(void) refreshUserTrackComments: (int) type{
+    
+    NSString* newsTime = nil;
+    if (self.userTrackComments != nil){
+        NSInteger count = [self.userTrackComments count];
+        if (count > 0){
+            if (type == CB_COMMENT_REFRESH_TYPE_AFTER){
+                // do nothing
+                UserTrackComment* topComment = [self.userTrackComments objectAtIndex:0];
+                if (topComment != nil)
+                    newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+            } else if (type == CB_COMMENT_REFRESH_TYPE_BEFORE){
+                UserTrackComment* latestComment = [self.userTrackComments objectAtIndex:count-1];
+                if (latestComment != nil)
+                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
+            }
+        }
+    }
+    
+    if (newsTime == nil){
+        newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:CB_COMMENT_REFRESH_TYPE_BEFORE];
+    }else{
+        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
+    }
+    
+    
+    //NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+    //[[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
 }
 
--(void) setRefreshUserComments: (NSArray*) dicData
+-(void) setRefreshUserTrackComments: (NSArray*) dicData
                    isClearData: (BOOL) clear
                           type: (int) type{
     
@@ -2343,28 +2370,28 @@
         return;
     
     for (NSDictionary* commentDataItem in dicData) {
-        FansComment* tmpItem = [[FansComment alloc] initWithDictionary:commentDataItem];
-        [self insertUserCommentItem:tmpItem];
+        UserTrackComment* tmpItem = [[UserTrackComment alloc] initWithDictionary:commentDataItem];
+        [self insertUserTrackCommentItem:tmpItem];
     }
 }
 
--(BOOL) insertUserCommentItem: (FansComment*) item{
+-(BOOL) insertUserTrackCommentItem: (UserTrackComment*) item{
     BOOL same = NO;
     BOOL ret = NO;
     int i = 0;
     
-    if (self.userComments == nil)
-        self.userComments = [NSMutableArray arrayWithCapacity:1];
+    if (self.userTrackComments == nil)
+        self.userTrackComments = [NSMutableArray arrayWithCapacity:1];
     
-    if (self.userComments == nil || item == nil)
+    if (self.userTrackComments == nil || item == nil)
         return ret;
     
-    int listCount = (int)[self.userComments count];
+    int listCount = (int)[self.userTrackComments count];
     for (i = 0; i < listCount; i++) {
         
-        id uComment = [self.userComments objectAtIndex:i];
-        if ([uComment isKindOfClass:[FansComment class]]) {
-            FansComment* comment = uComment;
+        id uComment = [self.userTrackComments objectAtIndex:i];
+        if ([uComment isKindOfClass:[UserTrackComment class]]) {
+            UserTrackComment* comment = uComment;
             if (comment != nil){
                 if ([comment.fid compare:item.fid] == NSOrderedSame) {
                     same = YES;
@@ -2377,7 +2404,7 @@
                 }
                 
                 if (comment.pts < item.pts) {
-                    [self.userComments insertObject:item atIndex:i];
+                    [self.userTrackComments insertObject:item atIndex:i];
                     ret = YES;
                     break;
                 }
@@ -2386,7 +2413,7 @@
     }
     
     if (same == NO && ret == NO){
-        [self.userComments addObject:item];
+        [self.userTrackComments addObject:item];
         ret = YES;
     }
     

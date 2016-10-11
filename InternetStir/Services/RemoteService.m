@@ -696,6 +696,8 @@
 
 -(void) doLogin: (NSString*) email
             uid: (NSString*) uid
+           name: (NSString*) name
+         avator: (NSString*) avator
     accessToken: (NSString*) accessToken
            type: (int) type
        callback: (RemoteCallback) callback{
@@ -709,6 +711,11 @@
         [param setObject:email forKey:@"email"];
     if (uid != nil)
         [param setObject:uid forKey:@"uid"];
+    if (name != nil)
+        [param setObject:name forKey:@"name"];
+    if (avator != nil)
+        [param setObject:avator forKey:@"avatar"];
+    
     [param setObject:accessToken forKey:@"access_token"];
     
     MMHttpSession* httpSession = [MMHttpSession alloc];
@@ -1023,7 +1030,7 @@
             
             NSArray* commentArr = [dataDic objectForKey:@"comments"];
             
-            [itsApp.dataSvr setRefreshUserComments:commentArr isClearData:isClear type:type];
+            [itsApp.dataSvr setRefreshUserTrackComments:commentArr isClearData:isClear type:type];
             
             MMEventService *es = [MMEventService getInstance];
             [es send:EVENT_USER_COMMENT_DATA_REFRESH eventData:USER_COMMENT_REFRESH_SUCCESS];
