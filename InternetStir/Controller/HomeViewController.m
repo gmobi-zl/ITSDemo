@@ -70,10 +70,11 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [poApp.reportSvr recordEvent:@"comment" params:eParams eventCategory:@"tabbar.click"];
 }
 - (void)passMessage {
-    
-    [self.Btn setTitle:@"" forState:UIControlStateNormal];
-    self.Btn.userInteractionEnabled = NO;
+   
+    self.Btn.frame = CGRectMake(0, 20, 25, 23);
 
+    [self.Btn setTitle:@"" forState:UIControlStateNormal];
+    [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
 }
 
 -(void)celebCommentsDataRefreshListener: (id) data{
@@ -314,7 +315,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [eParams setObject:@"forumid" forKey:@"fid"];
     [eParams setObject:content forKey:@"context"];
     [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
-
 }
 - (void)favBtnClick:(UIButton *)button {
     
@@ -327,26 +327,38 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     SettingService* ss = [SettingService get];
     BOOL isFav = [ss getBooleanValue:item.fid defValue:NO];
-    if (isFav == NO) {
-        cell.likeNum.text = [NSString stringWithFormat:@"%d",99999+1];
-        [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
-        cell.commentFrame.commentItem.isFavour = YES;
-        [ss setBooleanValue:item.fid data:YES];
-        
-        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-        [eParams setObject:@"forumid" forKey:@"fid"];
-        [eParams setObject:content forKey:@"context"];
-        [poApp.reportSvr recordEvent:@"+heart" params:eParams eventCategory:@"comment.click"];
-
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == NO) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
     }else {
-        cell.likeNum.text = [NSString stringWithFormat:@"%d",99999];
-        [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        cell.commentFrame.commentItem.isFavour = YES;
-        [ss setBooleanValue:item.fid data:NO];
-        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-        [eParams setObject:@"forumid" forKey:@"fid"];
-        [eParams setObject:content forKey:@"context"];
-        [poApp.reportSvr recordEvent:@"-heart" params:eParams eventCategory:@"comment.click"];
+        // fav
+        if (isFav == NO) {
+            item.likes ++;
+            cell.likeNum.text = [NSString stringWithFormat:@"%ld",item.likes];
+            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+            cell.commentFrame.commentItem.isFavour = YES;
+            [ss setBooleanValue:item.fid data:YES];
+            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+            [eParams setObject:@"forumid" forKey:@"fid"];
+            [eParams setObject:content forKey:@"context"];
+            [poApp.reportSvr recordEvent:@"+heart" params:eParams eventCategory:@"comment.click"];
+            
+            [poApp.remoteSvr userLike:item.fid ];
+        }else {
+            item.likes--;
+            cell.likeNum.text = [NSString stringWithFormat:@"%ld",item.likes];
+            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+            cell.commentFrame.commentItem.isFavour = YES;
+            [ss setBooleanValue:item.fid data:NO];
+            [poApp.remoteSvr userUnlike:item.fid ];
+            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+            [eParams setObject:@"forumid" forKey:@"fid"];
+            [eParams setObject:content forKey:@"context"];
+            [poApp.reportSvr recordEvent:@"-heart" params:eParams eventCategory:@"comment.click"];
+        }
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -544,9 +556,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         self.Btn.frame = CGRectMake(0, 20, 50, 30);
         if (us.user.isLogin == NO) {
             [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
-        }else {
-            [self.Btn setTitle:@"" forState:UIControlStateNormal];
-            self.Btn.userInteractionEnabled = NO;
         }
     }
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];

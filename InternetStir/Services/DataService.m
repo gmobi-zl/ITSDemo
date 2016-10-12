@@ -2281,7 +2281,6 @@
         CelebComment* tmpItem = [[CelebComment alloc] initWithDictionary:commentDataItem];
         tmpItem.name = itsApp.dataSvr.celebInfo.name;
         tmpItem.avator = itsApp.dataSvr.celebInfo.avator;
-        
         [self insertCelebCommentItem:tmpItem];
     }
 }

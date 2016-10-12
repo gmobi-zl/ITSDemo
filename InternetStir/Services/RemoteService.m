@@ -889,7 +889,7 @@
     CelebUser* user = itsApp.cbUserSvr.user;
     if (user != nil){
         if (user.isLogin == YES && user.session != nil){
-            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+            pSession = user.session;
         }
     }
     
@@ -918,7 +918,7 @@
     CelebUser* user = itsApp.cbUserSvr.user;
     if (user != nil){
         if (user.isLogin == YES && user.session != nil){
-            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+            pSession = user.session;
         }
     }
     

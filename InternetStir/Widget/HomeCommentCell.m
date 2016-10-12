@@ -274,10 +274,11 @@
         
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
         NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
         NSRange replyRange;
         if (item.u_role == CELEB_USER_VIP) {
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
             NSTextAttachment *attch = [[NSTextAttachment alloc] init];
             attch.image = [UIImage imageNamed:@"tomato"];
             attch.bounds = CGRectMake(0, 0, 16, 16);
@@ -286,6 +287,7 @@
             replyLabel.attributedText = noteStr;
             replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location + 1);
         }else {
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
             replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
         }
     
@@ -316,8 +318,8 @@
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
     
     self.timeLabel.text = time;
-    int fav = 99999;
-    self.likeNum.text = [NSString stringWithFormat:@"%d",fav];
+    self.likeNum.text = [NSString stringWithFormat:@"%ld",data.likes];
+    
 }
 
 -(void)settingFrame
