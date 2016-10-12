@@ -271,11 +271,11 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                                       name:@""
                                      Block:^(NSString *contentStr)
      {
-         if (userSvr.user.isLogin == YES) {
+         if (userSvr.user.isLogin == NO) {
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
              self.loginView.effectView.alpha = 1;
-             [ss setStringValue:@"login" data:contentStr];
+//             [ss setStringValue:@"login" data:contentStr];
 
          }else{
              

@@ -273,18 +273,22 @@
         NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.comment];
         
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
-        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-        attch.image = [UIImage imageNamed:@"tomato"];
-        attch.bounds = CGRectMake(0, 0, 16, 16);
-        NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-        [noteStr insertAttributedString:string atIndex:0];
-        replyLabel.attributedText = noteStr;
-
         NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
-        
-        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location + 1);
+        NSRange replyRange;
+        if (item.u_role == CELEB_USER_VIP) {
+            NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+            attch.image = [UIImage imageNamed:@"tomato"];
+            attch.bounds = CGRectMake(0, 0, 16, 16);
+            NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+            [noteStr insertAttributedString:string atIndex:0];
+            replyLabel.attributedText = noteStr;
+            replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location + 1);
+        }else {
+            replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
+        }
+    
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
         [replyLabel setAttributedText:noteStr];
         [replyLabel sizeToFit];
