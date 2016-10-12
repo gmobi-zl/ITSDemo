@@ -221,6 +221,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 #else
     ITSApplication* itsApp = [ITSApplication get];
     NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:indexPath.row];
     
     if (dataArr != nil){
         CelebComment* cbComment = [dataArr objectAtIndex:indexPath.row];
@@ -234,7 +235,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
 #endif
     SettingService* ss = [SettingService get];
-    BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",indexPath.row] defValue:NO];
+    BOOL isFav = [ss getBooleanValue:item.fid defValue:NO];
 
     if (isFav == YES) {
         //        self.zanImageView.image = self.zanImage;
@@ -325,12 +326,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSString *content = item.context;
 
     SettingService* ss = [SettingService get];
-    BOOL isFav = [ss getBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] defValue:NO];
+    BOOL isFav = [ss getBooleanValue:item.fid defValue:NO];
     if (isFav == NO) {
         cell.likeNum.text = [NSString stringWithFormat:@"%d",99999+1];
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
-        [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:YES];
+        [ss setBooleanValue:item.fid data:YES];
         
         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
         [eParams setObject:@"forumid" forKey:@"fid"];
@@ -341,7 +342,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         cell.likeNum.text = [NSString stringWithFormat:@"%d",99999];
         [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
         cell.commentFrame.commentItem.isFavour = YES;
-        [ss setBooleanValue:[NSString stringWithFormat:@"%ld",button.tag] data:NO];
+        [ss setBooleanValue:item.fid data:NO];
         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
         [eParams setObject:@"forumid" forKey:@"fid"];
         [eParams setObject:content forKey:@"context"];
