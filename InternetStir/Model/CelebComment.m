@@ -40,6 +40,14 @@
     if (numData != nil)
         self.uts = [numData longLongValue];
     
+    numData = [dic objectForKey:CB_COMMENT_ITEM_IS_LIKE];
+    if (numData != nil)
+        self.isLike = [numData boolValue];
+    
+    numData = [dic objectForKey:CB_COMMENT_ITEM_LIKES];
+    if (numData != nil)
+        self.likes = [numData integerValue];
+    
     NSArray* topComments = [dic objectForKey:CB_COMMENT_ITEM_COMMENTS];
     if (topComments != nil){
         NSMutableArray* tmpArray = [NSMutableArray arrayWithCapacity:2];

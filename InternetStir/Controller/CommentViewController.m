@@ -328,7 +328,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                              [frame initWithCommentData:sendComment];
                              sendComment.uiFrame = frame;
                              
-                             [ds insertCurrentReplyCommentItem:sendComment];
+                             [ds userInsertCurrentReplyCommentItem:sendComment];
                              
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.tableView reloadData];
@@ -600,7 +600,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                              sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
                              sendComment.uts = sendComment.pts;
                              
-                             [ds insertCurrentReplyCommentItem:sendComment];
+                             [ds userInsertCurrentReplyCommentItem:sendComment];
                              
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.tableView reloadData];

@@ -16,6 +16,8 @@
 #define CB_COMMENT_ITEM_CONTEXT @"context"
 #define CB_COMMENT_ITEM_ATTACHMENTS @"attachments"
 #define CB_COMMENT_ITEM_COMMENTS @"comments"
+#define CB_COMMENT_ITEM_LIKES @"likes"
+#define CB_COMMENT_ITEM_IS_LIKE @"isLike"
 #define CB_COMMENT_ITEM_PTS @"pts"
 #define CB_COMMENT_ITEM_UTS @"uts"
 
@@ -32,6 +34,9 @@
 
 @property NSArray* topFansComments;
 @property NSMutableArray* replayComments;
+
+@property BOOL isLike;
+@property NSInteger likes;
 
 @property UInt64 pts;
 @property UInt64 uts;

@@ -2604,5 +2604,125 @@
     return ret;
 }
 
+
+-(BOOL) userInsertCurrentReplyCommentItem: (FansComment*) item{
+    BOOL same = NO;
+    BOOL ret = NO;
+    int i = 0;
+    
+    if (item == nil)
+        return ret;
+    
+    NSInteger count = [self.celebComments count];
+    CelebComment* cbComment = nil;
+    for (int i = 0; i < count; i++) {
+        CelebComment* tmp = [self.celebComments objectAtIndex:i];
+        if (tmp != nil && [tmp.fid isEqualToString:item.fid]){
+            cbComment = tmp;
+            break;
+        }
+    }
+    if (cbComment == nil)
+        return ret;
+    if (item.rid != nil){
+        
+        if (cbComment.replayComments == nil){
+            return ret;
+        }
+        
+        NSInteger replyCount = [cbComment.replayComments count];
+        FansComment* fsComment = nil;
+        for (int j = 0; j < replyCount; j++) {
+            FansComment* tmp = [cbComment.replayComments objectAtIndex:j];
+            if (tmp != nil && [tmp.cid isEqualToString:item.rid]){
+                fsComment = tmp;
+                break;
+            }
+        }
+        
+        if (fsComment.replayComments == nil)
+            fsComment.replayComments = [NSMutableArray arrayWithCapacity:1];
+        
+        NSMutableArray* replayList = (NSMutableArray*)fsComment.replayComments;
+        
+        int listCount = (int)[replayList count];
+        for (i = 0; i < listCount; i++) {
+            
+            id uComment = [replayList objectAtIndex:i];
+            if ([uComment isKindOfClass:[FansComment class]]) {
+                FansComment* comment = uComment;
+                if (comment != nil){
+                    if ([comment.cid compare:item.cid] == NSOrderedSame) {
+                        same = YES;
+                        
+                        //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                        //    newItem.isOfflineDL = YES;
+                        //}
+                        
+                        break;
+                    }
+                    
+                    if (comment.pts < item.pts) {
+                        [replayList insertObject:item atIndex:i];
+                        ret = YES;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (same == NO && ret == NO){
+            [replayList addObject:item];
+            ret = YES;
+        }
+        
+        if (fsComment.uiFrame != nil){
+            fsComment.uiFrame.replysF = nil;
+            fsComment.uiFrame.replyNameF = nil;
+            fsComment.uiFrame.replyPictureF = nil;
+            [fsComment.uiFrame refreshFrame:fsComment];
+        }
+        
+    } else {
+        if (cbComment.replayComments == nil)
+            cbComment.replayComments = [NSMutableArray arrayWithCapacity:1];
+        
+        NSMutableArray* replayList = (NSMutableArray*)cbComment.replayComments;
+        
+        int listCount = (int)[replayList count];
+        for (i = 0; i < listCount; i++) {
+            
+            id uComment = [replayList objectAtIndex:i];
+            if ([uComment isKindOfClass:[FansComment class]]) {
+                FansComment* comment = uComment;
+                if (comment != nil){
+                    if ([comment.cid compare:item.cid] == NSOrderedSame) {
+                        same = YES;
+                        
+                        //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                        //    newItem.isOfflineDL = YES;
+                        //}
+                        
+                        break;
+                    }
+                    
+                    if (comment.pts < item.pts) {
+                        [replayList insertObject:item atIndex:i];
+                        ret = YES;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (same == NO && ret == NO){
+            [replayList addObject:item];
+            ret = YES;
+        }
+    }
+    
+    return ret;
+}
+
 @end
 

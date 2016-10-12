@@ -342,6 +342,7 @@ typedef enum{
                    isClearData: (BOOL) clear
                           type: (int) type;
 -(BOOL) insertCurrentReplyCommentItem: (FansComment*) item;
+-(BOOL) userInsertCurrentReplyCommentItem: (FansComment*) item;
 
 @end
 
