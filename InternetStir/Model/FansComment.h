@@ -13,6 +13,7 @@
 #import "CommentFrame.h"
 
 #define FANS_COMMENT_ITEM_UUID @"uuid"
+#define FANS_COMMENT_ITEM_CELEB @"celeb"
 #define FANS_COMMENT_ITEM_NAME @"u_name"
 #define FANS_COMMENT_ITEM_AVATAR @"u_avatar"
 #define FANS_COMMENT_ITEM_FORUMS_ID @"fid"
@@ -22,11 +23,15 @@
 #define FANS_COMMENT_ITEM_UTS @"uts"
 #define FANS_COMMENT_ITEM_CBREAD @"read"
 #define FANS_COMMENT_ITEM_RID @"rid"
+#define FANS_COMMENT_ITEM_ROLE @"u_role"
+#define FANS_COMMENT_ITEM_VIP @"u_object"
+#define FANS_COMMENT_ITEM_REPLAY @"reply"
 
 @interface FansComment : NSObject
 
 @property NSString* uuid;
 @property NSString* name;
+@property NSString* celeb;
 @property NSString* avator;
 @property NSString* fid;
 @property NSString* cid;
@@ -36,7 +41,9 @@
 @property UInt64 uts;
 @property BOOL isCelebRead;
 
-@property NSArray* replayComments;
+@property NSInteger u_role;
+
+@property NSMutableArray* replayComments;
 
 @property CommentFrame* uiFrame;
 

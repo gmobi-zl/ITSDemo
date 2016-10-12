@@ -39,7 +39,7 @@
 @property NSString* celebName;
 @property NSString* celebAvator;
 
-@property NSArray* replayComments;
+@property NSMutableArray* replayComments;
 
 -(UserTrackComment*) initWithDictionary: (NSDictionary*) dic;
 

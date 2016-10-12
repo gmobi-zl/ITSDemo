@@ -262,11 +262,11 @@
 //    [self.commentLabel setAttributedText:noteStr];
 //    
     //    self.name.text = comment.name;
-    NSInteger maxHotCommentCount = data.replayComments.count;
+    NSInteger maxHotCommentCount = data.topFansComments.count;
     if (maxHotCommentCount > 3)
         maxHotCommentCount = 3;
     for (NSInteger i = 0; i < maxHotCommentCount; i++) {
-        FansComment *item = [data.replayComments objectAtIndex:i];
+        FansComment *item = [data.topFansComments objectAtIndex:i];
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:16];
         replyLabel.numberOfLines = 0;

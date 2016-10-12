@@ -164,6 +164,12 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define EVENT_USER_TRACK_COMMENT_DATA_REFRESH  @"USER_TRACK_COMMENT_REFRESH"
 
 
+// user
+#define CELEB_USER_NORMAL 0
+#define CELEB_USER_VIP 1
+#define CELEB_USER_CELEB 2
+#define CELEB_USER_ADMIN 3
+
 // Color
 #define COLOR_MENU_ITEM_BACKGROUND @"#ffebebeb"
 #define COLOR_MENU_ITEM_VERTICAL_DIVIDER @"#ffc8c8c8"

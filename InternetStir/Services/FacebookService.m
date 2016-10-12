@@ -48,6 +48,8 @@
                             NSString* avator = [profile objectForKey:@"avatar"];
                             NSString* session = [profile objectForKey:@"session"];
                             NSString* uuid = [profile objectForKey:@"uuid"];
+                            NSDictionary* acl = [profile objectForKey:@"acl"];
+                            
                             
                             NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:1];
                             
@@ -76,12 +78,32 @@
                             
                             ConfigService* cs = [ConfigService get];
                             NSString* ch = [cs getChannel];
+                            us.user.isCBADM = NO;
                             
-                            if ([uuid isEqualToString:ch]){
-                                us.user.isCBADM = YES;
-                            } else {
-                                us.user.isCBADM = NO;
+                            if (acl != nil){
+                                NSString* role = [acl objectForKey:@"role"];
+                                if (role != nil){
+                                    if ([role isEqualToString:@"celeb"]){
+                                        us.user.isCBADM = YES;
+                                        us.user.role = CELEB_USER_CELEB;
+                                    } else if ([role isEqualToString:@"admin"]){
+                                        us.user.role = CELEB_USER_ADMIN;
+                                    } else if ([role isEqualToString:@"user"]){
+                                        us.user.role = CELEB_USER_NORMAL;
+                                    }
+                                }
+                                
+                                id vipObj = [acl objectForKey:@"object"];
+                                if (vipObj != nil)
+                                    us.user.role = CELEB_USER_VIP;
+                                
                             }
+                            
+//                            if ([uuid isEqualToString:ch]){
+//                                us.user.isCBADM = YES;
+//                            } else {
+//                                us.user.isCBADM = NO;
+//                            }
                             
                             us.user.isCBADM = YES;
                             us.user.isLogin = YES;

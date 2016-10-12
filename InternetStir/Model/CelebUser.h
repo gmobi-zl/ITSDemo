@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *email;
 
 @property (nonatomic, copy) NSString *session;
+@property (assign) NSInteger role;
 
 //@property (nonatomic, copy) NSString *openid;//第三方唯一标示
 //@property (nonatomic, copy) NSString *email;

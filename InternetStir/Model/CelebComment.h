@@ -30,8 +30,8 @@
 @property NSString* name;
 @property NSString* avator;
 
-//@property NSArray* topFansComments;
-@property NSArray* replayComments;
+@property NSArray* topFansComments;
+@property NSMutableArray* replayComments;
 
 @property UInt64 pts;
 @property UInt64 uts;

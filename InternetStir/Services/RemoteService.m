@@ -701,8 +701,9 @@
     accessToken: (NSString*) accessToken
            type: (int) type
        callback: (RemoteCallback) callback{
+    ConfigService *cs = [ConfigService get];
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/login",[self getBaseUrl]];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/auth/login?channel=%@",[self getBaseUrl], [cs getChannel]];
     MMLogDebug(@"Login URL: %@", url);
     
     NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -746,6 +747,12 @@
              //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
              NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
              MMLogDebug(@"Logout RSP: %@",dataDic);
+         } else {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSMutableArray* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogError(@"Logout RSP error: %@",dataDic);
          }
      }];
 }
@@ -873,14 +880,20 @@
      }];
 }
 
-
-
-
 -(void) userLike: (NSString*) fid {
     
     ConfigService* cs = [ConfigService get];
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/like",[self getBaseUrl], [cs getChannel], fid];
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/like?_s=%@",[self getBaseUrl], [cs getChannel], fid, pSession];
     MMLogDebug(@"userLike URL: %@", url);
     
     MMHttpSession* httpSession = [MMHttpSession alloc];
@@ -900,7 +913,16 @@
     
     ConfigService* cs = [ConfigService get];
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/like",[self getBaseUrl], [cs getChannel], fid];
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/like?_s=%@",[self getBaseUrl], [cs getChannel], fid, pSession];
     MMLogDebug(@"userUnlike URL: %@", url);
     
     MMHttpSession* httpSession = [MMHttpSession alloc];
