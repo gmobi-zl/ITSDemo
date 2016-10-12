@@ -1033,10 +1033,10 @@
             [itsApp.dataSvr setRefreshUserTrackComments:commentArr isClearData:isClear type:type];
             
             MMEventService *es = [MMEventService getInstance];
-            [es send:EVENT_USER_COMMENT_DATA_REFRESH eventData:USER_COMMENT_REFRESH_SUCCESS];
+            [es send:EVENT_USER_TRACK_COMMENT_DATA_REFRESH eventData:USER_COMMENT_REFRESH_SUCCESS];
         } else {
             MMEventService *es = [MMEventService getInstance];
-            [es send:EVENT_USER_COMMENT_DATA_REFRESH eventData:USER_COMMENT_REFRESH_ERROR];
+            [es send:EVENT_USER_TRACK_COMMENT_DATA_REFRESH eventData:USER_COMMENT_REFRESH_ERROR];
         }
     }];
 }

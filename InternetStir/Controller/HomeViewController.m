@@ -83,6 +83,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             
             ITSApplication* itsApp = [ITSApplication get];
             NSArray* dataArr = itsApp.dataSvr.celebComments;
+            
             for (NSInteger i = 0; i < dataArr.count; i++) {
                 CelebComment *comment = [dataArr objectAtIndex:i];
                 HomeCommentFrame *frame = [[HomeCommentFrame alloc] init];
@@ -163,13 +164,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
         [ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_BEFORE];
-        
-//        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-//        [eParams setObject:self.cid forKey:@"id"];
-//        NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
-//        [eParams setObject:cate.name forKey:@"name"];
-//        [poApp.reportSvr recordEvent:cate.name params:eParams timed:YES eventCategory:@"news.list.prev"];
-        
         self.isRefreshing = YES;
     }
 }

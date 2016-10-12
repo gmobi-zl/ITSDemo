@@ -12,5 +12,7 @@
 @interface MyCommentController : GAITrackedViewController<UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 
+@property (assign) int refreshType;
+@property (assign) BOOL isRefreshing;
 
 @end

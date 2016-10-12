@@ -2337,12 +2337,12 @@
     if (self.userTrackComments != nil){
         NSInteger count = [self.userTrackComments count];
         if (count > 0){
-            if (type == CB_COMMENT_REFRESH_TYPE_AFTER){
+            if (type == TRACK_COMMENT_REFRESH_TYPE_AFTER){
                 // do nothing
                 UserTrackComment* topComment = [self.userTrackComments objectAtIndex:0];
                 if (topComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
-            } else if (type == CB_COMMENT_REFRESH_TYPE_BEFORE){
+            } else if (type == TRACK_COMMENT_REFRESH_TYPE_BEFORE){
                 UserTrackComment* latestComment = [self.userTrackComments objectAtIndex:count-1];
                 if (latestComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
@@ -2352,7 +2352,7 @@
     
     if (newsTime == nil){
         newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
-        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:CB_COMMENT_REFRESH_TYPE_BEFORE];
+        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:TRACK_COMMENT_REFRESH_TYPE_BEFORE];
     }else{
         [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
     }

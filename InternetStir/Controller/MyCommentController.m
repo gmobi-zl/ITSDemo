@@ -14,6 +14,7 @@
 #import "UUInputAccessoryView.h"
 #import "ITSApplication.h"
 #import "MJRefresh.h"
+#import "MMEventService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -51,11 +52,27 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
     
     [self setupRefresh];
-    
+    MMEventService* es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_USER_TRACK_COMMENT_DATA_REFRESH selector:@selector(userTrackDataRefreshListener:)];
+
     ITSApplication* itsApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
 }
+
+-(void)userTrackDataRefreshListener: (id) data{
+    if (self.view.hidden == NO){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+            [self.tableView footerEndRefreshing];
+            [self.tableView headerEndRefreshing];
+            self.isRefreshing = NO;
+        });
+    }
+}
+
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
@@ -72,10 +89,23 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 - (void)headerRereshing
 {
 
+    if (self.isRefreshing == NO){
+        self.refreshType = TRACK_COMMENT_REFRESH_TYPE_AFTER;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshUserTrackComments:TRACK_COMMENT_REFRESH_TYPE_AFTER];
+        self.isRefreshing = YES;
+    }
 }
 - (void)footerRereshing
 {
-    
+    if (self.isRefreshing == NO){
+        self.refreshType = TRACK_COMMENT_REFRESH_TYPE_BEFORE;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshCelebComments:TRACK_COMMENT_REFRESH_TYPE_BEFORE];
+        self.isRefreshing = YES;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
