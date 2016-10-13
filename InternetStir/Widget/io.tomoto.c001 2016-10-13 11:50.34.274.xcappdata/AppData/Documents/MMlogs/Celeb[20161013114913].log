@@ -1,0 +1,35 @@
+========log start========
+2016-10-13 11:49:13.947 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:13.957 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:13.966 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:13.975 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:13.987 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:14.001 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:14.009 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:14.022 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:49:14.286 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = ch, params = {
+    ch = tomotoc001;
+    cid = "";
+}
+2016-10-13 11:49:14.333 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 324 : connect url = http://106.185.48.211:8080/v0/connector
+2016-10-13 11:49:14.358 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 364 : data = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}

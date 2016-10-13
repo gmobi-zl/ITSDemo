@@ -1,0 +1,146 @@
+========log start========
+2016-10-13 09:28:19.430 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.440 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.449 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.457 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.464 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.475 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.484 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.499 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 09:28:19.730 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = ch, params = {
+    ch = tomotoc001;
+    cid = "";
+}
+2016-10-13 09:28:19.772 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 324 : connect url = http://106.185.48.211:8080/v0/connector
+2016-10-13 09:28:19.807 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 364 : data = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-13 09:28:19.809 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m -[MMHttpSession doPostJSON:reqHeader:reqBody:callback:] 160 : MMHttpService: Post Body = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-13 09:28:20.089 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/connector  [200]
+2016-10-13 09:28:20.091 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Thu, 13 Oct 2016 01:28:19 GMT
+2016-10-13 09:28:20.093 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"270-bFT3woFwoOjt0+KelAUOYQ"
+2016-10-13 09:28:20.095 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 624
+2016-10-13 09:28:20.097 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-13 09:28:20.099 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-13 09:28:20.100 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-13 09:28:20.102 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 368 : connect rsp: status = 4 , code = 200
+2016-10-13 09:28:20.104 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 385 : Get connect Data rsp data: {"baseUrl":"/v0","channel":"017d8be4-8d03-4722-ae8e-6500c086f2ec","dch":"","did":"57fdf296ef7626ac07327b03","update":0,"name":"Jacob-爾賢就是愛生活","categories":[{"type":"facebook","label":"Facebook","url":"https://www.facebook.com/jacob.ek07"},{"type":"instagram","label":"Instagram","url":"https://www.instagram.com/jacob.ek07"},{"type":"youtube","label":"Youtube","url":"https://m.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg/videos"}],"launch":null,"avatar":"https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/p160x160/12938287_972142962863863_37536436875128892_n.jpg?oh=0501feabb5712a2951a9baeb4522c1a1&oe=58607417"}
+2016-10-13 09:28:20.106 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/DataService.m -[DataService setConnectRespData:] 362 : Connect Rsp : {
+  "update" : 0,
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "did" : "57fdf296ef7626ac07327b03",
+  "categories" : [
+    {
+      "type" : "facebook",
+      "label" : "Facebook",
+      "url" : "https:\/\/www.facebook.com\/jacob.ek07"
+    },
+    {
+      "type" : "instagram",
+      "label" : "Instagram",
+      "url" : "https:\/\/www.instagram.com\/jacob.ek07"
+    },
+    {
+      "type" : "youtube",
+      "label" : "Youtube",
+      "url" : "https:\/\/m.youtube.com\/channel\/UCfcGjEq_b-7lfBbD8tQSYNg\/videos"
+    }
+  ],
+  "launch" : null,
+  "dch" : "",
+  "avatar" : "https:\/\/scontent-tpe1-1.xx.fbcdn.net\/v\/t1.0-1\/p160x160\/12938287_972142962863863_37536436875128892_n.jpg?oh=0501feabb5712a2951a9baeb4522c1a1&oe=58607417",
+  "baseUrl" : "\/v0",
+  "name" : "Jacob-爾賢就是愛生活"
+}
+2016-10-13 09:28:57.952 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event POPOCONNECT
+2016-10-13 09:28:58.146 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = select, params = {
+}
+2016-10-13 09:28:58.209 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = comment, params = {
+}
+2016-10-13 09:28:58.211 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 09:28:58.232 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-13 09:28:58.234 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476322138233&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e
+2016-10-13 09:28:58.627 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476322138233&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e  [200]
+2016-10-13 09:28:58.629 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Thu, 13 Oct 2016 01:28:58 GMT
+2016-10-13 09:28:58.631 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"301b-wlkMobBmG8JCRsuCcPez7g"
+2016-10-13 09:28:58.632 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 12315
+2016-10-13 09:28:58.634 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-13 09:28:58.636 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-13 09:28:58.639 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-13 09:28:58.641 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-13 09:28:58.649 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":10,"contexts":[{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"新的ACL測試中","attachments":["d0cce3475e533f16a83402ab9bbd0f1b"],"uts":1475827273444,"pts":1475827273444,"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","comments":[{"rid":"e10f82d7-de3a-4ede-a344-b4ac98f0bbb9","fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"嗯哼","celeb":"5b917b59-0c77-4064-80af-074d00078753","cid":"bbbe920a-6f42-4b9f-bbf9-0867ef1b7acf","read":false,"uts":1476263966628,"pts":1476263966628,"_id":"57fe001e47456bde22bb406c","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"哦哦哦","celeb":"08dfea9a-9ca9-428e-bdf7-9b3612fc54c5","rid":null,"cid":"e10f82d7-de3a-4ede-a344-b4ac98f0bbb9","read":false,"uts":1476263956397,"pts":1476263956397,"_id":"57fe001447456bde22bb406b","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"39e677b4-3063-48bc-aae5-2e361e800b00","fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"666","celeb":"65cc09b7-35ed-4cb6-83cd-c7db16f309d3","cid":"06e6a9fc-20c7-400a-900a-5ccd61001915","read":false,"uts":1476263945461,"pts":1476263945461,"_id":"57fe000947456bde22bb406a","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"77777","celeb":"fe4bc268-09fd-43d7-b7c7-4206bcd2a361","rid":null,"cid":"39e677b4-3063-48bc-aae5-2e361e800b00","read":false,"uts":1476262374126,"pts":1476262374126,"_id":"57fdf9e647456bde22bb405b","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"30d73223-08ac-47c0-8447-457af5f7e7f2","fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"1111","celeb":"6a62930b-293d-4e45-84d3-d688051ccd9d","cid":"5d8f74eb-d703-42c7-90dd-5f4937002976","read":false,"uts":1476262323124,"pts":1476262323124,"_id":"57fdf9b347456bde22bb405a","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null}],"likes":4,"count":5,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"還沒快閃到警察就來了....\n#就是愛生活 #lovelife\nmin_556012哈哈無奈的表情","attachments":["be99a9d0078b6f03d698ffb06f7f5335"],"uts":1475217617905,"pts":1475217617905,"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","likes":5,"comments":[{"rid":"2ec082a0-256e-43cb-b48c-c75f7bcf98e9","fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"哈哈","celeb":"5ec015bd-27ec-472d-9199-70a91e4f0945","cid":"ff73a652-f895-4118-b5d1-95108e0d819b","read":false,"uts":1476265145463,"pts":1476265145463,"_id":"57fe04b947456bde22bb4074","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"81bf28ee-fc13-46ca-98ef-f76ea9cff190","fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"恩恩","celeb":"0f4e0abd-16b5-4b75-bed1-d889db817a92","cid":"3a19a5ba-7a8c-4a33-83b7-c6cc831d5200","read":false,"uts":1476265001915,"pts":1476265001915,"_id":"57fe042947456bde22bb4073","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"f4ec3fe0-43d0-4fcd-a0c5-499f9bfbbe18","fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"哈哈","celeb":"846720a0-6712-46b3-8636-33983bb79a1b","cid":"ac3a1897-652e-4198-899d-7f3fa2a11b6b","read":false,"uts":1476260797742,"pts":1476260797742,"_id":"57fdf3bd47456bde22bb404d","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"瞓觉","celeb":"6b9656b4-5159-4750-bf8d-6e85e1448ffe","rid":null,"cid":"f4ec3fe0-43d0-4fcd-a0c5-499f9bfbbe18","read":false,"uts":1476260774216,"pts":1476260774216,"_id":"57fdf3a647456bde22bb404c","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"好的","celeb":"a64fb43d-5238-444a-aa4e-3067588e71dd","rid":null,"cid":"c4c70c5a-ddf1-48e8-94e6-fc76f7c2994f","read":false,"uts":1476258270628,"pts":1476258270628,"_id":"57fde9de47456bde22bb4045","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null}],"count":5,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"一切都來的太快 喘不過氣了。\n#就是愛生活 #lovelife","attachments":["0872d27d4f10931a07d27300136a7aca"],"uts":1475217497615,"pts":1475217497615,"fid":"91a05cde-1e6f-4375-9673-6332ea5f3bf9","likes":2,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"今天帶著我的攝影小助理來酒吧拍片，結果他跟我說他第一次進這種場所....我跟他說絕對不能跟媽媽說是被我帶壞的！\n現在凌晨四點，我們帶著熱情結束了今天的拍攝 各位都辛苦了！\n#就是愛生活 #lovelife #filming\npingtian0821這是純情小處男啊","attachments":["197ba618ba99857f148595d6881497a0"],"uts":1475217401506,"pts":1475217401506,"fid":"e1d94ccc-cf86-488c-af75-a6866d9aecf0","likes":1,"comments":[],"count":0,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"真的超討厭那種有了女朋友就不認兄弟的！\n立馬標記馬子狗bj4 \nLike & Share （tag 3 friends)\nw/ 琳妲-林羿禎 WhitNey 卉妮 林家義 Austin 謝程凱 Kevin\n導演：高爾賢 Jacob\n攝影剪接： 范泛範\n＃就是愛生活 ＃lamigirls","attachments":["eca8b1a81db7daf0958654da6747af13"],"uts":1475217239790,"pts":1475217239790,"fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","likes":1,"comments":[{"rid":"cce37aac-9a11-4abc-bf43-f2abea2e7ca3","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"不不不","celeb":"2670fef0-d531-4bff-a76e-9c344c90aaa7","cid":"2e0f088a-17f9-4f9d-b5b2-51ecfc138106","read":false,"uts":1476265320560,"pts":1476265320560,"_id":"57fe056847456bde22bb4077","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"a9801266-51e9-4b14-ae00-38e5bf80c64a","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"和呵呵哒","celeb":"94f7d6ee-5b0e-41ca-ad34-f1872b9e41dd","cid":"cce37aac-9a11-4abc-bf43-f2abea2e7ca3","read":false,"uts":1476265290279,"pts":1476265290279,"_id":"57fe054a47456bde22bb4076","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"啊啊啊啊","celeb":"51db3359-1fca-4fba-bdd4-2933a08db457","rid":null,"cid":"a9801266-51e9-4b14-ae00-38e5bf80c64a","read":false,"uts":1476265283086,"pts":1476265283086,"_id":"57fe054347456bde22bb4075","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"f03e41f7-058e-4d27-b4e0-2e65cb3caac6","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"嘎嘎","celeb":"a0e59d2d-df76-4eaa-b870-0e698aad216c","cid":"71aa31d3-af14-4e5f-8478-9f354d205410","read":false,"uts":1476264880203,"pts":1476264880203,"_id":"57fe03b047456bde22bb4072","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"f03e41f7-058e-4d27-b4e0-2e65cb3caac6","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"仔细","celeb":"11591386-f15b-4242-869b-135663830fcf","cid":"1eb41735-c44d-484e-991b-64cceac61f24","read":false,"uts":1476264861737,"pts":1476264861737,"_id":"57fe039d47456bde22bb4071","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null}],"count":5,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"『年輕人要懂得吃苦，就算自己當老闆也有被客人指使的一天啊！』\n『分享給年輕人，標記老闆，標記司機』\n這次比較深奧的笑梗你們也懂嗎？！\nw/ 林懇 KEN 高爾賢 Jacob\n編導： 郭家禾\n＃就是愛生活 ＃沒有失敗就沒有成功 #振作","attachments":["ad60d4e80b4bdf5b7464bf38ec7cee54"],"uts":1475217037758,"pts":1475217037758,"fid":"717a94ea-6db4-4e8a-819e-3f65491d08ea","likes":2,"comments":[],"count":0,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"「以後如果女朋友都用這招我怎麼玩我的神奇寶貝.....」\nw/ WhitNey 卉妮 高爾賢 Jacob\n（tag 3 friends)\n#就是愛生活 #lovelife","attachments":["d0cce3475e533f16a83402ab9bbd0f1b"],"uts":1475216806277,"pts":1475216806277,"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","likes":0,"comments":[{"rid":"9f383949-2d19-4268-8b0b-ccdd9f236c87","fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"試試看reply","cid":"f5fe5085-a24a-4a6b-bccc-976932aca888","read":false,"uts":1475834665781,"pts":1475834665781,"_id":"57f7732981b3499c6cb9f775","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"rid":"0a965ccb-7c45-4255-83da-87067a4f6b0d","fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"this is my test123","cid":"073c5b9c-b742-4039-93cb-359a52af9b90","read":false,"uts":1475755541917,"pts":1475755541917,"_id":"57f63e151ce4448f64668d79","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"this is my test","rid":null,"cid":"9f383949-2d19-4268-8b0b-ccdd9f236c87","read":false,"uts":1475749919885,"pts":1475749919885,"_id":"57f6281fa6bac60d61d8871a","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","rid":null,"cid":"dbbacb75-dd6a-4515-aaa4-8fa181d3660c","read":false,"uts":1475749819228,"pts":1475749819228,"_id":"57f627bba6bac60d61d88719","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null}],"count":4,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看網紅發言功能順便附上這麼一個圖片試試1\n!!","attachments":["34434f7ac8a903c6298650947cc42f3a"],"uts":1474872641188,"pts":1474872641188,"fid":"cb8123f6-5ebb-4788-ab3f-96ed053fdf61","likes":0,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看網紅發言功能順便附上這麼一個圖片試試\n!!","attachments":["34434f7ac8a903c6298650947cc42f3a"],"uts":1474872238960,"pts":1474872238960,"fid":"16af176a-c94e-4606-878a-6fa53fb0f5a3","likes":0,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看附圖說得實在是太好了!!","attachments":["34434f7ac8a903c6298650947cc42f3a "],"uts":1474621221241,"pts":1474621221241,"fid":"dd1187a8-a5c3-4068-bb85-0c26a1c03d8c","likes":0,"comments":[],"count":0,"isLike":false}]}
+2016-10-13 09:28:58.661 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-13 09:29:18.755 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = select, params = {
+}
+2016-10-13 09:29:18.764 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = fans.tool, params = {
+}
+2016-10-13 09:29:18.768 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 09:29:20.229 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 09:29:21.146 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getUserCommentListData:timeType:] 1031 : User Comment data refresh url = http://106.185.48.211:8080/v0/user/(null)/comments?before=1476322161145&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e
+2016-10-13 09:29:21.500 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/user/(null)/comments?before=1476322161145&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e  [404]
+2016-10-13 09:29:21.504 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Thu, 13 Oct 2016 01:29:21 GMT
+2016-10-13 09:29:21.509 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"1a-+NAuFcOeZy98j5aafs0nTw"
+2016-10-13 09:29:21.515 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 26
+2016-10-13 09:29:21.518 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-13 09:29:21.522 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-13 09:29:21.524 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-13 09:29:21.527 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __49-[RemoteService getUserCommentListData:timeType:]_block_invoke 1035 : User Comment Data rsp: status = 4 , code = 404
+2016-10-13 09:30:18.150 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event USER_TRACK_COMMENT_REFRESH
+2016-10-13 09:30:20.160 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getUserCommentListData:timeType:] 1031 : User Comment data refresh url = http://106.185.48.211:8080/v0/user/(null)/comments?before=1476322220159&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e
+2016-10-13 09:30:40.591 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/user/(null)/comments?before=1476322220159&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e  [404]
+2016-10-13 09:30:40.594 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Thu, 13 Oct 2016 01:30:40 GMT
+2016-10-13 09:30:40.597 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"1a-+NAuFcOeZy98j5aafs0nTw"
+2016-10-13 09:30:40.599 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 26
+2016-10-13 09:30:40.602 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-13 09:30:40.605 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-13 09:30:40.607 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-13 09:30:40.609 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __49-[RemoteService getUserCommentListData:timeType:]_block_invoke 1035 : User Comment Data rsp: status = 4 , code = 404
+2016-10-13 09:30:40.611 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event USER_TRACK_COMMENT_REFRESH
+2016-10-13 09:30:43.197 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 09:30:44.680 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 09:30:50.491 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}

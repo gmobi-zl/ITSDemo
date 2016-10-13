@@ -1,0 +1,419 @@
+========log start========
+2016-10-12 16:27:41.231 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.240 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.249 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.256 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.266 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.277 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.286 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.300 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-12 16:27:41.474 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = ch, params = {
+    ch = tomotoc001;
+    cid = "";
+}
+2016-10-12 16:27:41.532 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 324 : connect url = http://106.185.48.211:8080/v0/connector
+2016-10-12 16:27:41.556 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 364 : data = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-12 16:27:41.557 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m -[MMHttpSession doPostJSON:reqHeader:reqBody:callback:] 160 : MMHttpService: Post Body = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-12 16:27:41.933 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/connector  [200]
+2016-10-12 16:27:41.938 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:27:41 GMT
+2016-10-12 16:27:41.985 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"270-bFT3woFwoOjt0+KelAUOYQ"
+2016-10-12 16:27:41.987 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 624
+2016-10-12 16:27:41.989 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:27:41.991 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:27:41.992 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:27:41.994 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 368 : connect rsp: status = 4 , code = 200
+2016-10-12 16:27:41.996 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 385 : Get connect Data rsp data: {"baseUrl":"/v0","channel":"017d8be4-8d03-4722-ae8e-6500c086f2ec","dch":"","did":"57fdf296ef7626ac07327b03","update":0,"name":"Jacob-爾賢就是愛生活","categories":[{"type":"facebook","label":"Facebook","url":"https://www.facebook.com/jacob.ek07"},{"type":"instagram","label":"Instagram","url":"https://www.instagram.com/jacob.ek07"},{"type":"youtube","label":"Youtube","url":"https://m.youtube.com/channel/UCfcGjEq_b-7lfBbD8tQSYNg/videos"}],"launch":null,"avatar":"https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/p160x160/12938287_972142962863863_37536436875128892_n.jpg?oh=0501feabb5712a2951a9baeb4522c1a1&oe=58607417"}
+2016-10-12 16:27:41.998 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/DataService.m -[DataService setConnectRespData:] 362 : Connect Rsp : {
+  "update" : 0,
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "did" : "57fdf296ef7626ac07327b03",
+  "categories" : [
+    {
+      "type" : "facebook",
+      "label" : "Facebook",
+      "url" : "https:\/\/www.facebook.com\/jacob.ek07"
+    },
+    {
+      "type" : "instagram",
+      "label" : "Instagram",
+      "url" : "https:\/\/www.instagram.com\/jacob.ek07"
+    },
+    {
+      "type" : "youtube",
+      "label" : "Youtube",
+      "url" : "https:\/\/m.youtube.com\/channel\/UCfcGjEq_b-7lfBbD8tQSYNg\/videos"
+    }
+  ],
+  "launch" : null,
+  "dch" : "",
+  "avatar" : "https:\/\/scontent-tpe1-1.xx.fbcdn.net\/v\/t1.0-1\/p160x160\/12938287_972142962863863_37536436875128892_n.jpg?oh=0501feabb5712a2951a9baeb4522c1a1&oe=58607417",
+  "baseUrl" : "\/v0",
+  "name" : "Jacob-爾賢就是愛生活"
+}
+2016-10-12 16:27:42.037 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event POPOCONNECT
+2016-10-12 16:27:44.808 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = select, params = {
+}
+2016-10-12 16:27:44.859 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = comment, params = {
+}
+2016-10-12 16:27:44.861 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-12 16:27:44.879 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:27:44.880 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476260864880&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:27:45.527 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476260864880&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:27:45.528 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:27:45 GMT
+2016-10-12 16:27:45.529 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"2f06-epUN2DbKB5S+GsCLH41fNw"
+2016-10-12 16:27:45.530 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 12038
+2016-10-12 16:27:45.531 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:27:45.532 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:27:45.533 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:27:45.534 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:27:45.537 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":10,"contexts":[{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"新的ACL測試中","attachments":["d0cce3475e533f16a83402ab9bbd0f1b"],"uts":1475827273444,"pts":1475827273444,"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","comments":[{"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"评论是吗","celeb":"c6733e97-a7e9-41a8-b994-591dd41c44ed","rid":null,"cid":"2144b737-a402-4381-83ea-2c7bd37705f1","read":false,"uts":1476258251236,"pts":1476258251236,"_id":"57fde9cb47456bde22bb4044","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"呵呵呵呵呵呵","celeb":"00b424fb-e314-4703-a781-d293fd58a413","rid":null,"cid":"e8533794-af10-4a9b-9697-b2f77d233537","read":false,"uts":1476257490446,"pts":1476257490446,"_id":"57fde6d247456bde22bb4043","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"嗯嗯嗯默默默默","celeb":"89b0469c-155c-40f4-87ea-998035f8d70d","rid":null,"cid":"897b5540-325f-4d58-8737-1841a9f6e528","read":false,"uts":1476257448892,"pts":1476257448892,"_id":"57fde6a847456bde22bb4042","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"e5c4aa22-c9b4-413e-bd4b-153db496136b","fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"只能显示回复喔","celeb":"1f4ad167-8fc2-4c06-bf13-87ed7ec3b649","cid":"c7d84020-57e8-40db-ae21-2aad65a4b95c","read":false,"uts":1476254632874,"pts":1476254632874,"_id":"57fddba847456bde22bb4037","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"642fd416-2e27-4a5a-badd-3cdda602c95f","fid":"935fbf78-9e1d-4e97-b48d-9885b2d65223","uuid":"22c9d0af-3ab0-4bea-9a0c-15d50cc69226","comment":"Cv bcc","celeb":"bac295cd-d037-455a-b011-5b7985255a3b","cid":"e5c4aa22-c9b4-413e-bd4b-153db496136b","read":false,"uts":1476254369233,"pts":1476254369233,"_id":"57fddaa147456bde22bb4036","u_name":"张亮","u_avatar":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p50x50/14370221_1002431183212566_7805085867600695388_n.jpg?oh=cb3c05235fa970b15c02b2b2eaa5d6f5&oe=58AB5556&__gda__=1482838679_2dc5ad4fa3821ea46d757cec8f2a3a9a","u_role":"user","u_object":null}],"likes":2,"count":5,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"還沒快閃到警察就來了....\n#就是愛生活 #lovelife\nmin_556012哈哈無奈的表情","attachments":["be99a9d0078b6f03d698ffb06f7f5335"],"uts":1475217617905,"pts":1475217617905,"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","likes":5,"comments":[{"rid":"f4ec3fe0-43d0-4fcd-a0c5-499f9bfbbe18","fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"哈哈","celeb":"846720a0-6712-46b3-8636-33983bb79a1b","cid":"ac3a1897-652e-4198-899d-7f3fa2a11b6b","read":false,"uts":1476260797742,"pts":1476260797742,"_id":"57fdf3bd47456bde22bb404d","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"瞓觉","celeb":"6b9656b4-5159-4750-bf8d-6e85e1448ffe","rid":null,"cid":"f4ec3fe0-43d0-4fcd-a0c5-499f9bfbbe18","read":false,"uts":1476260774216,"pts":1476260774216,"_id":"57fdf3a647456bde22bb404c","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"好的","celeb":"a64fb43d-5238-444a-aa4e-3067588e71dd","rid":null,"cid":"c4c70c5a-ddf1-48e8-94e6-fc76f7c2994f","read":false,"uts":1476258270628,"pts":1476258270628,"_id":"57fde9de47456bde22bb4045","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"547f04de-d360-4f73-8aa6-dd40e06f0276","fid":"56e87e2c-88a2-4685-8dad-34f4712f0d43","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"恩恩","celeb":"a792c481-6cbe-4e9f-9b44-e53be410e050","cid":"a5b1fa40-44ca-4b05-b1ea-035aa898bac7","read":false,"uts":1476175344675,"pts":1476175344675,"_id":"57fca5f081c8446a12f5880d","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null}],"count":4,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"一切都來的太快 喘不過氣了。\n#就是愛生活 #lovelife","attachments":["0872d27d4f10931a07d27300136a7aca"],"uts":1475217497615,"pts":1475217497615,"fid":"91a05cde-1e6f-4375-9673-6332ea5f3bf9","likes":1,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"今天帶著我的攝影小助理來酒吧拍片，結果他跟我說他第一次進這種場所....我跟他說絕對不能跟媽媽說是被我帶壞的！\n現在凌晨四點，我們帶著熱情結束了今天的拍攝 各位都辛苦了！\n#就是愛生活 #lovelife #filming\npingtian0821這是純情小處男啊","attachments":["197ba618ba99857f148595d6881497a0"],"uts":1475217401506,"pts":1475217401506,"fid":"e1d94ccc-cf86-488c-af75-a6866d9aecf0","likes":1,"comments":[],"count":0,"isLike":true},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"真的超討厭那種有了女朋友就不認兄弟的！\n立馬標記馬子狗bj4 \nLike & Share （tag 3 friends)\nw/ 琳妲-林羿禎 WhitNey 卉妮 林家義 Austin 謝程凱 Kevin\n導演：高爾賢 Jacob\n攝影剪接： 范泛範\n＃就是愛生活 ＃lamigirls","attachments":["eca8b1a81db7daf0958654da6747af13"],"uts":1475217239790,"pts":1475217239790,"fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","likes":1,"comments":[{"fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"哈哈","celeb":"0a668536-3107-4860-aad4-027b02bcbc0f","rid":null,"cid":"1980c9c0-2ae2-47bf-838a-e75558388bc3","read":false,"uts":1476258416761,"pts":1476258416761,"_id":"57fdea7047456bde22bb4047","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"2a7af094-30c9-40c8-aa63-cb7bee33bf00","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"好的","celeb":"b91fc26f-2ecc-4a47-96e3-e7fd6bbfb468","cid":"84b5ef31-6a6c-4084-98c7-aaa0a21e11b4","read":false,"uts":1476258397614,"pts":1476258397614,"_id":"57fdea5d47456bde22bb4046","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"1b2e92e5-c894-4172-99ec-fe6980440d55","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"皇太极路虎就磨椎间盘","celeb":"b12f5943-725f-4ed2-b915-f6d1d33dd920","cid":"4f0547be-67a4-4f62-a7d7-0df43d833d1f","read":false,"uts":1476176593785,"pts":1476176593785,"_id":"57fcaad181c8446a12f5880e","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"9234e997-a59b-4bed-9e8d-af162b4aeed0","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"回复vvv","celeb":"504f6b23-77f4-4872-8964-8f0b34891529","cid":"1b2e92e5-c894-4172-99ec-fe6980440d55","read":false,"uts":1476174072845,"pts":1476174072845,"_id":"57fca0f881c8446a12f5880b","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null},{"rid":"950cea23-5f84-4582-a360-de94db9c0ecb","fid":"60ce1f5f-1774-4048-a077-bbfce34312dd","uuid":"6ff73379-6f67-4873-bc84-06063b983bf8","comment":"回复你","celeb":"126ef12e-5e5f-4e4d-bac5-e39e47adb8c9","cid":"c562d277-e12f-4a34-a8ab-2f0e285cf632","read":false,"uts":1476174031053,"pts":1476174031053,"_id":"57fca0cf81c8446a12f5880a","u_name":"Sheng NieOne","u_avatar":"http://graph.facebook.com/345931952411205/picture?type=large","u_role":"user","u_object":null}],"count":5,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"『年輕人要懂得吃苦，就算自己當老闆也有被客人指使的一天啊！』\n『分享給年輕人，標記老闆，標記司機』\n這次比較深奧的笑梗你們也懂嗎？！\nw/ 林懇 KEN 高爾賢 Jacob\n編導： 郭家禾\n＃就是愛生活 ＃沒有失敗就沒有成功 #振作","attachments":["ad60d4e80b4bdf5b7464bf38ec7cee54"],"uts":1475217037758,"pts":1475217037758,"fid":"717a94ea-6db4-4e8a-819e-3f65491d08ea","likes":1,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"「以後如果女朋友都用這招我怎麼玩我的神奇寶貝.....」\nw/ WhitNey 卉妮 高爾賢 Jacob\n（tag 3 friends)\n#就是愛生活 #lovelife","attachments":["d0cce3475e533f16a83402ab9bbd0f1b"],"uts":1475216806277,"pts":1475216806277,"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","likes":0,"comments":[{"rid":"9f383949-2d19-4268-8b0b-ccdd9f236c87","fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"試試看reply","cid":"f5fe5085-a24a-4a6b-bccc-976932aca888","read":false,"uts":1475834665781,"pts":1475834665781,"_id":"57f7732981b3499c6cb9f775","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"rid":"0a965ccb-7c45-4255-83da-87067a4f6b0d","fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"this is my test123","cid":"073c5b9c-b742-4039-93cb-359a52af9b90","read":false,"uts":1475755541917,"pts":1475755541917,"_id":"57f63e151ce4448f64668d79","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","comment":"this is my test","rid":null,"cid":"9f383949-2d19-4268-8b0b-ccdd9f236c87","read":false,"uts":1475749919885,"pts":1475749919885,"_id":"57f6281fa6bac60d61d8871a","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null},{"fid":"221ae836-ea10-4df5-a504-a9c51bf191ba","uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","rid":null,"cid":"dbbacb75-dd6a-4515-aaa4-8fa181d3660c","read":false,"uts":1475749819228,"pts":1475749819228,"_id":"57f627bba6bac60d61d88719","u_name":"Lai Tomoto","u_avatar":"http://graph.facebook.com/123377914789377/picture?type=large","u_role":"celeb","u_object":null}],"count":4,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看網紅發言功能順便附上這麼一個圖片試試1\n!!","attachments":["34434f7ac8a903c6298650947cc42f3a"],"uts":1474872641188,"pts":1474872641188,"fid":"cb8123f6-5ebb-4788-ab3f-96ed053fdf61","likes":0,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看網紅發言功能順便附上這麼一個圖片試試\n!!","attachments":["34434f7ac8a903c6298650947cc42f3a"],"uts":1474872238960,"pts":1474872238960,"fid":"16af176a-c94e-4606-878a-6fa53fb0f5a3","likes":0,"comments":[],"count":0,"isLike":false},{"uuid":"017d8be4-8d03-4722-ae8e-6500c086f2ec","context":"試試看附圖說得實在是太好了!!","attachments":["34434f7ac8a903c6298650947cc42f3a "],"uts":1474621221241,"pts":1474621221241,"fid":"dd1187a8-a5c3-4068-bb85-0c26a1c03d8c","likes":0,"comments":[],"count":0,"isLike":false}]}
+2016-10-12 16:27:45.539 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:27:54.890 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService userUnlike:] 926 : userUnlike URL: http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/56e87e2c-88a2-4685-8dad-34f4712f0d43/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:27:54.893 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = -heart, params = {
+    context = "\U9084\U6c92\U5feb\U9583\U5230\U8b66\U5bdf\U5c31\U4f86\U4e86....\n#\U5c31\U662f\U611b\U751f\U6d3b #lovelife\nmin_556012\U54c8\U54c8\U7121\U5948\U7684\U8868\U60c5";
+    fid = forumid;
+}
+2016-10-12 16:27:55.435 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/56e87e2c-88a2-4685-8dad-34f4712f0d43/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:27:55.438 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:27:55 GMT
+2016-10-12 16:27:55.440 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"10-c2PoX+nt7m8FOksxlYjAhg"
+2016-10-12 16:27:55.442 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 16
+2016-10-12 16:27:55.445 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:27:55.447 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:27:55.449 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:27:55.452 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __28-[RemoteService userUnlike:]_block_invoke 936 : userUnlike RSP: {
+    success = 1;
+}
+2016-10-12 16:27:57.069 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = +heart, params = {
+    context = "\U9084\U6c92\U5feb\U9583\U5230\U8b66\U5bdf\U5c31\U4f86\U4e86....\n#\U5c31\U662f\U611b\U751f\U6d3b #lovelife\nmin_556012\U54c8\U54c8\U7121\U5948\U7684\U8868\U60c5";
+    fid = forumid;
+}
+2016-10-12 16:27:57.072 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService userLike:] 897 : userLike URL: http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/56e87e2c-88a2-4685-8dad-34f4712f0d43/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:27:57.579 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/56e87e2c-88a2-4685-8dad-34f4712f0d43/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:27:57.582 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:27:57 GMT
+2016-10-12 16:27:57.584 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"10-c2PoX+nt7m8FOksxlYjAhg"
+2016-10-12 16:27:57.586 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 16
+2016-10-12 16:27:57.589 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:27:57.591 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:27:57.593 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:27:57.595 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService userLike:]_block_invoke 907 : userLike RSP: {
+    success = 1;
+}
+2016-10-12 16:28:22.005 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:28:22.009 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:28:22.650 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:28:22.652 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:28:22 GMT
+2016-10-12 16:28:22.656 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:28:22.659 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:28:22.662 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:28:22.665 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:28:22.667 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:28:22.669 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:28:22.672 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:28:22.674 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:28:32.510 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:28:32.514 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:28:32.908 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:28:32.918 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:28:32 GMT
+2016-10-12 16:28:32.921 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:28:32.923 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:28:32.925 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:28:32.928 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:28:32.933 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:28:32.934 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:28:32.936 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:28:32.938 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:30:50.263 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:30:50.268 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:30:50.773 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:30:50.774 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:30:50 GMT
+2016-10-12 16:30:50.776 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:30:50.777 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:30:50.778 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:30:50.781 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:30:50.782 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:30:50.783 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:30:50.785 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:30:50.789 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:30:55.632 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:30:55.637 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:30:56.117 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:30:56.122 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:30:55 GMT
+2016-10-12 16:30:56.127 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:30:56.130 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:30:56.139 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:30:56.141 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:30:56.143 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:30:56.144 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:30:56.146 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:30:56.154 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:31:13.091 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:31:13.096 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:31:13.666 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:31:13.669 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:31:13 GMT
+2016-10-12 16:31:13.671 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:31:13.673 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:31:13.675 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:31:13.678 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:31:13.681 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:31:13.683 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:31:13.685 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:31:13.687 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:31:32.668 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:31:32.672 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:31:33.108 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:31:33.111 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:31:32 GMT
+2016-10-12 16:31:33.113 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:31:33.115 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:31:33.118 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:31:33.121 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:31:33.124 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:31:33.126 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:31:33.127 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:31:33.129 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:31:34.869 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:31:34.873 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:31:35.579 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:31:35.582 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:31:35 GMT
+2016-10-12 16:31:35.584 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:31:35.586 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:31:35.588 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:31:35.590 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:31:35.592 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:31:35.594 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:31:35.596 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:31:35.598 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:17.674 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:17.678 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:18.084 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:18.087 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:17 GMT
+2016-10-12 16:32:18.089 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:18.092 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:18.095 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:18.099 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:18.101 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:18.103 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:18.105 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:18.108 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:30.797 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:30.802 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:31.388 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:31.390 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:31 GMT
+2016-10-12 16:32:31.392 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:31.396 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:31.399 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:31.402 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:31.404 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:31.406 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:31.408 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:31.410 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:32.965 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:32.969 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:33.335 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:33.337 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:33 GMT
+2016-10-12 16:32:33.340 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:33.343 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:33.345 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:33.347 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:33.350 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:33.353 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:33.357 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:33.358 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:34.934 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:34.938 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:35.284 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:35.289 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:35 GMT
+2016-10-12 16:32:35.292 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:35.294 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:35.296 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:35.299 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:35.304 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:35.306 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:35.308 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:35.309 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:41.302 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:41.306 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:41.720 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:41.723 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:41 GMT
+2016-10-12 16:32:41.726 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:41.730 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:41.733 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:41.739 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:41.741 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:41.742 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:41.744 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:41.745 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:32:43.904 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:32:43.908 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:32:44.291 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:32:44.294 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:32:44 GMT
+2016-10-12 16:32:44.296 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:32:44.299 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:32:44.301 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:32:44.303 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:32:44.306 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:32:44.308 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:32:44.309 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:32:44.311 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:33:14.519 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:33:14.522 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:14.938 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:14.941 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:14 GMT
+2016-10-12 16:33:14.943 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:33:14.945 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:33:14.947 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:14.949 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:14.951 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:14.954 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:33:14.958 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:33:14.960 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:33:19.785 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService userUnlike:] 926 : userUnlike URL: http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/935fbf78-9e1d-4e97-b48d-9885b2d65223/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:19.788 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = -heart, params = {
+    context = "\U65b0\U7684ACL\U6e2c\U8a66\U4e2d";
+    fid = forumid;
+}
+2016-10-12 16:33:20.169 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/935fbf78-9e1d-4e97-b48d-9885b2d65223/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:20.171 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:20 GMT
+2016-10-12 16:33:20.173 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"10-c2PoX+nt7m8FOksxlYjAhg"
+2016-10-12 16:33:20.175 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 16
+2016-10-12 16:33:20.177 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:20.180 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:20.182 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:20.184 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __28-[RemoteService userUnlike:]_block_invoke 936 : userUnlike RSP: {
+    success = 1;
+}
+2016-10-12 16:33:20.534 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = +heart, params = {
+    context = "\U65b0\U7684ACL\U6e2c\U8a66\U4e2d";
+    fid = forumid;
+}
+2016-10-12 16:33:20.537 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService userLike:] 897 : userLike URL: http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/935fbf78-9e1d-4e97-b48d-9885b2d65223/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:20.882 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec/935fbf78-9e1d-4e97-b48d-9885b2d65223/like?_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:20.884 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:20 GMT
+2016-10-12 16:33:20.886 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"10-c2PoX+nt7m8FOksxlYjAhg"
+2016-10-12 16:33:20.888 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 16
+2016-10-12 16:33:20.890 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:20.893 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:20.895 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:20.897 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService userLike:]_block_invoke 907 : userLike RSP: {
+    success = 1;
+}
+2016-10-12 16:33:21.773 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:33:21.777 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:22.123 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:22.126 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:22 GMT
+2016-10-12 16:33:22.128 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:33:22.131 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:33:22.133 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:22.135 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:22.137 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:22.141 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:33:22.144 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:33:22.147 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:33:23.674 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:33:23.678 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:24.005 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:24.008 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:23 GMT
+2016-10-12 16:33:24.012 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:33:24.015 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:33:24.017 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:24.020 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:24.022 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:24.025 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:33:24.028 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:33:24.030 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:33:36.914 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:33:36.917 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:37.308 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:37.311 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:37 GMT
+2016-10-12 16:33:37.314 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:33:37.317 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:33:37.319 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:37.322 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:37.324 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:37.326 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:33:37.327 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:33:37.329 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:33:57.474 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:33:57.478 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:33:58.547 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:33:58.550 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:33:58 GMT
+2016-10-12 16:33:58.552 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:33:58.554 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:33:58.556 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:33:58.558 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:33:58.560 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:33:58.562 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:33:58.565 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:33:58.567 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH
+2016-10-12 16:34:01.793 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-12 16:34:01.797 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79
+2016-10-12 16:34:02.141 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 48 : CMHttpSession response headers of http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?after=1475827273444&size=10&_s=15c833bf-01ff-4ffc-8d99-1e59edd08c79  [200]
+2016-10-12 16:34:02.144 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Date = Wed, 12 Oct 2016 08:34:02 GMT
+2016-10-12 16:34:02.147 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Etag = W/"19-tfC3K8kBnojarPgtyhHBkw"
+2016-10-12 16:34:02.149 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Length = 25
+2016-10-12 16:34:02.152 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Connection = keep-alive
+2016-10-12 16:34:02.154 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Content-Type = application/json; charset=utf-8
+2016-10-12 16:34:02.156 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 53 : Access-Control-Allow-Origin = *
+2016-10-12 16:34:02.158 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 4 , code = 200
+2016-10-12 16:34:02.161 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 785 : Celeb Comment Data rsp data: {"count":0,"contexts":[]}
+2016-10-12 16:34:02.165 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH

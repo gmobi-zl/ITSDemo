@@ -299,6 +299,29 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             WriteArticleController *vc = [[WriteArticleController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.type = 1;
+            // 1 在 document 下面创建目录  celebcache
+            /*
+             2 把图片的uiimage 对象转存为 图片文件，名称用 md5
+             3 上传
+             */
+            NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentPath = [path objectAtIndex:0];
+            NSFileManager *fileMgr = [NSFileManager defaultManager];
+            // create   celebcache folder
+            NSString* celebCacheFolder = [NSString stringWithFormat:@"%@/%@", documentPath, MM_CELEB_CACHE_FOLDER];
+            BOOL isDir = NO;
+            BOOL folderExist = [fileMgr fileExistsAtPath:celebCacheFolder isDirectory:&isDir];
+            if (!(isDir == YES && folderExist == YES)){
+                NSError* cfError = nil;
+                [fileMgr createDirectoryAtPath:celebCacheFolder withIntermediateDirectories:YES attributes:nil error:&cfError];
+            }
+    
+            NSString *encodedImageStr = [pickerImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            NSString *name = [MMSystemHelper getMd5String:encodedImageStr];
+            [MMSystemHelper writeImage:[UIImage imageWithData:pickerImage] toFileAtPath:[NSString stringWithFormat:@"%@/%@.png",celebCacheFolder,name]];
+            [MMSystemHelper writeImage:[UIImage imageWithData:pickerImage] toFileAtPath:[NSString stringWithFormat:@"%@/%@",celebCacheFolder,name]];
+//            [fileMgr createFileAtPath:[celebCacheFolder stringByAppendingString:[NSString stringWithFormat:@"/%@",name]] contents:pickerImage attributes:nil];
+            
             vc.data = pickerImage;
             [self.navigationController pushViewController:vc animated:YES];
         };

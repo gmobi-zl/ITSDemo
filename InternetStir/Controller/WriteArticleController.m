@@ -84,15 +84,15 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     [self.view addSubview:bgView];
     
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 50;
-    self.tableView.scrollEnabled = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableView];
-    [self.tableView registerClass:[WriteArticleCell class] forCellReuseIdentifier:WriteArticleCellIdentifier];
+//    self.tableView = [[UITableView alloc] init];
+//    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    self.tableView.rowHeight = 50;
+//    self.tableView.scrollEnabled = NO;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    [self.view addSubview:self.tableView];
+//    [self.tableView registerClass:[WriteArticleCell class] forCellReuseIdentifier:WriteArticleCellIdentifier];
 }
 #pragma mark TableViewDelegate
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

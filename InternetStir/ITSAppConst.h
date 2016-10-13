@@ -16,6 +16,7 @@
 #define PONEWS_GROUP @"test"
 
 #define MM_WEB_IMAGE_CACHE_FOLDER @"MMImageCache"
+#define MM_CELEB_CACHE_FOLDER @"celebCache"
 
 //#define PONEWS_URL_BASE @"http://api.poponews.net/"  http://api.poponews.net/
 //#define PONEWS_GROUP @"global"

@@ -1,0 +1,72 @@
+========log start========
+2016-10-13 11:20:11.443 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.450 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.459 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.465 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.474 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.487 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.494 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.509 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ConfigService.m -[ConfigService copyToLocaleFileSystem:fromFile:] 145 : copy file write data 1
+2016-10-13 11:20:11.778 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = ch, params = {
+    ch = tomotoc001;
+    cid = "";
+}
+2016-10-13 11:20:11.824 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 324 : connect url = http://106.185.48.211:8080/v0/connector
+2016-10-13 11:20:11.857 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService doConnect] 364 : data = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-13 11:20:11.862 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m -[MMHttpSession doPostJSON:reqHeader:reqBody:callback:] 160 : MMHttpService: Post Body = {
+  "did" : "57fdf296ef7626ac07327b03",
+  "device" : {
+    "pid" : "",
+    "os_v" : "9.2",
+    "app_v" : "1.0.3",
+    "os" : "ios",
+    "app" : "io.tomoto.c001",
+    "group" : "",
+    "ch" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+    "sh" : "667",
+    "lang" : "zh-Hans-HK",
+    "ua" : "ios;MANUFACTURER\/APPLE;MODEL\/iPhone7,2;BOARD\/APPLE;BRAND\/APPLE;DEVICE\/APPLE;HARDWARE\/APPLE;PRODUCT\/APPLE",
+    "sw" : "375",
+    "country" : "HK",
+    "aid" : "F2E819F9-EDE3-47EE-9E19-3705ACA60BC2",
+    "sn" : "D19E339E-AEBB-45F0-A994-133F59A1CB69"
+  },
+  "channel" : "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+  "update" : false
+}
+2016-10-13 11:20:11.881 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 76 : CMHttpSession error: Error Domain=NSURLErrorDomain Code=-1009 "似乎已断开与互联网的连接。" UserInfo={NSUnderlyingError=0x1410bd270 {Error Domain=kCFErrorDomainCFNetwork Code=-1009 "(null)" UserInfo={_kCFStreamErrorCodeKey=50, _kCFStreamErrorDomainKey=1}}, NSErrorFailingURLStringKey=http://106.185.48.211:8080/v0/connector, NSErrorFailingURLKey=http://106.185.48.211:8080/v0/connector, _kCFStreamErrorDomainKey=1, _kCFStreamErrorCodeKey=50, NSLocalizedDescription=似乎已断开与互联网的连接。}
+2016-10-13 11:20:11.884 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 368 : connect rsp: status = 5 , code = 800
+2016-10-13 11:20:11.885 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __26-[RemoteService doConnect]_block_invoke 374 : connect rsp : 
+2016-10-13 11:20:11.888 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event POPOCONNECT
+2016-10-13 11:20:15.213 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = select, params = {
+}
+2016-10-13 11:20:15.275 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = comment, params = {
+}
+2016-10-13 11:20:15.277 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list, params = {
+}
+2016-10-13 11:20:15.290 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/ReportService.m -[ReportService recordEvent:params:eventCategory:] 350 : Report Event : id = list.loading.up, params = {
+}
+2016-10-13 11:20:15.292 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m -[RemoteService getCelebCommentListData:timeType:] 773 : Celeb Comment data refresh url = http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476328815291&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e
+2016-10-13 11:20:15.322 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMHttpSession.m __24-[MMHttpSession execute]_block_invoke 76 : CMHttpSession error: Error Domain=NSURLErrorDomain Code=-1009 "似乎已断开与互联网的连接。" UserInfo={NSUnderlyingError=0x1413f3e50 {Error Domain=kCFErrorDomainCFNetwork Code=-1009 "(null)" UserInfo={_kCFStreamErrorCodeKey=50, _kCFStreamErrorDomainKey=1}}, NSErrorFailingURLStringKey=http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476328815291&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e, NSErrorFailingURLKey=http://106.185.48.211:8080/v0/forums/017d8be4-8d03-4722-ae8e-6500c086f2ec?before=1476328815291&size=10&_s=c791608e-2c93-4583-8e80-680f474f198e, _kCFStreamErrorDomainKey=1, _kCFStreamErrorCodeKey=50, NSLocalizedDescription=似乎已断开与互联网的连接。}
+2016-10-13 11:20:15.324 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Services/RemoteService.m __50-[RemoteService getCelebCommentListData:timeType:]_block_invoke 777 : Celeb Comment Data rsp: status = 5 , code = 800
+2016-10-13 11:20:15.325 [Debug] /Users/gongsy/Desktop/xing/ITSDemo_zl/InternetStir/Momock/MMEventService.m -[MMEventService send:eventData:] 83 : send event CELEB_COMMENT_REFRESH

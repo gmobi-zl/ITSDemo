@@ -1063,7 +1063,6 @@
     }];
 }
 
-
 -(void) getUserCommentById: (NSString*) cid
                   callback: (RemoteCallback) callback{
     if (cid == nil)
