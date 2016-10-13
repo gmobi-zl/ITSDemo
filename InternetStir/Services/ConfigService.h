@@ -27,6 +27,7 @@
 @property NSString* pinPhotoWidthHeight;
 @property NSString* gridPhotoWithHeight;
 @property NSString* Pin1PhotoWidthHeight;
+@property NSString* celebCacheFolderPath;
 @property (assign) int type;
 
 +(ConfigService*) get;
@@ -116,6 +117,8 @@
 -(UIColor*) getTableViewHeaderBackgroundColor;
 
 - (NSString *) cachedFileNameForKey:(NSString *)key;
+
+-(NSString*) getCelebCacheFolder;
 @end
 
 #endif

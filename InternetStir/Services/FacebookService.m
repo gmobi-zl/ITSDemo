@@ -93,9 +93,9 @@
                                     }
                                 }
                                 
-                                id vipObj = [acl objectForKey:@"object"];
-                                if (vipObj != nil)
-                                    us.user.role = CELEB_USER_VIP;
+//                                id vipObj = [acl objectForKey:@"object"];
+//                                if (vipObj != nil)
+//                                    us.user.role = CELEB_USER_VIP;
                                 
                             }
                             
@@ -105,7 +105,7 @@
 //                                us.user.isCBADM = NO;
 //                            }
                             
-                            us.user.isCBADM = YES;
+                            //us.user.isCBADM = YES;
                             us.user.isLogin = YES;
                             
                             [dic setObject:self.uId forKey:@"openid"];

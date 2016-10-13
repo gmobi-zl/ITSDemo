@@ -153,6 +153,11 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 - (void)sendClick {
     if (self.type == 1) {
         // 发送
+        
+        ITSApplication* app = [ITSApplication get];
+        NSString* fileName = app.dataSvr.selectUploadFile;
+        [app.remoteSvr uploadFileToServer:fileName];
+        
     }else {
         // 保存
     }

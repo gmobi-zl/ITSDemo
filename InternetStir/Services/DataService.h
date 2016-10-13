@@ -159,6 +159,8 @@ typedef enum{
 @property (retain) NSString* offPushNewsId;
 @property (retain) PoPoNewsItem* pushNews;
 
+@property (copy) NSString* selectUploadFile;
+
 //@property (retain) CelebUser *user;
 
 -(NSString*) getServerDeviceId;

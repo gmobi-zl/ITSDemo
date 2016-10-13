@@ -1140,10 +1140,26 @@
     }];
 }
 
--(void) uploadFileToServer{
+-(void) uploadFileToServer: (NSString*) fileName{
     
-    NSString* urlStr = @"";
+    ConfigService* cs = [ConfigService get];
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = user.session;
+        }
+    }
     
+    NSString* urlStr = [[NSString alloc] initWithFormat:@"%@v0/files?_s=%@",[self getBaseUrl], pSession];
+    MMLogDebug(@"uploadFileToServer URL: %@", urlStr);
+    
+    NSString* cacheFolder = [cs getCelebCacheFolder];
+    NSString* filePath = [NSString stringWithFormat:@"%@/%@", cacheFolder, fileName];
+    //NSError * ferror = nil;
+    //NSString* fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+    NSData* fileContentData = [NSData dataWithContentsOfFile:filePath];
     // create Request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlStr]];
@@ -1159,15 +1175,16 @@
     
     // 写入图片内容
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"PIC_DATA1.jpg\"\r\n",@"PIC_DATA1"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"files\"; filename=\"%@\"\r\n", fileName] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Transfer-Encoding: binary\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     //[body appendData:[infoDic objectForKey:@"PIC_DATA1"]];
     [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
     // 写入info 内容
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",@"PIC_INFO"] dataUsingEncoding:NSUTF8StringEncoding]];
-    //[body appendData:jsonData];
+    //[body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",@"PIC_INFO"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:fileContentData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
     // 写入尾部内容
@@ -1176,10 +1193,12 @@
     [request setHTTPBody:body];
     
     NSHTTPURLResponse *urlResponese = nil;
-    NSError *error = [[NSError alloc]init];
+    NSError *error = nil;//[[NSError alloc]init];
     NSData* resultData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponese error:&error];
     
     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:nil];
+    
+    MMLogDebug(@"uploadFileToServer RSP: \r\n %@", responseDic);
 }
 
 

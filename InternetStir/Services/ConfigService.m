@@ -69,6 +69,25 @@ ConfigService* configInstance = nil;
     return self.listHotImageWidthHeight;
 }
 
+-(NSString*) getCelebCacheFolder{
+    
+    if (self.celebCacheFolderPath == nil){
+        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentPath = [path objectAtIndex:0];
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        // create   celebcache folder
+        self.celebCacheFolderPath = [NSString stringWithFormat:@"%@/%@", documentPath, MM_CELEB_CACHE_FOLDER];
+        BOOL isDir = NO;
+        BOOL folderExist = [fileMgr fileExistsAtPath:self.celebCacheFolderPath isDirectory:&isDir];
+        if (!(isDir == YES && folderExist == YES)){
+            NSError* cfError = nil;
+            [fileMgr createDirectoryAtPath:self.celebCacheFolderPath withIntermediateDirectories:YES attributes:nil error:&cfError];
+        }
+    }
+    
+    return self.celebCacheFolderPath;
+}
+
 - (NSString *) getPhotoWidthHeight:(NewsImage*)photo{
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     int photoW = screenW/2 - 15;
