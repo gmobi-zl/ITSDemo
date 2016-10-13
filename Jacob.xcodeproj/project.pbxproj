@@ -115,6 +115,7 @@
 		E18C13071D6AE6EC00E635D6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13061D6AE6EC00E635D6 /* Security.framework */; };
 		E18C13091D6AE6FB00E635D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13081D6AE6FB00E635D6 /* SystemConfiguration.framework */; };
 		E18F06A21D991FA9008EC403 /* MMTabPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18F06A01D991FA9008EC403 /* MMTabPagerView.m */; };
+		E19443261DAF6AFB0016CEA6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E19443251DAF6AFB0016CEA6 /* MBProgressHUD.m */; };
 		E19845061D90D66E006A3ED2 /* MyCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845051D90D66E006A3ED2 /* MyCommentController.m */; };
 		E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450B1D9111D4006A3ED2 /* LoginView.m */; };
 		E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450E1D9132FF006A3ED2 /* MyCommentCell.m */; };
@@ -357,6 +358,8 @@
 		E18C13081D6AE6FB00E635D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E18F06A01D991FA9008EC403 /* MMTabPagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTabPagerView.m; sourceTree = "<group>"; };
 		E18F06A11D991FA9008EC403 /* MMTabPagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTabPagerView.h; sourceTree = "<group>"; };
+		E19443241DAF6AFB0016CEA6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E19443251DAF6AFB0016CEA6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E197B2011D7036E0000B03FF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		E197B2021D7036E0000B03FF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E197B2041D7037CF000B03FF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -828,6 +831,8 @@
 		E189F5E61D64155C008587CE /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E19443241DAF6AFB0016CEA6 /* MBProgressHUD.h */,
+				E19443251DAF6AFB0016CEA6 /* MBProgressHUD.m */,
 				E189F5F31D6415A1008587CE /* UUInputAccessoryView.h */,
 				E189F5F41D6415A1008587CE /* UUInputAccessoryView.m */,
 				E189F5F51D6415A1008587CE /* CommentView.h */,
@@ -1219,6 +1224,7 @@
 				E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */,
 				E1F030651D741C4100060559 /* MJRefreshHeaderView.m in Sources */,
 				E181D1331D66F785005115E6 /* WebviewController.m in Sources */,
+				E19443261DAF6AFB0016CEA6 /* MBProgressHUD.m in Sources */,
 				E1F0306E1D741C4100060559 /* SDWebImageDownloaderOperation.m in Sources */,
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
 				1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */,

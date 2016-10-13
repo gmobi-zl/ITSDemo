@@ -638,7 +638,7 @@ static NetWorkType currentNetType = NoNet;
         } else {
             // the rest, we write to jpeg
             // 0. best, 1. lost. about compress.
-            imageData = UIImageJPEGRepresentation(image, 0);
+            imageData = UIImageJPEGRepresentation(image, 1);
         }
         if ((imageData == nil) || ([imageData length] <= 0))
             return NO;

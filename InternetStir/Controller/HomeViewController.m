@@ -274,15 +274,25 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
    
+
     WEAKSELF
     if (actionSheet.tag == 80) {
+        
+        ITSApplication* itsApp = [ITSApplication get];
+        NSArray* dataArr = itsApp.dataSvr.celebComments;
+        CelebComment *item = [dataArr objectAtIndex:self.index];
+
+        NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+        NSString* image = [item.attachments objectAtIndex:0];
+        NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
+        
         if (buttonIndex == 0) {
             
         }else if (buttonIndex == 1) {
             WriteArticleController *vc = [[WriteArticleController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.type = 2;
-            vc.photoStr = @"2.jpg";
+            vc.photoStr = imageUrl;
             [self.navigationController pushViewController:vc animated:YES];
 
         }else if (buttonIndex == 2) {
@@ -318,9 +328,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
             NSString *encodedImageStr = [pickerImage base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             NSString *name = [MMSystemHelper getMd5String:encodedImageStr];
-            [MMSystemHelper writeImage:[UIImage imageWithData:pickerImage] toFileAtPath:[NSString stringWithFormat:@"%@/%@.png",celebCacheFolder,name]];
             [MMSystemHelper writeImage:[UIImage imageWithData:pickerImage] toFileAtPath:[NSString stringWithFormat:@"%@/%@",celebCacheFolder,name]];
-//            [fileMgr createFileAtPath:[celebCacheFolder stringByAppendingString:[NSString stringWithFormat:@"/%@",name]] contents:pickerImage attributes:nil];
             
             vc.data = pickerImage;
             [self.navigationController pushViewController:vc animated:YES];

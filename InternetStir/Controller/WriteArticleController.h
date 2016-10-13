@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
-@interface WriteArticleController : UIViewController<UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface WriteArticleController : UIViewController<UIGestureRecognizerDelegate,UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,MBProgressHUDDelegate>
+@property (strong, nonatomic) MBProgressHUD *hud;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, strong) UIImageView *photo;
 @property (nonatomic, strong) UITextView *textView;

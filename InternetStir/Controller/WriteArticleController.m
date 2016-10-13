@@ -12,6 +12,8 @@
 #import "AppStyleConfiguration.h"
 #import "WriteArticleCell.h"
 #import "ITSApplication.h"
+#import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -52,7 +54,8 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         [send setTitle:@"發布" forState:UIControlStateNormal];
     }else {
         if (self.photoStr != nil) {
-            self.photo.image = [UIImage imageNamed:self.photoStr];
+            self.photo.contentMode = UIViewContentModeScaleAspectFill;
+            [self.photo sd_setImageWithURL:[NSURL URLWithString:self.photoStr] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
             [send setTitle:@"儲存" forState:UIControlStateNormal];
         }
     }
@@ -151,12 +154,37 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)sendClick {
+    
+    [self.textView resignFirstResponder];
     if (self.type == 1) {
         // 发送
+        if (self.data != nil && self.textView.text.length > 0) {
+
+            self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            [self.view addSubview:self.hud];
+            self.hud.mode = MBProgressHUDModeIndeterminate;
+            self.hud.label.text = @"请稍等...";
+            self.hud.label.font = [UIFont systemFontOfSize:17];
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+                [self doSomeWork];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.hud hideAnimated:YES];
+                });
+            });
+            
+     }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请把内容补充完整" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            [alert show];
+        }
     }else {
         // 保存
     }
 }
+- (void)doSomeWork {
+    // Simulate by just waiting.
+    sleep(3.);
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
