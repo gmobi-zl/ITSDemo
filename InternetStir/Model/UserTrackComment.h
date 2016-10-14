@@ -9,6 +9,8 @@
 #ifndef UserTrackComment_h
 #define UserTrackComment_h
 
+#import "CelebComment.h"
+
 #define TRACK_COMMENT_ITEM_UUID @"uuid"
 #define TRACK_COMMENT_ITEM_NAME @"u_name"
 #define TRACK_COMMENT_ITEM_AVATAR @"u_avatar"
@@ -22,22 +24,20 @@
 
 @interface UserTrackComment : NSObject
 
-@property NSString* uuid;
-@property NSString* name;
-@property NSString* avator;
+@property NSString* rid;
 @property NSString* fid;
+@property NSString* uuid;
 @property NSString* cid;
 @property NSString* comment;
-@property NSString* rid;
-@property UInt64 pts;
-@property UInt64 uts;
 @property BOOL isCelebRead;
+@property UInt64 uts;
+@property UInt64 pts;
+@property NSString* celeb;
+@property NSString* name;
+@property NSString* avator;
+@property NSInteger u_role;
 
-@property NSString* celebComment;
-@property NSArray* celebAttachments;
-@property NSString* celebCCId;
-@property NSString* celebName;
-@property NSString* celebAvator;
+@property CelebComment* article;
 
 @property NSMutableArray* replayComments;
 

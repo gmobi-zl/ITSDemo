@@ -57,16 +57,19 @@
         self.user.email = [data objectForKey:@"email"];
         self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
         self.user.session = [data objectForKey:@"session"];
+        self.user.role = [[data objectForKey:@"role"] integerValue];
         
-        ConfigService* cs = [ConfigService get];
-        NSString* ch = [cs getChannel];
-        if ([self.user.uId isEqualToString:ch]){
+        if (self.user.role == CELEB_USER_CELEB){
             self.user.isCBADM = YES;
-        } else {
-            self.user.isCBADM = NO;
         }
         
-        //self.user.isCBADM = YES;
+//        ConfigService* cs = [ConfigService get];
+//        NSString* ch = [cs getChannel];
+//        if ([self.user.uId isEqualToString:ch]){
+//            self.user.isCBADM = YES;
+//        } else {
+//            self.user.isCBADM = NO;
+//        }
     }
 }
 

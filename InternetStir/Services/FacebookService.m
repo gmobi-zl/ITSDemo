@@ -16,6 +16,57 @@
 
 
 -(void) facebookUserInfo{
+    
+#ifdef TEST_CELEB_LOGIN
+    /* 
+     {
+     "success": true,
+     "profile": {
+     "name": "Tomoto Lai",
+     "uuid": "017d8be4-8d03-4722-ae8e-6500c086f2ec",
+     "session": "0d1c1f77-afcd-4354-a0a8-750142d9dd23",
+     "acl": {
+     "role": "celeb",
+     "object": null
+     }
+     }
+     }
+     */
+    
+    self.userName = @"Tomoto Lai";
+    self.uId = @"017d8be4-8d03-4722-ae8e-6500c086f2ec";
+    self.icon = @"";
+    self.email = @"tomoto.app@gmail.com";
+
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    
+    us.user.userName = self.userName;
+    us.user.avatar = self.icon;
+    us.user.email = self.email;
+    us.user.session = @"0d1c1f77-afcd-4354-a0a8-750142d9dd23";
+    us.user.uId = self.uId;
+    
+    us.user.isCBADM = YES;
+    us.user.role = CELEB_USER_CELEB;
+    us.user.isLogin = YES;
+    
+    [dic setObject:self.uId forKey:@"openid"];
+    [dic setObject:@"facebook" forKey:@"type"];
+    [dic setObject:us.user.userName forKey:@"name"];
+    [dic setObject:us.user.avatar forKey:@"avatar"];
+    [dic setObject:us.user.email forKey:@"email"];
+    [dic setObject:us.user.uId forKey:@"uuid"];
+    [dic setObject:us.user.session forKey:@"session"];
+    [dic setObject:[[NSNumber alloc] initWithBool:us.user.isLogin] forKey:@"isLogin"];
+    [dic setObject:[[NSNumber alloc] initWithInt:us.user.role] forKey:@"role"];
+    
+    SettingService* ss = [SettingService get];
+    [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+    if ([self.delegate respondsToSelector:@selector(passMessage)]) {
+        [self.delegate passMessage];
+    }
+#else
     if ([FBSDKAccessToken currentAccessToken]){
         
         ITSApplication* itsApp = [ITSApplication get];
@@ -40,96 +91,99 @@
                 
                 [itsApp.remoteSvr doLogin:self.email uid:self.uId name:self.userName
                                    avator:self.icon accessToken:[self getToken] type:1 callback:^(int status, int code, NSDictionary *resultData) {
-                    if (resultData != nil){
-                        NSDictionary* profile = [resultData objectForKey:@"profile"];
-                        if (profile != nil){
-                            NSString* name = [profile objectForKey:@"name"];
-                            NSString* email = [profile objectForKey:@"email"];
-                            NSString* avator = [profile objectForKey:@"avatar"];
-                            NSString* session = [profile objectForKey:@"session"];
-                            NSString* uuid = [profile objectForKey:@"uuid"];
-                            NSDictionary* acl = [profile objectForKey:@"acl"];
-                            
-                            
-                            NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:1];
-                            
-                            if (name != nil)
-                                us.user.userName = name;
-                            else
-                                us.user.userName = self.userName;
-                            
-                            if (avator != nil)
-                                us.user.avatar = avator;
-                            else
-                                us.user.avatar = self.icon;
-                            
-                            if (email != nil)
-                                us.user.email = email;
-                            else
-                                us.user.email = self.email;
-                            
-                            if (session != nil)
-                                us.user.session = session;
-                            
-                            if (uuid != nil)
-                                us.user.uId = uuid;
-                            else
-                                us.user.uId = self.uId;
-                            
-                            ConfigService* cs = [ConfigService get];
-                            NSString* ch = [cs getChannel];
-                            us.user.isCBADM = NO;
-                            
-                            if (acl != nil){
-                                NSString* role = [acl objectForKey:@"role"];
-                                if (role != nil){
-                                    if ([role isEqualToString:@"celeb"]){
-                                        us.user.isCBADM = YES;
-                                        us.user.role = CELEB_USER_CELEB;
-                                    } else if ([role isEqualToString:@"admin"]){
-                                        us.user.role = CELEB_USER_ADMIN;
-                                    } else if ([role isEqualToString:@"user"]){
-                                        us.user.role = CELEB_USER_NORMAL;
-                                    }
-                                }
-                                
-//                                id vipObj = [acl objectForKey:@"object"];
-//                                if (vipObj != nil)
-//                                    us.user.role = CELEB_USER_VIP;
-                                
-                            }
-                            
-//                            if ([uuid isEqualToString:ch]){
-//                                us.user.isCBADM = YES;
-//                            } else {
-//                                us.user.isCBADM = NO;
-//                            }
-                            
-                            //us.user.isCBADM = YES;
-                            us.user.isLogin = YES;
-                            
-                            [dic setObject:self.uId forKey:@"openid"];
-                            [dic setObject:@"facebook" forKey:@"type"];
-                            [dic setObject:us.user.userName forKey:@"name"];
-                            [dic setObject:us.user.avatar forKey:@"avatar"];
-                            [dic setObject:us.user.email forKey:@"email"];
-                            [dic setObject:us.user.uId forKey:@"uuid"];
-                            [dic setObject:us.user.session forKey:@"session"];
-                            [dic setObject:[[NSNumber alloc] initWithBool:us.user.isLogin] forKey:@"isLogin"];
-                            
-                            SettingService* ss = [SettingService get];
-                            [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
-                            if ([self.delegate respondsToSelector:@selector(passMessage)]) {
-                                [self.delegate passMessage];
-                            }
-                        }
-                    }
-                }];
+                                       if (resultData != nil){
+                                           NSDictionary* profile = [resultData objectForKey:@"profile"];
+                                           if (profile != nil){
+                                               NSString* name = [profile objectForKey:@"name"];
+                                               NSString* email = [profile objectForKey:@"email"];
+                                               NSString* avator = [profile objectForKey:@"avatar"];
+                                               NSString* session = [profile objectForKey:@"session"];
+                                               NSString* uuid = [profile objectForKey:@"uuid"];
+                                               NSDictionary* acl = [profile objectForKey:@"acl"];
+                                               
+                                               
+                                               NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:1];
+                                               
+                                               if (name != nil)
+                                                   us.user.userName = name;
+                                               else
+                                                   us.user.userName = self.userName;
+                                               
+                                               if (avator != nil)
+                                                   us.user.avatar = avator;
+                                               else
+                                                   us.user.avatar = self.icon;
+                                               
+                                               if (email != nil)
+                                                   us.user.email = email;
+                                               else
+                                                   us.user.email = self.email;
+                                               
+                                               if (session != nil)
+                                                   us.user.session = session;
+                                               
+                                               if (uuid != nil)
+                                                   us.user.uId = uuid;
+                                               else
+                                                   us.user.uId = self.uId;
+                                               
+                                               ConfigService* cs = [ConfigService get];
+                                               NSString* ch = [cs getChannel];
+                                               us.user.isCBADM = NO;
+                                               
+                                               if (acl != nil){
+                                                   NSString* role = [acl objectForKey:@"role"];
+                                                   if (role != nil){
+                                                       if ([role isEqualToString:@"celeb"]){
+                                                           us.user.isCBADM = YES;
+                                                           us.user.role = CELEB_USER_CELEB;
+                                                       } else if ([role isEqualToString:@"admin"]){
+                                                           us.user.role = CELEB_USER_ADMIN;
+                                                       } else if ([role isEqualToString:@"user"]){
+                                                           us.user.role = CELEB_USER_NORMAL;
+                                                       }
+                                                   }
+                                                   
+                                                   //                                id vipObj = [acl objectForKey:@"object"];
+                                                   //                                if (vipObj != nil)
+                                                   //                                    us.user.role = CELEB_USER_VIP;
+                                                   
+                                               }
+                                               
+                                               //                            if ([uuid isEqualToString:ch]){
+                                               //                                us.user.isCBADM = YES;
+                                               //                            } else {
+                                               //                                us.user.isCBADM = NO;
+                                               //                            }
+                                               
+                                               //us.user.isCBADM = YES;
+                                               us.user.isLogin = YES;
+                                               
+                                               [dic setObject:self.uId forKey:@"openid"];
+                                               [dic setObject:@"facebook" forKey:@"type"];
+                                               [dic setObject:us.user.userName forKey:@"name"];
+                                               [dic setObject:us.user.avatar forKey:@"avatar"];
+                                               [dic setObject:us.user.email forKey:@"email"];
+                                               [dic setObject:us.user.uId forKey:@"uuid"];
+                                               [dic setObject:us.user.session forKey:@"session"];
+                                               [dic setObject:[[NSNumber alloc] initWithBool:us.user.isLogin] forKey:@"isLogin"];
+                                               [dic setObject:[[NSNumber alloc] initWithInt:us.user.role] forKey:@"role"];
+
+                                               SettingService* ss = [SettingService get];
+                                               [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];
+                                               if ([self.delegate respondsToSelector:@selector(passMessage)]) {
+                                                   [self.delegate passMessage];
+                                               }
+                                           }
+                                       }
+                                   }];
                 
             }
         }];
     }
+#endif
 }
+
 -(void) facebookLogOut{
     
     [self.login logOut];
@@ -144,6 +198,10 @@
 }
 
 -(void) facebookLogin:(PoPoFBLoginCallback) cb viewController:(UIViewController *)view{
+    
+#ifdef TEST_CELEB_LOGIN
+    cb(ITS_FB_LOGIN_SUCCESS);
+#else
     if ([FBSDKAccessToken currentAccessToken]){
         cb(ITS_FB_LOGIN_SUCCESS);
         return;
@@ -163,5 +221,6 @@
             cb(ITS_FB_LOGIN_SUCCESS);
         }
     }];
+#endif
 }
 @end

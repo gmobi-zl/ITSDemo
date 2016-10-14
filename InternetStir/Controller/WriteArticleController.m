@@ -166,7 +166,6 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         
 
         if (self.data != nil && self.textView.text.length > 0) {
-
             self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             [self.view addSubview:self.hud];
             self.hud.mode = MBProgressHUDModeIndeterminate;
