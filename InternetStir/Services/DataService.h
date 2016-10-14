@@ -160,6 +160,7 @@ typedef enum{
 @property (retain) PoPoNewsItem* pushNews;
 
 @property (copy) NSString* selectUploadFile;
+@property (retain) CelebComment* selectUpdateComment;
 
 //@property (retain) CelebUser *user;
 
@@ -330,6 +331,11 @@ typedef enum{
 -(void) setRefreshCelebComments: (NSArray*) dicData
                     isClearData: (BOOL) clear
                            type: (int) type;
+-(BOOL) insertCelebCommentItem: (CelebComment*) item;
+-(void) removeCelebCommentItem: (NSString*) fid;
+-(void) updateCelebCommentItem: (NSString*) fid
+                       context: (NSString*) context
+                   attachments: (NSArray*) attachments;
 
 
 -(void) refreshUserTrackComments: (int) type;

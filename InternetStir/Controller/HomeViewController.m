@@ -290,12 +290,13 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         if (buttonIndex == 0) {
             
         }else if (buttonIndex == 1) {
+            itsApp.dataSvr.selectUpdateComment = item;
+            
             WriteArticleController *vc = [[WriteArticleController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             vc.type = 2;
             vc.photoStr = imageUrl;
             [self.navigationController pushViewController:vc animated:YES];
-
         }else if (buttonIndex == 2) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"刪除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [alert show];

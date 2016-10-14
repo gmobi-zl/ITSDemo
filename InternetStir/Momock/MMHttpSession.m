@@ -270,6 +270,62 @@
     [self execute];
 }
 
+-(void) doPut: (NSString*) url
+    reqHeader: (NSMutableDictionary*) header
+      reqBody: (NSString*) body
+     callback: (MMHttpSessionCallback) cb{
+    mmStatus = MM_HTTP_STATE_WAITING;
+    
+    [self initSession];
+    reqUrl = [NSURL URLWithString:url];
+    NSURLRequest* reqReq = [NSURLRequest requestWithURL:reqUrl];
+    
+    request = [reqReq mutableCopy];
+    if (header != nil){
+        [self setRequestHeader:header];
+    }
+    if (body != nil)
+        request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+    
+    request.HTTPMethod = @"PUT";
+    
+    self.mmCallbackHandler = cb;
+    
+    [self execute];
+}
+
+-(void) doPutJSON: (NSString*) url
+        reqHeader: (NSMutableDictionary*) header
+          reqBody: (NSDictionary*) body
+         callback: (MMHttpSessionCallback) cb{
+    mmStatus = MM_HTTP_STATE_WAITING;
+    
+    [self initSession];
+    reqUrl = [NSURL URLWithString:url];
+    NSURLRequest* reqReq = [NSURLRequest requestWithURL:reqUrl];
+    
+    request = [reqReq mutableCopy];
+    if (header != nil){
+        [self setRequestHeader:header];
+    }
+    
+    NSDictionary* jsonHeader = [NSDictionary dictionaryWithObject:@"application/json" forKey:@"Content-Type"];
+    [self setRequestHeader:jsonHeader];
+    
+    if (body != nil){
+        NSError* error = nil;
+        NSData* tmpBodyData = [NSJSONSerialization dataWithJSONObject:body options:NSJSONWritingPrettyPrinted error:&error];
+        NSString* tmpBodyStr = [[NSString alloc] initWithData:tmpBodyData encoding:NSUTF8StringEncoding];
+        MMLogDebug(@"MMHttpService: Post Body = %@", tmpBodyStr);
+        request.HTTPBody = tmpBodyData;
+    }
+    request.HTTPMethod = @"PUT";
+    
+    self.mmCallbackHandler = cb;
+    
+    [self execute];
+}
+
 -(void) URLSession:(NSURLSession*) session
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
       didWriteData:(int64_t)bytesWritten

@@ -78,6 +78,16 @@ typedef void (^MMHttpSessionProgressCallback)(NSString* url, double progress);
          reqBody: (NSString*) body
         callback: (MMHttpSessionCallback) cb;
 
+-(void) doPut: (NSString*) url
+       reqHeader: (NSMutableDictionary*) header
+         reqBody: (NSString*) body
+        callback: (MMHttpSessionCallback) cb;
+
+-(void) doPutJSON: (NSString*) url
+         reqHeader: (NSMutableDictionary*) header
+           reqBody: (NSDictionary*) body
+          callback: (MMHttpSessionCallback) cb;
+
 @end
 
 

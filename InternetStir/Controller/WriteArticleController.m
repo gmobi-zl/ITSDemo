@@ -14,6 +14,8 @@
 #import "ITSApplication.h"
 #import "MBProgressHUD.h"
 #import "UIImageView+WebCache.h"
+#import "MMEventService.h"
+#import "ConfigService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -87,6 +89,10 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     [self.view addSubview:bgView];
     
+    MMEventService* es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT selector:@selector(celebUploadFileListener:)];
+    [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_SEND_RESULT selector:@selector(celebSendCommentsListener:)];
+    
 //    self.tableView = [[UITableView alloc] init];
 //    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
 //    self.tableView.delegate = self;
@@ -158,33 +164,50 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [self.textView resignFirstResponder];
     if (self.type == 1) {
         // 发送
-
-        
-        //ITSApplication* app = [ITSApplication get];
-        //NSString* fileName = app.dataSvr.selectUploadFile;
-        //[app.remoteSvr uploadFileToServer:fileName];
-        
-
         if (self.data != nil && self.textView.text.length > 0) {
             self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             [self.view addSubview:self.hud];
             self.hud.mode = MBProgressHUDModeIndeterminate;
             self.hud.label.text = @"请稍等...";
             self.hud.label.font = [UIFont systemFontOfSize:17];
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-                [self doSomeWork];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.hud hideAnimated:YES];
-                });
-            });
             
-     }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请把内容补充完整" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                ITSApplication* app = [ITSApplication get];
+                NSString* fileName = app.dataSvr.selectUploadFile;
+                [app.remoteSvr uploadFileToServer:fileName];
+            });
+//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+//                [self doSomeWork];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.hud hideAnimated:YES];
+//                });
+//            });
+            
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"說點什麼吧" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
             [alert show];
         }
-
     }else {
         // 保存
+        if (self.data != nil && self.textView.text.length > 0) {
+            self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            [self.view addSubview:self.hud];
+            self.hud.mode = MBProgressHUDModeIndeterminate;
+            self.hud.label.text = @"请稍等...";
+            self.hud.label.font = [UIFont systemFontOfSize:17];
+            
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                ITSApplication* app = [ITSApplication get];
+                CelebComment* comment = app.dataSvr.selectUpdateComment;
+                NSString* context = self.textView.text;
+                
+                [app.remoteSvr celebUpdateComment:comment.fid context:context attachment:comment.attachments];
+            });
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"說點什麼吧" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            [alert show];
+        }
+        
     }
 }
 - (void)doSomeWork {
@@ -206,5 +229,58 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)celebUploadFileListener: (id) data{
+    if (data != nil && [data isKindOfClass:[NSMutableDictionary class]]){
+        NSDictionary* dic = (NSDictionary*)data;
+        NSNumber* tmpNum = [dic objectForKey:@"success"];
+        NSString* fd = [dic objectForKey:@"fd"];
+        BOOL succ = [tmpNum boolValue];
+        if (YES == succ && nil != fd){
+            // del cache file
+            ITSApplication* app = [ITSApplication get];
+            NSString* fileName = app.dataSvr.selectUploadFile;
+            ConfigService* cs = [ConfigService get];
+            NSString* cacheFolder = [cs getCelebCacheFolder];
+            NSString* filePath = [NSString stringWithFormat:@"%@/%@", cacheFolder, fileName];
+            [MMSystemHelper removeFileForDir:filePath];
+            
+            // send to server comment
+            NSString* context = self.textView.text;
+            NSArray* attachment = [[NSArray alloc] initWithObjects:fd, nil];
+            [app.remoteSvr celebSendComment:context attachment:attachment];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.hud hideAnimated:YES];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"發文失敗" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+                [alert show];
+            });
+        }
+    }
+}
+
+-(void)celebSendCommentsListener: (id) data{
+    if (data != nil){
+        NSString* ret = (NSString*)data;
+        if ([ret isEqualToString:CELEB_SEND_COMMENT_SUCCESS]){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.hud hideAnimated:YES];
+                
+                [[self navigationController] popViewControllerAnimated:YES];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.hud hideAnimated:YES];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"發文失敗" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+                [alert show];
+            });
+
+        }
+    }
+}
+
 
 @end

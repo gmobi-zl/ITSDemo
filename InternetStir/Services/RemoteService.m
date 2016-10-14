@@ -185,8 +185,9 @@
     NSString* url;
     ITSApplication* itsApp = [ITSApplication get];
     CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
     
-    NSString* param = [[NSString alloc] initWithFormat:AFTER_USERC_TEMPLATE_URL, user.uId, utc_time, FETCH_COUNT];
+    NSString* param = [[NSString alloc] initWithFormat:AFTER_USERC_TEMPLATE_URL, user.uId, [cs getChannel], utc_time, FETCH_COUNT];
     
     NSString* pSession = @"";
     
@@ -206,8 +207,9 @@
     
     ITSApplication* itsApp = [ITSApplication get];
     CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
     
-    NSString* param = [[NSString alloc] initWithFormat:BEFORE_USERC_TEMPLATE_URL, user.uId, utc_time, FETCH_COUNT];
+    NSString* param = [[NSString alloc] initWithFormat:BEFORE_USERC_TEMPLATE_URL, user.uId, [cs getChannel], utc_time, FETCH_COUNT];
     
     NSString* pSession = @"";
     
@@ -1199,6 +1201,173 @@
     NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:resultData options:NSJSONReadingMutableLeaves error:nil];
     
     MMLogDebug(@"uploadFileToServer RSP: \r\n %@", responseDic);
+    
+    MMEventService *es = [MMEventService getInstance];
+    NSString* fileId = nil;
+    if (nil != responseDic){
+        fileId = [responseDic objectForKey:@"fd"];
+    }
+    
+    NSMutableDictionary* retDic = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (fileId != nil){
+        [retDic setObject:[[NSNumber alloc] initWithBool:YES] forKey:@"success"];
+        [retDic setObject:fileId forKey:@"fd"];
+    } else {
+        [retDic setObject:[[NSNumber alloc] initWithBool:NO] forKey:@"success"];
+    }
+    
+    [es send:EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT eventData:retDic];
+}
+
+
+-(void) celebSendComment: (NSString*) context
+              attachment: (NSArray*) attachment{
+    if (context == nil || attachment == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@?_s=%@",[self getBaseUrl], [cs getChannel], user.session];
+    MMLogDebug(@"celebSendComment URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    [param setObject:context forKey:@"context"];
+    [param setObject:attachment forKey:@"attachments"];
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"celebSendComment RSP: %@",dataDic);
+             
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             NSString* fid = [dataDic objectForKey:@"fid"];
+             BOOL succ = [tmpNum boolValue];
+             
+             if (succ == YES){
+                 // add to dataservice
+                 CelebComment* comment = [CelebComment alloc];
+                 comment.fid = fid;
+                 comment.context = context;
+                 comment.name = user.userName;
+                 comment.avator = user.avatar;
+                 comment.attachments = attachment;
+                 UInt64 time = [MMSystemHelper getMillisecondTimestamp];
+                 comment.uts = time;
+                 comment.pts = time;
+                 
+                 [itsApp.dataSvr insertCelebCommentItem:comment];
+                 // send success
+                 
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_COMMENT_SEND_RESULT eventData:CELEB_SEND_COMMENT_SUCCESS];
+                 [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+             } else {
+                 // send fial
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_COMMENT_SEND_RESULT eventData:CELEB_SEND_COMMENT_ERROR];
+             }
+         }
+     }];
+}
+
+-(void) celebUpdateComment: (NSString*) fid
+                   content: (NSString*) context
+                attachment: (NSArray*) attachment {
+    if (fid == nil || context == nil || attachment == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], user.session, fid];
+    MMLogDebug(@"celebUpdateComment URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    [param setObject:context forKey:@"context"];
+    [param setObject:attachment forKey:@"attachments"];
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPutJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"celebUpdateComment RSP: %@",dataDic);
+             
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             BOOL succ = [tmpNum boolValue];
+             
+             if (succ == YES){
+                 [itsApp.dataSvr updateCelebCommentItem:fid context:context attachments:attachment];
+                 // send success
+                 
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_COMMENT_UPDATE_RESULT eventData:CELEB_SUCCESS];
+                 [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+             } else {
+                 // send fial
+                 
+             }
+         }
+     }];
+}
+
+-(void) celebRemoveComment: (NSString*) fid{
+    if (fid == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], user.session, fid];
+    MMLogDebug(@"celebRemoveComment URL: %@", url);
+
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"celebRemoveComment RSP: %@",dataDic);
+             
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             BOOL succ = [tmpNum boolValue];
+             
+             if (succ == YES){
+                 
+                 [itsApp.dataSvr removeCelebCommentItem:fid];
+                 
+                 // send success
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CELEB_SEND_COMMENT_SUCCESS];
+             } else {
+                 // send fial
+                 
+             }
+         }
+     }];
 }
 
 

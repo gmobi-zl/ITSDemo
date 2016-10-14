@@ -11,16 +11,22 @@
 
 #import "CelebComment.h"
 
-#define TRACK_COMMENT_ITEM_UUID @"uuid"
-#define TRACK_COMMENT_ITEM_NAME @"u_name"
-#define TRACK_COMMENT_ITEM_AVATAR @"u_avatar"
+#define TRACK_COMMENT_ITEM_RID @"rid"
 #define TRACK_COMMENT_ITEM_FORUMS_ID @"fid"
+#define TRACK_COMMENT_ITEM_UUID @"uuid"
 #define TRACK_COMMENT_ITEM_CID @"cid"
 #define TRACK_COMMENT_ITEM_COMMENT @"comment"
-#define TRACK_COMMENT_ITEM_PTS @"pts"
+#define TRACK_COMMENT_ITEM_READ @"read"
 #define TRACK_COMMENT_ITEM_UTS @"uts"
-#define TRACK_COMMENT_ITEM_CBREAD @"read"
-#define TRACK_COMMENT_ITEM_RID @"rid"
+#define TRACK_COMMENT_ITEM_PTS @"pts"
+#define TRACK_COMMENT_ITEM_CELEB @"celeb"
+#define TRACK_COMMENT_ITEM_NAME @"u_name"
+#define TRACK_COMMENT_ITEM_AVATAR @"u_avatar"
+#define TRACK_COMMENT_ITEM_ROLE @"u_role"
+#define TRACK_COMMENT_ITEM_OBJECT @"u_object"
+#define TRACK_COMMENT_ITEM_REPLY @"reply"
+#define TRACK_COMMENT_ITEM_ARTICLE @"article"
+
 
 @interface UserTrackComment : NSObject
 

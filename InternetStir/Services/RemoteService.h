@@ -36,8 +36,8 @@
 #define BEFORE_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?before=%@&size=%d"
 #define AFTER_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?after=%@&size=%d"
 
-#define BEFORE_USERC_TEMPLATE_URL @"v0/user/%@/comments?before=%@&size=%d"
-#define AFTER_USERC_TEMPLATE_URL @"v0/user/%@/comments?after=%@&size=%d"
+#define BEFORE_USERC_TEMPLATE_URL @"v0/users/%@/comments/%@?before=%@&size=%d"
+#define AFTER_USERC_TEMPLATE_URL @"v0/users/%@/comments/%@?after=%@&size=%d"
 
 #define CONNECT_PATH @"v0/connector"
 
@@ -125,6 +125,15 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
                                  fid: (NSString*) fid;
 
 -(void) uploadFileToServer: (NSString*) fileName;
+
+-(void) celebSendComment: (NSString*) context
+              attachment: (NSArray*) attachment;
+
+-(void) celebUpdateComment: (NSString*) fid
+                   context: (NSString*) context
+                attachment: (NSArray*) attachment;
+
+-(void) celebRemoveComment: (NSString*) fid;
 
 @end
 

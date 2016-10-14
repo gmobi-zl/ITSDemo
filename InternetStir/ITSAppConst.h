@@ -11,6 +11,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define TEST_CELEB_LOGIN 1
+
 // Test Channel & url
 #define PONEWS_URL_BASE @"http://test.poponews.net/"
 #define PONEWS_GROUP @"test"
@@ -132,6 +134,13 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define USER_COMMENT_REFRESH_SUCCESS @"user_refresh_success"
 #define USER_COMMENT_REFRESH_ERROR   @"user_refresh_failed"
 
+#define CELEB_SEND_COMMENT_SUCCESS @"cb_send_comment_success"
+#define CELEB_SEND_COMMENT_ERROR   @"cb_send_comment_failed"
+
+#define CELEB_SUCCESS @"success"
+#define CELEB_ERROR   @"error"
+
+
 // FACEBOOK news
 #define FB_ADD_NEWS_TOP    0
 #define FB_ADD_NEWS_END    1
@@ -164,6 +173,10 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH  @"CELEB_REPLY_COMMENT_REFRESH"
 #define EVENT_USER_TRACK_COMMENT_DATA_REFRESH  @"USER_TRACK_COMMENT_REFRESH"
 
+#define EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT  @"CELEB_UPLOAD_FILE_RESULT"
+#define EVENT_CELEB_COMMENT_SEND_RESULT  @"CELEB_SEND_COMMENT_RESULT"
+
+#define EVENT_CELEB_COMMENT_UPDATE_RESULT  @"CELEB_UPDATE_COMMENT_RESULT"
 
 // user
 #define CELEB_USER_NORMAL 0

@@ -11,6 +11,7 @@
 #import "SettingService.h"
 #import "ITSApplication.h"
 #import "ConfigService.h"
+#import "ITSAppConst.h"
 
 @implementation FacebookService
 
@@ -35,7 +36,7 @@
     
     self.userName = @"Tomoto Lai";
     self.uId = @"017d8be4-8d03-4722-ae8e-6500c086f2ec";
-    self.icon = @"";
+    self.icon = @"https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/p160x160/12938287_972142962863863_37536436875128892_n.jpg?oh=0501feabb5712a2951a9baeb4522c1a1&oe=58607417";
     self.email = @"tomoto.app@gmail.com";
 
     ITSApplication* itsApp = [ITSApplication get];
@@ -44,13 +45,14 @@
     us.user.userName = self.userName;
     us.user.avatar = self.icon;
     us.user.email = self.email;
-    us.user.session = @"0d1c1f77-afcd-4354-a0a8-750142d9dd23";
+    us.user.session = @"85a8b3fb-fb49-4fa2-ba41-7053c8f04314";
     us.user.uId = self.uId;
     
     us.user.isCBADM = YES;
     us.user.role = CELEB_USER_CELEB;
     us.user.isLogin = YES;
     
+    NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:1];
     [dic setObject:self.uId forKey:@"openid"];
     [dic setObject:@"facebook" forKey:@"type"];
     [dic setObject:us.user.userName forKey:@"name"];
@@ -59,7 +61,7 @@
     [dic setObject:us.user.uId forKey:@"uuid"];
     [dic setObject:us.user.session forKey:@"session"];
     [dic setObject:[[NSNumber alloc] initWithBool:us.user.isLogin] forKey:@"isLogin"];
-    [dic setObject:[[NSNumber alloc] initWithInt:us.user.role] forKey:@"role"];
+    [dic setObject:[[NSNumber alloc] initWithInteger:us.user.role] forKey:@"role"];
     
     SettingService* ss = [SettingService get];
     [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:dic];

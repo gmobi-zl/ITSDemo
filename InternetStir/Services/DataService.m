@@ -2330,6 +2330,53 @@
     return ret;
 }
 
+-(void) removeCelebCommentItem: (NSString*) fid{
+    
+    int i = 0;
+    if (self.celebComments == nil || fid == nil)
+        return;
+    
+    int listCount = (int)[self.celebComments count];
+    for (i = 0; i < listCount; i++) {
+        id cbComment = [self.celebComments objectAtIndex:i];
+        if ([cbComment isKindOfClass:[CelebComment class]]) {
+            CelebComment* comment = cbComment;
+            if (comment != nil){
+                if ([comment.fid compare:fid] == NSOrderedSame) {
+                    [self.celebComments removeObject:comment];
+                    break;
+                }
+            }
+        }
+    }
+}
+
+-(void) updateCelebCommentItem: (NSString*) fid
+                       context: (NSString*) context
+                   attachments: (NSArray*) attachments{
+    int i = 0;
+    if (self.celebComments == nil || fid == nil || context == nil || attachments == nil)
+        return;
+    
+    int listCount = (int)[self.celebComments count];
+    for (i = 0; i < listCount; i++) {
+        id cbComment = [self.celebComments objectAtIndex:i];
+        if ([cbComment isKindOfClass:[CelebComment class]]) {
+            CelebComment* comment = cbComment;
+            if (comment != nil){
+                if ([comment.fid compare:fid] == NSOrderedSame) {
+                    
+                    comment.context = context;
+                    comment.attachments = attachments;
+                    //comment.uts = [MMSystemHelper getMillisecondTimestamp];
+                    
+                    break;
+                }
+            }
+        }
+    }
+}
+
 -(void) refreshUserTrackComments: (int) type{
     
     NSString* newsTime = nil;
