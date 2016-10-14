@@ -235,7 +235,8 @@
     NSString* image = [data.attachments objectAtIndex:0];
     
     NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
-    self.photo.contentMode = UIViewContentModeScaleAspectFit;
+    self.photo.contentMode = UIViewContentModeScaleAspectFill;
+    self.photo.clipsToBounds = YES;
     [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
@@ -263,10 +264,31 @@
 //    
     //    self.name.text = comment.name;
     NSInteger maxHotCommentCount = data.topFansComments.count;
-    if (maxHotCommentCount > 3)
-        maxHotCommentCount = 3;
+    NSInteger maxReplyCommentCount = data.replayComments.count;
+    
+    if (data.replayComments != nil) {
+        if (maxReplyCommentCount > CB_MAX_COUNT) {
+            maxHotCommentCount = CB_MAX_COUNT;
+            self.button.hidden = NO;
+        }else {
+            self.button.hidden = YES;
+            maxHotCommentCount = maxReplyCommentCount;
+        }
+    }else {
+        if (maxHotCommentCount > CB_MAX_COUNT){
+            self.button.hidden = NO;
+            maxHotCommentCount = CB_MAX_COUNT;
+        }else {
+            self.button.hidden = YES;
+        }
+    }
     for (NSInteger i = 0; i < maxHotCommentCount; i++) {
-        FansComment *item = [data.topFansComments objectAtIndex:i];
+        FansComment *item;
+        if (data.replayComments != nil) {
+            item = [data.replayComments objectAtIndex:i];
+        }else {
+            item = [data.topFansComments objectAtIndex:i];
+        }
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:16];
         replyLabel.numberOfLines = 0;
@@ -274,7 +296,6 @@
         
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
         NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
-
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
         NSRange replyRange;
         if (item.u_role == CELEB_USER_VIP) {

@@ -201,14 +201,12 @@
             
             FansComment *item = [fansComment.replayComments objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight - 5, 30, 30);
-            CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, 100, 20);
+            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
+            CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, size.width + 10, 20);
             self.cellHeight += 30 + padding/2;
             CGSize replyLabelSize;
             //if (item.type == 1) {
-                replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
-//            }else{
-//                replyLabelSize   = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@回复啊%@：%@",item.name,item.name,item.comment ] font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
-//            }
+            replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
             
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;

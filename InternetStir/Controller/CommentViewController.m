@@ -274,7 +274,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
          if (userSvr.user.isLogin == NO) {
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
-             self.loginView.effectView.alpha = 1;
+             [UIView animateWithDuration:0.5 animations:^{
+                 self.loginView.effectView.alpha = 1;
+             }];
+             
 //             [ss setStringValue:@"login" data:contentStr];
 
          }else{
@@ -473,7 +476,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
      {
          
          if (userSvr.user.isLogin == NO) {
-             self.loginView.effectView.alpha = 1;
+             [UIView animateWithDuration:0.5 animations:^{
+                 self.loginView.effectView.alpha = 1;
+             }];
 
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
@@ -536,7 +541,9 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
      {
          
          if (userSvr.user.isLogin == NO) {
-             self.loginView.effectView.alpha = 1;
+             [UIView animateWithDuration:0.5 animations:^{
+                 self.loginView.effectView.alpha = 1;
+             }];
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];

@@ -168,7 +168,7 @@ NSInteger num;
         self.tabsView.tag = MC_TAB_VIEW_TAG;
         self.tabsView.delegate = self;
 //        self.tabsView.bounces = NO;
-        self.tabsView.scrollEnabled = NO;
+        self.tabsView.scrollEnabled = YES;
         
         [self.view insertSubview:self.tabsView atIndex:0];
     }

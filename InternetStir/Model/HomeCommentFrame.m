@@ -190,22 +190,29 @@
     self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
     
     CGFloat buttonW = [MMSystemHelper sizeWithString:@"查看更多留言" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
-    self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);
+    if (comment.replayComments.count ) {
+        if (comment.replayComments.count > CB_MAX_COUNT) {
+            self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);
+        }else {
+            self.buttonF = self.contentF;
+        }
+    }else {
+        if (comment.topFansComments.count > CB_MAX_COUNT) {
+            self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);
+        }else {
+            self.buttonF = self.contentF;
+        }
+    }
+   
     self.cellHeight = CGRectGetMaxY(self.buttonF);
-    
-    
-    
-    if ([comment.topFansComments count]) {
-        NSInteger maxHotCommentCount = comment.topFansComments.count;
-        if (maxHotCommentCount > 3)
-            maxHotCommentCount = 3;
+
+    if ([comment.replayComments count]) {
+        NSInteger maxHotCommentCount = comment.replayComments.count;
+        if (maxHotCommentCount > CB_MAX_COUNT)
+            maxHotCommentCount = CB_MAX_COUNT;
         for (int i = 0; i < maxHotCommentCount; i++) {
             
-            FansComment *item = [comment.topFansComments objectAtIndex:i];
-            
-            CGRect pictureF = CGRectMake(10, self.cellHeight, 30, 30);
-            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:12] maxSize:CGSizeMake(MAXFLOAT, 20)];
-            //            CGRect nameF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + 5, size.width, 20);
+            FansComment *item = [comment.replayComments objectAtIndex:i];
             CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
             CGFloat replyLabelY = self.cellHeight + 5;
             CGFloat replyLabelWidth = screenW - 50;
@@ -213,8 +220,23 @@
             self.cellHeight += replyLabelHeight + HOME_CONTENT_PADDING - 3;
             CGRect replyF = CGRectMake(HOME_CONTENT_LEFT_PADDING, replyLabelY + 3, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
-            //            [self.replyIconF addObject:[NSValue valueWithCGRect:pictureF]];
-            //            [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];
+        }
+    }else {
+        if ([comment.topFansComments count]) {
+            NSInteger maxHotCommentCount = comment.topFansComments.count;
+            if (maxHotCommentCount > 3)
+                maxHotCommentCount = 3;
+            for (int i = 0; i < maxHotCommentCount; i++) {
+                
+                FansComment *item = [comment.topFansComments objectAtIndex:i];
+                CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
+                CGFloat replyLabelY = self.cellHeight + 5;
+                CGFloat replyLabelWidth = screenW - 50;
+                CGFloat replyLabelHeight = replyLabelSize.height;
+                self.cellHeight += replyLabelHeight + HOME_CONTENT_PADDING - 3;
+                CGRect replyF = CGRectMake(HOME_CONTENT_LEFT_PADDING, replyLabelY + 3, replyLabelWidth, replyLabelHeight);
+                [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
+            }
         }
     }
     self.cellHeight = self.cellHeight + 20;

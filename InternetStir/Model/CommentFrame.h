@@ -17,7 +17,6 @@
 @property (nonatomic, assign) CGRect iconF;
 @property (nonatomic, assign) CGRect nameF;
 @property (nonatomic, assign) CGRect lineF;
-//@property (nonatomic, assign) CGRect photoF;
 @property (nonatomic, assign) CGRect contentF;
 @property (nonatomic, assign) CGRect replyF;
 @property (nonatomic, strong) NSMutableArray *replysF;

@@ -109,6 +109,7 @@
 		E189F63E1D644CC2008587CE /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F63D1D644CC2008587CE /* SettingController.m */; };
 		E189F6411D6450AE008587CE /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F6401D6450AE008587CE /* SettingCell.m */; };
 		E189F6471D645B10008587CE /* ChannelSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F6461D645B10008587CE /* ChannelSetCell.m */; };
+		E18A965B1DB08010009B1D9F /* UserTrackCommentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E18A965A1DB08010009B1D9F /* UserTrackCommentFrame.m */; };
 		E18C12FD1D6AE67600E635D6 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C12FC1D6AE67500E635D6 /* SafariServices.framework */; };
 		E18C13031D6AE6CC00E635D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13021D6AE6CC00E635D6 /* CoreData.framework */; };
 		E18C13051D6AE6DF00E635D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18C13041D6AE6DF00E635D6 /* Foundation.framework */; };
@@ -119,8 +120,6 @@
 		E19845061D90D66E006A3ED2 /* MyCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845051D90D66E006A3ED2 /* MyCommentController.m */; };
 		E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450B1D9111D4006A3ED2 /* LoginView.m */; };
 		E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E198450E1D9132FF006A3ED2 /* MyCommentCell.m */; };
-		E19845121D91389E006A3ED2 /* MyCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845111D91389E006A3ED2 /* MyCommentItem.m */; };
-		E19845151D91395A006A3ED2 /* MyCommentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E19845141D91395A006A3ED2 /* MyCommentFrame.m */; };
 		E19DFD0B1D8F87370042C777 /* DetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD0A1D8F87370042C777 /* DetailCommentCell.m */; };
 		E19DFD0E1D8F89220042C777 /* DetailCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD0D1D8F89220042C777 /* DetailCommentItem.m */; };
 		E19DFD111D8F893B0042C777 /* DetailCommentFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E19DFD101D8F893B0042C777 /* DetailCommentFrame.m */; };
@@ -351,6 +350,8 @@
 		E189F6461D645B10008587CE /* ChannelSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelSetCell.m; sourceTree = "<group>"; };
 		E189F64B1D645D55008587CE /* FeedBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackController.h; sourceTree = "<group>"; };
 		E189F64C1D645D55008587CE /* FeedBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackController.m; sourceTree = "<group>"; };
+		E18A96591DB08010009B1D9F /* UserTrackCommentFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTrackCommentFrame.h; sourceTree = "<group>"; };
+		E18A965A1DB08010009B1D9F /* UserTrackCommentFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTrackCommentFrame.m; sourceTree = "<group>"; };
 		E18C12FC1D6AE67500E635D6 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		E18C13021D6AE6CC00E635D6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E18C13041D6AE6DF00E635D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -370,10 +371,6 @@
 		E198450B1D9111D4006A3ED2 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		E198450D1D9132FF006A3ED2 /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
 		E198450E1D9132FF006A3ED2 /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
-		E19845101D91389E006A3ED2 /* MyCommentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentItem.h; sourceTree = "<group>"; };
-		E19845111D91389E006A3ED2 /* MyCommentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentItem.m; sourceTree = "<group>"; };
-		E19845131D91395A006A3ED2 /* MyCommentFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentFrame.h; sourceTree = "<group>"; };
-		E19845141D91395A006A3ED2 /* MyCommentFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentFrame.m; sourceTree = "<group>"; };
 		E19DFD091D8F87370042C777 /* DetailCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCommentCell.h; sourceTree = "<group>"; };
 		E19DFD0A1D8F87370042C777 /* DetailCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCommentCell.m; sourceTree = "<group>"; };
 		E19DFD0C1D8F89220042C777 /* DetailCommentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCommentItem.h; sourceTree = "<group>"; };
@@ -702,10 +699,6 @@
 				E19DFD0D1D8F89220042C777 /* DetailCommentItem.m */,
 				E19DFD0F1D8F893B0042C777 /* DetailCommentFrame.h */,
 				E19DFD101D8F893B0042C777 /* DetailCommentFrame.m */,
-				E19845101D91389E006A3ED2 /* MyCommentItem.h */,
-				E19845111D91389E006A3ED2 /* MyCommentItem.m */,
-				E19845131D91395A006A3ED2 /* MyCommentFrame.h */,
-				E19845141D91395A006A3ED2 /* MyCommentFrame.m */,
 				E1F6B1001D659ABC00822E8D /* ReplyItem.h */,
 				E1F6B1011D659ABC00822E8D /* ReplyItem.m */,
 				1807B1E41D797AB200CBD6FE /* CelebComment.h */,
@@ -714,6 +707,8 @@
 				1807B1E81D797AF900CBD6FE /* FansComment.m */,
 				1837D6291DAB3DB3004653F2 /* UserTrackComment.h */,
 				1837D62A1DAB3DC9004653F2 /* UserTrackComment.m */,
+				E18A96591DB08010009B1D9F /* UserTrackCommentFrame.h */,
+				E18A965A1DB08010009B1D9F /* UserTrackCommentFrame.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1143,6 +1138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18A965B1DB08010009B1D9F /* UserTrackCommentFrame.m in Sources */,
 				18F665121D5B311400BDB2E8 /* NativeAdItem.m in Sources */,
 				E1E4A44C1D8E729A00380026 /* FanCell.m in Sources */,
 				18F664CC1D5AC9FF00BDB2E8 /* MMEventService.m in Sources */,
@@ -1193,7 +1189,6 @@
 				E1A2A6321D6AF4DC005AA8DA /* GoogleService.m in Sources */,
 				E1F030631D741C4100060559 /* MJRefreshConst.m in Sources */,
 				E189F5FB1D6415A1008587CE /* PickerImageTools.m in Sources */,
-				E19845121D91389E006A3ED2 /* MyCommentItem.m in Sources */,
 				E1F6B0F91D65930200822E8D /* PNMoodView.m in Sources */,
 				E189F6041D6415BF008587CE /* HomeCommentItem.m in Sources */,
 				E1F030701D741C4100060559 /* SDWebImagePrefetcher.m in Sources */,
@@ -1242,7 +1237,6 @@
 				E1F0306D1D741C4100060559 /* SDWebImageDownloader.m in Sources */,
 				18F665161D5B311400BDB2E8 /* NewsImage.m in Sources */,
 				E1F030711D741C4100060559 /* UIButton+WebCache.m in Sources */,
-				E19845151D91395A006A3ED2 /* MyCommentFrame.m in Sources */,
 				E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */,
 				E1E3CF711D6549140053F00D /* SocialController.m in Sources */,
 				18F664F31D5ACFA100BDB2E8 /* RemoteService.m in Sources */,

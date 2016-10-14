@@ -21,7 +21,7 @@
 #define CB_COMMENT_ITEM_PTS @"pts"
 #define CB_COMMENT_ITEM_UTS @"uts"
 
-
+#define CB_MAX_COUNT 3
 @interface CelebComment : NSObject
 
 @property NSString* fid;

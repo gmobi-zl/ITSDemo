@@ -53,7 +53,7 @@
         
         self.user.avatar = [data objectForKey:@"avatar"];
         self.user.userName = [data objectForKey:@"name"];
-        self.user.uId = [data objectForKey:@"uid"];
+        self.user.uId = [data objectForKey:@"uuid"];
         self.user.email = [data objectForKey:@"email"];
         self.user.isLogin = [[data objectForKey:@"isLogin"] boolValue];
         self.user.session = [data objectForKey:@"session"];

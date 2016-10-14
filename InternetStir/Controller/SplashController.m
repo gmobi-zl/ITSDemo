@@ -86,7 +86,9 @@
         self.loginView.layer.cornerRadius = 10;
         self.loginView.center = self.view.center;
         [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        self.loginView.effectView.alpha = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
         [self.loginView.effectView addSubview:self.loginView];
     }
 }

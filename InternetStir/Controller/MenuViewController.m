@@ -382,7 +382,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
         [al show];
     }else {
-        self.loginView.effectView.alpha = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
+
         ITSApplication* itsApp = [ITSApplication get];
         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
         [itsApp.reportSvr recordEvent:@"login.click" params:eParams eventCategory:@"fans.tool.click"];

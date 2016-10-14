@@ -47,7 +47,8 @@
         self.loginButton.layer.masksToBounds = YES;
         self.loginButton.layer.cornerRadius = 22;
         self.loginButton.layer.borderWidth = 2;
-        self.loginButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        
+        self.loginButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightLight];
         self.loginButton.layer.borderColor = [MMSystemHelper string2UIColor:@"#4A4a4a"].CGColor;
         [self.loginButton setTitle:@"Content with Facebook" forState:UIControlStateNormal];
         [self.loginButton setImage:[UIImage imageNamed:@"icon_fb"] forState:UIControlStateNormal];

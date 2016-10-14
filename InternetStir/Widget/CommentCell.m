@@ -260,7 +260,6 @@
         self.commentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
-//        self.timeLabel.backgroundColor = [UIColor redColor];
         self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
@@ -268,20 +267,8 @@
             UILabel *replyLabel = [[UILabel alloc]init];
             replyLabel.font = [UIFont systemFontOfSize:16];
             replyLabel.numberOfLines = 0;
-            //if (item.type == 1) {
-                replyLabel.text = item.comment;
-                replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
-//            }else{
-//                NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
-//                NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
-//                NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"："].location);
-//                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
-//                
-//                NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
-//                [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-//                [replyLabel setAttributedText:noteStr];
-//                [replyLabel sizeToFit];
-//            }
+            replyLabel.text = item.comment;
+            replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
             self.replyLabel = replyLabel;
             [self.contentView addSubview:replyLabel];
             [self.replysView addObject:replyLabel];

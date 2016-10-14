@@ -18,7 +18,7 @@
 #import "AppStyleConfiguration.h"
 #import "TestController.h"
 #import "ITSApplication.h"
-#import "DetailCommentController.h"
+//#import "DetailCommentController.h"
 #import "SettingService.h"
 #import "WriteArticleController.h"
 #import "ErrorController.h"
@@ -250,7 +250,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.commentBtn.tag = indexPath.row;
-    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
+//    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
     [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -396,31 +396,31 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    vc.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:vc animated:YES];
 }
-- (void)pushDetailVc:(UIButton *)button {
-#ifdef DEMO_DATA
-    DetailCommentController *detail = [[DetailCommentController alloc] init];
-    HomeCommentFrame *frame = self.commentData[button.tag];
-    detail.hidesBottomBarWhenPushed = YES;
-    detail.index = button.tag;
-    detail.headHeight = frame.headH;
-    detail.item = frame.commentItem;
-    [self.navigationController pushViewController:detail animated:YES];
-#else
-    
-    ITSApplication* itsApp = [ITSApplication get];
-    NSArray* dataArr = itsApp.dataSvr.celebComments;
-    
-    if (dataArr != nil){
-        CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
-        [itsApp.dataSvr setCurrentCelebComment:cbComment];
-        DetailCommentController *detail = [[DetailCommentController alloc] init];
-        detail.hidesBottomBarWhenPushed = YES;
-        detail.headHeight = cbComment.uiFrame.headH;
-        [self.navigationController pushViewController:detail animated:YES];
-    }
-    
-#endif
-}
+//- (void)pushDetailVc:(UIButton *)button {
+//#ifdef DEMO_DATA
+//    DetailCommentController *detail = [[DetailCommentController alloc] init];
+//    HomeCommentFrame *frame = self.commentData[button.tag];
+//    detail.hidesBottomBarWhenPushed = YES;
+//    detail.index = button.tag;
+//    detail.headHeight = frame.headH;
+//    detail.item = frame.commentItem;
+//    [self.navigationController pushViewController:detail animated:YES];
+//#else
+//    
+//    ITSApplication* itsApp = [ITSApplication get];
+//    NSArray* dataArr = itsApp.dataSvr.celebComments;
+//    
+//    if (dataArr != nil){
+//        CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
+//        [itsApp.dataSvr setCurrentCelebComment:cbComment];
+//        DetailCommentController *detail = [[DetailCommentController alloc] init];
+//        detail.hidesBottomBarWhenPushed = YES;
+//        detail.headHeight = cbComment.uiFrame.headH;
+//        [self.navigationController pushViewController:detail animated:YES];
+//    }
+//    
+//#endif
+//}
 - (void)pushNextVc:(UIButton *)button{
     ITSApplication* itsApp = [ITSApplication get];
     NSArray* dataArr = itsApp.dataSvr.celebComments;
@@ -434,7 +434,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == NO) {
-        self.loginView.effectView.alpha = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
     }else {
 #ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
@@ -475,7 +477,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     
     if (us.user.isLogin == NO) {
-        self.loginView.effectView.alpha = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
     }else {
 #ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
@@ -591,7 +595,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [self headerRereshing];
         //[self.tableView headerBeginRefreshing];
     }
-    
+    [self.tableView reloadData];
     //[itsApp.dataSvr refreshCelebComments:NEWS_REFRESH_TYPE_BEFORE];
 
 }
@@ -604,7 +608,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     }else {
         if (us.user.isLogin == NO) {
-            self.loginView.effectView.alpha = 1;
+            [UIView animateWithDuration:0.5 animations:^{
+                self.loginView.effectView.alpha = 1;
+            }];
         }
     }
 //
