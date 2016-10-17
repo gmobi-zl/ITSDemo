@@ -298,6 +298,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             vc.hidesBottomBarWhenPushed = YES;
             vc.type = 2;
             vc.photoStr = imageUrl;
+            vc.labelStr = item.context;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (buttonIndex == 2) {
             itsApp.dataSvr.selectUpdateComment = item;

@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, copy) NSString *labelStr;
+
 @property (nonatomic, assign) int type;
 @property (nonatomic, copy) NSString *photoStr;
 @end

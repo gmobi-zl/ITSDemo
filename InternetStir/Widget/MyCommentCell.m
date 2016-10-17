@@ -93,10 +93,7 @@
 
         self.readBtn.layer.cornerRadius = 5;
         [self.contentView addSubview:self.readBtn];
-//        
-//        self.bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.bgView addSubview:self.bgButton];
-
+        
         self.line = [[UILabel alloc] init];
         self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];

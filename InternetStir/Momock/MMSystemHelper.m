@@ -591,11 +591,11 @@ static NetWorkType currentNetType = NoNet;
         result = [NSString stringWithFormat:@"剛剛"];
     }
     else if((temp = timeInterval/60) < 60){
-        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"分"]];
+        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"分前"]];
     }
     
     else if((temp = temp/60) < 24){
-        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"小時"]];
+        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"小時前"]];
     }
     
     else if((temp = temp/24) < 30){
