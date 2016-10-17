@@ -213,10 +213,11 @@
         for (int i = 0; i < maxHotCommentCount; i++) {
             
             FansComment *item = [comment.replayComments objectAtIndex:i];
-            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
+            CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
+//            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
             CGFloat replyLabelY = self.cellHeight + 5;
             CGFloat replyLabelWidth = screenW - 50;
-            CGFloat replyLabelHeight = replyLabelSize.height;
+            CGFloat replyLabelHeight = height;
             self.cellHeight += replyLabelHeight + HOME_CONTENT_PADDING - 3;
             CGRect replyF = CGRectMake(HOME_CONTENT_LEFT_PADDING, replyLabelY + 3, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
@@ -229,10 +230,11 @@
             for (int i = 0; i < maxHotCommentCount; i++) {
                 
                 FansComment *item = [comment.topFansComments objectAtIndex:i];
-                CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
+                CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
+//                CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
                 CGFloat replyLabelY = self.cellHeight + 5;
                 CGFloat replyLabelWidth = screenW - 50;
-                CGFloat replyLabelHeight = replyLabelSize.height;
+                CGFloat replyLabelHeight = height;
                 self.cellHeight += replyLabelHeight + HOME_CONTENT_PADDING - 3;
                 CGRect replyF = CGRectMake(HOME_CONTENT_LEFT_PADDING, replyLabelY + 3, replyLabelWidth, replyLabelHeight);
                 [self.replysF addObject:[NSValue valueWithCGRect:replyF]];

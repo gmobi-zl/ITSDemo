@@ -240,7 +240,6 @@
     [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
-    
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
     paragraphStyle.lineSpacing = 0.5;
     NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
@@ -248,21 +247,8 @@
     NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
-    
-//    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-//    attch.image = [UIImage imageNamed:@"tomato"];
-//    attch.bounds = CGRectMake(0, 0, 20, 21);
-//    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-//    [noteStr appendAttributedString:string];
-    // 用label的attributedText属性来使用富文本
     self.commentLabel.attributedText = noteStr;
 
-//    tomato
-//    NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@"   "].location);
-//    [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
-//    [self.commentLabel setAttributedText:noteStr];
-//    
-    //    self.name.text = comment.name;
     NSInteger maxHotCommentCount = data.topFansComments.count;
     NSInteger maxReplyCommentCount = data.replayComments.count;
     
@@ -294,9 +280,13 @@
         replyLabel.numberOfLines = 0;
         NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.comment];
         
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineSpacing = 0.5;
+        NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
         NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+        
         NSRange replyRange;
         if (item.u_role == CELEB_USER_VIP) {
             [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
@@ -313,6 +303,7 @@
         }
     
         [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR] range:replyRange];
+//        replyLabel .attributedText = noteStr;
         [replyLabel setAttributedText:noteStr];
         [replyLabel sizeToFit];
         
