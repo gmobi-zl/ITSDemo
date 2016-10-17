@@ -298,7 +298,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             vc.photoStr = imageUrl;
             [self.navigationController pushViewController:vc animated:YES];
         }else if (buttonIndex == 2) {
+            itsApp.dataSvr.selectUpdateComment = item;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"刪除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 1001;
             [alert show];
         }
     }else {
@@ -331,6 +333,19 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         };
     }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1001){
+        if (buttonIndex == 1) {
+            ITSApplication* itsApp = [ITSApplication get];
+            if (itsApp.dataSvr.selectUpdateComment != nil){
+                [itsApp.remoteSvr celebRemoveComment:itsApp.dataSvr.selectUpdateComment.fid];
+                itsApp.dataSvr.selectUpdateComment = nil;
+            }
+        }
+    }
+}
+
 - (void)shareBtn: (UIButton *)button {
     
     ITSApplication* itsApp = [ITSApplication get];

@@ -39,10 +39,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__37-[DetailCommentController writeClick]_block_invoke"
-                  moduleName = "Jacob"
+                  moduleName = "&#x6211;&#x662f;&#x99ac;&#x514b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "498121773.41504"
+                  timestampString = "498378032.004392"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -54,10 +54,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__37-[DetailCommentController writeClick]_block_invoke_2"
-                  moduleName = "Jacob"
+                  moduleName = "&#x6211;&#x662f;&#x99ac;&#x514b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "498121773.415597"
+                  timestampString = "498378032.004794"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2440"
             endingLineNumber = "2440"
-            landmarkName = "-refreshReplyComments:fid:"
+            landmarkName = "-insertUserTrackCommentItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -143,7 +143,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2451"
             endingLineNumber = "2451"
-            landmarkName = "-refreshReplyComments:fid:"
+            landmarkName = "-insertUserTrackCommentItem:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

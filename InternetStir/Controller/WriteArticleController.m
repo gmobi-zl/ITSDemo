@@ -92,6 +92,8 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT selector:@selector(celebUploadFileListener:)];
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_SEND_RESULT selector:@selector(celebSendCommentsListener:)];
+    [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_UPDATE_RESULT selector:@selector(celebUpdateCommentsListener:)];
+    
     
 //    self.tableView = [[UITableView alloc] init];
 //    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
@@ -278,6 +280,29 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
                 [alert show];
             });
 
+        }
+    }
+}
+
+
+-(void)celebUpdateCommentsListener: (id) data{
+    if (data != nil){
+        NSString* ret = (NSString*)data;
+        if ([ret isEqualToString:CELEB_SUCCESS]){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.hud hideAnimated:YES];
+                
+                [[self navigationController] popViewControllerAnimated:YES];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.hud hideAnimated:YES];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"儲存失敗" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+                [alert show];
+            });
+            
         }
     }
 }

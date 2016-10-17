@@ -1322,7 +1322,8 @@
                  [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
              } else {
                  // send fial
-                 
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_COMMENT_UPDATE_RESULT eventData:CELEB_ERROR];
              }
          }
      }];
