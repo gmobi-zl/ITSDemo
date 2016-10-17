@@ -10,6 +10,7 @@
 #import "UserTrackCommentFrame.h"
 #import "FansComment.h"
 
+
 @interface MyCommentCell : UITableViewCell
 @property (nonatomic, strong) UserTrackCommentFrame *trackCommentFrame;
 @property (nonatomic, strong) UIImageView *icon;
@@ -21,10 +22,12 @@
 @property (nonatomic, strong) UILabel *replyName;
 @property (nonatomic, strong) UILabel *replyContent;
 @property (nonatomic, strong) UIView *bgView;
+//@property (nonatomic, strong) UIButton *bgButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *photo;
 @property (nonatomic, strong) UIButton *replyButton;
 @property (nonatomic, strong) UIButton *readBtn;
+@property (nonatomic, strong) UILabel *line;
 
 @property (nonatomic, strong) NSMutableArray *replysView;
 @property (nonatomic, strong) NSMutableArray *replyIconView;

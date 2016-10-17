@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "UserTrackComment.h"
 
 @interface UserTrackCommentFrame : NSObject
 @property (nonatomic, assign) CGRect userIconF;
@@ -29,5 +28,5 @@
 @property (nonatomic, assign) float cellHeight;
 @property (nonatomic, assign) CGRect replyIcon;
 @property (nonatomic, assign) CGRect replyName;
-
+-(void) initWithDataFrame: (id)data;
 @end

@@ -160,7 +160,7 @@
     
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", comment.pts]];
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
-    self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight + 10 , timeLabelSize.width, 20);
+    self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight + 10 , timeLabelSize.width + 20, 20);
     
     self.photoF = CGRectMake(0, iconViewY + iconViewHeight + HOME_ICON_PHOTO_PADDING, screenW, 9 * (screenW - 20) / 16);
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;

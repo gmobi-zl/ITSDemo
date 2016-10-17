@@ -10,6 +10,7 @@
 #define UserTrackComment_h
 
 #import "CelebComment.h"
+#import "UserTrackCommentFrame.h"
 
 #define TRACK_COMMENT_ITEM_RID @"rid"
 #define TRACK_COMMENT_ITEM_FORUMS_ID @"fid"
@@ -46,6 +47,8 @@
 @property CelebComment* article;
 
 @property NSMutableArray* replayComments;
+
+@property UserTrackCommentFrame *uiFrame;
 
 -(UserTrackComment*) initWithDictionary: (NSDictionary*) dic;
 

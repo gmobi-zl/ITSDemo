@@ -15,6 +15,8 @@
 #import "ITSApplication.h"
 #import "MJRefresh.h"
 #import "MMEventService.h"
+#import "UserTrackComment.h"
+#import "CommentViewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -65,6 +67,23 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            DataService* ds = itsApp.dataSvr;
+            NSMutableArray *trackComment = ds.userTrackComments;
+            
+            if (trackComment != nil){
+                NSInteger count = [trackComment count];
+                for (int i = 0; i < count; i++) {
+                    UserTrackComment* c = [trackComment objectAtIndex:i];
+                    if (c.uiFrame == nil){
+                        UserTrackCommentFrame* frame = [UserTrackCommentFrame alloc];
+                        [frame initWithDataFrame:c];
+                        c.uiFrame = frame;
+                    }
+                }
+            }
+
             [self.tableView reloadData];
             [self.tableView footerEndRefreshing];
             [self.tableView headerEndRefreshing];
@@ -109,10 +128,37 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 270;
+   
+    CGFloat height = 0;
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *trackComment = ds.userTrackComments;
+    if (trackComment != nil){
+        UserTrackComment* c = [trackComment objectAtIndex:indexPath.row];
+        height = c.uiFrame.cellHeight;
+    }
+    return height;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *trackComment = ds.userTrackComments;
+    
+    if (trackComment != nil){
+        NSInteger count = [trackComment count];
+        for (int i = 0; i < count; i++) {
+            UserTrackComment* c = [trackComment objectAtIndex:i];
+            if (c.uiFrame == nil){
+                UserTrackCommentFrame* frame = [UserTrackCommentFrame alloc];
+                
+                [frame initWithDataFrame:c];
+                c.uiFrame = frame;
+            }
+        }
+    }
+    return trackComment.count;
+
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -123,8 +169,34 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     }
     MyCommentCell *tmpCell = (MyCommentCell*)cell;
     [tmpCell.replyButton addTarget:self action:@selector(replyBtn) forControlEvents:UIControlEventTouchUpInside];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray* trackComment= ds.userTrackComments;
+    if (trackComment != nil){
+        UserTrackComment* c = [trackComment objectAtIndex:indexPath.row];
+        [tmpCell setShowData:c];
+        [tmpCell setTrackCommentFrame:c.uiFrame];
+    }
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = tmpCell.bgView.bounds;
+    button.tag = indexPath.row;
+    [button addTarget:self action:@selector(pushCommentVc:) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.bgView addSubview:button];
     tmpCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return tmpCell;
+}
+- (void)pushCommentVc: (UIButton *)button {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray* trackComment= ds.userTrackComments;
+    UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
+    [itsApp.dataSvr setCurrentCelebComment:comment.article];
+    
+    CommentViewController *commentVc = [[CommentViewController alloc] init];
+    [self.navigationController pushViewController:commentVc animated:YES];
+
 }
 - (void)replyBtn {
     

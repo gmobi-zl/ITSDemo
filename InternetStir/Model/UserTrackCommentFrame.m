@@ -13,6 +13,8 @@
 #import "MMSystemHelper.h"
 #import "AppStyleConfiguration.h"
 #import "FansComment.h"
+#import "UserTrackComment.h"
+
 
 #define padding 5
 
@@ -37,7 +39,7 @@
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = CGRectGetMaxY(self.userNameF) + padding;
     CGSize contentLabelSize = [MMSystemHelper sizeWithString:trackComment.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-    CGFloat contentLabelWidth = contentLabelSize.width;
+    CGFloat contentLabelWidth = screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING;
     CGFloat contentLabelHeight = contentLabelSize.height;
     self.userCommentF = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
     

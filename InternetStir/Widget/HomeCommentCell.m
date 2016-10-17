@@ -278,6 +278,7 @@
         UILabel *replyLabel = [[UILabel alloc]init];
         replyLabel.font = [UIFont systemFontOfSize:16];
         replyLabel.numberOfLines = 0;
+    
         NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.comment];
         
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
@@ -288,11 +289,11 @@
         [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
         
         NSRange replyRange;
-        if (item.u_role == CELEB_USER_VIP) {
+        if (item.u_role == CELEB_USER_CELEB) {
             [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
             NSTextAttachment *attch = [[NSTextAttachment alloc] init];
             attch.image = [UIImage imageNamed:@"tomato"];
-            attch.bounds = CGRectMake(0, 0, 16, 16);
+            attch.bounds = CGRectMake(0, -2, 16, 16);
             NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
             [noteStr insertAttributedString:string atIndex:0];
             replyLabel.attributedText = noteStr;

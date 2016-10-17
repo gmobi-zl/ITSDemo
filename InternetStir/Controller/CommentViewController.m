@@ -75,9 +75,12 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [es addEventHandler:self eventName:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH selector:@selector(celebReplyCommentsDataRefreshListener:)];
     
     ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [eParams setObject:@"forumid" forKey:@"fid"];
-    [eParams setObject:self.context forKey:@"context"];
+    [eParams setObject:currentComment.context forKey:@"context"];
     [itsApp.reportSvr recordEvent:@"本文" params:eParams eventCategory:@"comment.more.view"];
 }
 

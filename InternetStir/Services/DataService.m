@@ -2439,7 +2439,7 @@
         if ([uComment isKindOfClass:[UserTrackComment class]]) {
             UserTrackComment* comment = uComment;
             if (comment != nil){
-                if ([comment.fid compare:item.fid] == NSOrderedSame) {
+                if ([comment.cid compare:item.cid] == NSOrderedSame) {
                     same = YES;
                     
                     //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){

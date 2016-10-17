@@ -10,6 +10,8 @@
 #import "AppStyleConfiguration.h"
 #import "UIImageView+WebCache.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
+#import "UserTrackComment.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -67,6 +69,7 @@
         self.bgView = [[UIView alloc] init];
         self.bgView.layer.masksToBounds = YES;
         self.bgView.layer.cornerRadius = 10;
+        self.bgView.userInteractionEnabled = YES;
         self.bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
         [self.contentView addSubview:self.bgView];
         
@@ -81,7 +84,7 @@
         
         self.readBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.readBtn.layer.masksToBounds = YES;
-        self.readBtn.frame = CGRectMake(screenW - 45, 25, 30, 30);
+        self.readBtn.frame = CGRectMake(screenW - 45, 10, 30, 30);
         self.readBtn.layer.cornerRadius = 3;
         self.readBtn.layer.borderWidth = 1;
         self.readBtn.layer.borderColor = [UIColor grayColor].CGColor;
@@ -90,20 +93,25 @@
 
         self.readBtn.layer.cornerRadius = 5;
         [self.contentView addSubview:self.readBtn];
-        
-        UILabel *line = [[UILabel alloc] init];
-        line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
-        [self.contentView addSubview:line];
+//        
+//        self.bgButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.bgView addSubview:self.bgButton];
+
+        self.line = [[UILabel alloc] init];
+        self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
+        [self.contentView addSubview:self.line];
     }
     return self;
 }
 - (void)setTrackCommentFrame:(UserTrackCommentFrame *)trackCommentFrame {
+    _trackCommentFrame = trackCommentFrame;
     [self settingFrame];
 }
 -(void)settingFrame
 {
     self.icon.frame = self.trackCommentFrame.userIconF;
     self.nameLabel.frame = self.trackCommentFrame.userNameF;
+    self.contentLabel.frame = self.trackCommentFrame.userCommentF;
     self.photo.frame = self.trackCommentFrame.photoF;
     self.timeLabel.frame = self.trackCommentFrame.timeF;
     self.replyButton.frame = self.trackCommentFrame.replyBtnF;
@@ -119,6 +127,7 @@
     for (int i = 0; i < [self.trackCommentFrame.replyNameF count]; i++) {
         ((UILabel *)[self.replyNameView objectAtIndex:i]).frame = [(NSValue *)[self.trackCommentFrame.replyNameF objectAtIndex:i] CGRectValue];
     }
+    self.line.frame = self.trackCommentFrame.lineF;
 }
 -(void) setShowData: (id) comment {
 
@@ -132,10 +141,16 @@
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
         self.titleLabel.text = data.article.context;
-        [self.photo sd_setImageWithURL:[NSURL URLWithString:data.article.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        
+        ITSApplication* itsApp = [ITSApplication get];
+        NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+
+        NSString* image = [data.article.attachments objectAtIndex:0];
+        NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
+        [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         
         if (data.isCelebRead == YES) {
-            self.readBtn.frame = CGRectMake(screenW - 75, 25, 60, 30);
+            self.readBtn.frame = CGRectMake(screenW - 75, 15, 60, 30);
             self.readBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             self.readBtn.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
             [self.readBtn setTitle:@"Read" forState:UIControlStateNormal];
@@ -145,7 +160,7 @@
             [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
 
         }else {
-            self.readBtn.frame = CGRectMake(screenW - 45, 25, 30, 30);
+            self.readBtn.frame = CGRectMake(screenW - 45, 15, 30, 30);
             UIImage *btnIcon = [UIImage imageNamed:@"rectangle.unread"];
             [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
         }

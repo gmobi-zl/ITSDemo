@@ -53,7 +53,7 @@
         [self.loginButton setTitle:@"Content with Facebook" forState:UIControlStateNormal];
         [self.loginButton setImage:[UIImage imageNamed:@"icon_fb"] forState:UIControlStateNormal];
         self.loginButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 0);
+        self.loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
         [self.loginButton addTarget:self action:@selector(loginFB) forControlEvents:UIControlEventTouchUpInside];
 
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Connect with Facebook"];
