@@ -335,7 +335,7 @@ typedef enum{
 -(void) removeCelebCommentItem: (NSString*) fid;
 -(void) updateCelebCommentItem: (NSString*) fid
                        context: (NSString*) context
-                   attachments: (NSArray*) attachments;
+                   attachments: (NSMutableArray*) attachments;
 
 
 -(void) refreshUserTrackComments: (int) type;

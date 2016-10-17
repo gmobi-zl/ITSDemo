@@ -15,6 +15,9 @@
 #define CB_COMMENT_ITEM_ID @"fid"
 #define CB_COMMENT_ITEM_CONTEXT @"context"
 #define CB_COMMENT_ITEM_ATTACHMENTS @"attachments"
+#define CB_COMMENT_ITEM_ATTACHMENTS_ID @"fd"
+#define CB_COMMENT_ITEM_ATTACHMENTS_W @"width"
+#define CB_COMMENT_ITEM_ATTACHMENTS_H @"height"
 #define CB_COMMENT_ITEM_COMMENTS @"comments"
 #define CB_COMMENT_ITEM_LIKES @"likes"
 #define CB_COMMENT_ITEM_IS_LIKE @"isLike"
@@ -22,11 +25,23 @@
 #define CB_COMMENT_ITEM_UTS @"uts"
 
 #define CB_MAX_COUNT 3
+
+
+@interface CelebAttachment : NSObject
+
+@property NSString* fd;
+@property NSInteger w;
+@property NSInteger h;
+
+-(CelebAttachment*) initWithDictionary: (NSDictionary*) dic;
+
+@end
+
 @interface CelebComment : NSObject
 
 @property NSString* fid;
 @property NSString* context;
-@property NSArray* attachments;
+@property NSMutableArray* attachments;
 
 @property NSString* ccId;
 @property NSString* name;

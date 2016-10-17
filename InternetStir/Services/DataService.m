@@ -2353,7 +2353,7 @@
 
 -(void) updateCelebCommentItem: (NSString*) fid
                        context: (NSString*) context
-                   attachments: (NSArray*) attachments{
+                   attachments: (NSMutableArray*) attachments{
     int i = 0;
     if (self.celebComments == nil || fid == nil || context == nil || attachments == nil)
         return;
@@ -2367,7 +2367,14 @@
                 if ([comment.fid compare:fid] == NSOrderedSame) {
                     
                     comment.context = context;
-                    comment.attachments = attachments;
+                    
+                    NSMutableArray* cbAttr = [NSMutableArray arrayWithCapacity:1];
+                    for (int i = 0; i < [attachments count]; i++) {
+                        NSDictionary* tData = [attachments objectAtIndex:i];
+                        CelebAttachment* attrObj = [[CelebAttachment alloc] initWithDictionary:tData];
+                        [cbAttr addObject:attrObj];
+                    }
+                    comment.attachments = cbAttr;
                     //comment.uts = [MMSystemHelper getMillisecondTimestamp];
                     
                     break;

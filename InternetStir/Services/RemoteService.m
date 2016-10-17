@@ -807,6 +807,39 @@
     }];
 }
 
+
+-(void) getCelebCommentByID: (NSString*) fid
+                   callback: (RemoteCallback) callback{
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
+    MMLogDebug(@"getCelebCommentByID url = %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doGet:url reqHeader:nil callback:^(int status, int code, NSDictionary *resultData) {
+        MMLogDebug(@"getCelebCommentByID Data rsp: status = %d , code = %d", status, code);
+        
+        if (code == 200){
+            NSData* data = [resultData objectForKey:@"data"];
+            NSError* err;
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            
+            MMLogDebug(@"getCelebCommentByID Data rsp data: %@", dataStr);
+            
+            
+            
+            //MMEventService *es = [MMEventService getInstance];
+            //[es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+        } else {
+            //MMEventService *es = [MMEventService getInstance];
+            //[es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_ERROR];
+        }
+    }];
+}
+
 -(void) replayCelebComment: (NSString*) fid
                    comment: (NSString*) comment
                   callback: (RemoteCallback) callback{
@@ -1204,14 +1237,19 @@
     
     MMEventService *es = [MMEventService getInstance];
     NSString* fileId = nil;
+    NSNumber *fileW, *fileH;
     if (nil != responseDic){
         fileId = [responseDic objectForKey:@"fd"];
+        fileW = [responseDic objectForKey:@"width"];
+        fileH = [responseDic objectForKey:@"height"];
     }
     
     NSMutableDictionary* retDic = [NSMutableDictionary dictionaryWithCapacity:1];
     if (fileId != nil){
         [retDic setObject:[[NSNumber alloc] initWithBool:YES] forKey:@"success"];
         [retDic setObject:fileId forKey:@"fd"];
+        [retDic setObject:fileW forKey:@"width"];
+        [retDic setObject:fileH forKey:@"height"];
     } else {
         [retDic setObject:[[NSNumber alloc] initWithBool:NO] forKey:@"success"];
     }
@@ -1221,7 +1259,7 @@
 
 
 -(void) celebSendComment: (NSString*) context
-              attachment: (NSArray*) attachment{
+              attachment: (NSMutableArray*) attachment{
     if (context == nil || attachment == nil)
         return;
     
@@ -1260,7 +1298,15 @@
                  comment.context = context;
                  comment.name = user.userName;
                  comment.avator = user.avatar;
-                 comment.attachments = attachment;
+                 
+                 NSMutableArray* cbAttr = [NSMutableArray arrayWithCapacity:1];
+                 for (int i = 0; i < [attachment count]; i++) {
+                     NSDictionary* tData = [attachment objectAtIndex:i];
+                     CelebAttachment* attrObj = [[CelebAttachment alloc] initWithDictionary:tData];
+                     [cbAttr addObject:attrObj];
+                 }
+                 comment.attachments = cbAttr;
+                 
                  UInt64 time = [MMSystemHelper getMillisecondTimestamp];
                  comment.uts = time;
                  comment.pts = time;
@@ -1282,7 +1328,7 @@
 
 -(void) celebUpdateComment: (NSString*) fid
                    content: (NSString*) context
-                attachment: (NSArray*) attachment {
+                attachment: (NSMutableArray*) attachment {
     if (fid == nil || context == nil || attachment == nil)
         return;
     

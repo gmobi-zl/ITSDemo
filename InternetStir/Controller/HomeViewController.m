@@ -284,7 +284,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         CelebComment *item = [dataArr objectAtIndex:self.index];
 
         NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
-        NSString* image = [item.attachments objectAtIndex:0];
+        //NSString* image = [item.attachments objectAtIndex:0];
+        CelebAttachment* cbAtt = [item.attachments objectAtIndex:0];
+        NSString* image = cbAtt.fd;
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
         
         if (buttonIndex == 0) {

@@ -203,7 +203,17 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
                 CelebComment* comment = app.dataSvr.selectUpdateComment;
                 NSString* context = self.textView.text;
                 
-                [app.remoteSvr celebUpdateComment:comment.fid context:context attachment:comment.attachments];
+                //comment.attachments
+                NSMutableArray* updateAttachments = [NSMutableArray arrayWithCapacity:1];
+                for (int i = 0; i < [comment.attachments count]; i++) {
+                    CelebAttachment* cbAtt = [comment.attachments objectAtIndex:i];
+                    NSDictionary* tmp = [NSDictionary dictionaryWithObjectsAndKeys:cbAtt.fd, @"fd",
+                                         [[NSNumber alloc] initWithInteger:cbAtt.w], @"width",
+                                         [[NSNumber alloc] initWithInteger:cbAtt.h], @"height",nil];
+                    [updateAttachments addObject:tmp];
+                }
+                
+                [app.remoteSvr celebUpdateComment:comment.fid context:context attachment:updateAttachments];
             });
         }else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"說點什麼吧" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
@@ -237,6 +247,8 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         NSDictionary* dic = (NSDictionary*)data;
         NSNumber* tmpNum = [dic objectForKey:@"success"];
         NSString* fd = [dic objectForKey:@"fd"];
+        NSNumber* fileW = [dic objectForKey:@"width"];
+        NSNumber* fileH = [dic objectForKey:@"height"];
         BOOL succ = [tmpNum boolValue];
         if (YES == succ && nil != fd){
             // del cache file
@@ -249,7 +261,12 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
             
             // send to server comment
             NSString* context = self.textView.text;
-            NSArray* attachment = [[NSArray alloc] initWithObjects:fd, nil];
+            NSMutableDictionary* cbAtt = [NSMutableDictionary dictionaryWithCapacity:1];
+            [cbAtt setValue:fd forKey:@"fd"];
+            [cbAtt setValue:fileW forKey:@"width"];
+            [cbAtt setValue:fileH forKey:@"height"];
+            
+            NSArray* attachment = [[NSArray alloc] initWithObjects:cbAtt, nil];
             [app.remoteSvr celebSendComment:context attachment:attachment];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{

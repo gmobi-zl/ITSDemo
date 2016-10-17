@@ -11,6 +11,29 @@
 #import "FansComment.h"
 #import "ITSApplication.h"
 
+@implementation CelebAttachment
+
+-(CelebAttachment*) initWithDictionary: (NSDictionary*) dic{
+    if (dic == nil)
+        return nil;
+    
+    NSString* tmpData = [dic objectForKey:CB_COMMENT_ITEM_ATTACHMENTS_ID];
+    if (tmpData != nil)
+        self.fd = tmpData;
+    
+    NSNumber* numData = [dic objectForKey:CB_COMMENT_ITEM_ATTACHMENTS_W];
+    if (numData != nil)
+        self.w = [numData integerValue];
+    
+    numData = [dic objectForKey:CB_COMMENT_ITEM_ATTACHMENTS_H];
+    if (numData != nil)
+        self.h = [numData integerValue];
+    
+    return self;
+}
+
+@end
+
 @implementation CelebComment
 
 
@@ -29,7 +52,16 @@
     
     NSArray* mmData = [dic objectForKey:CB_COMMENT_ITEM_ATTACHMENTS];
     if (mmData != nil){
-        self.attachments = mmData;
+        if (self.attachments == nil)
+            self.attachments = [NSMutableArray arrayWithCapacity:1];
+        
+        NSInteger aCount = [mmData count];
+        for (int m = 0; m < aCount; m++) {
+            NSDictionary* aDic = [mmData objectAtIndex:m];
+            CelebAttachment* att = [[CelebAttachment alloc] initWithDictionary:aDic];
+            [self.attachments addObject:att];
+        }
+        //self.attachments = mmData;
     }
     
     NSNumber* numData = [dic objectForKey:CB_COMMENT_ITEM_PTS];

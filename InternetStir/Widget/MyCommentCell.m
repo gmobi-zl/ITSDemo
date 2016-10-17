@@ -145,7 +145,10 @@
         ITSApplication* itsApp = [ITSApplication get];
         NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
 
-        NSString* image = [data.article.attachments objectAtIndex:0];
+        //NSString* image = [data.article.attachments objectAtIndex:0];
+        CelebAttachment* cbAtt = [data.article.attachments objectAtIndex:0];
+        NSString* image = cbAtt.fd;
+        
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
         [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         

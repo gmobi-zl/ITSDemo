@@ -232,7 +232,9 @@
     
     ITSApplication* itsApp = [ITSApplication get];
     NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
-    NSString* image = [data.attachments objectAtIndex:0];
+    //NSString* image = [data.attachments objectAtIndex:0];
+    CelebAttachment* cbAtt = [data.attachments objectAtIndex:0];
+    NSString* image = cbAtt.fd;
     
     NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
     self.photo.contentMode = UIViewContentModeScaleAspectFill;
