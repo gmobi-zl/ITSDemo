@@ -121,7 +121,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     [cleanMsg setFont:msgFont];
     [cleanMsg setNumberOfLines:1];
     [cleanMsg setTextColor:[UIColor whiteColor]];
-    [cleanMsg setText:@"Cleaning"];
+    [cleanMsg setText:NSLocalizedString(@"set_clear", nil)];
     [self.cleanPanel addSubview:cleanMsg];
     [self.view addSubview:self.cleanPanel];
     [self.view addSubview:self.cleanMask];

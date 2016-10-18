@@ -52,7 +52,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 
 //    for (NSInteger i = 0; i < title.count; i++) {
 //        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//         [self.btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 //        self.btn.frame = CGRectMake(space + i * (80 + space), 20, 80, 40);
 //        [self.btn setTitle:[title objectAtIndex:i] forState:UIControlStateNormal];
 //        [self.btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -76,14 +76,14 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerPullToRefreshText = NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing

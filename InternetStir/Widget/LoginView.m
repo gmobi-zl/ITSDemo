@@ -70,7 +70,7 @@
         
         self.label = [[UILabel alloc] init];
         self.label.frame = CGRectMake(15, 80, frame.size.width - 30, 20);
-        self.label.text = @"未經允許，我們不會發布至您的塗鴉牆";
+        self.label.text = NSLocalizedString(@"login_message", nil);
         self.label.textAlignment = NSTextAlignmentCenter;
         self.label.textColor = [MMSystemHelper string2UIColor:@"#4A4A4A"];
         self.label.font = [UIFont systemFontOfSize:14];
@@ -79,7 +79,7 @@
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.cancelButton.frame = CGRectMake(15, 120, frame.size.width - 30, 45);
         self.cancelButton.backgroundColor = [MMSystemHelper string2UIColor:@"#ADACAC"];
-        [self.cancelButton setTitle:@"稍後" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:NSLocalizedString(@"login_message_later", nil) forState:UIControlStateNormal];
         self.cancelButton.layer.masksToBounds = YES;
         self.cancelButton.layer.cornerRadius = 22;
         [self.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -113,7 +113,7 @@
             NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
             [poApp.reportSvr recordEvent:@"fail" params:eParams eventCategory:@"login.click"];
 
-            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:@"登陸超時" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            UIAlertView *al = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"login_error", nil) delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [al show];
         }
         

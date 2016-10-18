@@ -36,7 +36,7 @@
 
     ITSApplication* itsApp = [ITSApplication get];
     NSString* appTitleName = itsApp.dataSvr.celebInfo.name == nil ? @"" : itsApp.dataSvr.celebInfo.name;
-    NSArray *titleName = @[@"社群",appTitleName,@"粉絲小幫手"];
+    NSArray *titleName = @[@"社群",appTitleName,NSLocalizedString(@"fans_helper",nil)];
     int cnt = 0;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (NSString *className in vcName) {

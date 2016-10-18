@@ -35,7 +35,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.screenName = @"comment.more";
-    self.title = @"留言";
+    self.title = NSLocalizedString(@"tab_content", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -119,14 +119,14 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerPullToRefreshText = NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing

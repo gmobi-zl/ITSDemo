@@ -58,7 +58,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         if (self.photoStr != nil) {
             self.photo.contentMode = UIViewContentModeScaleAspectFill;
             [self.photo sd_setImageWithURL:[NSURL URLWithString:self.photoStr] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
-            [send setTitle:@"儲存" forState:UIControlStateNormal];
+            [send setTitle:NSLocalizedString(@"save", nil) forState:UIControlStateNormal];
         }
     }
     [self.view addSubview:self.photo];
@@ -78,7 +78,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     if (self.labelStr != nil) {
         str = self.labelStr;
     }else {
-        str = @"敘述這張照片...";
+        str = NSLocalizedString(@"narrated_img", nil);
     }
     
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 30)];
@@ -152,7 +152,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 -(void)textViewDidChange:(UITextView *)textView {
     if (textView.text.length == 0) {
         
-        self.label.text = @"敘述這張照片...";
+        self.label.text = NSLocalizedString(@"narrated_img", nil);
     }else {
         self.label.hidden = YES;
     }
@@ -178,7 +178,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
             self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             [self.view addSubview:self.hud];
             self.hud.mode = MBProgressHUDModeIndeterminate;
-            self.hud.label.text = @"请稍等...";
+            self.hud.label.text = NSLocalizedString(@"load_message", nil);
             self.hud.label.font = [UIFont systemFontOfSize:17];
             
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -194,7 +194,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 //            });
             
         }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"說點什麼吧" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
             [alert show];
         }
     }else {
@@ -203,7 +203,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
             self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             [self.view addSubview:self.hud];
             self.hud.mode = MBProgressHUDModeIndeterminate;
-            self.hud.label.text = @"请稍等...";
+            self.hud.label.text = NSLocalizedString(@"load_message", nil);
             self.hud.label.font = [UIFont systemFontOfSize:17];
             
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -224,7 +224,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
                 [app.remoteSvr celebUpdateComment:comment.fid context:context attachment:updateAttachments];
             });
         }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"說點什麼吧" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
             [alert show];
         }
         

@@ -571,12 +571,12 @@ static NetWorkType currentNetType = NoNet;
     
     NSDate *d = [[NSDate alloc]initWithTimeIntervalSince1970:longTime/1000.0];
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *timeString = [formatter stringFromDate:d];
     
     //把字符串转为NSdate
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *timeDate = [dateFormatter dateFromString:timeString];
     
     //得到与当前时间差
@@ -588,14 +588,14 @@ static NetWorkType currentNetType = NoNet;
     NSString *result;
     NSArray *time = [timeString componentsSeparatedByString:@" "];
     if (timeInterval < 60) {
-        result = [NSString stringWithFormat:@"剛剛"];
+        result = NSLocalizedString (@"time_util_just", nil);
     }
     else if((temp = timeInterval/60) < 60){
-        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"分前"]];
+        result = [NSString stringWithFormat:@"%d%@",temp,NSLocalizedString(@"time_util_minute", nil)];
     }
     
     else if((temp = temp/60) < 24){
-        result = [NSString stringWithFormat:@"%d%@",temp,[NSString stringWithFormat:@"小時前"]];
+        result = [NSString stringWithFormat:@"%d%@",temp,NSLocalizedString(@"time_util_hour", nil)];
     }
     
     else if((temp = temp/24) < 30){
@@ -607,7 +607,7 @@ static NetWorkType currentNetType = NoNet;
             //                result = [NSString stringWithFormat:@"%@",PPN_NSLocalizedString(@"time_util_before_yesterday", nil)];
             //            }
         }else{
-            result = [NSString stringWithFormat:@"%@ %@",[time objectAtIndex:0],[time objectAtIndex:1]];
+            result = [NSString stringWithFormat:@"%@",[time objectAtIndex:0]];
         }
     }
     

@@ -37,7 +37,7 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    self.title = @"留言";
+    self.title = NSLocalizedString(@"tab_content", nil);
     [self creatHeadView];
     [self creatTableView];
     self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 40, screenW, 44)];

@@ -11,6 +11,7 @@
 #import "MMSystemHelper.h"
 #import "UIImageView+WebCache.h"
 #import "AppStyleConfiguration.h"
+#import "ITSApplication.h"
 
 @implementation CommentCell
 
@@ -73,14 +74,12 @@
         
         self.replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self.replyButton setTitle:@"回復" forState:UIControlStateNormal];
+        [self.replyButton setTitle:NSLocalizedString (@"comment_reply", nil) forState:UIControlStateNormal];
         [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.replyButton];
     }
     return self;
 }
-
-
 
 -(void)setDetailCommentFrame:(CommentFrame *)detailCommentFrame{
     

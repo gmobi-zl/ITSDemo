@@ -10,6 +10,7 @@
 #import "CommentView.h"
 #import "MMSystemHelper.h"
 #import "AppStyleConfiguration.h"
+#import "ITSApplication.h"
 
 @implementation CommentView
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -37,7 +38,7 @@
     //[self addSubview:self.icon];
     
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.button setTitle:@"留言訊息..." forState:UIControlStateNormal];
+    [self.button setTitle:NSLocalizedString(@"message", nil) forState:UIControlStateNormal];
     self.button.frame = CGRectMake(50, 5, screenW - 114, 30);
     self.button.layer.masksToBounds = YES;
     self.button.layer.cornerRadius = 10;
@@ -59,7 +60,7 @@
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(screenW - 50, 10, 50, 20);
     label.font = [UIFont systemFontOfSize:14];
-    label.text = @"發佈";
+    label.text = NSLocalizedString(@"send", nil);
     label.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
     [self addSubview:label];
 }

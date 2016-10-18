@@ -58,7 +58,8 @@
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
         self.button.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.button setTitle:@"查看更多留言" forState:UIControlStateNormal];
+        [self.button setTitle:NSLocalizedString(@"comment_leave_more", nil) forState:UIControlStateNormal];
+//        [self.button setTitle:@"查看更多留言" forState:UIControlStateNormal];
         [self.button setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.button];
         

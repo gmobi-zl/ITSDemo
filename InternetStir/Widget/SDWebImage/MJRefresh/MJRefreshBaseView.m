@@ -109,8 +109,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    NSString *str2 = ITS_NSLocalizedString(@"Release2Refresh", nil);
-    NSString *str = ITS_NSLocalizedString(@"Pull2Load", nil);
+    NSString *str2 = NSLocalizedString(@"Release2Refresh", nil);
+    NSString *str = NSLocalizedString(@"Pull2Load", nil);
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
     CGRect rect;

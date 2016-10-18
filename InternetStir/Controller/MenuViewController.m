@@ -39,7 +39,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.screenName = @"fans.tool";
-    self.title = @"粉絲小幫手";
+//    self.title = NSLocalizedString(@"fans_helper", nil);
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
@@ -111,8 +111,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.bgImage addSubview:self.userEmailLabel];
 
     if (us.user.isLogin == NO) {
-        self.userNameLabel.text = @"登入";
-        self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
+        self.userNameLabel.text = NSLocalizedString(@"login_in", nil);
+        self.userEmailLabel.text = NSLocalizedString(@"login_fans_tool", nil);
     }
     
     NSString *str = @"Content with Facebook";
@@ -184,8 +184,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.bgImage.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
-        self.userNameLabel.text = @"登入";
-        self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
+        self.userNameLabel.text = NSLocalizedString(@"login_in", nil);
+        self.userEmailLabel.text = NSLocalizedString(@"login_fans_tool", nil);
         self.imageview.hidden = NO;
         button.hidden = YES;
     }
@@ -196,7 +196,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [navigationBar setShadowImage:[UIImage new]];
 }
 - (void)loginOut{
-    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"loginOut", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil),nil];
     [al show];
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -218,8 +218,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
             [ss setDictoryValue:CONFIG_USERLOGIN_INFO data:nil];
         }];
 
-        self.userNameLabel.text = @"登入";
-        self.userEmailLabel.text = @"須登入才能瀏覽粉絲小幫手";
+        self.userNameLabel.text = NSLocalizedString(@"login_in", nil);
+        self.userEmailLabel.text = NSLocalizedString(@"login_fans_tool", nil);
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
         self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
@@ -272,9 +272,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     if (indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 3) {
         if (indexPath.row == 4) {
             if (us.user.isLogin == YES) {
-                tmpCell.loginLabel.text = @"登出";
+                tmpCell.loginLabel.text = NSLocalizedString(@"login_out", nil);
             }else {
-                tmpCell.loginLabel.text = @"登入";
+                tmpCell.loginLabel.text = NSLocalizedString(@"login_in", nil);
             }
         }else {
             tmpCell.contentView.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
@@ -379,7 +379,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == YES) {
-        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登出帳號" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"loginOut", nil) message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
         [al show];
     }else {
         [UIView animateWithDuration:0.5 animations:^{

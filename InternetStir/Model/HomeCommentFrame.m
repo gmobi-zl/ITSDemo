@@ -63,7 +63,7 @@
     CGFloat btnW = [MMSystemHelper sizeWithString:@"繼續閱讀" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
     self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
     
-    CGFloat buttonW = [MMSystemHelper sizeWithString:@"查看更多留言" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
+    CGFloat buttonW = [MMSystemHelper sizeWithString:NSLocalizedString(@"comment_leave_more", nil) font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
     self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);
     self.cellHeight = CGRectGetMaxY(self.buttonF);
 
@@ -141,6 +141,7 @@
 -(void) initWithCommentData: (id) data{
     
     CelebComment* comment = (CelebComment*)data;
+    CelebAttachment *celeAttachment = [comment.attachments objectAtIndex:0];
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     //iconF头像
     CGFloat iconViewX = HOME_CONTENT_LEFT_PADDING;
@@ -162,7 +163,7 @@
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
     self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight + 10 , timeLabelSize.width + 20, 20);
     
-    self.photoF = CGRectMake(0, iconViewY + iconViewHeight + HOME_ICON_PHOTO_PADDING, screenW, 9 * (screenW - 20) / 16);
+    self.photoF = CGRectMake(0, iconViewY + iconViewHeight + HOME_ICON_PHOTO_PADDING, screenW, celeAttachment.h * screenW / celeAttachment.w);
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;
     
     self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 28, 24);
@@ -189,7 +190,7 @@
     CGFloat btnW = [MMSystemHelper sizeWithString:@"繼續閱讀" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
     self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
     
-    CGFloat buttonW = [MMSystemHelper sizeWithString:@"查看更多留言" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
+    CGFloat buttonW = [MMSystemHelper sizeWithString:NSLocalizedString(@"comment_leave_more", nil) font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
     if (comment.replayComments.count ) {
         if (comment.replayComments.count > CB_MAX_COUNT) {
             self.buttonF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.contentF.origin.y + height + 5, buttonW, 25);

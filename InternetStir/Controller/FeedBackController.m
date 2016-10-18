@@ -46,13 +46,13 @@ static int height;
 //    UIView *statusBarView=[[UIView alloc] initWithFrame:CGRectMake(0, -20, screenW, 20)];
 //    [self.navigationController.navigationBar addSubview:statusBarView];
 
-    NSString *str = ITS_NSLocalizedString(@"SettingFeedBack",nil);
+    NSString *str = NSLocalizedString(@"SettingFeedBack",nil);
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     CGRect rect = [str boundingRectWithSize:CGSizeMake(MAXFLOAT, 30) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
     
     UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 20, 60 + rect.size.width, 60);
-    [backBtn setTitle:ITS_NSLocalizedString(@"SettingFeedBack", nil) forState:UIControlStateNormal];
+    [backBtn setTitle:NSLocalizedString(@"SettingFeedBack", nil) forState:UIControlStateNormal];
     //[backBtn setTitle:@"Categories" forState:UIControlStateNormal];
     
     backBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 15);
@@ -65,7 +65,7 @@ static int height;
     CGFloat contentStartY = screenTitleBarH + headerHeight;
     UILabel* feedbackInfo = [[UILabel alloc] init];
     feedbackInfo.frame = CGRectMake(8, contentStartY + 10 , screenW - 16, 18);
-    [feedbackInfo setText:ITS_NSLocalizedString(@"FeedBackInfo", nil)];
+    [feedbackInfo setText:NSLocalizedString(@"FeedBackInfo", nil)];
     feedbackInfo.textAlignment = NSTextAlignmentLeft;
     feedbackInfo.backgroundColor = [UIColor clearColor];
     feedbackInfo.font = [UIFont systemFontOfSize:16];
@@ -112,7 +112,7 @@ static int height;
     
     self.sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.sendBtn.frame = CGRectMake(screenW/4, screenH - 100 + 64, screenW/2, 40);
-    [self.sendBtn setTitle:ITS_NSLocalizedString(@"FeedBackSend", @"Send") forState:UIControlStateNormal];
+    [self.sendBtn setTitle:NSLocalizedString(@"FeedBackSend", @"Send") forState:UIControlStateNormal];
     [self.sendBtn setBackgroundColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]];
     [self.sendBtn addTarget:self action:@selector(sendBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.sendBtn addTarget:self action:@selector(sendBtnTouchDown) forControlEvents:UIControlEventTouchDown];
@@ -172,7 +172,7 @@ static int height;
         ITSApplication* app = [ITSApplication get];
         [app.reportSvr recordFeedback:msg];
         [self.feedbackMsg setText:@""];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ITS_NSLocalizedString(@"FeedBackSend", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"FeedBackSend", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     //    if([msg length] >= 1 ){
@@ -182,7 +182,7 @@ static int height;
     //    }else
     if ([msg compare:@""] == NSOrderedSame){
         //       [self showAlertView :WKAlertViewStyleFail];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ITS_NSLocalizedString(@"FeedBackWrite", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"FeedBackWrite", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
 //    ITSApplication* poApp = [ITSApplication get];

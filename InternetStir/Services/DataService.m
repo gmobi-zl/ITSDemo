@@ -245,7 +245,7 @@
     
     LeftMenuItem* set = [LeftMenuItem alloc];
     set.iconName = @"icon_settings";
-    set.actionName = @"設定";
+    set.actionName = NSLocalizedString(@"set", nil);
     [self.leftMenuList addObject:set];
     
 //    LeftMenuItem* fav = [LeftMenuItem alloc];
@@ -260,7 +260,7 @@
 
     LeftMenuItem* comment = [LeftMenuItem alloc];
     comment.iconName = @"outbox";
-    comment.actionName = @"留言追蹤";
+    comment.actionName = NSLocalizedString(@"fans_menu_track", nil);
     [self.leftMenuList addObject:comment];
     // fav
 //    LeftMenuItem* download = [LeftMenuItem alloc];
@@ -280,7 +280,7 @@
     
     LeftMenuItem* menu = [LeftMenuItem alloc];
     menu.iconName = @"like [#1385]";
-    menu.actionName = @"擁有個人網紅App";
+    menu.actionName = NSLocalizedString(@"own_celeb", nil);
     [self.leftMenuList addObject:menu];
     
     LeftMenuItem* item = [[LeftMenuItem alloc] init];
@@ -326,7 +326,7 @@
 
     SettingItem* video = [[SettingItem alloc] init];
     video.iconName = @"setting_autoplay";
-    video.settingName = @"推播通知";
+    video.settingName = NSLocalizedString(@"set_push", nil);
     video.type = SettingTypeSwitch;
     video.actionType = SETTING_ACTION_VIDEO;
     video.isSwitch = NO;
@@ -334,14 +334,14 @@
     
     SettingItem* clearCache = [SettingItem alloc];
     clearCache.iconName = @"set_clean";
-    clearCache.settingName = ITS_NSLocalizedString(@"SettingClearCache", nil);
+    clearCache.settingName = NSLocalizedString(@"set_clean", nil);
     clearCache.type = SettingTypeButton;
     clearCache.actionType = SETTING_ACTION_CLEAN_CACHE;
     [self.settingList addObject:clearCache];
     
     SettingItem* feedBack = [SettingItem alloc];
     feedBack.iconName = @"set_feed";
-    feedBack.settingName = ITS_NSLocalizedString(@"SettingFeedBack", nil);
+    feedBack.settingName = NSLocalizedString(@"set_suggest", nil);
     feedBack.type = SettingTypeDetail;
     feedBack.actionType = SETTING_ACTION_FEEDBACK;
     [self.settingList addObject:feedBack];

@@ -32,7 +32,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.title = @"留言追蹤";
+    self.title = NSLocalizedString(@"fans_menu_track", nil);
     self.screenName = @"comment.track";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
@@ -95,14 +95,14 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerPullToRefreshText = NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing

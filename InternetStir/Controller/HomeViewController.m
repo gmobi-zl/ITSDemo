@@ -120,14 +120,14 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = ITS_NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.headerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.headerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.tableView.footerPullToRefreshText = ITS_NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
-    self.tableView.footerReleaseToRefreshText = ITS_NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = ITS_NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerPullToRefreshText = NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.footerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
+    self.tableView.footerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
@@ -269,7 +269,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)pushSheet:(UIButton *)button {
     
     self.index = button.tag;
-     self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"置頂",@"編輯",@"刪除", nil];
+     self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"set_top", nil),NSLocalizedString(@"set_editor", nil),NSLocalizedString(@"set_delete", nil), nil];
     self.sheet.tag = 80;
     [self.sheet showInView:self.view];
 }
@@ -302,7 +302,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             [self.navigationController pushViewController:vc animated:YES];
         }else if (buttonIndex == 2) {
             itsApp.dataSvr.selectUpdateComment = item;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"刪除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"set_delete", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
             alert.tag = 1001;
             [alert show];
         }
@@ -604,7 +604,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }else {
         self.Btn.frame = CGRectMake(0, 20, 50, 30);
         if (us.user.isLogin == NO) {
-            [self.Btn setTitle:@"登入" forState:UIControlStateNormal];
+            [self.Btn setTitle:NSLocalizedString(@"login_in", nil) forState:UIControlStateNormal];
         }
     }
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
@@ -622,7 +622,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isCBADM == YES) {
-        self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍張照",@"相機膠圈", nil];
+        self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"take_photo", nil),NSLocalizedString(@"select_photo", nil), nil];
         [self.photoSheet showInView:self.view];
 
     }else {

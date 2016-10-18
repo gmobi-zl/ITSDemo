@@ -230,7 +230,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.amazingImage.frame.origin.x - 6;
         startPos.y = self.amazingImage.frame.origin.y + self.amazingImage.frame.size.height + 2;
         self.amazingText.frame = CGRectMake(startPos.x, startPos.y, 50, 14);
-        [self.amazingText setText:ITS_NSLocalizedString(@"LabelAmazing", nil)];
+        [self.amazingText setText:NSLocalizedString(@"LabelAmazing", nil)];
         self.amazingText.textAlignment = NSTextAlignmentCenter;
         self.amazingText.backgroundColor = [UIColor clearColor];
         self.amazingText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[UIFont fontWithName:@"Arial" size:12];
@@ -265,7 +265,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.movingImage.frame.origin.x - 10;
         startPos.y = self.movingImage.frame.origin.y + self.movingImage.frame.size.height + 3;
         self.movingText.frame = CGRectMake(startPos.x, startPos.y, 55, 14);
-        [self.movingText setText:ITS_NSLocalizedString(@"LabelMoved", nil)];
+        [self.movingText setText:NSLocalizedString(@"LabelMoved", nil)];
         self.movingText.textAlignment = NSTextAlignmentCenter;
         self.movingText.backgroundColor = [UIColor clearColor];
         self.movingText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[UIFont fontWithName:@"Arial" size:12];
@@ -300,7 +300,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.sadImage.frame.origin.x - 10;
         startPos.y = self.sadImage.frame.origin.y + self.sadImage.frame.size.height + 3;
         self.sadText.frame = CGRectMake(startPos.x, startPos.y, 30, 14);
-        [self.sadText setText:ITS_NSLocalizedString(@"LabelSad", nil)];
+        [self.sadText setText:NSLocalizedString(@"LabelSad", nil)];
         self.sadText.textAlignment = NSTextAlignmentCenter;
         self.sadText.backgroundColor = [UIColor clearColor];
         self.sadText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[UIFont fontWithName:@"Arial" size:12];
@@ -335,7 +335,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.angryImage.frame.origin.x - 10;
         startPos.y = self.angryImage.frame.origin.y + self.angryImage.frame.size.height + 3;
         self.angryText.frame = CGRectMake(startPos.x, startPos.y, 30, 14);
-        [self.angryText setText:ITS_NSLocalizedString(@"LabelAngry", nil)];
+        [self.angryText setText:NSLocalizedString(@"LabelAngry", nil)];
         self.angryText.textAlignment = NSTextAlignmentCenter;
         self.angryText.backgroundColor = [UIColor clearColor];
         self.angryText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[UIFont fontWithName:@"Arial" size:12];
@@ -370,7 +370,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.happyImage.frame.origin.x - 10;
         startPos.y = self.happyImage.frame.origin.y + self.happyImage.frame.size.height + 3;
         self.happyText.frame = CGRectMake(startPos.x, startPos.y, 40, 14);
-        [self.happyText setText:ITS_NSLocalizedString(@"LabelHappy", nil)];
+        [self.happyText setText:NSLocalizedString(@"LabelHappy", nil)];
         self.happyText.textAlignment = NSTextAlignmentCenter;
         self.happyText.backgroundColor = [UIColor clearColor];
         self.happyText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[UIFont fontWithName:@"Arial" size:12];
@@ -405,7 +405,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.worryImage.frame.origin.x - 20;
         startPos.y = self.worryImage.frame.origin.y + self.worryImage.frame.size.height + 3;
         self.worryText.frame = CGRectMake(startPos.x, startPos.y, 45, 14);
-        [self.worryText setText:ITS_NSLocalizedString(@"LabelWorry", nil)];
+        [self.worryText setText:NSLocalizedString(@"LabelWorry", nil)];
         self.worryText.textAlignment = NSTextAlignmentCenter;
         self.worryText.backgroundColor = [UIColor clearColor];
         self.worryText.font = [UIFont systemFontOfSize:MOOD_TEXT_SIZE];//[[UIFont fontWithName:@"Arial" size:12];
@@ -418,7 +418,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.centerPoint.x - 42;
         startPos.y = self.centerPoint.y + 5;
         self.voteNumber.frame = CGRectMake(startPos.x, startPos.y, 84, 16);
-        [self.voteNumber setText:ITS_NSLocalizedString(@"LabelPlease", nil)];
+        [self.voteNumber setText:NSLocalizedString(@"LabelPlease", nil)];
         self.voteNumber.textAlignment = NSTextAlignmentCenter;
         self.voteNumber.backgroundColor = [UIColor clearColor];
         self.voteNumber.font = [UIFont systemFontOfSize:14];//[UIFont fontWithName:@"Arial" size:12];
@@ -429,7 +429,7 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         startPos.x = self.centerPoint.x - 35;
         startPos.y = self.centerPoint.y + 5 + 16 + 2;
         self.voteLabel.frame = CGRectMake(startPos.x, startPos.y, 70, 16);
-        [self.voteLabel setText:ITS_NSLocalizedString(@"LabelVote", nil)];
+        [self.voteLabel setText:NSLocalizedString(@"LabelVote", nil)];
         self.voteLabel.textAlignment = NSTextAlignmentCenter;
         self.voteLabel.backgroundColor = [UIColor clearColor];
         self.voteLabel.font = [UIFont systemFontOfSize:14];//[UIFont fontWithName:@"Arial" size:12];
@@ -462,10 +462,10 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
                 if (type != nil){
                     NSString* voteCountStr = [NSString stringWithFormat:@"%d", [self.moodData getTotalCount]];
                     [self.voteNumber setText:voteCountStr];
-                    [self.voteLabel setText:ITS_NSLocalizedString(@"LabelVotes", nil)];
+                    [self.voteLabel setText:NSLocalizedString(@"LabelVotes", nil)];
                 } else {
-                    [self.voteNumber setText:ITS_NSLocalizedString(@"LabelPlease", nil)];
-                    [self.voteLabel setText:ITS_NSLocalizedString(@"LabelVote", nil)];
+                    [self.voteNumber setText:NSLocalizedString(@"LabelPlease", nil)];
+                    [self.voteLabel setText:NSLocalizedString(@"LabelVote", nil)];
                 }
                 
                 int tP = [self.moodData getPercentByType:NEWS_ITEM_MOOD_AMAZE];
@@ -691,10 +691,10 @@ static inline void drawArc(CGContextRef ctx, CGPoint point, float radius, float 
         if (type != nil){
             NSString* voteCountStr = [NSString stringWithFormat:@"%d", [self.moodData getTotalCount]];
             [self.voteNumber setText:voteCountStr];
-            [self.voteLabel setText:ITS_NSLocalizedString(@"LabelVotes", nil)];
+            [self.voteLabel setText:NSLocalizedString(@"LabelVotes", nil)];
         } else {
-            [self.voteNumber setText:ITS_NSLocalizedString(@"LabelPlease", nil)];
-            [self.voteLabel setText:ITS_NSLocalizedString(@"LabelVote", nil)];
+            [self.voteNumber setText:NSLocalizedString(@"LabelPlease", nil)];
+            [self.voteLabel setText:NSLocalizedString(@"LabelVote", nil)];
         }
     }
     
