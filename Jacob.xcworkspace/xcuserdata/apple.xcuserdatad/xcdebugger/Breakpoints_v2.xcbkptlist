@@ -42,7 +42,7 @@
                   moduleName = "&#x6211;&#x662f;&#x99ac;&#x514b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "498387596.131097"
+                  timestampString = "498454455.45309"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
@@ -57,7 +57,7 @@
                   moduleName = "&#x6211;&#x662f;&#x99ac;&#x514b;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/GitHub/ITSDemo/InternetStir/Controller/DetailCommentController.m"
-                  timestampString = "498387596.131478"
+                  timestampString = "498454455.453779"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "212"
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2447"
             endingLineNumber = "2447"
-            landmarkName = "-insertUserTrackCommentItem:"
+            landmarkName = "-setRefreshUserTrackComments:isClearData:type:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

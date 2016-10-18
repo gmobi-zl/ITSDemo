@@ -2575,8 +2575,13 @@
             break;
         }
     }
-    if (cbComment == nil)
-        return ret;
+    if (cbComment == nil){
+        if (self.currentCelebComment != nil && [self.currentCelebComment.fid isEqualToString:item.fid]){
+            cbComment = self.currentCelebComment;
+        } else {
+            return ret;
+        }
+    }
     
 //    if (item.rid != nil){
 //        

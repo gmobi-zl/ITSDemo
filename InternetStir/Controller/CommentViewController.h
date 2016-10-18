@@ -29,5 +29,7 @@
 @property (assign) BOOL isRefreshing;
 @property (nonatomic, strong) LoginView *loginView;
 
+//@property (assign) BOOL isTrackComment;
+
 
 @end
