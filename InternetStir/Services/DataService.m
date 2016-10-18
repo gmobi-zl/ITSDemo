@@ -2330,6 +2330,27 @@
     return ret;
 }
 
+-(CelebComment*) findCelebCommentById: (NSString*) fid{
+    
+    if (fid == nil || self.celebComments == nil)
+        return nil;
+    
+    int listCount = (int)[self.celebComments count];
+    for (int i = 0; i < listCount; i++) {
+        id cbComment = [self.celebComments objectAtIndex:i];
+        if ([cbComment isKindOfClass:[CelebComment class]]) {
+            CelebComment* comment = cbComment;
+            if (comment != nil){
+                if ([comment.fid compare:fid] == NSOrderedSame) {
+                    return comment;
+                }
+            }
+        }
+    }
+    
+    return nil;
+}
+
 -(void) removeCelebCommentItem: (NSString*) fid{
     
     int i = 0;

@@ -107,7 +107,6 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-
     if (self.isRefreshing == NO){
         self.refreshType = TRACK_COMMENT_REFRESH_TYPE_AFTER;
         ITSApplication* itsApp = [ITSApplication get];
@@ -192,11 +191,32 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     DataService* ds = itsApp.dataSvr;
     NSMutableArray* trackComment= ds.userTrackComments;
     UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
-    [itsApp.dataSvr setCurrentCelebComment:comment.article];
     
-    CommentViewController *commentVc = [[CommentViewController alloc] init];
-    [self.navigationController pushViewController:commentVc animated:YES];
-
+    if(comment.replayComments == nil){
+        CelebComment* celebC = [ds findCelebCommentById:comment.fid];
+        if (celebC == nil){
+            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+            CommentViewController *commentVc = [[CommentViewController alloc] init];
+            [self.navigationController pushViewController:commentVc animated:YES];
+            
+//            // get comment from internet
+//            [itsApp.remoteSvr getCelebCommentByID:comment.fid callback:^(int status, int code, NSDictionary *resultData) {
+//                if (resultData != nil){
+//                    
+//                }
+//            }];
+        } else {
+            comment.article = celebC;
+            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+            CommentViewController *commentVc = [[CommentViewController alloc] init];
+            [self.navigationController pushViewController:commentVc animated:YES];
+        }
+    } else {
+        [itsApp.dataSvr setCurrentCelebComment:comment.article];
+        
+        CommentViewController *commentVc = [[CommentViewController alloc] init];
+        [self.navigationController pushViewController:commentVc animated:YES];
+    }
 }
 - (void)replyBtn {
     
@@ -222,6 +242,13 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *trackComment = ds.userTrackComments;
+    
+    if (trackComment == nil)
+        [self headerRereshing];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

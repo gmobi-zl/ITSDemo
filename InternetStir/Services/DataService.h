@@ -327,6 +327,7 @@ typedef enum{
 // celeb comments list
 -(void) setCurrentCelebComment: (CelebComment*) item;
 -(CelebComment*) getCurrentCelebComment;
+-(CelebComment*) findCelebCommentById: (NSString*) fid;
 -(void) refreshCelebComments: (int) type;
 -(void) setRefreshCelebComments: (NSArray*) dicData
                     isClearData: (BOOL) clear
@@ -336,7 +337,6 @@ typedef enum{
 -(void) updateCelebCommentItem: (NSString*) fid
                        context: (NSString*) context
                    attachments: (NSMutableArray*) attachments;
-
 
 -(void) refreshUserTrackComments: (int) type;
 -(void) setRefreshUserTrackComments: (NSArray*) dicData

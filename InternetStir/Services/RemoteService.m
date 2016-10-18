@@ -829,13 +829,11 @@
             
             MMLogDebug(@"getCelebCommentByID Data rsp data: %@", dataStr);
             
-            
-            
-            //MMEventService *es = [MMEventService getInstance];
-            //[es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+            if (callback != nil)
+                callback(1,1,dataDic);
         } else {
-            //MMEventService *es = [MMEventService getInstance];
-            //[es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_ERROR];
+            if (callback != nil)
+                callback(0,0,nil);
         }
     }];
 }
