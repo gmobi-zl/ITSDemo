@@ -1238,8 +1238,9 @@
     NSNumber *fileW, *fileH;
     if (nil != responseDic){
         fileId = [responseDic objectForKey:@"fd"];
-        fileW = [responseDic objectForKey:@"width"];
-        fileH = [responseDic objectForKey:@"height"];
+        NSDictionary* meta = [responseDic objectForKey:@"meta"];
+        fileW = [meta objectForKey:@"width"];
+        fileH = [meta objectForKey:@"height"];
     }
     
     NSMutableDictionary* retDic = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -1384,11 +1385,11 @@
     if (user == nil || user.isLogin == NO)
         return;
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], user.session, fid];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
     MMLogDebug(@"celebRemoveComment URL: %@", url);
 
     MMHttpSession* httpSession = [MMHttpSession alloc];
-    [httpSession doPostJSON:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+    [httpSession doDelete:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
      {
          if (code == 200) {
              NSData* data = [resultData objectForKey:@"data"];
