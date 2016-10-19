@@ -69,7 +69,9 @@
 
 - (NSUInteger)numberOfTabView
 {
-    return 4;
+    ITSApplication* itsApp = [ITSApplication get];
+    NSMutableArray* arr = itsApp.dataSvr.categoryList;
+    return arr.count + 1;
 }
 
 - (UIView *)viewPager:(MMTabPagerView *)viewPager viewForTabAtIndex:(NSUInteger)index

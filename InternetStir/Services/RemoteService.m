@@ -1324,7 +1324,6 @@
          }
      }];
 }
-
 -(void) celebUpdateComment: (NSString*) fid
                    content: (NSString*) context
                 attachment: (NSMutableArray*) attachment {
@@ -1415,6 +1414,24 @@
          }
      }];
 }
+- (void) downloadLaunchImage:(NSString *) file {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl,file];
+    
+    ConfigService *cs = [ConfigService get];
+    NSString* launchFolder = [cs getlaunchFolder];
+    NSString* filePath = [NSString stringWithFormat:@"%@/%@",launchFolder,file];
 
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession download:url reqHeader:nil filePath:filePath callback:^(int status, int code, NSDictionary *resultData) {
+        if (code == 200) {
+            NSLog( @"%@",resultData);
+        }
+    } progressCallback:^(NSString *url, double progress) {
+        
+    }];
+}
 
 @end

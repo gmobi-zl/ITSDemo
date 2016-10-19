@@ -87,6 +87,24 @@ ConfigService* configInstance = nil;
     
     return self.celebCacheFolderPath;
 }
+-(NSString*) getlaunchFolder{
+    
+    if (self.launchFolderPath == nil){
+        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentPath = [path objectAtIndex:0];
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        // create   launch folder
+        self.launchFolderPath = [NSString stringWithFormat:@"%@/%@", documentPath, MM_LAUNCH_FOLDER];
+        BOOL isDir = NO;
+        BOOL folderExist = [fileMgr fileExistsAtPath:self.launchFolderPath isDirectory:&isDir];
+        if (!(isDir == YES && folderExist == YES)){
+            NSError* cfError = nil;
+            [fileMgr createDirectoryAtPath:self.launchFolderPath withIntermediateDirectories:YES attributes:nil error:&cfError];
+        }
+    }
+    
+    return self.launchFolderPath;
+}
 
 - (NSString *) getPhotoWidthHeight:(NewsImage*)photo{
     CGFloat screenW = [MMSystemHelper getScreenWidth];

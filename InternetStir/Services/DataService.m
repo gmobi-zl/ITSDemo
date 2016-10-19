@@ -20,6 +20,7 @@
 #import "CelebComment.h"
 #import "FansComment.h"
 #import "UserTrackComment.h"
+#import "SocialComment.h"
 
 //#import "Go2Reach.framework/Headers/GRAdService.h"
 
@@ -370,7 +371,34 @@
         NSString* tmpData = [dicData objectForKey:@"baseUrl"];
         if (tmpData != nil)
             self.fileBaseUrl = tmpData;
-        
+        tmpData = [dicData objectForKey:@"launch"];
+    
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        ITSApplication* itsApp = [ITSApplication get];
+        NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+        self.launch = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl,tmpData];
+        ConfigService *cs = [ConfigService get];
+        NSString* launchFolder = [cs getlaunchFolder];
+        NSArray *file = [[[NSFileManager alloc] init] subpathsAtPath:launchFolder];
+        if([tmpData isEqual:[NSNull null]]) {
+            if (file.count > 0) {
+                [fileManager removeItemAtPath:launchFolder error:nil];
+            }
+        }else {
+            
+            if (file.count > 0) {
+                for (NSString *name in file) {
+                    if ([name compare:tmpData] == NSOrderedSame) {
+                        continue;
+                    }else {
+                        [fileManager removeItemAtPath:launchFolder error:nil];
+                        [[ITSApplication get].remoteSvr downloadLaunchImage:tmpData];
+                    }
+                }
+            }else {
+                [[ITSApplication get].remoteSvr downloadLaunchImage:tmpData];
+            }
+        }
         tmpData = [dicData objectForKey:@"name"];
         if (tmpData != nil)
             self.celebInfo.name = tmpData;
@@ -2403,6 +2431,78 @@
             }
         }
     }
+}
+-(void) refreshSocialComments: (int) type {
+    NSString* newsTime = nil;
+    if (self.socialComments != nil){
+        NSInteger count = [self.socialComments count];
+        if (count > 0){
+            if (type == SOCIAL_COMMENT_REFRESH_TYPE_AFTER){
+                // do nothing
+                SocialComment* topComment = [self.socialComments objectAtIndex:0];
+                if (topComment != nil)
+                    newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+            } else if (type == SOCIAL_COMMENT_REFRESH_TYPE_BEFORE){
+                SocialComment* latestComment = [self.socialComments objectAtIndex:count-1];
+                if (latestComment != nil)
+                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
+            }
+        }
+    }
+    
+    if (newsTime == nil){
+        newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+        
+//        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:SOCIAL_COMMENT_REFRESH_TYPE_BEFORE];
+    }else{
+        
+//        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
+    }
+
+}
+-(void) setRefreshSocialComments: (NSArray*) dicData
+                     isClearData: (BOOL) clear
+                            type: (int) type {
+    if (dicData == nil)
+        return;
+    
+    for (NSDictionary* commentDataItem in dicData) {
+        SocialComment* tmpItem = [[SocialComment alloc] initWithDictionary:commentDataItem];
+        [self insertSocialCommentItem:tmpItem];
+    }
+}
+-(BOOL) insertSocialCommentItem: (SocialComment*) item{
+    BOOL same = NO;
+    BOOL ret = NO;
+    int i = 0;
+    
+    if (self.socialComments == nil)
+        self.socialComments = [NSMutableArray arrayWithCapacity:1];
+    
+    if (self.socialComments == nil || item == nil)
+        return ret;
+    
+    int listCount = (int)[self.socialComments count];
+    for (i = 0; i < listCount; i++) {
+        
+        id uComment = [self.socialComments objectAtIndex:i];
+        if ([uComment isKindOfClass:[SocialComment class]]) {
+            SocialComment* comment = uComment;
+            if (comment != nil){
+                if ([comment.cid compare:item.cid] == NSOrderedSame) {
+                    same = YES;
+                    break;
+                }
+            }
+        }
+    }
+    
+    if (same == NO && ret == NO){
+        [self.socialComments addObject:item];
+        ret = YES;
+    }
+    
+    return ret;
 }
 
 -(void) refreshUserTrackComments: (int) type{

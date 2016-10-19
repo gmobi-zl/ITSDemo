@@ -591,7 +591,7 @@ static NetWorkType currentNetType = NoNet;
         result = NSLocalizedString (@"time_util_just", nil);
     }
     else if((temp = timeInterval/60) < 60){
-        result = [NSString stringWithFormat:@"%d%@",temp,NSLocalizedString(@"time_util_minute", nil)];
+        result = [NSString stringWithFormat:@"%d%@",temp,NSLocalizedString(@"time_util_minutes", nil)];
     }
     
     else if((temp = temp/60) < 24){

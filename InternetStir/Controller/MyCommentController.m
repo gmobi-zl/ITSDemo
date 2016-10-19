@@ -167,7 +167,8 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         cell = [[MyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCommentTableViewCellIdentifier];
     }
     MyCommentCell *tmpCell = (MyCommentCell*)cell;
-    [tmpCell.replyButton addTarget:self action:@selector(replyBtn) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.replyButton addTarget:self action:@selector(pushCommentVc:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.replyButton.tag = indexPath.row;
     
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
@@ -199,12 +200,6 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
             CommentViewController *commentVc = [[CommentViewController alloc] init];
             [self.navigationController pushViewController:commentVc animated:YES];
             
-//            // get comment from internet
-//            [itsApp.remoteSvr getCelebCommentByID:comment.fid callback:^(int status, int code, NSDictionary *resultData) {
-//                if (resultData != nil){
-//                    
-//                }
-//            }];
         } else {
             comment.article = celebC;
             [itsApp.dataSvr setCurrentCelebComment:comment.article];
@@ -218,20 +213,45 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         [self.navigationController pushViewController:commentVc animated:YES];
     }
 }
-- (void)replyBtn {
+- (void)replyBtn:(UIButton *)button {
     
-    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
-                                   content:@""
-                                      name:@""
-                                     Block:^(NSString *contentStr)
-     {
-     
-         ITSApplication* itsApp = [ITSApplication get];
-         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-         [eParams setObject:@"reply" forKey:@"fid"];
-         [eParams setObject:contentStr forKey:@"reply"];
-         [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.track.click"];
-     }];
+//    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+//                                   content:@""
+//                                      name:@""
+//                                     Block:^(NSString *contentStr)
+//     {
+//     
+//         ITSApplication* itsApp = [ITSApplication get];
+//         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+//         [eParams setObject:@"reply" forKey:@"fid"];
+//         [eParams setObject:contentStr forKey:@"reply"];
+//         [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.track.click"];
+//     }];
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray* trackComment= ds.userTrackComments;
+    UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
+    
+    if(comment.replayComments == nil){
+        CelebComment* celebC = [ds findCelebCommentById:comment.fid];
+        if (celebC == nil){
+            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+            CommentViewController *commentVc = [[CommentViewController alloc] init];
+            [self.navigationController pushViewController:commentVc animated:YES];
+            
+        } else {
+            comment.article = celebC;
+            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+            CommentViewController *commentVc = [[CommentViewController alloc] init];
+            [self.navigationController pushViewController:commentVc animated:YES];
+        }
+    } else {
+        [itsApp.dataSvr setCurrentCelebComment:comment.article];
+        
+        CommentViewController *commentVc = [[CommentViewController alloc] init];
+        [self.navigationController pushViewController:commentVc animated:YES];
+    }
+
 }
 - (void)clickBack {
     [self.navigationController popViewControllerAnimated:YES];

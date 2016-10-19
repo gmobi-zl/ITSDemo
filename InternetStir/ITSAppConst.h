@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-//#define TEST_CELEB_LOGIN 1
+#define TEST_CELEB_LOGIN 1
 
 // Test Channel & url
 #define PONEWS_URL_BASE @"http://test.poponews.net/"
@@ -19,6 +19,8 @@
 
 #define MM_WEB_IMAGE_CACHE_FOLDER @"MMImageCache"
 #define MM_CELEB_CACHE_FOLDER @"celebCache"
+#define MM_LAUNCH_FOLDER @"launch"
+
 
 //#define PONEWS_URL_BASE @"http://api.poponews.net/"  http://api.poponews.net/
 //#define PONEWS_GROUP @"global"
@@ -114,6 +116,9 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define NEWS_REFRESH_SUCCESS @"refresh_success"
 #define NEWS_REFRESH_ERROR   @"refresh_failed"
 
+//lanch
+
+
 #define CB_COMMENT_REFRESH_TYPE_BEFORE  1
 #define CB_COMMENT_REFRESH_TYPE_AFTER   2
 #define CB_COMMENT_REFRESH_SUCCESS @"cb_refresh_success"
@@ -123,6 +128,12 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define TRACK_COMMENT_REFRESH_TYPE_AFTER   2
 #define TRACK_COMMENT_REFRESH_SUCCESS @"track_refresh_success"
 #define TRACK_COMMENT_REFRESH_ERROR   @"track_refresh_failed"
+
+#define SOCIAL_COMMENT_REFRESH_TYPE_BEFORE  1
+#define SOCIAL_COMMENT_REFRESH_TYPE_AFTER   2
+#define SOCIAL_COMMENT_REFRESH_SUCCESS @"social_refresh_success"
+#define SOCIAL_COMMENT_REFRESH_ERROR   @"social_refresh_failed"
+
 
 #define CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE  1
 #define CB_COMMENT_REPLY_REFRESH_TYPE_AFTER   2
@@ -172,6 +183,8 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define EVENT_USER_COMMENT_DATA_REFRESH  @"USER_COMMENT_REFRESH"
 #define EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH  @"CELEB_REPLY_COMMENT_REFRESH"
 #define EVENT_USER_TRACK_COMMENT_DATA_REFRESH  @"USER_TRACK_COMMENT_REFRESH"
+#define EVENT_SOCIAL_COMMENT_DATA_REFRESH  @"SOCIAL_COMMENT_REFRESH"
+
 
 #define EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT  @"CELEB_UPLOAD_FILE_RESULT"
 #define EVENT_CELEB_COMMENT_SEND_RESULT  @"CELEB_SEND_COMMENT_RESULT"

@@ -19,6 +19,8 @@
 #import "HomeViewController.h"
 #import "MJRefresh.h"
 #import "ITSApplication.h"
+#import "MMEventService.H"
+#import "SocialComment.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -72,6 +74,21 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     
     [self setupRefresh];
+    
+    MMEventService* es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_SOCIAL_COMMENT_DATA_REFRESH selector:@selector(socialCommentsDataRefreshListener:)];
+}
+- (void)socialCommentsDataRefreshListener: (id) data {
+    if (self.view.hidden == NO){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            [self.tableView reloadData];
+            [self.tableView footerEndRefreshing];
+            [self.tableView headerEndRefreshing];
+            self.isRefreshing = NO;
+        });
+    }
 }
 - (void)setupRefresh
 {
@@ -90,17 +107,36 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 {
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    
     [poApp.reportSvr recordEvent:@"list.loading.up" params:eParams eventCategory:@"recommendation.view"];
+    if (self.isRefreshing == NO){
+        self.refreshType = SOCIAL_COMMENT_REFRESH_TYPE_AFTER;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshSocialComments:SOCIAL_COMMENT_REFRESH_TYPE_AFTER];
+        self.isRefreshing = YES;
+    }
 }
 - (void)footerRereshing
 {
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"list.loading.down" params:eParams eventCategory:@"recommendation.view"];
+    if (self.isRefreshing == NO){
+        self.refreshType = SOCIAL_COMMENT_REFRESH_TYPE_BEFORE;
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        [ds refreshSocialComments:SOCIAL_COMMENT_REFRESH_TYPE_BEFORE];
+        self.isRefreshing = YES;
+    }
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+ 
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *socialComments = ds.socialComments;
+    return socialComments.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -113,8 +149,12 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     if (cell == nil){
         cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentCellIdentifier];
     }
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    SocialComment *comment = [ds.socialComments objectAtIndex:indexPath.row];
     ContentViewCell* tmpCell = (ContentViewCell*)cell;
-    [tmpCell showDataWithModel:indexPath.row];
+    [tmpCell showDataWithModel:comment];
     
     return tmpCell;
 }

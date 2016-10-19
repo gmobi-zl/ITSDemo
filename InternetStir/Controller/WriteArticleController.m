@@ -199,7 +199,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
         }
     }else {
         // 保存
-        if (self.data != nil && self.textView.text.length > 0) {
+        if (self.photoStr != nil && self.textView.text.length > 0) {
             self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             [self.view addSubview:self.hud];
             self.hud.mode = MBProgressHUDModeIndeterminate;

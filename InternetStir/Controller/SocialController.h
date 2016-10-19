@@ -18,4 +18,7 @@
 @property (nonatomic, strong) NSArray *urlArr;
 @property (nonatomic, strong) UIButton *btn;
 
+@property (assign) int refreshType;
+@property (assign) BOOL isRefreshing;
+
 @end

@@ -14,6 +14,7 @@
 #import "ITSApplication.h"
 #import "DataService.h"
 #import "SettingService.h"
+#import "ConfigService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -41,9 +42,25 @@
     self.isReconnect = NO;
     self.isConnected = NO;
     self.isWaitMaxTime = NO;
+
+    UIImage* bgImg;
+    ConfigService *cs = [ConfigService get];
+    NSString* launchFolder = [cs getlaunchFolder];
+
+    NSArray *file = [[[NSFileManager alloc] init] subpathsAtPath:launchFolder];
+    if (file.count > 0) {
+        if ([file objectAtIndex:0]) {
+            NSString *urls = [NSString stringWithFormat:@"%@/%@",launchFolder,[file objectAtIndex:0]];
+            NSData *dd = [NSData dataWithContentsOfFile:urls];
+            bgImg = [UIImage imageWithData:dd];
+        }
+    }else {
+        bgImg = [UIImage imageNamed:@"splash_default"];
+    }
+
     
     // logo
-    UIImage* bgImg = [UIImage imageNamed:@"splash_default"];
+//    UIImage* bgImg = [UIImage imageNamed:@"splash_default"];
     //CGImageRef imgRef = [logoImg CGImage];
     //CGFloat iW = CGImageGetWidth(imgRef);
     //CGFloat iH = CGImageGetHeight(imgRef);
@@ -127,9 +144,7 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
-    ITSApplication* itsApp = [ITSApplication get];
-    DataService* ds = itsApp.dataSvr;
-    
+    ITSApplication* itsApp = [ITSApplication get];    
     [itsApp.remoteSvr doConnect];
     
 //    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:

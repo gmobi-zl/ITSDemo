@@ -28,6 +28,8 @@
 @property NSString* gridPhotoWithHeight;
 @property NSString* Pin1PhotoWidthHeight;
 @property NSString* celebCacheFolderPath;
+@property NSString* launchFolderPath;
+
 @property (assign) int type;
 
 +(ConfigService*) get;
@@ -118,6 +120,7 @@
 
 - (NSString *) cachedFileNameForKey:(NSString *)key;
 
+-(NSString*) getlaunchFolder;
 -(NSString*) getCelebCacheFolder;
 @end
 

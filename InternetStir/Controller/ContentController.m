@@ -94,7 +94,7 @@
 //        cell = [[ContentViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ContentCellIdentifier];
     }
     ContentViewCell* tmpCell = (ContentViewCell*)cell;
-    [tmpCell showDataWithModel:indexPath.row];
+//    [tmpCell showDataWithModel:indexPath.row];
     
     return tmpCell;
 }

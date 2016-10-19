@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SocialComment.h"
 
 @interface ContentViewCell : UITableViewCell
 @property (nonatomic, strong)UILabel *titleLabel;
@@ -16,6 +17,6 @@
 @property (nonatomic, strong)UILabel *line;
 @property (nonatomic, strong)UIView *bgView;
 @property (nonatomic, strong)UIImageView *photo;
--(void)showDataWithModel:(NSInteger)index;
+-(void)showDataWithModel:(SocialComment*)item;
 
 @end
