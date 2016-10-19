@@ -36,15 +36,8 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.screenName = @"recommendation";
-    self.urlArr = @[@"https://www.youtube.com/watch?v=QqPtEB9rxg4",
-                    @"https://www.youtube.com/watch?v=iDXgBkIeZG0",
-                    @"https://www.youtube.com/watch?v=VCkL3AsnHTo",
-                    @"https://www.youtube.com/watch?v=veBjTuLDzF0",
-                    @"https://www.youtube.com/watch?v=i_Z_j-U4yK4"];
 
     self.view.backgroundColor = [UIColor whiteColor];
-    self.dataArr = @[@"https://www.facebook.com/WithGaLoveTaiwan/?fref=ts",@"https://plus.google.com/u/0/+%E8%94%A1%E9%98%BF%E5%98%8E/posts",@"https://www.instagram.com/yga0721/",@"http://yga0721.pixnet.net/blog"];
-    
 //    NSArray *title = @[@"推薦",@"Facebook",@"You Tube",@"Instagram"];
 //
 //    CGFloat space = (screenW - title.count*80)/(title.count + 1);
@@ -71,6 +64,8 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self.tableView registerClass:[ContentViewCell class] forCellReuseIdentifier:ContentCellIdentifier];
     
     [self setupRefresh];
@@ -140,7 +135,23 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 0.5 + 20 + 5 + 40 + 10 + 3 * (screenW - 30)/4 + 10;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *celebRecommends = ds.celebRecommends;
+    CelebRecommend *comment = [celebRecommends objectAtIndex:indexPath.row];
+    NewsImage *image = [comment.images objectAtIndex:0];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.frame = CGRectMake(15, 0, screenW - 30, 40);
+    label.font = [UIFont systemFontOfSize:18];
+    label.text = comment.title;
+    label.numberOfLines = 2;
+    CGSize size = [label sizeThatFits:CGSizeMake(label.bounds.size.width, MAXFLOAT)];
+
+    CGFloat height;
+    height = image.h * screenW / image.w;
+    
+    return size.height + height + 30 + 0.5;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -160,8 +171,12 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebRecommend *comment = [ds.celebRecommends objectAtIndex:indexPath.row];
+
     DetailContentController *detail = [[DetailContentController alloc] init];
-    detail.path = self.urlArr[indexPath.row];
+    detail.path = comment.source;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
@@ -318,14 +333,13 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
        NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_COMMENT_COLOR]}];
-    
-//    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    Btn.frame = CGRectMake(0, 20, 30, 30);
-//    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_Menu"] forState:UIControlStateNormal];
-//    [Btn addTarget:self action:@selector(pushMenu) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
-//    self.navigationItem.leftBarButtonItem = left;
     self.navigationController.navigationBar.hidden = YES;
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *celebRecommends = ds.celebRecommends;
+    if (celebRecommends == nil) {
+        [self headerRereshing];
+    }
 }
 - (void)pushMenu{
 

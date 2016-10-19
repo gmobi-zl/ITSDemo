@@ -2447,7 +2447,7 @@
                 if (latestComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
             }
-        }
+        } 
     }
     
     if (newsTime == nil){
@@ -2458,7 +2458,6 @@
         
         [[ITSApplication get].remoteSvr getCelebRecommendListData:newsTime timeType:type];
     }
-
 }
 -(void) setRefreshCelebRecommends: (NSArray*) dicData
                      isClearData: (BOOL) clear

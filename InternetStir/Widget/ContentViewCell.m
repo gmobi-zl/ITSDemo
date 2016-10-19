@@ -35,7 +35,7 @@
         [self.bgView addSubview:self.titleLabel];
         
         self.sourceLabel = [[UILabel alloc] init];
-        self.sourceLabel.textAlignment = NSTextAlignmentCenter;
+        self.sourceLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.sourceLabel];
         
         self.timeLabel = [[UILabel alloc]init];
@@ -59,9 +59,9 @@
 -(void)showDataWithModel:(CelebRecommend*)item{
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
-    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
+//    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
     
-    self.titleLabel.frame = CGRectMake(15, 0, self.bounds.size.width - 30, 40);
+    self.titleLabel.frame = CGRectMake(15, 5, self.bounds.size.width - 30, 0);
     self.titleLabel.font = [UIFont systemFontOfSize:18];
     self.titleLabel.textColor = [MMSystemHelper string2UIColor:@"#4A4A4A"];
     self.titleLabel.text = item.title;
@@ -72,12 +72,14 @@
     [self.titleLabel setFrame:frame];
     self.titleLabel.frame = frame;
     
-    self.icon.frame = CGRectMake(0, 60 , [[UIScreen mainScreen] bounds].size.width ,  3 * [[UIScreen mainScreen] bounds].size.width/4);
-    self.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"%1.jpg"]];
-    
-    self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 40, 20);
+    NewsImage *image = [item.images objectAtIndex:0];
+    CGFloat height;
+    height = image.h * screenW / image.w;
+    self.icon.frame = CGRectMake(0, frame.size.height + 5 , screenW, height);
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+    self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 20);
     self.sourceLabel.font = [UIFont systemFontOfSize:10];
-    self.sourceLabel.text = item.source;
+    self.sourceLabel.text = item.pdomain;
     
 //    self.timeLabel.frame = CGRectMake(self.sourceLabel.frame.size.width + self.sourceLabel.frame.origin.x + 10, self.sourceLabel.frame.origin.y, 40, 20);
 //    self.timeLabel.text = @"4小时前";
