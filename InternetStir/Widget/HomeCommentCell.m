@@ -229,7 +229,9 @@
     [self removeOldReplys];
     
     self.nameLabel.text = data.name;
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+    self.icon.contentMode = UIViewContentModeScaleAspectFill;
+    self.icon.layer.masksToBounds = YES;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     
     ITSApplication* itsApp = [ITSApplication get];
     NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
@@ -240,7 +242,7 @@
     NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
     self.photo.contentMode = UIViewContentModeScaleAspectFill;
     self.photo.clipsToBounds = YES;
-    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];

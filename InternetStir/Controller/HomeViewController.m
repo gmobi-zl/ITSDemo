@@ -227,11 +227,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     if (dataArr != nil){
         CelebComment* cbComment = [dataArr objectAtIndex:indexPath.row];
-        if (cbComment.uiFrame == nil){
-            HomeCommentFrame* frame = [HomeCommentFrame alloc];
-            [frame initWithCommentData:cbComment];
-            cbComment.uiFrame = frame;
-        }
+        HomeCommentFrame* frame = [HomeCommentFrame alloc];
+        [frame initWithCommentData:cbComment];
+        cbComment.uiFrame = frame;
+
         [tmpCell setShowData:cbComment];
         tmpCell.commentFrame = cbComment.uiFrame;
     }

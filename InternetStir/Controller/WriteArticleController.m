@@ -57,7 +57,8 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     }else {
         if (self.photoStr != nil) {
             self.photo.contentMode = UIViewContentModeScaleAspectFill;
-            [self.photo sd_setImageWithURL:[NSURL URLWithString:self.photoStr] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+            self.photo.layer.masksToBounds = YES;
+            [self.photo sd_setImageWithURL:[NSURL URLWithString:self.photoStr] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
             [send setTitle:NSLocalizedString(@"save", nil) forState:UIControlStateNormal];
         }
     }

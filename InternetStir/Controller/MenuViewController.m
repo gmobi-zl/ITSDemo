@@ -144,7 +144,9 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     
     self.userEmailLabel.text = us.user.email;
     self.userNameLabel.text = us.user.userName;
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+    self.icon.contentMode = UIViewContentModeScaleAspectFill;
+    self.icon.clipsToBounds = YES;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
 }
 //- (void)pushLoginVc{
 //    
@@ -171,7 +173,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     if (us.user.isLogin == YES) {
         self.bgImage.backgroundColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
         NSString *icon = us.user.avatar; //[loginDic objectForKey:@"avatar"];
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+        
+        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+        self.icon.clipsToBounds = YES;    
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         self.imageview.hidden = YES;
         self.userNameLabel.hidden = NO;
         self.userEmailLabel.hidden = NO;
@@ -305,9 +310,19 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         
     }else if (index == 1){
 //        if (us.user.isLogin == YES) {
+        
+        ITSApplication* itsApp = [ITSApplication get];
+        CBUserService* us = itsApp.cbUserSvr;
+        
+        if (us.user.isLogin == NO) {
+            [UIView animateWithDuration:0.5 animations:^{
+                self.loginView.effectView.alpha = 1;
+            }];
+        }else {
             MyCommentController *Vc = [[MyCommentController alloc] init];
             Vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:Vc animated:YES];
+        }
 //        }
     }else if (index == 2){
         WebviewController *webVc = [[WebviewController alloc] init];

@@ -226,7 +226,9 @@
     if ([comment isKindOfClass:[CelebComment class]]) {
         CelebComment *data = comment;
         self.icon.frame = CGRectMake(15, 13, 40, 40);
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+        self.icon.layer.masksToBounds = YES;
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
         CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,20)];
@@ -254,7 +256,9 @@
         self.iconBtn.frame = self.icon.bounds;
     }else if ([comment isKindOfClass:[FansComment class]]) {
         FansComment *data = comment;
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+        self.icon.layer.masksToBounds = YES;
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         self.commentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
@@ -275,8 +279,9 @@
             UIImageView *replyIcon = [[UIImageView alloc] init];
             replyIcon.backgroundColor = [UIColor redColor];
             replyIcon.layer.cornerRadius = 15;
+            replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;
-            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
             [self.contentView addSubview:replyIcon];
             self.replyIcon = replyIcon;
             [self.replyIconView addObject:replyIcon];

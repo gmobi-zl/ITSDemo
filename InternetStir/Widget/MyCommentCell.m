@@ -132,7 +132,9 @@
     if ([comment isKindOfClass:[UserTrackComment class]]) {
         
         UserTrackComment *data = comment;
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+        self.icon.clipsToBounds = YES;
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         self.contentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
@@ -147,7 +149,9 @@
         NSString* image = cbAtt.fd;
         
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
-        [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+        self.photo.contentMode = UIViewContentModeScaleAspectFill;
+        self.photo.layer.masksToBounds = YES;
+        [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         
         if (data.isCelebRead == YES) {
             self.readBtn.frame = CGRectMake(screenW - 75, 15, 60, 30);
@@ -179,8 +183,9 @@
             UIImageView *replyIcon = [[UIImageView alloc] init];
             replyIcon.backgroundColor = [UIColor redColor];
             replyIcon.layer.cornerRadius = 15;
+            replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;
-            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
+            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
             [self.contentView addSubview:replyIcon];
             self.replyIcon = replyIcon;
             [self.replyIconView addObject:replyIcon];

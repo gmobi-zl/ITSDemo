@@ -72,11 +72,15 @@
     [self.titleLabel setFrame:frame];
     self.titleLabel.frame = frame;
     
+    self.icon.contentMode = UIViewContentModeScaleAspectFill;
+    self.icon.layer.masksToBounds = YES;
     NewsImage *image = [item.images objectAtIndex:0];
     CGFloat height;
     height = image.h * screenW / image.w;
     self.icon.frame = CGRectMake(0, frame.size.height + 5 , screenW, height);
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+    self.icon.contentMode = UIViewContentModeScaleAspectFill;
+    self.icon.layer.masksToBounds = YES;
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 20);
     self.sourceLabel.font = [UIFont systemFontOfSize:10];
     self.sourceLabel.text = item.pdomain;

@@ -209,13 +209,15 @@
 
     if ([comment.replayComments count]) {
         NSInteger maxHotCommentCount = comment.replayComments.count;
-        if (maxHotCommentCount > CB_MAX_COUNT)
+        if (maxHotCommentCount > CB_MAX_COUNT){
             maxHotCommentCount = CB_MAX_COUNT;
+        }else {
+            maxHotCommentCount = comment.replayComments.count;
+        }
         for (int i = 0; i < maxHotCommentCount; i++) {
             
             FansComment *item = [comment.replayComments objectAtIndex:i];
             CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
-//            CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
             CGFloat replyLabelY = self.cellHeight + 5;
             CGFloat replyLabelWidth = screenW - 50;
             CGFloat replyLabelHeight = height;
@@ -226,13 +228,15 @@
     }else {
         if ([comment.topFansComments count]) {
             NSInteger maxHotCommentCount = comment.topFansComments.count;
-            if (maxHotCommentCount > 3)
+            if (maxHotCommentCount > 3){
                 maxHotCommentCount = 3;
+            }else {
+                maxHotCommentCount = comment.topFansComments.count;
+            }
             for (int i = 0; i < maxHotCommentCount; i++) {
                 
                 FansComment *item = [comment.topFansComments objectAtIndex:i];
                 CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
-//                CGSize replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
                 CGFloat replyLabelY = self.cellHeight + 5;
                 CGFloat replyLabelWidth = screenW - 50;
                 CGFloat replyLabelHeight = height;
