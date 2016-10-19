@@ -36,7 +36,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-    self.title = itsApp.dataSvr.celebInfo.name == nil ? @"" : itsApp.dataSvr.celebInfo.name; //@"蔡阿嘎";
+    self.title = itsApp.dataSvr.celebInfo.title == nil ? @"" : itsApp.dataSvr.celebInfo.title; //@"蔡阿嘎";
     NSArray *arr = @[@"留言",@"内容",@"社群"];
     self.segment = [[UISegmentedControl alloc] initWithItems:arr];
     self.segment.frame = CGRectMake(20, 70, screenW - 40, 30);

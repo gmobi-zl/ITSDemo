@@ -35,7 +35,7 @@
     NSArray *imageSelectArr = @[@"social_selected",@"home_selected",@"more_selected"];
 
     ITSApplication* itsApp = [ITSApplication get];
-    NSString* appTitleName = itsApp.dataSvr.celebInfo.name == nil ? @"" : itsApp.dataSvr.celebInfo.name;
+    NSString* appTitleName = itsApp.dataSvr.celebInfo.title == nil ? @"" : itsApp.dataSvr.celebInfo.title;
     NSArray *titleName = @[@"社群",appTitleName,NSLocalizedString(@"fans_helper",nil)];
     int cnt = 0;
     NSMutableArray *arr = [[NSMutableArray alloc] init];

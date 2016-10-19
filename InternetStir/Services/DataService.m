@@ -407,6 +407,9 @@
         if (tmpData != nil)
             self.celebInfo.avator = tmpData;
         
+        tmpData = [dicData objectForKey:@"title"];
+        if (tmpData != nil)
+            self.celebInfo.title = tmpData;
         
         NSArray* tmpCateList = [dicData objectForKey:@"categories"];
         if (tmpCateList != nil){
