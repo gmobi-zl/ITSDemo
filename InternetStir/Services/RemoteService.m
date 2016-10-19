@@ -1325,7 +1325,7 @@
      }];
 }
 -(void) celebUpdateComment: (NSString*) fid
-                   content: (NSString*) context
+                   context: (NSString*) context
                 attachment: (NSMutableArray*) attachment {
     if (fid == nil || context == nil || attachment == nil)
         return;
