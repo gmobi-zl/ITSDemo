@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SocialComment.h"
+#import "CelebRecommend.h"
 
 @interface ContentViewCell : UITableViewCell
 @property (nonatomic, strong)UILabel *titleLabel;
@@ -17,6 +17,6 @@
 @property (nonatomic, strong)UILabel *line;
 @property (nonatomic, strong)UIView *bgView;
 @property (nonatomic, strong)UIImageView *photo;
--(void)showDataWithModel:(SocialComment*)item;
+-(void)showDataWithModel:(CelebRecommend*)item;
 
 @end

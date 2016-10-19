@@ -71,7 +71,7 @@
 		E181D12E1D669525005115E6 /* b-12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E181D12A1D669525005115E6 /* b-12.jpg */; };
 		E181D1301D66AB64005115E6 /* replyGroup.plist in Resources */ = {isa = PBXBuildFile; fileRef = E181D12F1D66AB64005115E6 /* replyGroup.plist */; };
 		E181D1331D66F785005115E6 /* WebviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E181D1321D66F785005115E6 /* WebviewController.m */; };
-		E18341C81DB5D298005263C0 /* SocialComment.m in Sources */ = {isa = PBXBuildFile; fileRef = E18341C71DB5D298005263C0 /* SocialComment.m */; };
+		E18341C81DB5D298005263C0 /* CelebRecommend.m in Sources */ = {isa = PBXBuildFile; fileRef = E18341C71DB5D298005263C0 /* CelebRecommend.m */; };
 		E187B6551D9A057D00A6D565 /* HomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B6541D9A057D00A6D565 /* HomePageController.m */; };
 		E187B6581D9A3EBB00A6D565 /* SocialWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = E187B6571D9A3EBB00A6D565 /* SocialWebController.m */; };
 		E189F5EF1D64158E008587CE /* ContentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F5E81D64158E008587CE /* ContentViewCell.m */; };
@@ -290,8 +290,8 @@
 		E181D12F1D66AB64005115E6 /* replyGroup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = replyGroup.plist; sourceTree = "<group>"; };
 		E181D1311D66F785005115E6 /* WebviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewController.h; sourceTree = "<group>"; };
 		E181D1321D66F785005115E6 /* WebviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewController.m; sourceTree = "<group>"; };
-		E18341C61DB5D298005263C0 /* SocialComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialComment.h; sourceTree = "<group>"; };
-		E18341C71DB5D298005263C0 /* SocialComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialComment.m; sourceTree = "<group>"; };
+		E18341C61DB5D298005263C0 /* CelebRecommend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CelebRecommend.h; sourceTree = "<group>"; };
+		E18341C71DB5D298005263C0 /* CelebRecommend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CelebRecommend.m; sourceTree = "<group>"; };
 		E187B6531D9A057D00A6D565 /* HomePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageController.h; sourceTree = "<group>"; };
 		E187B6541D9A057D00A6D565 /* HomePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageController.m; sourceTree = "<group>"; };
 		E187B6561D9A3EBB00A6D565 /* SocialWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialWebController.h; sourceTree = "<group>"; };
@@ -712,8 +712,8 @@
 				1837D62A1DAB3DC9004653F2 /* UserTrackComment.m */,
 				E18A96591DB08010009B1D9F /* UserTrackCommentFrame.h */,
 				E18A965A1DB08010009B1D9F /* UserTrackCommentFrame.m */,
-				E18341C61DB5D298005263C0 /* SocialComment.h */,
-				E18341C71DB5D298005263C0 /* SocialComment.m */,
+				E18341C61DB5D298005263C0 /* CelebRecommend.h */,
+				E18341C71DB5D298005263C0 /* CelebRecommend.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1189,7 +1189,7 @@
 				E1F6B1021D659ABC00822E8D /* ReplyItem.m in Sources */,
 				E187B6551D9A057D00A6D565 /* HomePageController.m in Sources */,
 				E1F030681D741C4100060559 /* UIView+MJExtension.m in Sources */,
-				E18341C81DB5D298005263C0 /* SocialComment.m in Sources */,
+				E18341C81DB5D298005263C0 /* CelebRecommend.m in Sources */,
 				E19DFD0B1D8F87370042C777 /* DetailCommentCell.m in Sources */,
 				E1F0306C1D741C4100060559 /* SDWebImageDecoder.m in Sources */,
 				E1A2A6321D6AF4DC005AA8DA /* GoogleService.m in Sources */,

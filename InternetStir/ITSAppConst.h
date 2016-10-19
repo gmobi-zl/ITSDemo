@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define TEST_CELEB_LOGIN 1
+//#define TEST_CELEB_LOGIN 1
 
 // Test Channel & url
 #define PONEWS_URL_BASE @"http://test.poponews.net/"
@@ -129,11 +129,6 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define TRACK_COMMENT_REFRESH_SUCCESS @"track_refresh_success"
 #define TRACK_COMMENT_REFRESH_ERROR   @"track_refresh_failed"
 
-#define SOCIAL_COMMENT_REFRESH_TYPE_BEFORE  1
-#define SOCIAL_COMMENT_REFRESH_TYPE_AFTER   2
-#define SOCIAL_COMMENT_REFRESH_SUCCESS @"social_refresh_success"
-#define SOCIAL_COMMENT_REFRESH_ERROR   @"social_refresh_failed"
-
 
 #define CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE  1
 #define CB_COMMENT_REPLY_REFRESH_TYPE_AFTER   2
@@ -150,6 +145,9 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 
 #define CELEB_SUCCESS @"success"
 #define CELEB_ERROR   @"error"
+
+#define CB_RECOMMEND_REFRESH_TYPE_BEFORE  1
+#define CB_RECOMMEND_REFRESH_TYPE_AFTER   2
 
 
 // FACEBOOK news
@@ -183,7 +181,7 @@ static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfs
 #define EVENT_USER_COMMENT_DATA_REFRESH  @"USER_COMMENT_REFRESH"
 #define EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH  @"CELEB_REPLY_COMMENT_REFRESH"
 #define EVENT_USER_TRACK_COMMENT_DATA_REFRESH  @"USER_TRACK_COMMENT_REFRESH"
-#define EVENT_SOCIAL_COMMENT_DATA_REFRESH  @"SOCIAL_COMMENT_REFRESH"
+#define EVENT_CELEB_RECOMMEND_DATA_REFRESH  @"CELEB_RECOMMEND_REFRESH"
 
 
 #define EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT  @"CELEB_UPLOAD_FILE_RESULT"

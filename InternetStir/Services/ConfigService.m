@@ -52,7 +52,8 @@ ConfigService* configInstance = nil;
 
 -(NSString*) getChannel{
     //return self.currentChannel;
-    return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";
+    return @"d1ce6ba1-3636-4938-9614-7649058344b4";   // 我是马克
+    //return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";   // 菜啊嘎
 }
 
 -(NSString*) getListArticleWidthHeight{

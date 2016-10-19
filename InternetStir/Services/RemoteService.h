@@ -36,6 +36,9 @@
 #define BEFORE_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?before=%@&size=%d"
 #define AFTER_CBREPLY_TEMPLATE_URL @"v0/forums/%@/%@/comments?after=%@&size=%d"
 
+#define BEFORE_CB_RECOMMEND_TEMPLATE_URL @"v0/news/%@?before=%@&size=%d"
+#define AFTER_CB_RECOMMEND_TEMPLATE_URL @"v0/news/%@?after=%@&size=%d"
+
 #define BEFORE_USERC_TEMPLATE_URL @"v0/users/%@/comments/%@?before=%@&size=%d"
 #define AFTER_USERC_TEMPLATE_URL @"v0/users/%@/comments/%@?after=%@&size=%d"
 
@@ -139,6 +142,10 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 
 //下载launch
 - (void) downloadLaunchImage:(NSString *) file;
+
+-(void) getCelebRecommendListData: (NSString*) utc_time
+                         timeType: (int) type;
+
 @end
 
 #endif

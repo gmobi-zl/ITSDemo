@@ -20,7 +20,7 @@
 #import "MJRefresh.h"
 #import "ITSApplication.h"
 #import "MMEventService.H"
-#import "SocialComment.h"
+#import "CelebRecommend.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -76,9 +76,9 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     [self setupRefresh];
     
     MMEventService* es = [MMEventService getInstance];
-    [es addEventHandler:self eventName:EVENT_SOCIAL_COMMENT_DATA_REFRESH selector:@selector(socialCommentsDataRefreshListener:)];
+    [es addEventHandler:self eventName:EVENT_CELEB_RECOMMEND_DATA_REFRESH selector:@selector(celebRecommendsDataRefreshListener:)];
 }
-- (void)socialCommentsDataRefreshListener: (id) data {
+- (void)celebRecommendsDataRefreshListener: (id) data {
     if (self.view.hidden == NO){
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -110,10 +110,10 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     
     [poApp.reportSvr recordEvent:@"list.loading.up" params:eParams eventCategory:@"recommendation.view"];
     if (self.isRefreshing == NO){
-        self.refreshType = SOCIAL_COMMENT_REFRESH_TYPE_AFTER;
+        self.refreshType = CB_RECOMMEND_REFRESH_TYPE_AFTER;
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
-        [ds refreshSocialComments:SOCIAL_COMMENT_REFRESH_TYPE_AFTER];
+        [ds refreshCelebRecommends:CB_RECOMMEND_REFRESH_TYPE_AFTER];
         self.isRefreshing = YES;
     }
 }
@@ -123,10 +123,10 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"list.loading.down" params:eParams eventCategory:@"recommendation.view"];
     if (self.isRefreshing == NO){
-        self.refreshType = SOCIAL_COMMENT_REFRESH_TYPE_BEFORE;
+        self.refreshType = CB_RECOMMEND_REFRESH_TYPE_BEFORE;
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
-        [ds refreshSocialComments:SOCIAL_COMMENT_REFRESH_TYPE_BEFORE];
+        [ds refreshCelebRecommends:CB_RECOMMEND_REFRESH_TYPE_BEFORE];
         self.isRefreshing = YES;
     }
 }
@@ -135,8 +135,8 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
  
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
-    NSMutableArray *socialComments = ds.socialComments;
-    return socialComments.count;
+    NSMutableArray *celebRecommends = ds.celebRecommends;
+    return celebRecommends.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -152,7 +152,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
-    SocialComment *comment = [ds.socialComments objectAtIndex:indexPath.row];
+    CelebRecommend *comment = [ds.celebRecommends objectAtIndex:indexPath.row];
     ContentViewCell* tmpCell = (ContentViewCell*)cell;
     [tmpCell showDataWithModel:comment];
     

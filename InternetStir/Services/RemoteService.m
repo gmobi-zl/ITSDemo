@@ -267,6 +267,50 @@
 }
 
 
+-(NSString*) getLatesCelebRecommendListUrl: (NSString*) utc_time{
+    NSString* url;
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
+    
+    NSString* param = [[NSString alloc] initWithFormat:AFTER_CB_RECOMMEND_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
+    
+    NSString* pSession = @"";
+    
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
+    
+    return url;
+}
+
+-(NSString*) getEarlyCelebRecommendListUrl: (NSString*) utc_time{
+    NSString* url;
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
+    
+    NSString* param = [[NSString alloc] initWithFormat:BEFORE_CB_RECOMMEND_TEMPLATE_URL, [cs getChannel], utc_time, FETCH_COUNT];
+    
+    NSString* pSession = @"";
+    
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
+    
+    url = [[NSString alloc] initWithFormat:@"%@%@%@" , [self getBaseUrl], param, pSession];
+    
+    return url;
+}
+
+
 -(NSMutableDictionary*) getDeviceInfo{
     NSMutableDictionary* devInfo = [NSMutableDictionary dictionaryWithCapacity:2];
     ConfigService* conf = [ConfigService get];
@@ -696,6 +740,10 @@
     }];
 }
 
+/**********************************************
+ ****   Celeb APIs
+ ****
+ */
 -(void) doLogin: (NSString*) email
             uid: (NSString*) uid
            name: (NSString*) name
@@ -1431,6 +1479,54 @@
         }
     } progressCallback:^(NSString *url, double progress) {
         
+    }];
+}
+
+-(void) getCelebRecommendListData: (NSString*) utc_time
+                         timeType: (int) type{
+    
+    NSString* dataTime = utc_time;
+    if (dataTime == nil)
+        dataTime = [MMSystemHelper getTimeStampSeconds];
+    
+    NSString* url = nil;
+    if (type == CB_RECOMMEND_REFRESH_TYPE_BEFORE)
+        url = [self getEarlyCelebRecommendListUrl:dataTime];
+    else
+        url = [self getLatesCelebRecommendListUrl:dataTime];
+    
+    MMLogDebug(@"Celeb Recommend data refresh url = %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doGet:url reqHeader:nil callback:^(int status, int code, NSDictionary *resultData) {
+        MMLogDebug(@"Celeb Recommend Data rsp: status = %d , code = %d", status, code);
+        
+        if (code == 200){
+            NSData* data = [resultData objectForKey:@"data"];
+            NSError* err;
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSArray* dataArr = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            
+            MMLogDebug(@"Celeb Recommend Data rsp data: %@", dataStr);
+            
+            BOOL isClear = NO;
+            if (utc_time == nil && type == NEWS_REFRESH_TYPE_AFTER)
+                isClear = YES;
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear type:type];
+            
+            //NSArray* commentArr = [dataDic objectForKey:@"contexts"];
+            
+            [itsApp.dataSvr setRefreshCelebRecommends:dataArr isClearData:isClear type:type];
+            
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_RECOMMEND_DATA_REFRESH eventData:CELEB_SUCCESS];
+        } else {
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_RECOMMEND_DATA_REFRESH eventData:CELEB_ERROR];
+        }
     }];
 }
 

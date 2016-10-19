@@ -142,7 +142,7 @@ typedef enum{
 @property (retain) NSMutableArray* myCommentNewsList;
 @property (retain) NSMutableArray* unLikeNewsList;
 
-@property (retain) NSMutableArray* socialComments;
+@property (retain) NSMutableArray* celebRecommends;
 @property (retain) NSMutableArray* celebComments;
 @property (retain) CelebComment* currentCelebComment;
 @property (retain) NSMutableArray* userTrackComments;
@@ -345,8 +345,8 @@ typedef enum{
                     isClearData: (BOOL) clear
                            type: (int) type;
 
--(void) refreshSocialComments: (int) type;
--(void) setRefreshSocialComments: (NSArray*) dicData
+-(void) refreshCelebRecommends: (int) type;
+-(void) setRefreshCelebRecommends: (NSArray*) dicData
                         isClearData: (BOOL) clear
                                type: (int) type;
 

@@ -56,7 +56,7 @@
     }
     return self;
 }
--(void)showDataWithModel:(SocialComment*)item{
+-(void)showDataWithModel:(CelebRecommend*)item{
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     self.bgView.frame = CGRectMake(0, 10, screenW, 40);

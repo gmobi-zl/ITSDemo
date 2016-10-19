@@ -20,7 +20,7 @@
 #import "CelebComment.h"
 #import "FansComment.h"
 #import "UserTrackComment.h"
-#import "SocialComment.h"
+#import "CelebRecommend.h"
 
 //#import "Go2Reach.framework/Headers/GRAdService.h"
 
@@ -2432,18 +2432,18 @@
         }
     }
 }
--(void) refreshSocialComments: (int) type {
+-(void) refreshCelebRecommends: (int) type {
     NSString* newsTime = nil;
-    if (self.socialComments != nil){
-        NSInteger count = [self.socialComments count];
+    if (self.celebComments != nil){
+        NSInteger count = [self.celebComments count];
         if (count > 0){
-            if (type == SOCIAL_COMMENT_REFRESH_TYPE_AFTER){
+            if (type == CB_RECOMMEND_REFRESH_TYPE_AFTER){
                 // do nothing
-                SocialComment* topComment = [self.socialComments objectAtIndex:0];
+                CelebRecommend* topComment = [self.celebComments objectAtIndex:0];
                 if (topComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
-            } else if (type == SOCIAL_COMMENT_REFRESH_TYPE_BEFORE){
-                SocialComment* latestComment = [self.socialComments objectAtIndex:count-1];
+            } else if (type == CB_RECOMMEND_REFRESH_TYPE_BEFORE){
+                CelebRecommend* latestComment = [self.celebComments objectAtIndex:count-1];
                 if (latestComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
             }
@@ -2453,44 +2453,54 @@
     if (newsTime == nil){
         newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
         
-//        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:SOCIAL_COMMENT_REFRESH_TYPE_BEFORE];
+        [[ITSApplication get].remoteSvr getCelebRecommendListData:newsTime timeType:CB_RECOMMEND_REFRESH_TYPE_BEFORE];
     }else{
         
-//        [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
+        [[ITSApplication get].remoteSvr getCelebRecommendListData:newsTime timeType:type];
     }
 
 }
--(void) setRefreshSocialComments: (NSArray*) dicData
+-(void) setRefreshCelebRecommends: (NSArray*) dicData
                      isClearData: (BOOL) clear
                             type: (int) type {
     if (dicData == nil)
         return;
     
     for (NSDictionary* commentDataItem in dicData) {
-        SocialComment* tmpItem = [[SocialComment alloc] initWithDictionary:commentDataItem];
-        [self insertSocialCommentItem:tmpItem];
+        CelebRecommend* tmpItem = [[CelebRecommend alloc] initWithDictionary:commentDataItem];
+        [self insertCelebRecommendsItem:tmpItem];
     }
 }
--(BOOL) insertSocialCommentItem: (SocialComment*) item{
+-(BOOL) insertCelebRecommendsItem: (CelebRecommend*) item{
     BOOL same = NO;
     BOOL ret = NO;
     int i = 0;
     
-    if (self.socialComments == nil)
-        self.socialComments = [NSMutableArray arrayWithCapacity:1];
+    if (self.celebRecommends == nil)
+        self.celebRecommends = [NSMutableArray arrayWithCapacity:1];
     
-    if (self.socialComments == nil || item == nil)
+    if (self.celebRecommends == nil || item == nil)
         return ret;
     
-    int listCount = (int)[self.socialComments count];
+    int listCount = (int)[self.celebRecommends count];
     for (i = 0; i < listCount; i++) {
-        
-        id uComment = [self.socialComments objectAtIndex:i];
-        if ([uComment isKindOfClass:[SocialComment class]]) {
-            SocialComment* comment = uComment;
+        // PoPoNewsItem* newItem = [list objectAtIndex:i];
+        id cbComment = [self.celebRecommends objectAtIndex:i];
+        if ([cbComment isKindOfClass:[CelebRecommend class]]) {
+            CelebRecommend* comment = cbComment;
             if (comment != nil){
                 if ([comment.cid compare:item.cid] == NSOrderedSame) {
                     same = YES;
+                    
+                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                    //    newItem.isOfflineDL = YES;
+                    //}
+                    break;
+                }
+                
+                if (comment.uts < item.uts) {
+                    [self.celebRecommends insertObject:item atIndex:i];
+                    ret = YES;
                     break;
                 }
             }
@@ -2498,7 +2508,7 @@
     }
     
     if (same == NO && ret == NO){
-        [self.socialComments addObject:item];
+        [self.celebRecommends addObject:item];
         ret = YES;
     }
     
