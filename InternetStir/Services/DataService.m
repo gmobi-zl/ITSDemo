@@ -2543,7 +2543,6 @@
         [[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
     }
     
-    
     //NSString* newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
     //[[ITSApplication get].remoteSvr getUserCommentListData:newsTime timeType:type];
 }

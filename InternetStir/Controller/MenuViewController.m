@@ -142,11 +142,14 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     
-    self.userEmailLabel.text = us.user.email;
-    self.userNameLabel.text = us.user.userName;
-    self.icon.contentMode = UIViewContentModeScaleAspectFill;
-    self.icon.clipsToBounds = YES;
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.userEmailLabel.text = us.user.email;
+        self.userNameLabel.text = us.user.userName;
+//        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+//        self.icon.clipsToBounds = YES;
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+        [self.tableView reloadData];
+    });
 }
 //- (void)pushLoginVc{
 //    
