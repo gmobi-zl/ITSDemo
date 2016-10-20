@@ -102,7 +102,6 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_SEND_RESULT selector:@selector(celebSendCommentsListener:)];
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_UPDATE_RESULT selector:@selector(celebUpdateCommentsListener:)];
     
-    
 //    self.tableView = [[UITableView alloc] init];
 //    self.tableView.frame = CGRectMake(0, 179, screenW, screenH - 179);
 //    self.tableView.delegate = self;

@@ -121,7 +121,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         self.refreshType = TRACK_COMMENT_REFRESH_TYPE_BEFORE;
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
-        [ds refreshCelebComments:TRACK_COMMENT_REFRESH_TYPE_BEFORE];
+        [ds refreshUserTrackComments:TRACK_COMMENT_REFRESH_TYPE_BEFORE];
         self.isRefreshing = YES;
     }
 }

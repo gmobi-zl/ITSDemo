@@ -134,7 +134,7 @@
         UserTrackComment *data = comment;
         self.icon.contentMode = UIViewContentModeScaleAspectFill;
         self.icon.clipsToBounds = YES;
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         self.contentLabel.text = data.comment;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
