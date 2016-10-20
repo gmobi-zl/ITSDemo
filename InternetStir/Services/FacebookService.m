@@ -210,6 +210,7 @@
     }
     
     self.login = [[FBSDKLoginManager alloc] init];
+    self.login.loginBehavior = FBSDKLoginBehaviorWeb;
     //@"public_profile", @"email", @"user_friends", @"user_likes", @"user_posts"
     [self.login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:view handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         MMLogDebug(@"FB login rsp:  %@", result);

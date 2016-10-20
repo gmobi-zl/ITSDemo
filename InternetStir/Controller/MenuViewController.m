@@ -147,7 +147,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.userNameLabel.text = us.user.userName;
 //        self.icon.contentMode = UIViewContentModeScaleAspectFill;
 //        self.icon.clipsToBounds = YES;
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:us.user.avatar] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         [self.tableView reloadData];
     });
 }

@@ -231,7 +231,7 @@
     self.nameLabel.text = data.name;
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
     
     ITSApplication* itsApp = [ITSApplication get];
     NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];

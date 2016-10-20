@@ -75,18 +75,24 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
     [self.view addSubview:self.textView];
     
-    NSString *str;
-    if (self.labelStr != nil) {
-        str = self.labelStr;
-    }else {
-        str = NSLocalizedString(@"narrated_img", nil);
-    }
+    NSString *str = NSLocalizedString(@"narrated_img", nil);;
+//    if (self.labelStr != nil) {
+//        str = self.labelStr;
+//    }else {
+//        str = NSLocalizedString(@"narrated_img", nil);
+//    }
     
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 30)];
     self.label = [[UILabel alloc] init];
     self.label.textColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
     self.label.frame = CGRectMake(90, 74, size.width, 30);
     self.label.text = str;
+    if (self.type == 1) {
+        self.label.hidden = NO;
+    }else {
+        self.label.hidden = YES;
+        self.textView.text = self.labelStr;
+    }
     self.label.font = [UIFont systemFontOfSize:16];
     self.label.enabled = NO;
     self.label.backgroundColor = [UIColor clearColor];
@@ -150,9 +156,12 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 }
 #pragma mark TextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView {
-    if (textView.text.length == 0) {
-        
-        self.label.text = NSLocalizedString(@"narrated_img", nil);
+    if (self.type == 1) {
+        if (textView.text.length == 0) {
+            self.label.text = NSLocalizedString(@"narrated_img", nil);
+        }else {
+            self.label.hidden = YES;
+        }
     }else {
         self.label.hidden = YES;
     }
