@@ -1385,7 +1385,7 @@
     if (user == nil || user.isLogin == NO)
         return;
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], user.session, fid];
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
     MMLogDebug(@"celebUpdateComment URL: %@", url);
     
     NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
