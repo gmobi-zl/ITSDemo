@@ -175,6 +175,9 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     NSMutableArray* trackComment= ds.userTrackComments;
     if (trackComment != nil){
         UserTrackComment* c = [trackComment objectAtIndex:indexPath.row];
+        UserTrackCommentFrame *frame = [[UserTrackCommentFrame alloc] init];
+        [frame initWithDataFrame:c];
+        c.uiFrame = frame;
         [tmpCell setShowData:c];
         [tmpCell setTrackCommentFrame:c.uiFrame];
     }
@@ -198,18 +201,21 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         if (celebC == nil){
             [itsApp.dataSvr setCurrentCelebComment:comment.article];
             CommentViewController *commentVc = [[CommentViewController alloc] init];
+            commentVc.context = celebC.context;
             [self.navigationController pushViewController:commentVc animated:YES];
             
         } else {
             comment.article = celebC;
             [itsApp.dataSvr setCurrentCelebComment:comment.article];
             CommentViewController *commentVc = [[CommentViewController alloc] init];
+            commentVc.context = celebC.context;
             [self.navigationController pushViewController:commentVc animated:YES];
         }
     } else {
         [itsApp.dataSvr setCurrentCelebComment:comment.article];
         
         CommentViewController *commentVc = [[CommentViewController alloc] init];
+        commentVc.context = comment.article.context;
         [self.navigationController pushViewController:commentVc animated:YES];
     }
 }

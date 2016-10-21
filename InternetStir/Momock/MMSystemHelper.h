@@ -107,7 +107,7 @@ typedef enum{
 
 +(CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize;
 //+ (NSString *) compareCurrentTime:(NSString *)str;
-
++ (BOOL) isEmpty:(NSString *) str;
 +(BOOL) writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath;
 
 @end

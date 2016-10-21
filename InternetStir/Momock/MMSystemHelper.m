@@ -623,8 +623,24 @@ static NetWorkType currentNetType = NoNet;
     return  result;
     
 }
+//判断是否全是空格
 
-
++ (BOOL) isEmpty:(NSString *) str {
+    
+    if (!str) {
+        return true;
+    } else {
+        
+        NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimedString = [str stringByTrimmingCharactersInSet:set];
+        
+        if ([trimedString length] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 +(BOOL) writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath
 {
     if ((image == nil) || (aPath == nil) || ([aPath isEqualToString:@""]))

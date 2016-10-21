@@ -71,11 +71,18 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [poApp.reportSvr recordEvent:@"comment" params:eParams eventCategory:@"tabbar.click"];
 }
 - (void)passMessage {
-   
-    self.Btn.frame = CGRectMake(0, 20, 25, 23);
-
-    [self.Btn setTitle:@"" forState:UIControlStateNormal];
-    [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (us.user.isCBADM == YES) {
+            self.Btn.frame = CGRectMake(0, 20, 25, 23);
+            [self.Btn setTitle:@"" forState:UIControlStateNormal];
+            [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
+        }else {
+            [self.Btn setTitle:@"" forState:UIControlStateNormal];
+        }
+    });
 }
 
 -(void)celebCommentsDataRefreshListener: (id) data{

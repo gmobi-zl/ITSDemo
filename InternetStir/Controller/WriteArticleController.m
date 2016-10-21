@@ -203,7 +203,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 //            });
             
         }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
             [alert show];
         }
     }else {

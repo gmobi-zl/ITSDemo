@@ -11,6 +11,7 @@
 #import "ConfigService.h"
 #import "AppStyleConfiguration.h"
 #import "MMSystemHelper.h"
+#import "MMSystemHelper.h"
 
 #define UUIAV_MAIN_W    CGRectGetWidth([UIScreen mainScreen].bounds)
 #define UUIAV_MAIN_H    CGRectGetHeight([UIScreen mainScreen].bounds)
@@ -201,6 +202,13 @@
 //    [inputView removeFromSuperview];
 //    [bar removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    BOOL isEmpty = [MMSystemHelper isEmpty:inputView.text];
+    if (isEmpty == YES) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+        [alert show];
+        
+    }
 }
 
 // textView's delegate

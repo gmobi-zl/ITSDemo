@@ -33,6 +33,7 @@
         
         self.contentLabel = [[UILabel alloc] init];
         self.contentLabel.font = [UIFont systemFontOfSize:16];
+        self.contentLabel.numberOfLines = 0;
         self.contentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
         self.contentLabel.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.contentLabel];
@@ -84,7 +85,7 @@
         
         self.readBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.readBtn.layer.masksToBounds = YES;
-        self.readBtn.frame = CGRectMake(screenW - 45, 10, 30, 30);
+        self.readBtn.frame = CGRectMake(screenW - 45, 8, 30, 30);
         self.readBtn.layer.cornerRadius = 3;
         self.readBtn.layer.borderWidth = 1;
         self.readBtn.layer.borderColor = [UIColor grayColor].CGColor;
@@ -154,7 +155,7 @@
         [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         
         if (data.isCelebRead == YES) {
-            self.readBtn.frame = CGRectMake(screenW - 75, 15, 60, 30);
+            self.readBtn.frame = CGRectMake(screenW - 75, 13, 60, 30);
             self.readBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             self.readBtn.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
             [self.readBtn setTitle:@"Read" forState:UIControlStateNormal];
@@ -164,7 +165,7 @@
             [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
 
         }else {
-            self.readBtn.frame = CGRectMake(screenW - 45, 15, 30, 30);
+            self.readBtn.frame = CGRectMake(screenW - 45, 13, 30, 30);
             UIImage *btnIcon = [UIImage imageNamed:@"rectangle.unread"];
             [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
         }

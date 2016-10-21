@@ -304,46 +304,49 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              
 #else
              
-             ITSApplication* itsApp = [ITSApplication get];
-             DataService* ds = itsApp.dataSvr;
-             CelebComment* currentComment = ds.currentCelebComment;
-             
-             [itsApp.remoteSvr replayCelebComment:currentComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+             BOOL isEmpty = [MMSystemHelper isEmpty:contentStr];
+             if (isEmpty == NO) {
+                 ITSApplication* itsApp = [ITSApplication get];
+                 DataService* ds = itsApp.dataSvr;
+                 CelebComment* currentComment = ds.currentCelebComment;
                  
-                 if (resultData != nil){
-                     NSNumber* retNum = [resultData objectForKey:@"success"];
-                     if (retNum != nil){
-                         BOOL ret = [retNum boolValue];
-                         if (ret == YES){
-                             CelebUser* user = itsApp.cbUserSvr.user;
-                             FansComment* sendComment = [FansComment alloc];
-                             sendComment.name = user.userName;
-                             sendComment.avator = user.avatar;
-                             sendComment.comment = contentStr;
-                             NSString* retuuid = [resultData objectForKey:@"uuid"];
-                             NSString* retfid = [resultData objectForKey:@"fid"];
-                             NSString* retcid = [resultData objectForKey:@"cid"];
-                             
-                             sendComment.uuid = retuuid;
-                             sendComment.fid = retfid;
-                             sendComment.cid = retcid;
-                             sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
-                             sendComment.uts = sendComment.pts;
-                             
-                             CommentFrame* frame = [CommentFrame alloc];
-                             [frame initWithCommentData:sendComment];
-                             sendComment.uiFrame = frame;
-                             
-                             [ds userInsertCurrentReplyCommentItem:sendComment];
-                             
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 [self.tableView reloadData];
-                             });
+                 [itsApp.remoteSvr replayCelebComment:currentComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                     
+                     if (resultData != nil){
+                         NSNumber* retNum = [resultData objectForKey:@"success"];
+                         if (retNum != nil){
+                             BOOL ret = [retNum boolValue];
+                             if (ret == YES){
+                                 CelebUser* user = itsApp.cbUserSvr.user;
+                                 FansComment* sendComment = [FansComment alloc];
+                                 sendComment.name = user.userName;
+                                 sendComment.avator = user.avatar;
+                                 sendComment.comment = contentStr;
+                                 NSString* retuuid = [resultData objectForKey:@"uuid"];
+                                 NSString* retfid = [resultData objectForKey:@"fid"];
+                                 NSString* retcid = [resultData objectForKey:@"cid"];
+                                 
+                                 sendComment.uuid = retuuid;
+                                 sendComment.fid = retfid;
+                                 sendComment.cid = retcid;
+                                 sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                                 sendComment.uts = sendComment.pts;
+                                 
+                                 CommentFrame* frame = [CommentFrame alloc];
+                                 [frame initWithCommentData:sendComment];
+                                 sendComment.uiFrame = frame;
+                                 
+                                 [ds userInsertCurrentReplyCommentItem:sendComment];
+                                 
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     [self.tableView reloadData];
+                                 });
+                             }
                          }
                      }
-                 }
-             }];
-             
+                 }];
+
+             }
 #endif
          }
      }];
@@ -423,7 +426,11 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }else {
         NSArray* replyList = currentComment.replayComments;
         if (replyList != nil){
+
             FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
+            CommentFrame *frame = [[CommentFrame alloc] init];
+            [frame initWithCommentData:c];
+            c.uiFrame = frame;
             [tmpCell setShowData:c];
             [tmpCell setDetailCommentFrame:c.uiFrame];
         }
@@ -440,7 +447,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         tmpCell.replyIcon.userInteractionEnabled = YES;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 0, tmpCell.replyIcon.frame.size.width, tmpCell.replyIcon.frame .size.height);
-        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
+//        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
         button.userInteractionEnabled = YES;
         button.tag = indexPath.row;
         [tmpCell.replyIcon addSubview:button];
@@ -451,7 +458,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         tmpCell.replyNameLabel.userInteractionEnabled = YES;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 0, tmpCell.replyNameLabel.frame.size.width, tmpCell.replyNameLabel.frame .size.height);
-        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
+//        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
         button.userInteractionEnabled = YES;
         button.tag = indexPath.row;
         [tmpCell.replyNameLabel addSubview:button];

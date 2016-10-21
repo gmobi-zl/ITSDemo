@@ -65,10 +65,10 @@
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     
-    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"404" ofType:@"html"];
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"404" ofType:@"html"];
+//    NSURL *url = [NSURL fileURLWithPath:filePath];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {
