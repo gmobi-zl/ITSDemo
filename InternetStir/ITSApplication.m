@@ -96,25 +96,28 @@ NSString* customerLocal = nil;
 }
 
 -(void) connect{
-//    if (internetStirAppInstance == nil)
-//        return;
-//    
+    if (internetStirAppInstance == nil)
+        return;
+    
 //    [internetStirAppInstance.dataSvr refreshCacheDataSize];
-//    
-//    BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
-//    if (isHadNetwork == NO){
-//        SettingService* ss = [SettingService get];
-//        NSDictionary* savedConnect = [ss getDictoryValue:CONFIG_LAST_CONNECT_INFO defValue:nil];
-//        if (savedConnect != nil){
-//            [internetStirAppInstance.dataSvr setConnectRespData:savedConnect];
-//            
-//            MMEventService *es = [MMEventService getInstance];
-//            [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
-//            return;
-//        }
-//    }
-//    
-//    [self.remoteSvr doConnect];
+    
+    BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
+    if (isHadNetwork == NO){
+        SettingService* ss = [SettingService get];
+        NSDictionary* savedConnect = [ss getDictoryValue:CONFIG_LAST_CONNECT_INFO defValue:nil];
+        if (savedConnect != nil){
+            [internetStirAppInstance.dataSvr setConnectRespData:savedConnect];
+            
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
+            return;
+        }else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"网络错误" delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+            [alert show];
+        }
+    }
+    
+    [self.remoteSvr doConnect];
 }
 
 -(void) refreshChannels{

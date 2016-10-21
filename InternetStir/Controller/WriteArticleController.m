@@ -69,7 +69,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.delegate = self;
     self.textView.font = [UIFont systemFontOfSize:18];
-    self.textView.returnKeyType = UIReturnKeyDone;//return键的类型
+    self.textView.returnKeyType = UIReturnKeyDefault;//return键的类型
     self.textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
     self.textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
     self.textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
@@ -169,12 +169,11 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
+//        [textView resignFirstResponder];
+//        return NO;
     }
     return YES;
 }
-
 - (void)clickBack {
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -15,6 +15,7 @@
 #import "DataService.h"
 #import "SettingService.h"
 #import "ConfigService.h"
+#import "MMEventService.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -74,13 +75,32 @@
     self.bgImage.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImage];
     
-    [self delayToHome];
+//    [self delayToHome];
 
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [eParams setObject:@"tomotoc001" forKey:@"ch"];
     [eParams setObject:@"" forKey:@"cid"];
     [poApp.reportSvr recordEvent:@"ch" params:eParams eventCategory:@"launch.view"];
+    
+    MMEventService *es = [MMEventService getInstance];
+    [es addEventHandler:self eventName:EVENT_CONNECT_ID selector:@selector(poponewsConnectListener:)];
+}
+-(void)poponewsConnectListener: (id) data{
+    NSString* resultStatus = data;
+    if (resultStatus != nil && [resultStatus compare:EVENT_CONNECT_SUCCESS] == NSOrderedSame){
+        [self delayToHome];
+    }else {
+        [self reconnect];
+    }
+}
+-(void) reconnect{
+    NSThread* th1 = [[NSThread alloc] initWithTarget:self selector:@selector(doConnect) object:nil];
+    [th1 start];
+}
+-(void) doConnect{
+    sleep(10);
+    [[ITSApplication get] connect];
 }
 
 -(void) pushNextVc{
@@ -144,17 +164,10 @@
     [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //[self startBGAnimation];
-    ITSApplication* itsApp = [ITSApplication get];    
-    [itsApp.remoteSvr doConnect];
-    
-//    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                         @"launch.view",@"EventCategory",
-//                         @"tomotoc001",@"EventAction",
-//                         @"" ,@"name",
-//                         nil];
-//
-//    [itsApp.reportSvr recordEvent:@"launch" params:dic eventCategory:nil];
-    
+//    ITSApplication* itsApp = [ITSApplication get];    
+//    [itsApp.remoteSvr doConnect];
+    [[ITSApplication get] connect];
+   
 }
 
 -(void) viewWillAppear:(BOOL)animated{

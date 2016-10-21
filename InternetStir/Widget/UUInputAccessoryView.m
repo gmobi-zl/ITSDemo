@@ -185,7 +185,14 @@
 {
     [inputView resignFirstResponder];
     !inputBlock ?: inputBlock(inputView.text);
-    [self dismiss];
+    BOOL isEmpty = [MMSystemHelper isEmpty:inputView.text];
+    if (isEmpty == YES) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+        [alert show];
+        [inputView becomeFirstResponder];
+    }else {
+        [self dismiss];
+    }
 }
 
 - (void)dismiss
@@ -202,13 +209,6 @@
 //    [inputView removeFromSuperview];
 //    [bar removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    BOOL isEmpty = [MMSystemHelper isEmpty:inputView.text];
-    if (isEmpty == YES) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"say_something", nil) message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
-        [alert show];
-        
-    }
 }
 
 // textView's delegate
