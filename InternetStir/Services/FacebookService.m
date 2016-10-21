@@ -45,7 +45,7 @@
     us.user.userName = self.userName;
     us.user.avatar = self.icon;
     us.user.email = self.email;
-    us.user.session = @"85a8b3fb-fb49-4fa2-ba41-7053c8f04314";
+    us.user.session = @"d05a8267-e14a-4755-9077-f79c313baaa4";//@"85a8b3fb-fb49-4fa2-ba41-7053c8f04314";
     us.user.uId = self.uId;
     
     us.user.isCBADM = YES;

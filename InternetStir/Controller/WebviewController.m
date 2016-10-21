@@ -11,7 +11,8 @@
 #import "MMSystemHelper.h"
 #import "ConfigService.h"
 
-#define URL @"tomoto.io"
+#define TOMOTO_URL @"http://www.tomoto.io"
+
 @interface WebviewController ()
 
 @end
@@ -57,7 +58,7 @@
     progressView.trackTintColor = [UIColor whiteColor];
     [self.view addSubview:progressView];
     self.progressView = progressView;
-    NSURL* url = [NSURL URLWithString:URL];
+    NSURL* url = [NSURL URLWithString:TOMOTO_URL];
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
