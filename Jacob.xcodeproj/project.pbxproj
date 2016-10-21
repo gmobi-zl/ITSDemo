@@ -197,7 +197,7 @@
 		1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1837D6291DAB3DB3004653F2 /* UserTrackComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTrackComment.h; sourceTree = "<group>"; };
 		1837D62A1DAB3DC9004653F2 /* UserTrackComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTrackComment.m; sourceTree = "<group>"; };
-		18F664961D59BA9B00BDB2E8 /* 左撇子的電影博物館.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "左撇子的電影博物館.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F664961D59BA9B00BDB2E8 /* 左撇子電影.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "左撇子電影.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -525,7 +525,7 @@
 		18F664971D59BA9B00BDB2E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18F664961D59BA9B00BDB2E8 /* 左撇子的電影博物館.app */,
+				18F664961D59BA9B00BDB2E8 /* 左撇子電影.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -979,7 +979,7 @@
 			);
 			name = Jacob;
 			productName = InternetStir;
-			productReference = 18F664961D59BA9B00BDB2E8 /* 左撇子的電影博物館.app */;
+			productReference = 18F664961D59BA9B00BDB2E8 /* 左撇子電影.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1397,7 +1397,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c002;
-				PRODUCT_NAME = "左撇子的電影博物館";
+				PRODUCT_NAME = "左撇子電影";
 			};
 			name = Debug;
 		};
@@ -1427,7 +1427,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c002;
-				PRODUCT_NAME = "左撇子的電影博物館";
+				PRODUCT_NAME = "左撇子電影";
 			};
 			name = Release;
 		};

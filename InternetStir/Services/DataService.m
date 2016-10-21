@@ -2437,16 +2437,16 @@
 }
 -(void) refreshCelebRecommends: (int) type {
     NSString* newsTime = nil;
-    if (self.celebComments != nil){
-        NSInteger count = [self.celebComments count];
+    if (self.celebRecommends != nil){
+        NSInteger count = [self.celebRecommends count];
         if (count > 0){
             if (type == CB_RECOMMEND_REFRESH_TYPE_AFTER){
                 // do nothing
-                CelebRecommend* topComment = [self.celebComments objectAtIndex:0];
+                CelebRecommend* topComment = [self.celebRecommends objectAtIndex:0];
                 if (topComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
             } else if (type == CB_RECOMMEND_REFRESH_TYPE_BEFORE){
-                CelebRecommend* latestComment = [self.celebComments objectAtIndex:count-1];
+                CelebRecommend* latestComment = [self.celebRecommends objectAtIndex:count-1];
                 if (latestComment != nil)
                     newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
             }
