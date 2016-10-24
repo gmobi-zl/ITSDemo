@@ -1173,7 +1173,50 @@
     }];
 }
 
+-(void) getCelebReplyCommentListData: (int) page
+                                 fid: (NSString*) fid {
+    
+    NSString* pSession = @"";
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    ConfigService* cs = [ConfigService get];
+    if (user != nil){
+        if (user.isLogin == YES && user.session != nil){
+            pSession = [NSString stringWithFormat:@"&_s=%@", user.session];
+        }
+    }
 
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments?size=10&page=%d%@",[self getBaseUrl],[cs getChannel],fid,page,pSession];
+    MMLogDebug(@"User reply Comment data refresh url = %@", url);
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doGet:url reqHeader:nil callback:^(int status, int code, NSDictionary *resultData) {
+        MMLogDebug(@"User reply Comment Data rsp: status = %d , code = %d", status, code);
+        
+        if (code == 200){
+            NSData* data = [resultData objectForKey:@"data"];
+            NSError* err;
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSMutableDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            
+            MMLogDebug(@"User reply Comment Data rsp data: %@", dataStr);
+            
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear];
+            //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear type:type];
+            
+            NSArray* commentArr = [dataDic objectForKey:@"comments"];
+            [itsApp.dataSvr setRefreshReplyComments:commentArr fid:fid ];
+            
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_SUCCESS];
+        } else {
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_ERROR];
+        }
+    }];
+
+}
 -(void) getCelebReplyCommentListData: (NSString*) utc_time
                             timeType: (int) type
                                  fid: (NSString*) fid{
@@ -1210,7 +1253,7 @@
             //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear type:type];
             
             NSArray* commentArr = [dataDic objectForKey:@"comments"];
-            [itsApp.dataSvr setRefreshReplyComments:commentArr fid:fid isClearData:NO type:type];
+            [itsApp.dataSvr setRefreshReplyComments:commentArr fid:fid ];
             
             MMEventService *es = [MMEventService getInstance];
             [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_SUCCESS];

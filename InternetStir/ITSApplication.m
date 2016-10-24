@@ -15,6 +15,7 @@
 #import "NewsService.h"
 #import "ITSAppConst.h"
 #import "MMLogger.h"
+#import "MBProgressHUD.h"
 
 #define IOS_LOCAL_STRING 1
 
@@ -112,8 +113,12 @@ NSString* customerLocal = nil;
             [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
             return;
         }else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"网络错误" delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
-            [alert show];
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = @"网络错误";
+            // Move to bottm center.
+            hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+            [hud hideAnimated:YES afterDelay:3.f];
         }
     }
     

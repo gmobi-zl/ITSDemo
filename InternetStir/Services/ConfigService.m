@@ -52,10 +52,10 @@ ConfigService* configInstance = nil;
 
 -(NSString*) getChannel{
     //return self.currentChannel;
-    return @"8c398a20-0394-4db0-be74-f6c1eba28796"; // 左撇子的电影博物馆
+    //return @"8c398a20-0394-4db0-be74-f6c1eba28796"; // 左撇子的电影博物馆
     //return @"d1ce6ba1-3636-4938-9614-7649058344b4";   // 我是马克
     //return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";   // 菜啊嘎
-    //return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";     //测试
+    return @"017d8be4-8d03-4722-ae8e-6500c086f2ec";     //测试
 }
 
 -(NSString*) getListArticleWidthHeight{

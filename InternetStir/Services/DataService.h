@@ -350,13 +350,12 @@ typedef enum{
                         isClearData: (BOOL) clear
                                type: (int) type;
 
-
--(void) refreshReplyComments: (int) type
-                        fid: (NSString*) fid;
+-(void) refreshReplyComments:(int)page
+                  fid:(NSString *)fid;
+//-(void) refreshReplyComments: (int) type
+//                        fid: (NSString*) fid;
 -(void) setRefreshReplyComments: (NSArray*) dicData
-                           fid: (NSString*) fid
-                   isClearData: (BOOL) clear
-                          type: (int) type;
+                            fid: (NSString*) fid;
 -(BOOL) insertCurrentReplyCommentItem: (FansComment*) item;
 -(BOOL) userInsertCurrentReplyCommentItem: (FansComment*) item;
 
