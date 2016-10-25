@@ -10,6 +10,8 @@
 #import "SDWebImageDecoder.h"
 #import "UIImage+MultiFormat.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "MMEventService.h"
+#import "ITSAppConst.h"
 
 static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
 // PNG signature bytes and data (below)
@@ -389,6 +391,8 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
                 completion();
             });
         }
+        MMEventService *es = [MMEventService getInstance];
+        [es send:EVENT_CACHE_CLEARED eventData:nil];
     });
 }
 
@@ -502,7 +506,20 @@ BOOL ImageDataHasPNGPreffix(NSData *data) {
     });
     return size;
 }
-
+- (float)checkTmpSize
+{
+    float totalSize = 0;
+    NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:self.diskCachePath];
+    for (NSString *fileName in fileEnumerator)
+    {
+        NSString *filePath = [self.diskCachePath stringByAppendingPathComponent:fileName];
+        
+        NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        unsigned long long length = [attrs fileSize];
+        totalSize += length / 1024.0 / 1024.0;
+    }
+    return totalSize;
+}
 - (NSUInteger)getDiskCount {
     __block NSUInteger count = 0;
     dispatch_sync(self.ioQueue, ^{

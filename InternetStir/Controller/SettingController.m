@@ -16,6 +16,7 @@
 #import "MMEventService.h"
 #import "SettingService.h"
 #import "FeedBackController.h"
+#import "UIImageView+WebCache.h"
 
 
 NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
@@ -327,7 +328,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     if (setting.type == SettingTypeButton){
         tmpCell.detailImage.hidden = YES;
         tmpCell.desc.hidden = NO;
-        long cacheSize = [ds getCacheFolderSize];
+        long cacheSize = [[SDImageCache sharedImageCache] getSize];
         NSString* showSize = @"0Kb";
         long bSize = 0;
         long kbSize = 0;
@@ -383,7 +384,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
         } else if (clickItem.actionType == SETTING_ACTION_CLEAN_CACHE) {
             //self.cleanMask.hidden = NO;
             ITSApplication* poApp = [ITSApplication get];
-            [poApp.dataSvr clearCacheFolder];
+//            [poApp.dataSvr clearCacheFolder];
+            [[SDImageCache sharedImageCache] clearDisk];
             self.clearFinish = NO;
             [self showCleanPanel];
             NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];

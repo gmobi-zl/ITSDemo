@@ -196,26 +196,18 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     NSMutableArray* trackComment= ds.userTrackComments;
     UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
     
-    if(comment.replayComments == nil){
-        CelebComment* celebC = [ds findCelebCommentById:comment.fid];
-        if (celebC == nil){
-            [itsApp.dataSvr setCurrentCelebComment:comment.article];
-            CommentViewController *commentVc = [[CommentViewController alloc] init];
-            commentVc.context = celebC.context;
-            [self.navigationController pushViewController:commentVc animated:YES];
-            
-        } else {
-            comment.article = celebC;
-            [itsApp.dataSvr setCurrentCelebComment:comment.article];
-            CommentViewController *commentVc = [[CommentViewController alloc] init];
-            commentVc.context = celebC.context;
-            [self.navigationController pushViewController:commentVc animated:YES];
-        }
-    } else {
+    CelebComment* celebC = [ds findCelebCommentById:comment.fid];
+    if (celebC == nil){
         [itsApp.dataSvr setCurrentCelebComment:comment.article];
-        
         CommentViewController *commentVc = [[CommentViewController alloc] init];
-        commentVc.context = comment.article.context;
+        commentVc.context = celebC.context;
+        [self.navigationController pushViewController:commentVc animated:YES];
+        
+    } else {
+        comment.article = celebC;
+        [itsApp.dataSvr setCurrentCelebComment:comment.article];
+        CommentViewController *commentVc = [[CommentViewController alloc] init];
+        commentVc.context = celebC.context;
         [self.navigationController pushViewController:commentVc animated:YES];
     }
 }
