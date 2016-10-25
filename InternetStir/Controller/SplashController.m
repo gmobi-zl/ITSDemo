@@ -58,7 +58,6 @@
     }else {
         bgImg = [UIImage imageNamed:@"splash_default"];
     }
-
     
     // logo
 //    UIImage* bgImg = [UIImage imageNamed:@"splash_default"];
