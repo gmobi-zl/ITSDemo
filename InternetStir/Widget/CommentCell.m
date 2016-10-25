@@ -281,7 +281,7 @@
             replyIcon.layer.cornerRadius = 15;
             replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;
-            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+            [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
             [self.contentView addSubview:replyIcon];
             self.replyIcon = replyIcon;
             [self.replyIconView addObject:replyIcon];

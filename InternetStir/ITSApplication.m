@@ -15,6 +15,7 @@
 #import "NewsService.h"
 #import "ITSAppConst.h"
 #import "MMLogger.h"
+#import "MBProgressHUD.h"
 
 #define IOS_LOCAL_STRING 1
 
@@ -96,25 +97,32 @@ NSString* customerLocal = nil;
 }
 
 -(void) connect{
-//    if (internetStirAppInstance == nil)
-//        return;
-//    
+    if (internetStirAppInstance == nil)
+        return;
+    
 //    [internetStirAppInstance.dataSvr refreshCacheDataSize];
-//    
-//    BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
-//    if (isHadNetwork == NO){
-//        SettingService* ss = [SettingService get];
-//        NSDictionary* savedConnect = [ss getDictoryValue:CONFIG_LAST_CONNECT_INFO defValue:nil];
-//        if (savedConnect != nil){
-//            [internetStirAppInstance.dataSvr setConnectRespData:savedConnect];
-//            
-//            MMEventService *es = [MMEventService getInstance];
-//            [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
-//            return;
-//        }
-//    }
-//    
-//    [self.remoteSvr doConnect];
+    
+    BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
+    if (isHadNetwork == NO){
+        SettingService* ss = [SettingService get];
+        NSDictionary* savedConnect = [ss getDictoryValue:CONFIG_LAST_CONNECT_INFO defValue:nil];
+        if (savedConnect != nil){
+            [internetStirAppInstance.dataSvr setConnectRespData:savedConnect];
+            
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
+            return;
+        }else {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = @"网络错误";
+            // Move to bottm center.
+            hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+            [hud hideAnimated:YES afterDelay:3.f];
+        }
+    }
+    
+    [self.remoteSvr doConnect];
 }
 
 -(void) refreshChannels{

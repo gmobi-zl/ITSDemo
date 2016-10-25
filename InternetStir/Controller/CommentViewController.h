@@ -24,6 +24,7 @@
 #endif
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, copy) NSString *context;
+@property (nonatomic, assign) int page;
 
 @property (assign) int refreshType;
 @property (assign) BOOL isRefreshing;

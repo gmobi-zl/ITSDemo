@@ -124,7 +124,9 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 -(void) getUserCommentById: (NSString*) cid
                   callback: (RemoteCallback) callback;
 
-
+//
+-(void) getCelebReplyCommentListData: (int) page
+                                 fid: (NSString*) fid;
 -(void) getCelebReplyCommentListData: (NSString*) utc_time
                             timeType: (int) type
                                  fid: (NSString*) fid;

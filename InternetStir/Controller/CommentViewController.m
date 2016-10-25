@@ -49,6 +49,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:CommentTableViewCellIdentifier];
     [self.view addSubview:self.tableView];
     
+    self.page = 1;
     self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 40, screenW, 44)];
     self.commentView.backgroundColor = [MMSystemHelper string2UIColor:COMMENT_BOTTOM_BG_COLOR];
 //    [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
@@ -87,6 +88,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 -(void)celebReplyCommentsDataRefreshListener: (id) data{
     if (self.view.hidden == NO){
         
+        self.page++;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             ITSApplication* itsApp = [ITSApplication get];
@@ -137,11 +139,11 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         DataService* ds = itsApp.dataSvr;
         CelebComment* currentComment = ds.currentCelebComment;
         
-        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_AFTER fid:currentComment.fid];
-        
+//        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_AFTER fid:currentComment.fid];
+        [ds refreshReplyComments:self.page fid:currentComment.fid];
+
         self.isRefreshing = YES;
     }
-
 }
 
 - (void)footerRereshing
@@ -152,8 +154,8 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
         DataService* ds = itsApp.dataSvr;
         CelebComment* currentComment = ds.currentCelebComment;
         
-        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE fid:currentComment.fid];
-        
+//        [ds refreshReplyComments:CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE fid:currentComment.fid];
+        [ds refreshReplyComments:1 fid:currentComment.fid];
         self.isRefreshing = YES;
     }
 }

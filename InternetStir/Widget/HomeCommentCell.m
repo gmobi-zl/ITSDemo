@@ -100,13 +100,14 @@
         self.likeNum.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.likeNum];
         
-        ITSApplication* itsApp = [ITSApplication get];
-        CBUserService* us = itsApp.cbUserSvr;
-        if (us.user.isCBADM == YES) {
-            self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
-            [self.contentView addSubview:self.delBtn];
-        }
+        self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.delBtn];
+
+//        ITSApplication* itsApp = [ITSApplication get];
+//        CBUserService* us = itsApp.cbUserSvr;
+//        if (us.user.isCBADM == YES) {
+//        }
     }
     return self;
 }
@@ -228,12 +229,20 @@
 -(void) setShowData: (CelebComment*) data{
     [self removeOldReplys];
     
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isCBADM == YES) {
+        self.delBtn.hidden = NO;
+    }else {
+        self.delBtn.hidden = YES;
+    }
+
     self.nameLabel.text = data.name;
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
     
-    ITSApplication* itsApp = [ITSApplication get];
+//    ITSApplication* itsApp = [ITSApplication get];
     NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
     //NSString* image = [data.attachments objectAtIndex:0];
     CelebAttachment* cbAtt = [data.attachments objectAtIndex:0];

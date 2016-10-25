@@ -2605,61 +2605,70 @@
     return ret;
 }
 
--(void) refreshReplyComments: (int) type
-                         fid: (NSString*) fid{
-    
+-(void) refreshReplyComments:(int)page fid:(NSString *)fid {
+
     if (fid == nil){
         MMEventService *es = [MMEventService getInstance];
         [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_ERROR];
         return;
     }
-    
-    NSString* newsTime = nil;
-    if (self.celebComments != nil){
-        NSInteger count = [self.celebComments count];
-        CelebComment* cbComment = nil;
-        for (int i = 0; i < count; i++) {
-            CelebComment* tmp = [self.celebComments objectAtIndex:i];
-            if (tmp != nil && [tmp.fid isEqualToString:fid]){
-                cbComment = tmp;
-                break;
-            }
-        }
-        
-        if (cbComment == nil){
-            MMEventService *es = [MMEventService getInstance];
-            [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_ERROR];
-            return;
-        }
-        
-        NSArray* replyList = cbComment.replayComments;
-        if (replyList != nil){
-            NSInteger count = [replyList count];
-            if (count > 0){
-                if (type == CB_COMMENT_REPLY_REFRESH_TYPE_AFTER){
-                    // do nothing
-                    FansComment* topComment = [replyList objectAtIndex:0];
-                    if (topComment != nil)
-                        newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
-                } else if (type == CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE){
-                    FansComment* latestComment = [replyList objectAtIndex:count-1];
-                    if (latestComment != nil)
-                        newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
-                }
-            }
-        }
-    }
-    if (newsTime == nil){
-        newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
-        [[ITSApplication get].remoteSvr getCelebReplyCommentListData:newsTime timeType:CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE fid:fid];
-    } else
-        [[ITSApplication get].remoteSvr getCelebReplyCommentListData:newsTime timeType:type fid:fid];
+    [[ITSApplication get].remoteSvr getCelebReplyCommentListData:page fid:fid];
+
+
 }
+//-(void) refreshReplyComments: (int) type
+//                         fid: (NSString*) fid{
+//    
+//    if (fid == nil){
+//        MMEventService *es = [MMEventService getInstance];
+//        [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_ERROR];
+//        return;
+//    }
+//    
+//    NSString* newsTime = nil;
+//    if (self.celebComments != nil){
+//        NSInteger count = [self.celebComments count];
+//        CelebComment* cbComment = nil;
+//        for (int i = 0; i < count; i++) {
+//            CelebComment* tmp = [self.celebComments objectAtIndex:i];
+//            if (tmp != nil && [tmp.fid isEqualToString:fid]){
+//                cbComment = tmp;
+//                break;
+//            }
+//        }
+//        
+//        if (cbComment == nil){
+//            MMEventService *es = [MMEventService getInstance];
+//            [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_ERROR];
+//            return;
+//        }
+//        
+//        NSArray* replyList = cbComment.replayComments;
+//        if (replyList != nil){
+//            NSInteger count = [replyList count];
+//            if (count > 0){
+//                if (type == CB_COMMENT_REPLY_REFRESH_TYPE_AFTER){
+//                    // do nothing
+//                    FansComment* topComment = [replyList objectAtIndex:0];
+//                    if (topComment != nil)
+//                        newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+//                } else if (type == CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE){
+//                    FansComment* latestComment = [replyList objectAtIndex:count-1];
+//                    if (latestComment != nil)
+//                        newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
+//                }
+//            }
+//        }
+//    }
+//    if (newsTime == nil){
+//        newsTime = [NSString stringWithFormat:@"%llu", [MMSystemHelper getMillisecondTimestamp]];
+//        [[ITSApplication get].remoteSvr getCelebReplyCommentListData:newsTime timeType:CB_COMMENT_REPLY_REFRESH_TYPE_BEFORE fid:fid];
+//    } else
+//        [[ITSApplication get].remoteSvr getCelebReplyCommentListData:newsTime timeType:type fid:fid];
+//}
 
 -(void) setRefreshReplyComments: (NSArray*) dicData
-                            fid: (NSString*) fid
-                    isClearData: (BOOL) clear
-                           type: (int) type{
+                            fid: (NSString*) fid{
     if (dicData == nil || fid == nil)
         return;
     
@@ -2768,6 +2777,7 @@
                 if (comment != nil){
                     if ([comment.cid compare:item.cid] == NSOrderedSame) {
                         same = YES;
+                        [replayList replaceObjectAtIndex:i withObject:item];
                         
                         //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
                         //    newItem.isOfflineDL = YES;
@@ -2776,7 +2786,7 @@
                         break;
                     }
                     
-                    if (comment.pts < item.pts) {
+                    if (comment.pts > item.pts) {
                         [replayList insertObject:item atIndex:i];
                         ret = YES;
                         break;
@@ -2852,7 +2862,7 @@
                         break;
                     }
                     
-                    if (comment.pts < item.pts) {
+                    if (comment.pts > item.pts) {
                         [replayList insertObject:item atIndex:i];
                         ret = YES;
                         break;
@@ -2896,7 +2906,7 @@
                         break;
                     }
                     
-                    if (comment.pts < item.pts) {
+                    if (comment.pts > item.pts) {
                         [replayList insertObject:item atIndex:i];
                         ret = YES;
                         break;

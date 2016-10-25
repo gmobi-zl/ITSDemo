@@ -204,10 +204,10 @@
 #ifdef TEST_CELEB_LOGIN
     cb(ITS_FB_LOGIN_SUCCESS);
 #else
-    if ([FBSDKAccessToken currentAccessToken]){
-        cb(ITS_FB_LOGIN_SUCCESS);
-        return;
-    }
+//    if ([FBSDKAccessToken currentAccessToken]){
+//        cb(ITS_FB_LOGIN_SUCCESS);
+//        return;
+//    }
     
     self.login = [[FBSDKLoginManager alloc] init];
     self.login.loginBehavior = FBSDKLoginBehaviorWeb;
