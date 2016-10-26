@@ -31,7 +31,7 @@
 @property FacebookService* fbSvr;
 @property TwitterService* tw;
 @property NSString* baseUrl;
-//@property NSString* group;
+@property NSString* group;
 @property BOOL isFirstOpen;
 @property BOOL isUserOpen;
 
