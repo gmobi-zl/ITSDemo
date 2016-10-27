@@ -16,6 +16,7 @@
 #import "MMEventService.h"
 #import "SettingService.h"
 #import "FeedBackController.h"
+#import "UIImageView+WebCache.h"
 
 
 NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
@@ -102,7 +103,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     self.cleanMask.hidden = YES;
     
     self.cleanPanel = [[UIView alloc] init];
-    self.cleanPanel.frame = CGRectMake(0, screenH - 140, screenW, 140);
+    self.cleanPanel.frame = CGRectMake(0, screenH - 140 + 64, screenW, 140);
     self.cleanPanel.backgroundColor = [MMSystemHelper string2UIColor:COLOR_BG_BLACK];
     self.cleanPanel.alpha = 0.8;
     self.cleanPanel.hidden = YES;
@@ -193,13 +194,12 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     MMEventService *es = [MMEventService getInstance];
     [es removeEventHandler:EVENT_CACHE_SIZE_REFRESHED];
     [es removeEventHandler:EVENT_CACHE_CLEARED];
-    
 }
 -(void)cacheClearListener: (id) data{
     if (self.view.hidden == NO){
         self.clearFinish = YES;
-        ITSApplication* poApp = [ITSApplication get];
-        [poApp.dataSvr setCacheDataSize:0];
+//        ITSApplication* poApp = [ITSApplication get];
+//        [poApp.dataSvr setCacheDataSize:0];
         [self clearCacheFinish];
     }
 }
@@ -245,13 +245,12 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     self.cleanPanel.hidden = NO;
     self.cleanLoad.hidden = NO;
     self.cleanMask.hidden = NO;
-    
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat screenH = [MMSystemHelper getScreenHeight];
     
     CABasicAnimation *moveAnmi = [CABasicAnimation animationWithKeyPath:@"position"];
-    moveAnmi.fromValue = [NSValue valueWithCGRect:CGRectMake(screenW/2 , screenH, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
-    moveAnmi.toValue = [NSValue valueWithCGRect:CGRectMake(screenW/2 , screenH-80, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
+    moveAnmi.fromValue = [NSValue valueWithCGRect:CGRectMake(screenW/2 , screenH + 64, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
+    moveAnmi.toValue = [NSValue valueWithCGRect:CGRectMake(screenW/2 , screenH - 16 , self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
     moveAnmi.duration = 0.6f;
     moveAnmi.fillMode=kCAFillModeForwards;
     moveAnmi.removedOnCompletion=YES;
@@ -271,8 +270,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     CGFloat screenH = [MMSystemHelper getScreenHeight];
     
     CABasicAnimation *moveAnmi = [CABasicAnimation animationWithKeyPath:@"position"];
-    moveAnmi.toValue = [NSValue valueWithCGRect:CGRectMake(screenW/2, screenH+40, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
-    moveAnmi.fromValue = [NSValue valueWithCGRect:CGRectMake(screenW/2, screenH-80, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
+    moveAnmi.toValue = [NSValue valueWithCGRect:CGRectMake(screenW/2, screenH+64, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
+    moveAnmi.fromValue = [NSValue valueWithCGRect:CGRectMake(screenW/2, screenH-16, self.cleanPanel.frame.size.width, self.cleanPanel.frame.size.height)];
     moveAnmi.duration = 0.6f;
     moveAnmi.fillMode=kCAFillModeForwards;
     moveAnmi.removedOnCompletion=NO;
@@ -327,7 +326,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     if (setting.type == SettingTypeButton){
         tmpCell.detailImage.hidden = YES;
         tmpCell.desc.hidden = NO;
-        long cacheSize = [ds getCacheFolderSize];
+        long cacheSize = [[SDImageCache sharedImageCache] getSize];
         NSString* showSize = @"0Kb";
         long bSize = 0;
         long kbSize = 0;
@@ -383,7 +382,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
         } else if (clickItem.actionType == SETTING_ACTION_CLEAN_CACHE) {
             //self.cleanMask.hidden = NO;
             ITSApplication* poApp = [ITSApplication get];
-            [poApp.dataSvr clearCacheFolder];
+//            [poApp.dataSvr clearCacheFolder];
+            [[SDImageCache sharedImageCache] clearDisk];
             self.clearFinish = NO;
             [self showCleanPanel];
             NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];

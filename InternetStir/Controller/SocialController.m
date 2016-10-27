@@ -21,6 +21,7 @@
 #import "ITSApplication.h"
 #import "MMEventService.H"
 #import "CelebRecommend.h"
+#import "SocialDetailController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -174,9 +175,11 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     CelebRecommend *comment = [ds.celebRecommends objectAtIndex:indexPath.row];
+    [ds setCurrentDetailNewsItem:comment];
 
-    DetailContentController *detail = [[DetailContentController alloc] init];
-    detail.path = comment.source;
+//    DetailContentController *detail = [[DetailContentController alloc] init];
+    SocialDetailController *detail = [[SocialDetailController alloc] init];
+//    detail.path = comment.source;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

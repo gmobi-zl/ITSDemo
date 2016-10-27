@@ -17,9 +17,16 @@
 #define CELEB_RECOMMEND_ITEM_UTS @"uts"
 #define CELEB_RECOMMEND_ITEM_PDOMAIN @"p_domain"
 #define CELEB_RECOMMEND_ITEM_MM @"mm"
+#define CELEB_RECOMMEND_ITEM_BODY @"body"
+#define CELEB_RECOMMEND_ITEM_RELEASE_TIME @"releaseTime"
+#define CELEB_RECOMMEND_ITEM_PREVIEW @"preview"
 
 
 @interface CelebRecommend : NSObject
+
+@property (copy) NSString* preview;
+@property (copy) NSString* body;
+@property (assign) unsigned long long releaseTime;
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *photo;

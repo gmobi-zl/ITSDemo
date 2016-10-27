@@ -58,7 +58,6 @@
     }else {
         bgImg = [UIImage imageNamed:@"splash_default"];
     }
-
     
     // logo
 //    UIImage* bgImg = [UIImage imageNamed:@"splash_default"];
@@ -89,6 +88,9 @@
 -(void)poponewsConnectListener: (id) data{
     NSString* resultStatus = data;
     if (resultStatus != nil && [resultStatus compare:EVENT_CONNECT_SUCCESS] == NSOrderedSame){
+        ITSApplication* app = [ITSApplication get];
+        [app.reportSvr startReportService];
+
         [self delayToHome];
     }else {
         [self reconnect];

@@ -56,7 +56,7 @@
 -(NSString*) getDefaultReportUrl{
     NSString* url;
     
-    url = [[NSString alloc] initWithFormat:@"%@api/news/data" , [self getBaseUrl]];
+    url = [[NSString alloc] initWithFormat:@"%@v0/data" , [self getBaseUrl]];
     
     return url;
 }

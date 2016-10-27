@@ -97,14 +97,14 @@
         if (self.isSending == NO){
             BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
             
-//            ITSApplication* app = [ITSApplication get];
-            NSString* did = @"";//[app.dataSvr getServerDeviceId];
+            ITSApplication* app = [ITSApplication get];
+            NSString* did = [app.dataSvr getServerDeviceId];
             
             if (did != nil && isHadNetwork == YES) {
                 NSMutableDictionary* reportData = [self genCollectData];
                 
                 if (reportData != nil && self.sendingDataIds != nil && [self.sendingDataIds count] > 0){
-                    //[app.remoteSvr doReportData:reportData];
+                    [app.remoteSvr doReportData:reportData];
                     self.isSending = YES;
                 }
             }
@@ -159,7 +159,7 @@
     }
     
     ITSApplication* app = [ITSApplication get];
-    NSString* did = @"";//[app.dataSvr getServerDeviceId];
+    NSString* did = [app.dataSvr getServerDeviceId];
     
     if (did != nil && self.sendingDataIds != nil && [self.sendingDataIds count] > 0) {
         NSMutableDictionary* joc = [NSMutableDictionary dictionaryWithCapacity:2];
@@ -190,7 +190,7 @@
       dataObject: (id) data{
     
     ITSApplication* app = [ITSApplication get];
-    NSString* did = @"";//[app.dataSvr getServerDeviceId];
+    NSString* did = [app.dataSvr getServerDeviceId];
     
     if (did == nil || server == nil || type == nil || key == nil || data == nil){
         return;
@@ -251,9 +251,9 @@
     
     if (ch == nil)
         return;
-    ITSApplication* app = [ITSApplication get];
+//    ITSApplication* app = [ITSApplication get];
     NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:3];
-    //[dic setObject:app.group forKey:KEY_GROUP];
+    [dic setObject:@"group" forKey:KEY_GROUP];
     [dic setObject:ch forKey:KEY_CHANNEL];
     [dic setObject:msg forKey:KEY_DATA];
     
@@ -273,8 +273,8 @@
         return;
     
     NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:3];
-    ITSApplication* app = [ITSApplication get];
-    //[dic setObject:app.group forKey:KEY_GROUP];
+//    ITSApplication* app = [ITSApplication get];
+    [dic setObject:@"group" forKey:KEY_GROUP];
     [dic setObject:ch forKey:KEY_CHANNEL];
     
     NSMutableDictionary* crashInfo = [NSMutableDictionary dictionaryWithCapacity:3];
