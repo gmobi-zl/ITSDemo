@@ -24,6 +24,10 @@
     if (tmpData != nil)
         self.photo = tmpData;
     
+    NSNumber* numData = [dic objectForKey:CELEB_RECOMMEND_ITEM_RELEASE_TIME];
+    if (numData != nil)
+        self.releaseTime = [numData longLongValue];
+
     tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_SOURCE];
     if (tmpData != nil)
         self.source = tmpData;
@@ -50,7 +54,14 @@
     if (tmpData != nil)
         self.uts = [tmpData longLongValue];
 
+    tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_PREVIEW];
     
+    tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_BODY];
+    if (tmpData != nil)
+        self.body = tmpData;
+
+    if (tmpData != nil)
+        self.preview = tmpData;
     return self;
 }
 @end

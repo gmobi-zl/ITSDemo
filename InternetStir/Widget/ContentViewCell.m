@@ -30,7 +30,7 @@
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.font = [UIFont systemFontOfSize:18];
         self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.numberOfLines = 0;
+        self.titleLabel.numberOfLines = 2;
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.bgView addSubview:self.titleLabel];
         
