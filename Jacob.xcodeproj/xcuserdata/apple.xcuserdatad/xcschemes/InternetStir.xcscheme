@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F664951D59BA9B00BDB2E8"
-            BuildableName = "&#x5de6;&#x6487;&#x5b50;&#x96fb;&#x5f71;.app"
+            BuildableName = "&#x81fa;&#x7063;&#x599e;&#x97d3;&#x570b;&#x5ab3;.app"
             BlueprintName = "Jacob"
             ReferencedContainer = "container:Jacob.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F664951D59BA9B00BDB2E8"
-            BuildableName = "&#x5de6;&#x6487;&#x5b50;&#x96fb;&#x5f71;.app"
+            BuildableName = "&#x81fa;&#x7063;&#x599e;&#x97d3;&#x570b;&#x5ab3;.app"
             BlueprintName = "Jacob"
             ReferencedContainer = "container:Jacob.xcodeproj">
          </BuildableReference>
