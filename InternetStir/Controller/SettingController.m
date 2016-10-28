@@ -198,8 +198,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
 -(void)cacheClearListener: (id) data{
     if (self.view.hidden == NO){
         self.clearFinish = YES;
-//        ITSApplication* poApp = [ITSApplication get];
-//        [poApp.dataSvr setCacheDataSize:0];
+        ITSApplication* poApp = [ITSApplication get];
+        [poApp.dataSvr setCacheDataSize:0];
         [self clearCacheFinish];
     }
 }
@@ -326,7 +326,9 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     if (setting.type == SettingTypeButton){
         tmpCell.detailImage.hidden = YES;
         tmpCell.desc.hidden = NO;
-        long cacheSize = [[SDImageCache sharedImageCache] getSize];
+        long cacheSize = [ds getCacheFolderSize];
+
+//        long cacheSize = [[SDImageCache sharedImageCache] getSize];
         NSString* showSize = @"0Kb";
         long bSize = 0;
         long kbSize = 0;
@@ -382,8 +384,8 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
         } else if (clickItem.actionType == SETTING_ACTION_CLEAN_CACHE) {
             //self.cleanMask.hidden = NO;
             ITSApplication* poApp = [ITSApplication get];
-//            [poApp.dataSvr clearCacheFolder];
-            [[SDImageCache sharedImageCache] clearDisk];
+            [poApp.dataSvr clearCacheFolder];
+//            [[SDImageCache sharedImageCache] clearDisk];
             self.clearFinish = NO;
             [self showCleanPanel];
             NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];

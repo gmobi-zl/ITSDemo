@@ -14,6 +14,7 @@
 #import "UIKit/UIKit.h"
 //#import "Firebase.h"
 #import <Google/Analytics.h>
+#import "SettingService.h"
 
 @import FirebaseAnalytics;
 
@@ -48,6 +49,43 @@ static NSString * const kClientID =
     gai.trackUncaughtExceptions = YES;
     gai.logger.logLevel = kGAILogLevelVerbose;
     
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    // ios push
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
+    }
+    
+    NSLog(@"launchOption==%@",[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]);
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+        
+        NSMutableDictionary* notifiDic = [NSMutableDictionary dictionaryWithCapacity:1];
+        if (notifiDic.count != 0) {
+            [notifiDic removeAllObjects];
+        }
+        [notifiDic setDictionary:(NSDictionary *)[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+        
+        if (notifiDic != nil){
+            NSLog(@"poponews off click push message  : %@", notifiDic);
+            NSString* msg = [[notifiDic objectForKey:@"aps"] objectForKey:@"alert"];
+            NSLog(@"poponews off push message : %@", msg);
+            
+            if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive){
+                NSString* pushNewsItemId = [[notifiDic objectForKey:@"aps"] objectForKey:@"itemId"];
+                
+                if (pushNewsItemId != nil){
+                    ITSApplication* poApp = [ITSApplication get];
+                    [poApp.dataSvr setOffPushNewsId:pushNewsItemId];
+                    //[poApp.dataSvr getPushNewsDetail:pushNewsItemId];
+                }
+            }
+        }
+    }
     return YES;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -88,6 +126,59 @@ static NSString * const kClientID =
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+/* ios push delegate */
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSString* token = [NSString stringWithFormat:@"%@", deviceToken];
+    NSLog(@"push device token : %@", token);
+    
+    NSString* tmpTokenStr1 = [token stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    NSString* tmpTokenStr2 = [tmpTokenStr1 stringByReplacingOccurrencesOfString:@">" withString:@""];
+    NSString* tmpTokenStr = [tmpTokenStr2 stringByReplacingOccurrencesOfString:@" " withString:@""];
+    MMLogDebug(@"push device token : %@", tmpTokenStr);
+    SettingService* ss = [SettingService get];
+    if (ss != nil){
+        [ss setStringValue:POPO_IOS_PUSH_DEVICE_TOKEN data:tmpTokenStr];
+    }
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"push register failed : %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"userinfo : %@", userInfo);
+    NSString* msg = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    NSLog(@"push message : %@", msg);
+    
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive){
+        NSString* pushNewsItemId = [[userInfo objectForKey:@"aps"] objectForKey:@"itemId"];
+        NSLog(@"click push message id : %@", pushNewsItemId);
+        if (pushNewsItemId != nil){
+            ITSApplication* poApp = [ITSApplication get];
+            //[poApp.dataSvr getPushNewsDetail:pushNewsItemId isShowDetailPage:YES];
+            
+            [poApp.reportSvr recordPushMsgReceived:pushNewsItemId];
+            [poApp.reportSvr recordPushMsgClicked:pushNewsItemId];
+        }
+    } else {
+        NSString* pushNewsItemId = [[userInfo objectForKey:@"aps"] objectForKey:@"itemId"];
+        NSLog(@"click push message id : %@", pushNewsItemId);
+        if (pushNewsItemId != nil){
+            ITSApplication* poApp = [ITSApplication get];
+            
+            //            BOOL isReceived = [poApp.dataSvr checkPushNewsId:pushNewsItemId];
+            //            if (isReceived == YES){
+            //                [poApp.reportSvr recordPushMsgClicked:pushNewsItemId];
+            //            } else {
+            [poApp.reportSvr recordPushMsgReceived:pushNewsItemId];
+            //}
+            
+            //[poApp.dataSvr getPushNewsDetail:pushNewsItemId isShowDetailPage:NO];
+        }
+    }
+    
+    //[[[UIAlertView alloc] initWithTitle:@"push" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
 
 @end

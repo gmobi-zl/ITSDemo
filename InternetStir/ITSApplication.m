@@ -100,7 +100,7 @@ NSString* customerLocal = nil;
     if (internetStirAppInstance == nil)
         return;
     
-//    [internetStirAppInstance.dataSvr refreshCacheDataSize];
+    [internetStirAppInstance.dataSvr refreshCacheDataSize];
     
     BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
     if (isHadNetwork == NO){

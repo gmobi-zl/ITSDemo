@@ -308,6 +308,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         setVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:setVc animated:YES];
         ITSApplication* itsApp = [ITSApplication get];
+        [itsApp.dataSvr refreshCacheDataSize];
         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
         [itsApp.reportSvr recordEvent:@"setting" params:eParams eventCategory:@"fans.tool.click"];
         

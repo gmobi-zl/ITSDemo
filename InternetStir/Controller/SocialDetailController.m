@@ -321,6 +321,12 @@
                 isUsedLocalImg = YES;
         }
         [rspDataDic setObject:mms forKey:@"mms"];
+        if (isUsedLocalImg == YES) {
+            [rspDataDic setObject:[NSNumber numberWithInt:1] forKey:@"local"];
+        } else {
+            [rspDataDic setObject:[NSNumber numberWithInt:0] forKey:@"local"];
+        }
+
         
 //        if (item.isOfflineDL == YES && isUsedLocalImg == YES){
 //            [rspDataDic setObject:[NSNumber numberWithInt:1] forKey:@"local"];
