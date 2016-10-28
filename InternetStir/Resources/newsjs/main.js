@@ -14,7 +14,7 @@ function init()
         sdkLog("data = " + JSON.stringify(data));
                
         var context = {Title:data.title, publishIconId:data.picon, publisherDomian:data.pname, releaseTime:data.time,source:data.source,btnStr:data.readsource,local:data.local, nm: data.nightmode};
-		var source   = $("#entry-template").html();
+		var source  = $("#entry-template").html();
 
 		var sourceUrl = data.source;
 		var local = data.local;
@@ -48,7 +48,8 @@ function init()
 				sdkLog("has == "+has+" and mms[has].w = "+mms[has].w);
 				if(has>0 && mms[has].w < 320) {
 					//result = '<img width="'+mms[has].w+'px" height="'+mms[has].h+'px" src="temp/' + id + '" />';
-                    result = '<img id="'+id+allImgIdx+'" src="temp/' + id + '"  onload = "onloadImg(this,id)">';
+                    //result = '<img id="'+id+allImgIdx+'" src="temp/' + id + '"  onload = "onloadImg(this,id)">';
+                    result = '<img id="'+id+'" src="temp/' + id + '"  onload = "onloadImg(this,id)">';
 					//result = '<img width="'+mms[has].w+'" src="content://'+pakname+'/' + id + '">';
 				} else
                     result = '<img src="temp/' + id + '" />';
@@ -57,10 +58,12 @@ function init()
                 sdkLog("offline image : "+result);
 			}
 			else {
-				result = '<img id="'+id+allImgIdx+'" src="'+entryurl+'/files/' + id + '"  onload = "onloadImg(this,id)">';
+				//result = '<img id="'+id+allImgIdx+'" src="'+entryurl+'/files/' + id + '"  onload = "onloadImg(this,id)">';
+                result = '<img id="'+id+'" src="'+entryurl+'files/' + id + '"  onload = "onloadImg(this,id)">';
+                sdkLog("web page image url = "+result);
 			}
 
-			allImgIdx ++;
+			allImgIdx++;
                                   
             /*
             if (local == 1){

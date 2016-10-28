@@ -282,9 +282,12 @@
         [rspDataDic setObject:item.source == nil ? @"" : item.source forKey:@"source"];
         [rspDataDic setObject:NSLocalizedString (@"WebViewReadSrc", @"READ THIS ARTICLE ON THE WEB") forKey:@"readsource"];
         
+        NSNumber* fontSize = [NSNumber numberWithInt:1];
+        [rspDataDic setObject:fontSize forKey:@"fontsize"];
+        
 //        int modeType = [ss getIntValue:CONFIG_DAY_NIGHT_MODE defValue:MODE_DAY];
-//        NSNumber* dayNightMode = [NSNumber numberWithInt:modeType];
-//        [rspDataDic setObject:dayNightMode forKey:@"nightmode"];
+        NSNumber* dayNightMode = [NSNumber numberWithInt:1];
+        [rspDataDic setObject:dayNightMode forKey:@"nightmode"];
         [rspDataDic setObject:poApp.baseUrl forKey:@"entryurl"];
         
         NSString* appId = [MMSystemHelper getAppPackageId];
@@ -328,12 +331,12 @@
         }
 
         
-//        if (item.isOfflineDL == YES && isUsedLocalImg == YES){
-//            [rspDataDic setObject:[NSNumber numberWithInt:1] forKey:@"local"];
-//        } else {
-//            [rspDataDic setObject:[NSNumber numberWithInt:0] forKey:@"local"];
-//        }
-//        
+        //if (item.isOfflineDL == YES && isUsedLocalImg == YES){
+        //    [rspDataDic setObject:[NSNumber numberWithInt:1] forKey:@"local"];
+        //} else {
+            [rspDataDic setObject:[NSNumber numberWithInt:0] forKey:@"local"];
+        //}
+
         NSError *error;
         NSData* transData = [NSJSONSerialization dataWithJSONObject:rspDataDic options:NSJSONWritingPrettyPrinted error:&error];
         NSString* transStr = [[NSString alloc] initWithData:transData encoding:NSUTF8StringEncoding];
