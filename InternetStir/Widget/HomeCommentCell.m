@@ -231,7 +231,7 @@
     
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isCBADM == YES) {
+    if (us.user.isCBADM == YES && us.user.isLogin == YES) {
         self.delBtn.hidden = NO;
     }else {
         self.delBtn.hidden = YES;

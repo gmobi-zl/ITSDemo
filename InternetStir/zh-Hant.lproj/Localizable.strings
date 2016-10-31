@@ -43,6 +43,7 @@
 "set_clear"="清除中";
 "FeedBackInfo"="請輸入您的建議與回饋:";
 "FeedBackSend"="發送";
+"FeedBackSendOk"="發送成功";
 "FeedBackWrite"="請輸入您的建議與回饋~";
 "save"="儲存";
 "say_something"="請輸入留言內容";

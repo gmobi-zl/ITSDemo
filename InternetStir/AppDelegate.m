@@ -50,42 +50,42 @@ static NSString * const kClientID =
     gai.logger.logLevel = kGAILogLevelVerbose;
     
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
-    // ios push
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    } else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
-    }
-    
-    NSLog(@"launchOption==%@",[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]);
-    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
-        
-        NSMutableDictionary* notifiDic = [NSMutableDictionary dictionaryWithCapacity:1];
-        if (notifiDic.count != 0) {
-            [notifiDic removeAllObjects];
-        }
-        [notifiDic setDictionary:(NSDictionary *)[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
-        
-        if (notifiDic != nil){
-            NSLog(@"poponews off click push message  : %@", notifiDic);
-            NSString* msg = [[notifiDic objectForKey:@"aps"] objectForKey:@"alert"];
-            NSLog(@"poponews off push message : %@", msg);
-            
-            if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive){
-                NSString* pushNewsItemId = [[notifiDic objectForKey:@"aps"] objectForKey:@"itemId"];
-                
-                if (pushNewsItemId != nil){
-                    ITSApplication* poApp = [ITSApplication get];
-                    [poApp.dataSvr setOffPushNewsId:pushNewsItemId];
-                    //[poApp.dataSvr getPushNewsDetail:pushNewsItemId];
-                }
-            }
-        }
-    }
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    
+//    // ios push
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+//        
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//    } else {
+//        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
+//    }
+//    
+//    NSLog(@"launchOption==%@",[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]);
+//    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+//        
+//        NSMutableDictionary* notifiDic = [NSMutableDictionary dictionaryWithCapacity:1];
+//        if (notifiDic.count != 0) {
+//            [notifiDic removeAllObjects];
+//        }
+//        [notifiDic setDictionary:(NSDictionary *)[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+//        
+//        if (notifiDic != nil){
+//            NSLog(@"poponews off click push message  : %@", notifiDic);
+//            NSString* msg = [[notifiDic objectForKey:@"aps"] objectForKey:@"alert"];
+//            NSLog(@"poponews off push message : %@", msg);
+//            
+//            if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive){
+//                NSString* pushNewsItemId = [[notifiDic objectForKey:@"aps"] objectForKey:@"itemId"];
+//                
+//                if (pushNewsItemId != nil){
+//                    ITSApplication* poApp = [ITSApplication get];
+//                    [poApp.dataSvr setOffPushNewsId:pushNewsItemId];
+//                    //[poApp.dataSvr getPushNewsDetail:pushNewsItemId];
+//                }
+//            }
+//        }
+//    }
     return YES;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

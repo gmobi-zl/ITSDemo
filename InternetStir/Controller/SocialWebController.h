@@ -13,4 +13,7 @@
 @property (nonatomic, assign) NSUInteger viewIndex;
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) NSMutableArray *arr;
+@property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
+@property (nonatomic, strong) UIView *backView;
+
 @end

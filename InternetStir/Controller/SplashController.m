@@ -123,13 +123,21 @@
         self.loginView.backgroundColor = [UIColor whiteColor];
         self.loginView.layer.masksToBounds = YES;
         self.loginView.layer.cornerRadius = 10;
+        self.loginView.alpha = 0;
         self.loginView.center = self.view.center;
         [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
         [UIView animateWithDuration:0.5 animations:^{
             self.loginView.effectView.alpha = 1;
         }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
+
         [self.loginView.effectView addSubview:self.loginView];
     }
+}
+- (void)delayMethod {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loginView.alpha = 1;
+    }];
 }
 - (void)cancelBtn {
     
@@ -148,17 +156,26 @@
 }
 - (void)passMessage {
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.loginView.effectView.alpha = 0;
-    }];
-    TabBarController *tabBar = [[TabBarController alloc] init];
-    tabBar.selectedIndex = 1;
-    [self.navigationController pushViewController:tabBar animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        TabBarController *tabBar = [[TabBarController alloc] init];
+        tabBar.selectedIndex = 1;
+        [self.navigationController pushViewController:tabBar animated:YES];
+    });
 }
 
 -(void) delayToHome{
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM--dd HH:mm:ss.ssssss"];
+    NSLog(@"当前毫秒级时间1 = %@",[dateFormatter stringFromDate:[NSDate date]]);
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM--dd HH:mm:ss.ssssss"];
+        NSLog(@"当前毫秒级时间2 = %@",[dateFormatter stringFromDate:[NSDate date]]);
+
         [self pushNextVc];
+        NSLog(@"当前毫秒级时间3 = %@",[dateFormatter stringFromDate:[NSDate date]]);
+
     });
 }
 

@@ -123,6 +123,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
+    self.loginView.alpha = 0;
     [self.loginView.effectView addSubview:self.loginView];
     
     ITSApplication* poApp = [ITSApplication get];
@@ -133,10 +134,16 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)passMessage {
+- (void)delayMethod {
     [UIView animateWithDuration:0.5 animations:^{
-        self.loginView.effectView.alpha = 0;
+        self.loginView.alpha = 1;
     }];
+}
+
+- (void)passMessage {
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.loginView.effectView.alpha = 0;
+//    }];
     [self.tableView reloadData];
     
     ITSApplication* itsApp = [ITSApplication get];
@@ -322,6 +329,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
             [UIView animateWithDuration:0.5 animations:^{
                 self.loginView.effectView.alpha = 1;
             }];
+            [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
         }else {
             MyCommentController *Vc = [[MyCommentController alloc] init];
             Vc.hidesBottomBarWhenPushed = YES;
@@ -404,6 +412,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         [UIView animateWithDuration:0.5 animations:^{
             self.loginView.effectView.alpha = 1;
         }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
 
         ITSApplication* itsApp = [ITSApplication get];
         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];

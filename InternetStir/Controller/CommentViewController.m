@@ -68,6 +68,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
+    self.loginView.alpha = 0;
     self.loginView.center = self.view.center;
     [self.loginView.effectView addSubview:self.loginView];
 
@@ -262,6 +263,11 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     
     [self writeClick];
 }
+- (void)delayMethod {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loginView.alpha = 1;
+    }];
+}
 
 //写新的评论
 -(void)writeClick{
@@ -282,6 +288,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [UIView animateWithDuration:0.5 animations:^{
                  self.loginView.effectView.alpha = 1;
              }];
+             [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
              
 //             [ss setStringValue:@"login" data:contentStr];
 
@@ -491,6 +498,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [UIView animateWithDuration:0.5 animations:^{
                  self.loginView.effectView.alpha = 1;
              }];
+             [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
 
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
@@ -556,6 +564,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
              [UIView animateWithDuration:0.5 animations:^{
                  self.loginView.effectView.alpha = 1;
              }];
+             [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
 //             LoginViewController *loginVc = [[LoginViewController alloc] init];
 //             [self.navigationController pushViewController:loginVc animated:YES];
 //             [ss setStringValue:@"login" data:contentStr];
