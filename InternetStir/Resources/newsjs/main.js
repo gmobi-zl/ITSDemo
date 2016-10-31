@@ -60,7 +60,7 @@ function init()
 			else {
 				//result = '<img id="'+id+allImgIdx+'" src="'+entryurl+'/files/' + id + '"  onload = "onloadImg(this,id)">';
                 result = '<img id="'+id+'" src="'+entryurl+'files/' + id + '"  onload = "onloadImg(this,id)">';
-                sdkLog("web page image url = "+result);
+                //sdkLog("web page image url = "+result);
 			}
 
 			allImgIdx++;
