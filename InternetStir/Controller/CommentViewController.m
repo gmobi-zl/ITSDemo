@@ -637,7 +637,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                      }
                  }
              }];
-
 #endif
         }
     }];

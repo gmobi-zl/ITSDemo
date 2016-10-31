@@ -24,9 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    self.view.backgroundColor = [UIColor whiteColor];
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat screenH = [MMSystemHelper getScreenHeight];
 
@@ -41,7 +41,6 @@
 }
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.hidden = NO;
 
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];

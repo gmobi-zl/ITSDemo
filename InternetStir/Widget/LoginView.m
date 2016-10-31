@@ -95,13 +95,13 @@
     [poApp.reportSvr recordEvent:@"cancel" params:eParams eventCategory:@"login.click"];
 
     [UIView animateWithDuration:0.5 animations:^{
-        self.effectView.alpha = 0;
-//        self.alpha = 0;
+        self.alpha = 0;
     }];
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
 }
 - (void)delayMethod {
     [UIView animateWithDuration:0.5 animations:^{
-        self.alpha = 0;
+        self.effectView.alpha = 0;
     }];
 }
 - (void)loginFB {
@@ -111,7 +111,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.effectView.alpha = 0;
     }];
-    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
+//    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
 
     faceBook.delegate = self.viewController;
     [faceBook facebookLogin:^(int resultCode) {

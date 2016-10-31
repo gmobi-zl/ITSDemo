@@ -164,18 +164,9 @@
 }
 
 -(void) delayToHome{
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM--dd HH:mm:ss.ssssss"];
-    NSLog(@"当前毫秒级时间1 = %@",[dateFormatter stringFromDate:[NSDate date]]);
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM--dd HH:mm:ss.ssssss"];
-        NSLog(@"当前毫秒级时间2 = %@",[dateFormatter stringFromDate:[NSDate date]]);
-
         [self pushNextVc];
-        NSLog(@"当前毫秒级时间3 = %@",[dateFormatter stringFromDate:[NSDate date]]);
-
     });
 }
 
