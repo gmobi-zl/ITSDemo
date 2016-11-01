@@ -89,7 +89,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"PullLoad", STR_PULL_REFRESH_PULL);
     self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
     self.tableView.headerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
     

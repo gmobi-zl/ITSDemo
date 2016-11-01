@@ -59,7 +59,7 @@
             UILabel* tabLabel = [self.tabs objectAtIndex:i];
             if (tabLabel != nil){
                 //ConfigService *cs = [ConfigService get];
-                // tabLabel.textColor = [cs getScrollViewTitleColor:cs.type];
+                //tabLabel.textColor = [cs getScrollViewTitleColor:cs.type];
             }
         }
     }
