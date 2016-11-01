@@ -206,13 +206,13 @@
             self.cellHeight += 30 + padding/2;
             CGSize replyLabelSize;
             //if (item.type == 1) {
-            replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX, MAXFLOAT)];
+            replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX - 40, MAXFLOAT)];
             
             CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;
             self.cellHeight += padding + replyLabelHeight;
-            CGRect replyF = CGRectMake(replyLabelX, replyLabelY, replyLabelWidth, replyLabelHeight);
+            CGRect replyF = CGRectMake(nameLabelX + 40, replyLabelY, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
             [self.replyPictureF addObject:[NSValue valueWithCGRect:pictureF]];
             [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];

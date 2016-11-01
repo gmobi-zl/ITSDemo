@@ -18,7 +18,7 @@
 #ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;
 #endif
-//@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) UIVisualEffectView *effectView;
 @property (nonatomic, strong) LoginView *loginView;
 @property (nonatomic, strong) UIButton* Btn;
 

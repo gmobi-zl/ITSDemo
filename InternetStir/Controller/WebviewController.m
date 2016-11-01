@@ -41,7 +41,7 @@
     [self.view addSubview:self.backView];
     
     self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.testActivityIndicato.frame = CGRectMake(0, 150, screenW, 50);
+    self.testActivityIndicato.frame = CGRectMake(0, 200, screenW, 50);
     [self.backView addSubview:self.testActivityIndicato];
 }
 - (void)clickBack {
@@ -95,10 +95,10 @@
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     
-    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"404" ofType:@"html"];
-    NSURL *url = [NSURL fileURLWithPath:filePath];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+//    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"404" ofType:@"html"];
+//    NSURL *url = [NSURL fileURLWithPath:filePath];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
 }
 - (void)dealloc {
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];

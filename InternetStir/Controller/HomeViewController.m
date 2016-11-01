@@ -53,14 +53,30 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSString *str = @"Content with Facebook";
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
     CGFloat width = size.width + 30 + 10 + 60;
-
+//
+//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+//    self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
+//    self.effectView.alpha = 0;
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
+//    
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = self.effectView.bounds;
+//    UIColor *oneColor = [UIColor colorWithRed:246/255.0 green:123/255.0 blue:226/255.0 alpha:0.36];
+//    UIColor *twoColor = [UIColor colorWithRed:209/255.0 green:74/255.0 blue:138/255.0 alpha:0.34];
+//    UIColor *threeColor = [UIColor colorWithRed:45/255.0 green:65/255.0 blue:213/255.0 alpha:0.36];
+//    gradient.colors = [NSArray arrayWithObjects:(id)oneColor.CGColor, (id)twoColor.CGColor, (id)threeColor.CGColor, nil];
+//    [self.effectView.layer insertSublayer:gradient atIndex:0];
+//
+    
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.layer.masksToBounds = YES;
     self.loginView.layer.cornerRadius = 10;
     self.loginView.center = self.view.center;
+    self.loginView.alpha = 0;
     [self.loginView.effectView addSubview:self.loginView];
-    
+//    [self.effectView addSubview:self.loginView];
     [self setupRefresh];
     
     MMEventService* es = [MMEventService getInstance];
@@ -82,6 +98,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }else {
             [self.Btn setTitle:@"" forState:UIControlStateNormal];
         }
+        [self.tableView reloadData];
     });
 }
 
@@ -384,6 +401,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [UIView animateWithDuration:0.5 animations:^{
             self.loginView.effectView.alpha = 1;
         }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
     }else {
         // fav
         if (isFav == NO) {
@@ -462,6 +480,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [UIView animateWithDuration:0.5 animations:^{
             self.loginView.effectView.alpha = 1;
         }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
     }else {
 #ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
@@ -505,6 +524,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [UIView animateWithDuration:0.5 animations:^{
             self.loginView.effectView.alpha = 1;
         }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
     }else {
 #ifdef DEMO_DATA
         CommentViewController *vc = [[CommentViewController alloc] init];
@@ -605,7 +625,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
     
-    if (us.user.isCBADM == YES) {
+    if (us.user.isCBADM == YES && us.user.isLogin == YES) {
         [self.Btn setBackgroundImage:[UIImage imageNamed:@"camera [#952]"] forState:UIControlStateNormal];
     }else {
         self.Btn.frame = CGRectMake(0, 20, 50, 30);
@@ -627,7 +647,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)login {
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if (us.user.isCBADM == YES) {
+    if (us.user.isCBADM == YES && us.user.isLogin == YES) {
         self.photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"take_photo", nil),NSLocalizedString(@"select_photo", nil), nil];
         [self.photoSheet showInView:self.view];
 
@@ -636,6 +656,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             [UIView animateWithDuration:0.5 animations:^{
                 self.loginView.effectView.alpha = 1;
             }];
+            [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
         }
     }
 //
@@ -643,6 +664,11 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    error.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:error animated:YES];
 //
+}
+- (void)delayMethod {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loginView.alpha = 1;
+    }];
 }
 - (void)push {
     

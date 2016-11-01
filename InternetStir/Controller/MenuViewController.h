@@ -29,5 +29,5 @@
 @property (nonatomic, strong) UIButton *loginOut;
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) LoginView *loginView;
-//@property (nonatomic, strong) UIVisualEffectView *effectView;
+@property (nonatomic, strong) UIVisualEffectView *effectView;
 @end

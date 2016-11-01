@@ -47,6 +47,17 @@
     }
    
     [self.view addSubview:self.webView];
+    
+    self.backView = [[UIView alloc] init];
+    self.backView.frame = CGRectMake(0, 0, screenW,screenH);
+    self.backView.backgroundColor = [UIColor blackColor];
+    self.backView.alpha = 0.5;
+    self.backView.hidden = NO;
+    [self.view addSubview:self.backView];
+    
+    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.testActivityIndicato.frame = CGRectMake(0, 250, screenW, 50);
+    [self.backView addSubview:self.testActivityIndicato];
 
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -55,13 +66,13 @@
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
     
-//    self.backView.hidden = NO;
-//    [self.testActivityIndicato startAnimating];
+    self.backView.hidden = NO;
+    [self.testActivityIndicato startAnimating];
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     
-//    self.backView.hidden = YES;
-//    [self.testActivityIndicato stopAnimating];
+    self.backView.hidden = YES;
+    [self.testActivityIndicato stopAnimating];
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     

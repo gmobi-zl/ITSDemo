@@ -43,6 +43,7 @@
 "set_clear"="清除中";
 "FeedBackInfo"="请写点东西吧:";
 "FeedBackSend"="发送";
+"FeedBackSendOk"="发送成功";
 "FeedBackWrite"="请输入您的建议";
 "save"="存储";
 "say_something"="请输入留言内容";

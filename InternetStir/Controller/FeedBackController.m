@@ -172,7 +172,7 @@ static int height;
         ITSApplication* app = [ITSApplication get];
         [app.reportSvr recordFeedback:msg];
         [self.feedbackMsg setText:@""];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"FeedBackSend", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"FeedBackSendOk", nil) message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     //    if([msg length] >= 1 ){

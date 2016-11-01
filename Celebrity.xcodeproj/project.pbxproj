@@ -878,9 +878,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18F664951D59BA9B00BDB2E8 /* Jacob */ = {
+		18F664951D59BA9B00BDB2E8 /* Celebrity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Jacob" */;
+			buildConfigurationList = 18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Celebrity" */;
 			buildPhases = (
 				5F1B6B8DA34A60F69ED206F5 /* Check Pods Manifest.lock */,
 				18F664921D59BA9B00BDB2E8 /* Sources */,
@@ -894,8 +894,8 @@
 			);
 			dependencies = (
 			);
-			name = Jacob;
-			productName = InternetStir;
+			name = Celebrity;
+			productName = CelebrityApp;
 			productReference = 18F664961D59BA9B00BDB2E8 /* How Fun.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -914,7 +914,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Jacob" */;
+			buildConfigurationList = 18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Celebrity" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -929,7 +929,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18F664951D59BA9B00BDB2E8 /* Jacob */,
+				18F664951D59BA9B00BDB2E8 /* Celebrity */,
 			);
 		};
 /* End PBXProject section */
@@ -1322,7 +1322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Jacob" */ = {
+		18F664911D59BA9B00BDB2E8 /* Build configuration list for PBXProject "Celebrity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18F664AB1D59BA9B00BDB2E8 /* Debug */,
@@ -1331,7 +1331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Jacob" */ = {
+		18F664AD1D59BA9B00BDB2E8 /* Build configuration list for PBXNativeTarget "Celebrity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18F664AE1D59BA9B00BDB2E8 /* Debug */,
