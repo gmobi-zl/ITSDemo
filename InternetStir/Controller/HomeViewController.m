@@ -144,14 +144,14 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)setupRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.tableView.headerPullToRefreshText = NSLocalizedString(@"Pull2Load", STR_PULL_REFRESH_PULL);
+    self.tableView.headerPullToRefreshText = NSLocalizedString(@"PullLoad", STR_PULL_REFRESH_PULL);
     self.tableView.headerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.headerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.headerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
     
     [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     self.tableView.footerPullToRefreshText = NSLocalizedString (@"Pull2Load", STR_PULL_REFRESH_PULL);
     self.tableView.footerReleaseToRefreshText = NSLocalizedString(@"Release2Refresh", STR_PULL_REFRESH_RELEASE);
-    self.tableView.footerRefreshingText = NSLocalizedString(@"Loading", STR_PULL_REFRESH_LOADING);
+    self.tableView.footerRefreshingText = NSLocalizedString(@"LoadingNews", STR_PULL_REFRESH_LOADING);
 }
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing

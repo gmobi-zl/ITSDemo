@@ -50,4 +50,7 @@
 "narrated_img"="请描述这张图片";
 "load_message"="请稍后…";
 "WebViewReadSrc"="阅读原文";
-
+"LoadingNews"="加载中…";
+"Release2Refresh"="松开刷新…";
+"PullLoad"="下拉刷新…";
+"Pull2Load"="上拉刷新…";
