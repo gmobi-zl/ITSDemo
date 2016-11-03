@@ -35,7 +35,7 @@
         
         self.icon = [[UIImageView alloc] init];
         self.icon.layer.masksToBounds = YES;
-        self.icon.layer.cornerRadius = 25;
+        self.icon.layer.cornerRadius = 18;
         [self.contentView addSubview:self.icon];
         
         self.nameLabel = [[UILabel alloc] init];
@@ -76,15 +76,15 @@
         [self.contentView addSubview:self.timeLabel];
         
         self.favBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [self.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.favBtn];
         
         self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.commentBtn setBackgroundImage:[UIImage imageNamed:@"comment"] forState:UIControlStateNormal];
+        [self.commentBtn setBackgroundImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.commentBtn];
         
         self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.shareBtn];
         
         self.line = [[UILabel alloc] init];
@@ -101,7 +101,7 @@
         [self.contentView addSubview:self.likeNum];
         
         self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"PinDown"] forState:UIControlStateNormal];
+        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"icon_ios_addition"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.delBtn];
 
 //        ITSApplication* itsApp = [ITSApplication get];

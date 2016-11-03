@@ -32,10 +32,11 @@
         self.title = [[UILabel alloc] init];
         CGFloat titleW = itemWidth - 16*3 - 42;
         CGFloat titleH = 20;
-        self.title.frame = CGRectMake(16 + 45 + 10, 12, titleW, titleH);
+        self.title.frame = CGRectMake(16 + 15 + 20, 12, titleW, titleH);
         //UIFont* titleFont = [UIFont fontWithName:@"Arial" size:18];
         UIFont* titleFont = [UIFont systemFontOfSize:16];
         [self.title setFont:titleFont];
+        self.title.textAlignment = NSTextAlignmentLeft;
         self.title.text = @"设置";
         [self.title setNumberOfLines:1];
         [self.contentView addSubview:self.title];
@@ -59,7 +60,7 @@
         [self.contentView addSubview:self.bgView];
         
         self.line = [[UIView alloc] init];
-        self.line.frame = CGRectMake(0, 43, screenW, 1);
+        self.line.frame = CGRectMake(16 + 15 + 20, 43, screenW, 1);
 //        self.line.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];//[UIColor lightGrayColor];
 //        self.line.alpha = 0.5;
         self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];

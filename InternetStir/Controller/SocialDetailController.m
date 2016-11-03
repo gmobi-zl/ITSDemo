@@ -42,7 +42,6 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 15, 20);
     [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -50,6 +49,9 @@
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
 
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -277,7 +279,6 @@
         NSMutableDictionary* rspDataDic = [NSMutableDictionary dictionaryWithCapacity:2];
         [rspDataDic setObject:item.title == nil ? @"" : item.title forKey:@"title"];
         [rspDataDic setObject:timeStr == nil ? @"" : timeStr forKey:@"time"];
-//        [rspDataDic setObject:item.pdomain == nil ? @"" : item.pdomain forKey:@"pname"];
         [rspDataDic setObject:item.source == nil ? @"" : item.source forKey:@"source"];
         [rspDataDic setObject:NSLocalizedString (@"WebViewReadSrc", @"READ THIS ARTICLE ON THE WEB") forKey:@"readsource"];
         

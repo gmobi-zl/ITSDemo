@@ -210,9 +210,9 @@
 //    }
     
     self.login = [[FBSDKLoginManager alloc] init];
-    self.login.loginBehavior = FBSDKLoginBehaviorWeb;
+    self.login.loginBehavior = FBSDKLoginBehaviorNative;
     //@"public_profile", @"email", @"user_friends", @"user_likes", @"user_posts"
-    [self.login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:view handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [self.login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         MMLogDebug(@"FB login rsp:  %@", result);
         if (error){
             // process error
@@ -225,6 +225,7 @@
             cb(ITS_FB_LOGIN_SUCCESS);
         }
     }];
+    
 #endif
 }
 @end

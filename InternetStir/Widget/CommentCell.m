@@ -32,7 +32,7 @@
         
         self.nameLabel = [[UILabel alloc] init];
 //        self.nameLabel.font = [UIFont systemFontOfSize:16];
-        self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:16];
+        self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
         [self.contentView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
@@ -231,7 +231,7 @@
         [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
-        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,20)];
+        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
         CGFloat nameLabelY = 13;
         CGFloat nameLabelWidth = nameLabelSize.width + 20;
         CGFloat nameLabelHeight = nameLabelSize.height;
