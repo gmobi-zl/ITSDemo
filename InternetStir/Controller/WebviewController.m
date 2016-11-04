@@ -11,8 +11,6 @@
 #import "MMSystemHelper.h"
 #import "ConfigService.h"
 
-#define TOMOTO_URL @"http://www.tomoto.io"
-
 @interface WebviewController ()
 
 @end
@@ -23,7 +21,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self configUI];
-    
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat screenH = [MMSystemHelper getScreenHeight];
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,7 +58,7 @@
     progressView.trackTintColor = [UIColor whiteColor];
     [self.view addSubview:progressView];
     self.progressView = progressView;
-    NSURL* url = [NSURL URLWithString:TOMOTO_URL];
+    NSURL* url = [NSURL URLWithString:self.path];
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;

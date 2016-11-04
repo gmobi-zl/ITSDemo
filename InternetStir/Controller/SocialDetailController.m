@@ -272,13 +272,13 @@
         DataService* ds = poApp.dataSvr;
         CelebRecommend* item = [ds getCurrentDetailNewsItem];
         
-        NSString* timeStr = [NSString stringWithFormat:@"發布日期: %@",[MMSystemHelper dateFormatStr:item.releaseTime/1000 format:nil]];
+//        NSString* timeStr = [NSString stringWithFormat:@"發布日期: %@",[MMSystemHelper dateFormatStr:item.releaseTime/1000 format:nil]];
         
         //保存每一次选中的字体  设置默认的字体
 
         NSMutableDictionary* rspDataDic = [NSMutableDictionary dictionaryWithCapacity:2];
         [rspDataDic setObject:item.title == nil ? @"" : item.title forKey:@"title"];
-        [rspDataDic setObject:timeStr == nil ? @"" : timeStr forKey:@"time"];
+//        [rspDataDic setObject:timeStr == nil ? @"" : timeStr forKey:@"time"];
         [rspDataDic setObject:item.source == nil ? @"" : item.source forKey:@"source"];
         [rspDataDic setObject:NSLocalizedString (@"WebViewReadSrc", @"READ THIS ARTICLE ON THE WEB") forKey:@"readsource"];
         

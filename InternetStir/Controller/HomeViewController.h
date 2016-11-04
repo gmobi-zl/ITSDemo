@@ -12,8 +12,9 @@
 #import "FacebookService.h"
 #import "ITSAppConst.h"
 #import "GAITrackedViewController.h"
+#import "HomeCommentCell.h"
 
-@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TQRichTextViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 #ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;
