@@ -146,29 +146,29 @@
     //iconF头像
     CGFloat iconViewX = HOME_CONTENT_LEFT_PADDING;
     CGFloat iconViewY = 10;
-    CGFloat iconViewWidth = 50;
-    CGFloat iconViewHeight = 50;
+    CGFloat iconViewWidth = 36;
+    CGFloat iconViewHeight = 36;
     self.iconF = CGRectMake(iconViewX, iconViewY, iconViewWidth, iconViewHeight);
     
-    self.delBtnF = CGRectMake(screenW - 50, 15, 25, 18);
+    self.delBtnF = CGRectMake(screenW - 40, 20, 20, 20);
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + 10;
     CGSize nameLabelSize = [MMSystemHelper sizeWithString:comment.name font:[UIFont systemFontOfSize:HOME_USER_NAME_FONT_SIZE] maxSize:CGSizeMake(MAXFLOAT,30)];
     CGFloat nameLabelY = iconViewY;
     CGFloat nameLabelWidth = nameLabelSize.width;
     CGFloat nameLabelHeight = nameLabelSize.height;
-    self.nameF = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 30);
+    self.nameF = CGRectMake(nameLabelX, nameLabelY - 5, nameLabelWidth, 30);
     
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", comment.pts]];
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
-    self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight + 10 , timeLabelSize.width + 20, 20);
+    self.timeF = CGRectMake(nameLabelX, nameLabelY + nameLabelHeight, timeLabelSize.width + 20, 20);
     
     self.photoF = CGRectMake(0, iconViewY + iconViewHeight + HOME_ICON_PHOTO_PADDING, screenW, celeAttachment.h * screenW / celeAttachment.w);
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;
     
-    self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 28, 24);
-    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 25 + HOME_ICON_PADDING, self.cellHeight, 25, 22);
-    self.shareF = CGRectMake(self.commentF.origin.x + 2 * HOME_ICON_PADDING, self.cellHeight, 21, 24);
+    self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 32, 32);
+    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 25 + HOME_ICON_PADDING, self.cellHeight, 32, 32);
+    self.shareF = CGRectMake(self.commentF.origin.x + 2 * HOME_ICON_PADDING, self.cellHeight, 32, 32);
     self.cellHeight = self.photoF.origin.y + self.photoF.size.height + 50;
     self.lineF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight - 1, screenW - 2*HOME_CONTENT_LEFT_PADDING, 1);
     

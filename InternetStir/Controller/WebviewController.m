@@ -41,7 +41,7 @@
     [self.view addSubview:self.backView];
     
     self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.testActivityIndicato.frame = CGRectMake(0, 200, screenW, 50);
+    self.testActivityIndicato.frame = CGRectMake(0, screenH/2 - 64, screenW, 50);
     [self.backView addSubview:self.testActivityIndicato];
 }
 - (void)clickBack {

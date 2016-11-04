@@ -50,7 +50,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.navigationItem.rightBarButtonItem = right;
     
     self.photo = [[UIImageView alloc] init];
-    self.photo.frame = CGRectMake(25, 90, 50, 50);
+    self.photo.frame = CGRectMake(screenW/2 - 25, 90, 80, 80);
     if (self.type == 1) {
         self.photo.image = [UIImage imageWithData:self.data];
         [send setTitle:@"發布" forState:UIControlStateNormal];
@@ -65,7 +65,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     [self.view addSubview:self.photo];
     
     self.textView = [[UITextView alloc] init];
-    self.textView.frame = CGRectMake(85, 74, screenW - 100, 90);
+    self.textView.frame = CGRectMake(15, 180, screenW - 30, 100);
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.delegate = self;
     self.textView.font = [UIFont systemFontOfSize:18];
@@ -85,7 +85,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 30)];
     self.label = [[UILabel alloc] init];
     self.label.textColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
-    self.label.frame = CGRectMake(90, 74, size.width, 30);
+    self.label.frame = CGRectMake(20, 180, size.width, 30);
     self.label.text = str;
     if (self.type == 1) {
         self.label.hidden = NO;
@@ -98,10 +98,10 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.label];
     
-    UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, 174, screenW, 3);
-    bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
-    [self.view addSubview:bgView];
+//    UIView *bgView = [[UIView alloc] init];
+//    bgView.frame = CGRectMake(0, 174, screenW, 3);
+//    bgView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+//    [self.view addSubview:bgView];
     
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_CELEB_COMMENT_UPLOAD_FILE_RESULT selector:@selector(celebUploadFileListener:)];

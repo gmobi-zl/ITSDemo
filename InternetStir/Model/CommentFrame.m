@@ -162,14 +162,14 @@
     
     CGFloat screenW = [MMSystemHelper getScreenWidth];
     CGFloat iconViewX = HOME_CONTENT_LEFT_PADDING;
-    CGFloat iconViewY = padding + 5;
+    CGFloat iconViewY = 5 + 5;
     CGFloat iconViewWidth = 40;
     CGFloat iconViewHeight = 40;
     self.iconF = CGRectMake(iconViewX, iconViewY , iconViewWidth, iconViewHeight);
     
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:fansComment.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:fansComment.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
     CGFloat nameLabelY = iconViewY;
     CGFloat nameLabelWidth = nameLabelSize.width + 20;
     CGFloat nameLabelHeight = nameLabelSize.height;
@@ -189,7 +189,7 @@
     self.timeF = CGRectMake(nameLabelX, self.cellHeight , timeLabelSize.width + 20, 20);
     self.replyBtnF = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.cellHeight, 40, 20);
     
-    self.cellHeight = CGRectGetMaxY(self.timeF) + padding + 5;
+    self.cellHeight = CGRectGetMaxY(self.timeF) + padding ;
     
     //评论
 //    self.replysF = [[NSMutableArray alloc] init];
@@ -200,24 +200,25 @@
         for (int i = 0; i < [fansComment.replayComments count]; i++) {
             
             FansComment *item = [fansComment.replayComments objectAtIndex:i];
-            CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight - 5, 30, 30);
+            CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
             CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, size.width + 10, 20);
-            self.cellHeight += 30 + padding/2;
+//            self.cellHeight += 30 ;
             CGSize replyLabelSize;
             //if (item.type == 1) {
             replyLabelSize = [MMSystemHelper sizeWithString:item.comment font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 2*padding - nameLabelX - 40, MAXFLOAT)];
             
-            CGFloat replyLabelY = self.cellHeight;
+//            CGFloat replyLabelY = self.cellHeight;
             CGFloat replyLabelWidth = replyLabelSize.width;
             CGFloat replyLabelHeight = replyLabelSize.height;
             self.cellHeight += padding + replyLabelHeight;
-            CGRect replyF = CGRectMake(nameLabelX + 40, replyLabelY, replyLabelWidth, replyLabelHeight);
+            CGRect replyF = CGRectMake(nameLabelX + 40, nameF.origin.y + 20, replyLabelWidth, replyLabelHeight);
             [self.replysF addObject:[NSValue valueWithCGRect:replyF]];
             [self.replyPictureF addObject:[NSValue valueWithCGRect:pictureF]];
             [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];
+            
+            self.cellHeight += 15;
         }
-        
         //评论的背景
         self.cellHeight = CGRectGetMaxY([(NSValue *)[self.replysF lastObject] CGRectValue]) + padding;
         CGFloat replyBackgroundWidth = screenW - 1.5*padding - nameLabelX;

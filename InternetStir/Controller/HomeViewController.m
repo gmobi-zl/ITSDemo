@@ -264,9 +264,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     if (isFav == YES) {
         //        self.zanImageView.image = self.zanImage;
-        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like_slected"] forState:UIControlStateNormal];
+        
     }else{
-        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
     }
     
     tmpCell.button.tag = indexPath.row;
@@ -407,7 +408,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         if (isFav == NO) {
             item.likes ++;
             cell.likeNum.text = [NSString stringWithFormat:@"%ld",item.likes];
-            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like_slected"] forState:UIControlStateNormal];
+            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like_slected"] forState:UIControlStateNormal];
             cell.commentFrame.commentItem.isFavour = YES;
             [ss setBooleanValue:item.fid data:YES];
             NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -419,7 +420,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }else {
             item.likes--;
             cell.likeNum.text = [NSString stringWithFormat:@"%ld",item.likes];
-            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
             cell.commentFrame.commentItem.isFavour = YES;
             [ss setBooleanValue:item.fid data:NO];
             [poApp.remoteSvr userUnlike:item.fid ];

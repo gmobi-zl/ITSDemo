@@ -114,7 +114,7 @@
         tabBar.selectedIndex = 1;
         [self.navigationController pushViewController:tabBar animated:YES];
     }else {
-        
+
         NSString *str = @"Content with Facebook";
         CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
         CGFloat width = size.width + 30 + 10 + 60;
