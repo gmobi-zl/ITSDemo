@@ -96,6 +96,11 @@ function init()
             return new Handlebars.SafeString(videoFrame);
 		});
         
+        Handlebars.registerHelper('a', function (url) {
+            var result = '<a href="javascript:void(0);" onclick="openInWebView(\''+url+'\');return false;" >'+url+'</a>';
+            return new Handlebars.SafeString(result);
+        });
+        
 		Handlebars.registerHelper('slide', function (ids) {
 			sdkLog("slide1");
 			var id= new Array();
@@ -502,6 +507,11 @@ function sdkLog(msg){
   jsCallNativeApi("loggerDebug", [msg], null);
 }
 
+function openInWebView(url){
+    sdkLog("open url = " + url);
+    apiOpenUrl(url);
+}
+
 var apiGetData = function(nid,callback) {
   jsCallNativeApi("getNewsData", [nid], callback);
 };
@@ -509,6 +519,10 @@ var apiGetData = function(nid,callback) {
 var apiOpenSrc = function(nid,callback) {
   jsCallNativeApi("webOpenSrc", [nid], callback);
 };
+
+var apiOpenUrl = function(url) {
+    jsCallNativeApi("webOpenUrl", [url], null);
+}
 
 var apiGetNativeAd = function(nid, callback) {
     jsCallNativeApi("GetDetailAd", [nid], callback);

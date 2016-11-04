@@ -2444,11 +2444,11 @@
                 // do nothing
                 CelebRecommend* topComment = [self.celebRecommends objectAtIndex:0];
                 if (topComment != nil)
-                    newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+                    newsTime = [NSString stringWithFormat:@"%llu", topComment.releaseTime];
             } else if (type == CB_RECOMMEND_REFRESH_TYPE_BEFORE){
                 CelebRecommend* latestComment = [self.celebRecommends objectAtIndex:count-1];
                 if (latestComment != nil)
-                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.uts];
+                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.releaseTime];
             }
         } 
     }
@@ -2500,7 +2500,7 @@
                     break;
                 }
                 
-                if (comment.uts < item.uts) {
+                if (comment.releaseTime < item.releaseTime) {
                     [self.celebRecommends insertObject:item atIndex:i];
                     ret = YES;
                     break;

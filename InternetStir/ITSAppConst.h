@@ -14,7 +14,7 @@
 //#define TEST_CELEB_LOGIN 1
 
 // Test Channel & url
-#define PONEWS_URL_BASE @"http://test.poponews.net/"
+#define PONEWS_URL_BASE @"http://106.185.48.211:8080/"  // @"http://www.tomoto.io/"
 #define PONEWS_GROUP @"test"
 
 #define MM_WEB_IMAGE_CACHE_FOLDER @"MMImageCache"

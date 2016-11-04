@@ -343,13 +343,36 @@
         actionCB(aId, @"success", transStr);
     } else if ([action compare:@"webOpenSrc"] == NSOrderedSame){
         [self goToReadSourcePage];
+    } else if ([action compare:@"webOpenUrl"] == NSOrderedSame){
+        MMLogDebug(@"%@", data);
+        if (data != nil){
+            NSData* tmpData = [data dataUsingEncoding:NSUTF8StringEncoding];
+            NSError* nError = nil;
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:tmpData options:NSJSONReadingAllowFragments error:&nError];
+            NSString* urlStr = @"";
+            if ([jsonObject isKindOfClass:[NSArray class]]){
+                urlStr = [jsonObject objectAtIndex:0];
+            }
+            
+            MMLogDebug(@" url = %@", urlStr);
+            if (urlStr != nil)
+                [self goToWebView:urlStr];
+        }
+        
     }
 }
 
--(void) goToReadSourcePage{
-    
+-(void) goToWebView: (NSString*) url{
     dispatch_async(dispatch_get_main_queue(), ^{
+        DetailContentController *readSourcePage = [[DetailContentController alloc] init];
+        readSourcePage.path = url;
+        readSourcePage.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:readSourcePage animated:YES];
+    });
+}
 
+-(void) goToReadSourcePage{
+    dispatch_async(dispatch_get_main_queue(), ^{
         ITSApplication* poApp = [ITSApplication get];
         DataService* ds = poApp.dataSvr;
         CelebRecommend* item = [ds getCurrentDetailNewsItem];

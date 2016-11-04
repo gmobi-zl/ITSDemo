@@ -71,6 +71,7 @@ function objcGetJsCommands() {
 
 function jsCallNativeApi(action, params, callback){
 	var timestamp = Math.round(new Date().getTime()/1000);
+    var paramsJsonArrayStr = JSON.stringify(params);
 	var cItem = {
 		'id': timestamp + "_" + callbackCounter,
 		'callback': callback,
@@ -88,7 +89,7 @@ function jsCallNativeApi(action, params, callback){
 	
 	checkCallbackList();
 
-	var paramsJsonArrayStr = JSON.stringify(params);
+	
 	
 	//if (getPlatform() == "MOBILE"){
         //if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {

@@ -30,7 +30,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>CelebrityBaseUrl</key>
-	<string>http://106.185.48.211:8080/</string>
+	<string>http://www.tomoto.io/</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -51,9 +51,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>318717128488813</string>
+	<string>571339486398797</string>
 	<key>FacebookDisplayName</key>
-	<string>Jaco­b­-­爾­賢­就­是愛生活</string>
+	<string>肆一</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
