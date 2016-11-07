@@ -593,10 +593,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                  self.loginView.effectView.alpha = 1;
              }];
              [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
-//             LoginViewController *loginVc = [[LoginViewController alloc] init];
-//             [self.navigationController pushViewController:loginVc animated:YES];
-//             [ss setStringValue:@"login" data:contentStr];
-
          }else {
 #ifdef DEMO_DATA
              CommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];

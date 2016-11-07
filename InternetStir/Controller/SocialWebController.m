@@ -62,17 +62,44 @@
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"name" params:eParams eventCategory:@"social.web.view"];
-
+    
+    self.backBtn = [[UIButton alloc] init];
+    self.backBtn.frame = CGRectMake(15, screenH - 49 - 55 - 15, 33, 55);
+    [self.backBtn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.backBtn.hidden = YES;
+    [self.backBtn setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.backBtn];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    if ([self.webView canGoBack]) {
+//        self.backBtn.hidden = NO;
+//    }else {
+//        self.backBtn.hidden = YES;
+//    }
+}
+- (void)btnClick {
+    [self.webView goBack];
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
     
     self.backView.hidden = NO;
+    self.backBtn.hidden = YES;
     [self.testActivityIndicato startAnimating];
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     
     self.backView.hidden = YES;
     [self.testActivityIndicato stopAnimating];
+    if ([self.webView canGoBack]) {
+        self.backBtn.hidden = NO;
+    }else {
+        self.backBtn.hidden = YES;
+    }
+
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     

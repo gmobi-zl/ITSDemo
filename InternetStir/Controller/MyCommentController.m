@@ -167,12 +167,12 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         cell = [[MyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCommentTableViewCellIdentifier];
     }
     MyCommentCell *tmpCell = (MyCommentCell*)cell;
-    [tmpCell.replyButton addTarget:self action:@selector(pushCommentVc:) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.replyButton addTarget:self action:@selector(replyBtn:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.replyButton.tag = indexPath.row;
     
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
-    NSMutableArray* trackComment= ds.userTrackComments;
+    NSMutableArray* trackComment = ds.userTrackComments;
     if (trackComment != nil){
         UserTrackComment* c = [trackComment objectAtIndex:indexPath.row];
         UserTrackCommentFrame *frame = [[UserTrackCommentFrame alloc] init];
@@ -213,42 +213,109 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 }
 - (void)replyBtn:(UIButton *)button {
     
-//    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
-//                                   content:@""
-//                                      name:@""
-//                                     Block:^(NSString *contentStr)
-//     {
-//     
-//         ITSApplication* itsApp = [ITSApplication get];
-//         NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-//         [eParams setObject:@"reply" forKey:@"fid"];
-//         [eParams setObject:contentStr forKey:@"reply"];
-//         [itsApp.reportSvr recordEvent:@"reply" params:eParams eventCategory:@"comment.track.click"];
-//     }];
+    
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
-    NSMutableArray* trackComment= ds.userTrackComments;
-    UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
-    
-    if(comment.replayComments == nil){
-        CelebComment* celebC = [ds findCelebCommentById:comment.fid];
-        if (celebC == nil){
-            [itsApp.dataSvr setCurrentCelebComment:comment.article];
-            CommentViewController *commentVc = [[CommentViewController alloc] init];
-            [self.navigationController pushViewController:commentVc animated:YES];
-            
-        } else {
-            comment.article = celebC;
-            [itsApp.dataSvr setCurrentCelebComment:comment.article];
-            CommentViewController *commentVc = [[CommentViewController alloc] init];
-            [self.navigationController pushViewController:commentVc animated:YES];
-        }
-    } else {
-        [itsApp.dataSvr setCurrentCelebComment:comment.article];
-        
-        CommentViewController *commentVc = [[CommentViewController alloc] init];
-        [self.navigationController pushViewController:commentVc animated:YES];
-    }
+    CBUserService* userSvr = itsApp.cbUserSvr;
+    [UUInputAccessoryView showKeyboardType:UIKeyboardTypeDefault
+                                   content:@""
+                                      name:@""
+                                     Block:^(NSString *contentStr)
+     {
+         
+         if (userSvr.user.isLogin == NO) {
+         
+         }else {
+#ifdef DEMO_DATA
+             CommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];
+             CommentItem *newReplyItem = frameNeedChanged.detailCommentItem;
+             
+             //做个中转
+             NSMutableArray *mutaArray = [[NSMutableArray alloc] init];
+             [mutaArray addObjectsFromArray:newReplyItem.replys];
+             ReplyItem *newsItem = [[ReplyItem alloc] init];
+             newsItem.comment = contentStr;
+             frameNeedChanged.replysF = nil;
+             frameNeedChanged.replyPictureF = nil;
+             frameNeedChanged.replyNameF = nil;
+             newsItem.name = userSvr.user.userName;
+             newsItem.icon = userSvr.user.avatar;
+             [mutaArray addObject:newsItem];
+             newReplyItem.replys = mutaArray;
+             newsItem.type = 1;
+             frameNeedChanged.detailCommentItem = newReplyItem;
+             [self.tableView reloadData];
+#else
+             // send to server
+             ITSApplication* itsApp = [ITSApplication get];
+             DataService* ds = itsApp.dataSvr;
+             NSMutableArray* trackComment= ds.userTrackComments;
+
+             UserTrackComment *currentFansComment = [trackComment objectAtIndex:button.tag];
+             CelebComment* currentComment = currentFansComment.article;
+             
+             if (currentFansComment == nil){
+                 return;
+             }
+             
+             [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:currentFansComment.cid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                 if (resultData != nil){
+                     NSNumber* retNum = [resultData objectForKey:@"success"];
+                     if (retNum != nil){
+                         BOOL ret = [retNum boolValue];
+                         if (ret == YES){
+                             CelebUser* user = itsApp.cbUserSvr.user;
+                             FansComment* sendComment = [FansComment alloc];
+                             sendComment.name = user.userName;
+                             sendComment.avator = user.avatar;
+                             sendComment.comment = contentStr;
+                             NSString* retuuid = [resultData objectForKey:@"uuid"];
+                             NSString* retfid = [resultData objectForKey:@"fid"];
+                             NSString* retcid = [resultData objectForKey:@"cid"];
+                             NSString* retrid = [resultData objectForKey:@"rid"];
+                             sendComment.uuid = retuuid;
+                             sendComment.fid = retfid;
+                             sendComment.cid = retcid;
+                             sendComment.rid = retrid;
+                             sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                             sendComment.uts = sendComment.pts;
+                             
+                             [ds userInsertCurrentReplyCommentItem:sendComment];
+                             [ds userInsertUserTrackCommentItem:sendComment];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self.tableView reloadData];
+                             });
+                         }
+                     }
+                 }
+             }];
+#endif
+         }
+     }];
+//    ITSApplication* itsApp = [ITSApplication get];
+//    DataService* ds = itsApp.dataSvr;
+//    NSMutableArray* trackComment= ds.userTrackComments;
+//    UserTrackComment *comment = [trackComment objectAtIndex:button.tag];
+//    
+//    if(comment.replayComments == nil){
+//        CelebComment* celebC = [ds findCelebCommentById:comment.fid];
+//        if (celebC == nil){
+//            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+//            CommentViewController *commentVc = [[CommentViewController alloc] init];
+//            [self.navigationController pushViewController:commentVc animated:YES];
+//            
+//        } else {
+//            comment.article = celebC;
+//            [itsApp.dataSvr setCurrentCelebComment:comment.article];
+//            CommentViewController *commentVc = [[CommentViewController alloc] init];
+//            [self.navigationController pushViewController:commentVc animated:YES];
+//        }
+//    } else {
+//        [itsApp.dataSvr setCurrentCelebComment:comment.article];
+//        
+//        CommentViewController *commentVc = [[CommentViewController alloc] init];
+//        [self.navigationController pushViewController:commentVc animated:YES];
+//    }
 
 }
 - (void)clickBack {

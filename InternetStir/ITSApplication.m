@@ -115,7 +115,7 @@ NSString* customerLocal = nil;
         }else {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
             hud.mode = MBProgressHUDModeText;
-            hud.label.text = @"网络错误";
+            hud.label.text = NSLocalizedString(@"NetErr", nil);
             // Move to bottm center.
             hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
             [hud hideAnimated:YES afterDelay:3.f];

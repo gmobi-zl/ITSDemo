@@ -358,7 +358,7 @@ typedef enum{
                             fid: (NSString*) fid;
 -(BOOL) insertCurrentReplyCommentItem: (FansComment*) item;
 -(BOOL) userInsertCurrentReplyCommentItem: (FansComment*) item;
-
+-(BOOL) userInsertUserTrackCommentItem: (FansComment*) item;
 @end
 
 #endif
