@@ -7,6 +7,7 @@
 //
 
 #import "TQRichTextRunURL.h"
+#import "MMSystemHelper.h"
 
 @implementation TQRichTextRunURL
 
@@ -16,7 +17,8 @@
 - (void)decorateToAttributedString:(NSMutableAttributedString *)attributedString range:(NSRange)range
 {
     [super decorateToAttributedString:attributedString range:range];
-    [attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[UIColor blueColor].CGColor range:range];
+    [attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[MMSystemHelper string2UIColor:@"#72ACE3"] range:range];
+//    [attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[UIColor blueColor].CGColor range:range];
 }
 
 /**

@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define TEST_CELEB_LOGIN 1
+//#define TEST_CELEB_LOGIN 1
 
 // Test Channel & url
 #define PONEWS_URL_BASE @"http://106.185.48.211:8080/"  // @"http://api.tomoto.io/"

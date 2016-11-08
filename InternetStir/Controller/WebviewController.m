@@ -64,6 +64,8 @@
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.navigationDelegate = self;
+    [self.webView setAllowsBackForwardNavigationGestures:true];
+
     [self.view insertSubview:self.webView belowSubview:progressView];
     
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
