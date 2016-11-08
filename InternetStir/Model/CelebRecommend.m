@@ -50,18 +50,23 @@
         }
         self.images = tmpArray;
     }
-    tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_UTS];
+    numData = [dic objectForKey:CELEB_RECOMMEND_ITEM_UTS];
     if (tmpData != nil)
-        self.uts = [tmpData longLongValue];
+        self.uts = [numData longLongValue];
+    
+    numData = [dic objectForKey:CELEB_RECOMMEND_ITEM_WEIGHT];
+    if (tmpData != nil)
+        self.weights = [numData integerValue];
 
     tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_PREVIEW];
+    if (tmpData != nil)
+        self.preview = tmpData;
     
     tmpData = [dic objectForKey:CELEB_RECOMMEND_ITEM_BODY];
     if (tmpData != nil)
         self.body = tmpData;
 
-    if (tmpData != nil)
-        self.preview = tmpData;
+    
     return self;
 }
 @end

@@ -2442,13 +2442,19 @@
         if (count > 0){
             if (type == CB_RECOMMEND_REFRESH_TYPE_AFTER){
                 // do nothing
-                CelebRecommend* topComment = [self.celebRecommends objectAtIndex:0];
-                if (topComment != nil)
-                    newsTime = [NSString stringWithFormat:@"%llu", topComment.releaseTime];
+//                CelebRecommend* topComment = [self.celebRecommends objectAtIndex:0];
+//                if (topComment != nil)
+//                    newsTime = [NSString stringWithFormat:@"%llu", topComment.releaseTime];
+                if (self.cbRecommendAfter != 0)
+                    newsTime = [NSString stringWithFormat:@"%llu", self.cbRecommendAfter];
+                
             } else if (type == CB_RECOMMEND_REFRESH_TYPE_BEFORE){
-                CelebRecommend* latestComment = [self.celebRecommends objectAtIndex:count-1];
-                if (latestComment != nil)
-                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.releaseTime];
+//                CelebRecommend* latestComment = [self.celebRecommends objectAtIndex:count-1];
+//                if (latestComment != nil)
+//                    newsTime = [NSString stringWithFormat:@"%llu", latestComment.releaseTime];
+                
+                if (self.cbRecommendBefore != 0)
+                    newsTime = [NSString stringWithFormat:@"%llu", self.cbRecommendBefore];
             }
         } 
     }
@@ -2470,6 +2476,18 @@
     
     for (NSDictionary* commentDataItem in dicData) {
         CelebRecommend* tmpItem = [[CelebRecommend alloc] initWithDictionary:commentDataItem];
+        
+        if (self.cbRecommendAfter == 0)
+            self.cbRecommendAfter = tmpItem.releaseTime;
+        if (self.cbRecommendBefore == 0)
+            self.cbRecommendBefore = tmpItem.releaseTime;
+        
+        if (tmpItem.releaseTime > self.cbRecommendAfter)
+            self.cbRecommendAfter = tmpItem.releaseTime;
+        
+        if (tmpItem.releaseTime < self.cbRecommendBefore)
+            self.cbRecommendBefore = tmpItem.releaseTime;
+        
         [self insertCelebRecommendsItem:tmpItem];
     }
 }
@@ -2486,30 +2504,54 @@
     
     int listCount = (int)[self.celebRecommends count];
     for (i = 0; i < listCount; i++) {
-        // PoPoNewsItem* newItem = [list objectAtIndex:i];
         id cbComment = [self.celebRecommends objectAtIndex:i];
         if ([cbComment isKindOfClass:[CelebRecommend class]]) {
             CelebRecommend* comment = cbComment;
             if (comment != nil){
                 if ([comment.cid compare:item.cid] == NSOrderedSame) {
-                    same = YES;
                     
-                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
-                    //    newItem.isOfflineDL = YES;
-                    //}
-                    break;
+                    if (comment.weights != item.weights){
+                        same = NO;
+                        [self.celebRecommends removeObject:comment];
+                    } else {
+                        same = YES;
+                        break;
+                    }
                 }
                 
-                if (comment.releaseTime < item.releaseTime) {
-                    [self.celebRecommends insertObject:item atIndex:i];
-                    ret = YES;
-                    break;
-                }
+//                if (comment.releaseTime < item.releaseTime) {
+//                    [self.celebRecommends insertObject:item atIndex:i];
+//                    ret = YES;
+//                    break;
+//                }
             }
         }
     }
     
-    if (same == NO && ret == NO){
+    if (same == YES)
+        return NO;
+    
+    BOOL isAdd = NO;
+    int lCount = (int)[self.celebRecommends count];
+    for (i = 0; i < lCount; i++) {
+        CelebRecommend* comment = [self.celebRecommends objectAtIndex:i];
+        
+        if (comment.weights < item.weights){
+            [self.celebRecommends insertObject:item atIndex:i];
+            ret = YES;
+            isAdd = YES;
+            break;
+        }
+        
+        if (comment.releaseTime < item.releaseTime && comment.weights <= item.weights) {
+            [self.celebRecommends insertObject:item atIndex:i];
+            isAdd = YES;
+            ret = YES;
+            break;
+        }
+    }
+    
+    if (isAdd == NO){
         [self.celebRecommends addObject:item];
         ret = YES;
     }

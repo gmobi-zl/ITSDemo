@@ -143,6 +143,8 @@ typedef enum{
 @property (retain) NSMutableArray* unLikeNewsList;
 
 @property (retain) NSMutableArray* celebRecommends;
+@property (assign) UInt64 cbRecommendAfter;
+@property (assign) UInt64 cbRecommendBefore;
 @property (retain) NSMutableArray* celebComments;
 @property (retain) CelebComment* currentCelebComment;
 @property (retain) NSMutableArray* userTrackComments;
