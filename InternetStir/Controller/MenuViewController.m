@@ -339,6 +339,8 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     }else if (index == 2){
         WebviewController *webVc = [[WebviewController alloc] init];
         webVc.hidesBottomBarWhenPushed = YES;
+        webVc.path = @"http://www.tomoto.io";
+
         [self.navigationController pushViewController:webVc animated:YES];
         
         ITSApplication* itsApp = [ITSApplication get];

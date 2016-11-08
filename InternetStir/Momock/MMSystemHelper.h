@@ -109,6 +109,7 @@ typedef enum{
 //+ (NSString *) compareCurrentTime:(NSString *)str;
 + (BOOL) isEmpty:(NSString *) str;
 +(BOOL) writeImage:(UIImage*)image toFileAtPath:(NSString*)aPath;
++ (NSRange)getRangeOfEmailAddress:(NSString *)email;
 
 @end
 

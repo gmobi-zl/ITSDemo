@@ -12,16 +12,25 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "CelebComment.h"
 #import "HomeCommentFrame.h"
-@interface CommentCell : UITableViewCell
+#import "TQRichTextView.h"
+
+@protocol ViewCellDelegate <NSObject>
+
+- (void)viewCellInitial:(NSIndexPath *)indepath scr:(UIScrollView *)scr;
+
+@end
+
+@interface CommentCell : UITableViewCell<UIScrollViewDelegate>
 
 @property (nonatomic, strong) HomeCommentFrame *TopCommentFrame;
 @property (nonatomic, strong) CommentFrame *detailCommentFrame;
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) TQRichTextView *commentLabel;
 @property (nonatomic, strong) NSMutableArray *replysView;
 @property (nonatomic, strong) NSMutableArray *replyIconView;
 @property (nonatomic, strong) NSMutableArray *replyNameView;
+@property (nonatomic, strong) NSMutableArray *replyScrollView;
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyNameLabel;
 @property (nonatomic, strong) UIImageView *replyIcon;
@@ -31,6 +40,11 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *replyButton;
 @property (nonatomic, strong) UIButton *iconBtn;
+@property (nonatomic, strong) UIScrollView *bgView;
+@property (nonatomic, strong) UIButton *delButton;
+@property (nonatomic, strong) NSIndexPath *myIndexPath;
+@property (nonatomic, assign) id<ViewCellDelegate>delegate;
+
 
 -(void) setShowData: (id) comment;
 

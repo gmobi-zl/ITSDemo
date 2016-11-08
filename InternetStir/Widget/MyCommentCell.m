@@ -45,7 +45,7 @@
         [self.contentView addSubview:self.timeLabel];
         
         self.replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.replyButton setTitle:@"回復" forState:UIControlStateNormal];
+        [self.replyButton setTitle:NSLocalizedString(@"comment_reply", nil) forState:UIControlStateNormal];
         [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         self.replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.replyButton];

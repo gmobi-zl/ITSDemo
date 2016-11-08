@@ -666,5 +666,16 @@ static NetWorkType currentNetType = NoNet;
 
     return NO;
 }
-
+//判断当前字符串是否包含网址链接,是则返回网址所在的NSRange,这样可以相应的操作(NSAttributedString去设置高亮等等)
++ (NSRange)getRangeOfEmailAddress:(NSString *)email
+{
+    NSString *re = @"/^(http|https)://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$/";
+    NSRange range = [email rangeOfString:re options:NSRegularExpressionSearch];
+    if (range.location != NSNotFound) {
+        return range;
+    }
+    else {
+        return NSMakeRange(0, 0);
+    }
+}
 @end

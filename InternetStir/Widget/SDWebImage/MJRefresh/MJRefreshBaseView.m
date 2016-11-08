@@ -55,7 +55,7 @@
     if (!_arrowImage) {
        
         //UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:MJRefreshSrcName(@"arrow.png")]];
-        UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_down.png"]];
+        UIImageView *arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
         CGRect imRect = CGRectMake(arrowImage.frame.origin.x, arrowImage.frame.origin.y, 24, 24);
         arrowImage.frame = imRect;
         arrowImage.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -72,18 +72,18 @@
 - (UIImageView *)activityView
 {
     if (!_activityView) {
-        //UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        UIImageView *activityView = [[UIImageView alloc] init];
+//        UIImageView *activityView = [[UIImageView alloc] init];
         //activityView.frame = CGRectMake(imageX, (height-PPN_LOADING_ICON_H) / 2, PPN_LOADING_ICON_W, PPN_LOADING_ICON_H);
-        CGRect imRect = CGRectMake(activityView.frame.origin.x, activityView.frame.origin.y, 24, 24);
+        CGRect imRect = CGRectMake(activityView.frame.origin.x , activityView.frame.origin.y, 24, 24);
         activityView.frame = imRect;
-        activityView.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"loading_news_1.png"],
-                                      [UIImage imageNamed:@"loading_news_2.png"],
-                                      [UIImage imageNamed:@"loading_news_3.png"], nil];
+//        activityView.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"loading_news_1.png"],
+//                                      [UIImage imageNamed:@"loading_news_2.png"],
+//                                      [UIImage imageNamed:@"loading_news_3.png"], nil];
         
-        [activityView setAnimationDuration:0.3f];
-        [activityView setAnimationRepeatCount:0];
+//        [activityView setAnimationDuration:0.3f];
+//        [activityView setAnimationRepeatCount:0];
         
         activityView.bounds = self.arrowImage.bounds;
         activityView.autoresizingMask = self.arrowImage.autoresizingMask;
@@ -130,8 +130,8 @@
     self.arrowImage.center = CGPointMake(space, self.mj_height * 0.5);
     
     // 2.指示器
-    self.activityView.center = CGPointMake(arrowX, self.mj_height * 0.5);
-  //  self.activityView.center = self.arrowImage.center;
+    self.activityView.center = CGPointMake(arrowX + 30, self.mj_height * 0.5);
+    self.activityView.center = self.arrowImage.center;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview

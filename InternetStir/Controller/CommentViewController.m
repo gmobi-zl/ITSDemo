@@ -21,6 +21,7 @@
 #import "AppStyleConfiguration.h"
 #import "MMEventService.h"
 #import "FansComment.h"
+#import "WebviewController.h"
 
 NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 
@@ -432,11 +433,13 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     CelebComment* currentComment = ds.currentCelebComment;
     if (indexPath.row == 0) {
         [tmpCell setShowData:currentComment];
+        tmpCell.delButton.hidden = YES;
     }else {
         NSArray* replyList = currentComment.replayComments;
         if (replyList != nil){
 
             FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
+            
             CommentFrame *frame = [[CommentFrame alloc] init];
             [frame initWithCommentData:c];
             c.uiFrame = frame;
@@ -446,6 +449,10 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }
    
 #endif
+    tmpCell.commentLabel.delegage = self;
+    tmpCell.myIndexPath = indexPath;
+    tmpCell.delegate = self;
+
     [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.replyButton.tag = indexPath.row;
     [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -474,6 +481,27 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     }
     return tmpCell;
 }
+- (void)richTextView:(TQRichTextView *)view touchBeginRun:(TQRichTextRun *)run
+{
+    
+}
+
+- (void)richTextView:(TQRichTextView *)view touchEndRun:(TQRichTextRun *)run
+{
+    WebviewController *webView = [[WebviewController alloc] init];
+    webView.path = run.text;
+    webView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webView animated:YES];
+}
+//-(void)viewCellInitial:(NSIndexPath *)indepath scr:(UIScrollView *)scr{
+//    CommentCell *cell = [self.tableView cellForRowAtIndexPath:indepath];
+//    CGFloat screenW = [MMSystemHelper getScreenWidth];
+//
+//    [UIView animateWithDuration:0.3 animations:^{
+//        cell.bgView.frame =  CGRectMake(0, 0, screenW, cell.detailCommentFrame.BgViewF.size.height);
+//    }];
+//}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 
@@ -565,10 +593,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                  self.loginView.effectView.alpha = 1;
              }];
              [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
-//             LoginViewController *loginVc = [[LoginViewController alloc] init];
-//             [self.navigationController pushViewController:loginVc animated:YES];
-//             [ss setStringValue:@"login" data:contentStr];
-
          }else {
 #ifdef DEMO_DATA
              CommentFrame *frameNeedChanged = [self.commentData objectAtIndex:index];

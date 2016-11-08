@@ -2626,7 +2626,7 @@
                     //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
                     //    newItem.isOfflineDL = YES;
                     //}
-                    
+                    [self.userTrackComments replaceObjectAtIndex:i withObject:item];
                     break;
                 }
                 
@@ -2963,6 +2963,33 @@
         }
     }
     
+    return ret;
+}
+-(BOOL) userInsertUserTrackCommentItem: (FansComment*) item{
+    BOOL ret = NO;
+    
+    if (item == nil)
+        return ret;
+    
+    NSInteger count = [self.userTrackComments count];
+    UserTrackComment* cbComment = nil;
+    for (int i = 0; i < count; i++) {
+        UserTrackComment* tmp = [self.userTrackComments objectAtIndex:i];
+        if (tmp != nil && [tmp.cid isEqualToString:item.rid]){
+            cbComment = tmp;
+            break;
+        }
+    }
+    if (cbComment == nil)
+        return ret;
+    if (cbComment.replayComments == nil){
+        cbComment.replayComments = [[NSMutableArray alloc] init];
+    }
+        
+    NSInteger replyCount = [cbComment.replayComments count];
+    [cbComment.replayComments addObject:item];
+    ret = YES;
+
     return ret;
 }
 

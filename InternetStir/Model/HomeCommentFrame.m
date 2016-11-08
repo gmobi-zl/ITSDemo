@@ -11,6 +11,8 @@
 #import "AppStyleConfiguration.h"
 #import "CelebComment.h"
 #import "FansComment.h"
+#import "TQRichTextView.h"
+
 //#define padding 10
 
 @implementation HomeCommentFrame
@@ -153,7 +155,7 @@
     self.delBtnF = CGRectMake(screenW - 40, 20, 20, 20);
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + 10;
-    CGSize nameLabelSize = [MMSystemHelper sizeWithString:comment.name font:[UIFont systemFontOfSize:HOME_USER_NAME_FONT_SIZE] maxSize:CGSizeMake(MAXFLOAT,30)];
+    CGSize nameLabelSize = [MMSystemHelper sizeWithString:comment.name font:[UIFont fontWithName:@"PingFangTC-Semibold" size:HOME_USER_NAME_FONT_SIZE] maxSize:CGSizeMake(MAXFLOAT,30)];
     CGFloat nameLabelY = iconViewY;
     CGFloat nameLabelWidth = nameLabelSize.width;
     CGFloat nameLabelHeight = nameLabelSize.height;
@@ -178,8 +180,10 @@
     
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.context];
-    CGFloat height = [self height:str];
-    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, [self height:str]);
+//    CGFloat height = [self height:str];
+    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(screenW - 30, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:str lineSpace:0.5 type:1];
+    CGFloat height = rect.size.height;
+    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, height);
     
     CGFloat contentH = height;
     self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 20;

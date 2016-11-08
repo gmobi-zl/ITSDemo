@@ -5,4 +5,54 @@
   Created by Apple on 16/8/29.
   Copyright © 2016年 Gmobi. All rights reserved.
 */
-"test"="33";
+"comment_leave_more"="View all comments";
+"time_util_just"="Just now";
+"time_util_minutes"="m";
+"time_util_hour"="h";
+"time_util_yesterday"="d";
+"set_top"="Sticky";
+"set_editor"="Edit";
+"set_delete"="Del";
+"set_cancel"="Cancel";
+"sure"="OK";
+"take_photo"="Take pictures";
+"select_photo"="Photo Gallery";
+"login_in"="Login";
+"login_message"="Without permission,We won't post to your Facebook wall.";
+"login_message_later"="Wait for login";
+"login_error"="Login timeout";
+"tab_content"="Comment";
+"comment_reply"="Reply";
+"send"="Send";
+"message"="Message";
+"login_fans_tool"="Sign in to view Fan tools";
+"set"="Settings";
+"fans_menu_track"="Message tracking";
+"fans_fav"="Favorite";
+"other_celeb"="Apps";
+"own_celeb"="Tomoto";
+"fans_helper"="Fan tools";
+"fans_list"="Fanboard";
+"prize_center"="Rewards";
+"pur_history"="Purchases";
+"login_out"="Logout";
+"loginOut"="Logout";
+"set_push"="Notifications";
+"set_clean"="Cache";
+"set_suggest"="Feedback";
+"set_clear"="Cleaning";
+"FeedBackInfo"="Give feedback or ask for help:";
+"FeedBackSend"="Send";
+"FeedBackSendOk"="Sending successful";
+"FeedBackWrite"="Give feedback or ask for help~";
+"save"="Save";
+"say_something"="Please enter a message";
+"narrated_img"="Please describe this picture";
+"load_message"="Uploading";
+"WebViewReadSrc"="Read the original";
+
+"LoadingNews"="Loading…";
+"Release2Refresh"="Loading…";
+"PullLoad"="Loading…";
+"Pull2Load"="Loading…";
+"NetErr"="Network error";

@@ -46,9 +46,12 @@
         self.photo = [[UIImageView alloc] init];
         [self.contentView addSubview:self.photo];
         
-        self.commentLabel = [[UILabel alloc] init];
+        self.commentLabel = [[TQRichTextView alloc] init];
         self.commentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.commentLabel.numberOfLines = 0;
+        self.commentLabel.lineSpace = 0.5;
+        self.commentLabel.type = 1;
+//        self.commentLabel.delegage = self;
+        self.commentLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.commentLabel];
         
         self.replyLabel = [[UILabel alloc] init];
@@ -238,6 +241,7 @@
     }
 
     self.nameLabel.text = data.name;
+    self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:16];
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
@@ -254,15 +258,20 @@
     [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.lineSpacing = 0.5;
-    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
-    NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
-    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
-    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
-    self.commentLabel.attributedText = noteStr;
-
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+//    paragraphStyle.lineSpacing = 0.5;
+//    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
+//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];;
+//
+//    NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+//    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
+//    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+    
+//    NSRange urlRange = [MMSystemHelper getRangeOfEmailAddress:str];
+//    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:urlRange];
+//    self.commentLabel.attributedText = noteStr;
+    self.commentLabel.text = str;
+//    self.commentLabel.backgroundColor = [UIColor redColor];
     NSInteger maxHotCommentCount = data.topFansComments.count;
     NSInteger maxReplyCommentCount = data.replayComments.count;
     

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "CommentItem.h"
+#import "TQRichTextView.h"
 @interface CommentFrame : NSObject
 //@property (nonatomic, strong) ReplyItem *item;
 #ifdef DEMO_DATA
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *replysF;
 @property (nonatomic, strong) NSMutableArray *replyPictureF;
 @property (nonatomic, strong) NSMutableArray *replyNameF;
+@property (nonatomic, strong) NSMutableArray *replyScrollF;
 @property (nonatomic, assign) float cellHeight;
 @property (nonatomic, assign) CGRect replyBackgroundF;
 @property (nonatomic, assign) CGRect replyIcon;
@@ -29,6 +31,8 @@
 
 @property (nonatomic, assign) CGRect timeF;
 @property (nonatomic, assign) CGRect replyBtnF;
+@property (nonatomic, assign) CGRect scrollViewF;
+@property (nonatomic, assign) CGRect BgViewF;
 
 -(void) initWithCommentData: (id) data;
 -(void) refreshFrame: (id)data;

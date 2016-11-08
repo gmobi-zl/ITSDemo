@@ -25,6 +25,7 @@
 #import "MJRefresh.h"
 #import "MMEventService.h"
 #import "ConfigService.h"
+#import "WebviewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -269,7 +270,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }else{
         [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
     }
-    
+    tmpCell.commentLabel.delegage = self;
     tmpCell.button.tag = indexPath.row;
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
@@ -290,6 +291,19 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     
     return cell;
 }
+- (void)richTextView:(TQRichTextView *)view touchBeginRun:(TQRichTextRun *)run
+{
+    
+}
+
+- (void)richTextView:(TQRichTextView *)view touchEndRun:(TQRichTextRun *)run
+{
+    WebviewController *webView = [[WebviewController alloc] init];
+    webView.path = run.text;
+    webView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webView animated:YES];
+}
+
 - (void)pushSheet:(UIButton *)button {
     
     self.index = button.tag;

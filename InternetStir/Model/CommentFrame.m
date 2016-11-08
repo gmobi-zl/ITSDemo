@@ -166,7 +166,6 @@
     CGFloat iconViewWidth = 40;
     CGFloat iconViewHeight = 40;
     self.iconF = CGRectMake(iconViewX, iconViewY , iconViewWidth, iconViewHeight);
-    
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + padding;
     CGSize nameLabelSize = [MMSystemHelper sizeWithString:fansComment.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,MAXFLOAT)];
@@ -177,9 +176,10 @@
     
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
-    CGSize contentLabelSize = [MMSystemHelper sizeWithString:fansComment.comment font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-    CGFloat contentLabelWidth = contentLabelSize.width;
-    CGFloat contentLabelHeight = contentLabelSize.height;
+//    CGSize contentLabelSize = [MMSystemHelper sizeWithString:fansComment.comment font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
+    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:fansComment.comment lineSpace:0.5 type:2];
+    CGFloat contentLabelWidth = rect.size.width;
+    CGFloat contentLabelHeight = rect.size.height;
     self.contentF = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
     
     self.cellHeight = CGRectGetMaxY(self.contentF) + padding/2;
@@ -188,7 +188,8 @@
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
     self.timeF = CGRectMake(nameLabelX, self.cellHeight , timeLabelSize.width + 20, 20);
     self.replyBtnF = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.cellHeight, 40, 20);
-    
+    self.BgViewF = CGRectMake(0, 0, screenW, CGRectGetMaxY(self.timeF));
+
     self.cellHeight = CGRectGetMaxY(self.timeF) + padding ;
     
     //评论
@@ -201,7 +202,7 @@
             
             FansComment *item = [fansComment.replayComments objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
-            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
+            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 20)];
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, size.width + 10, 20);
 //            self.cellHeight += 30 ;
             CGSize replyLabelSize;

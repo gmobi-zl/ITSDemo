@@ -15,5 +15,5 @@
 @property (nonatomic, strong) NSMutableArray *arr;
 @property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
 @property (nonatomic, strong) UIView *backView;
-
+@property (nonatomic, strong) UIButton *backBtn;
 @end

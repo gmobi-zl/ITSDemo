@@ -153,6 +153,12 @@
 		E1F030761D741C4100060559 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F030601D741C4100060559 /* UIView+WebCacheOperation.m */; };
 		E1F6B0F91D65930200822E8D /* PNMoodView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F6B0F81D65930200822E8D /* PNMoodView.m */; };
 		E1F6B1021D659ABC00822E8D /* ReplyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F6B1011D659ABC00822E8D /* ReplyItem.m */; };
+		E1F89E921DCC7ACB0099F117 /* TQRichTextRun.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F89E8B1DCC7ACB0099F117 /* TQRichTextRun.m */; };
+		E1F89E931DCC7ACB0099F117 /* TQRichTextRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F89E8D1DCC7ACB0099F117 /* TQRichTextRunDelegate.m */; };
+		E1F89E941DCC7ACB0099F117 /* TQRichTextRunURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F89E8F1DCC7ACB0099F117 /* TQRichTextRunURL.m */; };
+		E1F89E951DCC7ACB0099F117 /* TQRichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F89E911DCC7ACB0099F117 /* TQRichTextView.m */; };
+		E1F89E971DCC7B110099F117 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F89E961DCC7B110099F117 /* CoreText.framework */; };
+		E1F89E991DCC7B610099F117 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F89E981DCC7B610099F117 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -422,6 +428,16 @@
 		E1F6B0F81D65930200822E8D /* PNMoodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNMoodView.m; sourceTree = "<group>"; };
 		E1F6B1001D659ABC00822E8D /* ReplyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyItem.h; sourceTree = "<group>"; };
 		E1F6B1011D659ABC00822E8D /* ReplyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyItem.m; sourceTree = "<group>"; };
+		E1F89E8A1DCC7ACB0099F117 /* TQRichTextRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQRichTextRun.h; sourceTree = "<group>"; };
+		E1F89E8B1DCC7ACB0099F117 /* TQRichTextRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQRichTextRun.m; sourceTree = "<group>"; };
+		E1F89E8C1DCC7ACB0099F117 /* TQRichTextRunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQRichTextRunDelegate.h; sourceTree = "<group>"; };
+		E1F89E8D1DCC7ACB0099F117 /* TQRichTextRunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQRichTextRunDelegate.m; sourceTree = "<group>"; };
+		E1F89E8E1DCC7ACB0099F117 /* TQRichTextRunURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQRichTextRunURL.h; sourceTree = "<group>"; };
+		E1F89E8F1DCC7ACB0099F117 /* TQRichTextRunURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQRichTextRunURL.m; sourceTree = "<group>"; };
+		E1F89E901DCC7ACB0099F117 /* TQRichTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQRichTextView.h; sourceTree = "<group>"; };
+		E1F89E911DCC7ACB0099F117 /* TQRichTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQRichTextView.m; sourceTree = "<group>"; };
+		E1F89E961DCC7B110099F117 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		E1F89E981DCC7B610099F117 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F2898A68A0857C2948B09715 /* Pods-Jacob.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jacob.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jacob/Pods-Jacob.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -430,6 +446,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1F89E991DCC7B610099F117 /* CoreGraphics.framework in Frameworks */,
+				E18C13051D6AE6DF00E635D6 /* Foundation.framework in Frameworks */,
+				E1F89E971DCC7B110099F117 /* CoreText.framework in Frameworks */,
 				E1AFAF4D1D6ED44200759969 /* StoreKit.framework in Frameworks */,
 				E18C13071D6AE6EC00E635D6 /* Security.framework in Frameworks */,
 				E1A2A5FE1D6AF04C005AA8DA /* UIKit.framework in Frameworks */,
@@ -439,7 +458,6 @@
 				E1EB481C1D6BE19F003C42BC /* FBSDKShareKit.framework in Frameworks */,
 				E1EB481A1D6BE19F003C42BC /* FBSDKCoreKit.framework in Frameworks */,
 				E1A2A5F51D6AEE62005AA8DA /* AddressBook.framework in Frameworks */,
-				E18C13051D6AE6DF00E635D6 /* Foundation.framework in Frameworks */,
 				E1EB48311D6C4BC8003C42BC /* TwitterCore.framework in Frameworks */,
 				E18C13031D6AE6CC00E635D6 /* CoreData.framework in Frameworks */,
 				18F664EA1D5ACCC400BDB2E8 /* libsqlite3.tbd in Frameworks */,
@@ -722,6 +740,14 @@
 		18F664E81D5ACA4700BDB2E8 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				E1F89E8A1DCC7ACB0099F117 /* TQRichTextRun.h */,
+				E1F89E8B1DCC7ACB0099F117 /* TQRichTextRun.m */,
+				E1F89E8C1DCC7ACB0099F117 /* TQRichTextRunDelegate.h */,
+				E1F89E8D1DCC7ACB0099F117 /* TQRichTextRunDelegate.m */,
+				E1F89E8E1DCC7ACB0099F117 /* TQRichTextRunURL.h */,
+				E1F89E8F1DCC7ACB0099F117 /* TQRichTextRunURL.m */,
+				E1F89E901DCC7ACB0099F117 /* TQRichTextView.h */,
+				E1F89E911DCC7ACB0099F117 /* TQRichTextView.m */,
 				E1F030331D741C4100060559 /* MJRefresh */,
 				E1F030321D741C4100060559 /* SDWebImage */,
 				E189F5E61D64155C008587CE /* view */,
@@ -733,6 +759,8 @@
 		3162DC3EC6447FAC92677B40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1F89E981DCC7B610099F117 /* CoreGraphics.framework */,
+				E1F89E961DCC7B110099F117 /* CoreText.framework */,
 				07A69515971C39331B5EA30D /* libPods-Jacob.a */,
 			);
 			name = Frameworks;
@@ -1106,6 +1134,7 @@
 				18F664CD1D5AC9FF00BDB2E8 /* MMHttpSession.m in Sources */,
 				E1E4A4491D8E70E000380026 /* FanController.m in Sources */,
 				E1F0306B1D741C4100060559 /* SDWebImageCompat.m in Sources */,
+				E1F89E921DCC7ACB0099F117 /* TQRichTextRun.m in Sources */,
 				E189F6111D6415DB008587CE /* MenuViewController.m in Sources */,
 				E1F030761D741C4100060559 /* UIView+WebCacheOperation.m in Sources */,
 				E1F030661D741C4100060559 /* UIScrollView+MJExtension.m in Sources */,
@@ -1113,6 +1142,7 @@
 				E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */,
 				E1F030651D741C4100060559 /* MJRefreshHeaderView.m in Sources */,
 				E181D1331D66F785005115E6 /* WebviewController.m in Sources */,
+				E1F89E931DCC7ACB0099F117 /* TQRichTextRunDelegate.m in Sources */,
 				E19443261DAF6AFB0016CEA6 /* MBProgressHUD.m in Sources */,
 				E1F0306E1D741C4100060559 /* SDWebImageDownloaderOperation.m in Sources */,
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
@@ -1128,9 +1158,11 @@
 				18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */,
 				E19DFD0E1D8F89220042C777 /* DetailCommentItem.m in Sources */,
 				18F664D01D5AC9FF00BDB2E8 /* MMLogger.m in Sources */,
+				E1F89E941DCC7ACB0099F117 /* TQRichTextRunURL.m in Sources */,
 				E1F0306D1D741C4100060559 /* SDWebImageDownloader.m in Sources */,
 				18F665161D5B311400BDB2E8 /* NewsImage.m in Sources */,
 				E1F030711D741C4100060559 /* UIButton+WebCache.m in Sources */,
+				E1F89E951DCC7ACB0099F117 /* TQRichTextView.m in Sources */,
 				E198450C1D9111D4006A3ED2 /* LoginView.m in Sources */,
 				E1E3CF711D6549140053F00D /* SocialController.m in Sources */,
 				18F664F31D5ACFA100BDB2E8 /* RemoteService.m in Sources */,

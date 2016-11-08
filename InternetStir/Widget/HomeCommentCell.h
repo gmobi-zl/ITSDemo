@@ -10,6 +10,7 @@
 #import "CelebComment.h"
 #import "HomeCommentFrame.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "TQRichTextView.h"
 
 @interface HomeCommentCell : UITableViewCell
 @property (nonatomic, strong) HomeCommentFrame *commentFrame;
@@ -23,7 +24,7 @@
 //@property (nonatomic, strong) NSMutableArray *replyIconView;
 //@property (nonatomic, strong) UIImageView *replyIcon;
 @property (nonatomic, strong) UILabel *replyName;
-@property (nonatomic, strong) UILabel *commentLabel;
+@property (nonatomic, strong) TQRichTextView *commentLabel;
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIButton *btn;

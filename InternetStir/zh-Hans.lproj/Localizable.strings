@@ -34,7 +34,7 @@
 "fans_helper"="粉丝小帮手";
 "fans_list"="粉丝排行榜";
 "prize_center"="奖品中心";
-"pur_history"="";
+"pur_history"="购买记录";
 "login_out"="登出";
 "loginOut"="登出账号";
 "set_push"="推播通知";
@@ -54,3 +54,4 @@
 "Release2Refresh"="松开刷新…";
 "PullLoad"="下拉刷新…";
 "Pull2Load"="上拉刷新…";
+"NetErr"="网络错误";
