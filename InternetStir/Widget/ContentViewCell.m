@@ -61,7 +61,7 @@
     CGFloat screenW = [MMSystemHelper getScreenWidth];
 //    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
     
-    self.titleLabel.frame = CGRectMake(15, 5, self.bounds.size.width - 30, 0);
+    self.titleLabel.frame = CGRectMake(15, 20, self.bounds.size.width - 30, 0);
     self.titleLabel.font = [UIFont systemFontOfSize:18];
     self.titleLabel.textColor = [MMSystemHelper string2UIColor:@"#4A4A4A"];
     self.titleLabel.text = item.title;
@@ -77,7 +77,7 @@
     NewsImage *image = [item.images objectAtIndex:0];
     CGFloat height;
     height = image.h * screenW / image.w;
-    self.icon.frame = CGRectMake(0, frame.size.height + 5 , screenW, height);
+    self.icon.frame = CGRectMake(0, frame.size.height + 20 , screenW, height);
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];

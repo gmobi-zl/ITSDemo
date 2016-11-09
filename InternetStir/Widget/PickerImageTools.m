@@ -43,6 +43,8 @@ static PickerImageTools *_tools = nil;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     picker.delegate = self;
     picker.allowsEditing = YES;
+    picker.showsCameraControls = YES;
+    picker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         

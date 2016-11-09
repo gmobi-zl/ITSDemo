@@ -202,7 +202,7 @@
             
             FansComment *item = [fansComment.replayComments objectAtIndex:i];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight, 30, 30);
-            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 20)];
+            CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont fontWithName:@"PingFangTC-Semibold" size:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, size.width + 10, 20);
 //            self.cellHeight += 30 ;
             CGSize replyLabelSize;
@@ -218,7 +218,7 @@
             [self.replyPictureF addObject:[NSValue valueWithCGRect:pictureF]];
             [self.replyNameF addObject:[NSValue valueWithCGRect:nameF]];
             
-            self.cellHeight += 15;
+            self.cellHeight += 18;
         }
         //评论的背景
         self.cellHeight = CGRectGetMaxY([(NSValue *)[self.replysF lastObject] CGRectValue]) + padding;

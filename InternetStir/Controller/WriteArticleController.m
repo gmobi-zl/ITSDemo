@@ -50,7 +50,7 @@ NSString *const WriteArticleCellIdentifier = @"WriteArticleCell";
     self.navigationItem.rightBarButtonItem = right;
     
     self.photo = [[UIImageView alloc] init];
-    self.photo.frame = CGRectMake(screenW/2 - 25, 90, 80, 80);
+    self.photo.frame = CGRectMake(screenW/2 - 40, 90, 80, 80);
     if (self.type == 1) {
         self.photo.image = [UIImage imageWithData:self.data];
         [send setTitle:@"發布" forState:UIControlStateNormal];

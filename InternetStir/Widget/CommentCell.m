@@ -347,6 +347,7 @@ NSIndexPath *indexP;
             replyLabel.text = item.comment;
             replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
             self.replyLabel = replyLabel;
+//            self.replyLabel.backgroundColor = [UIColor redColor];
             [self.contentView addSubview:replyLabel];
             [self.replysView addObject:replyLabel];
             
@@ -363,7 +364,8 @@ NSIndexPath *indexP;
             UILabel *replyName = [[UILabel alloc] init];
             replyName.text = item.name;
             replyName.textColor = [UIColor blackColor];
-            replyName.font = [UIFont systemFontOfSize:16];
+//            replyName.backgroundColor = [UIColor redColor];
+            replyName.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
             
             self.replyNameLabel = replyName;
             [self.contentView addSubview:replyName];

@@ -85,6 +85,37 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     [eParams setObject:@"forumid" forKey:@"fid"];
     [eParams setObject:currentComment.context forKey:@"context"];
     [itsApp.reportSvr recordEvent:@"本文" params:eParams eventCategory:@"comment.more.view"];
+    
+    //增加监听，当键盘出现或改变时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
+}
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    //获得键盘的尺寸
+//    NSDictionary *dic = aNotification.userInfo;
+//
+//    CGRect keyBoardRect = [aNotification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+//        
+//        [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
+//        
+////        CGRect frame = self.replyViewDraw;
+////        frame.origin.y = frame.origin.y - keyBoardRect.size.height + 52;
+//        CGPoint point = self.tableView.contentOffset;
+////
+//        point.y -= (keyBoardRect.size.height + keyBoardRect.origin.y + 44 - self.replyViewDraw);
+//        self.tableView.contentOffset = point;
+//    }];
+}
+- (void)keyboardWillHide:(NSNotification *)aNotification {
 }
 
 -(void)celebReplyCommentsDataRefreshListener: (id) data{
@@ -434,12 +465,17 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     if (indexPath.row == 0) {
         [tmpCell setShowData:currentComment];
         tmpCell.delButton.hidden = YES;
+        [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+        tmpCell.replyButton.tag = indexPath.row;
+
     }else {
+        [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+        tmpCell.replyButton.tag = indexPath.row;
+
         NSArray* replyList = currentComment.replayComments;
         if (replyList != nil){
 
             FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
-            
             CommentFrame *frame = [[CommentFrame alloc] init];
             [frame initWithCommentData:c];
             c.uiFrame = frame;
@@ -453,8 +489,6 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
     tmpCell.myIndexPath = indexPath;
     tmpCell.delegate = self;
 
-    [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
-    tmpCell.replyButton.tag = indexPath.row;
     [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.iconBtn.tag = indexPath.row;
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
@@ -561,6 +595,13 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 }
 - (void)replyClick:(UIButton *)btn {
     
+    CommentCell *cell = (CommentCell *)btn.superview.superview;
+//    CGRect rect = [self.view convertRect:cell.frame toView:self.tableView];
+//    CGRect rect = [self.tableView convertRect:rectInTableView toView:[tableView superview]];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:btn.tag inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+//    self.replyViewDraw = rectInTableView.origin.y + rectInTableView.size.height;
+    self.replyViewDraw = [cell convertRect:cell.bounds toView:self.view.window].origin.y + cell.frame.size.height;
     if (btn.tag == 0) {
         [self writeNewComment];
     }else{

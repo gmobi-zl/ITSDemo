@@ -30,6 +30,7 @@
 @property (assign) BOOL isRefreshing;
 @property (nonatomic, strong) LoginView *loginView;
 
+@property (nonatomic, assign) CGFloat replyViewDraw;
 //@property (assign) BOOL isTrackComment;
 
 

@@ -152,7 +152,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     CGFloat height;
     height = image.h * screenW / image.w;
     
-    return size.height + height + 30 + 0.5;
+    return size.height + height + 30 + 0.5 + 15;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
