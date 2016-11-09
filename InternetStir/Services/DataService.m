@@ -2509,21 +2509,14 @@
             CelebRecommend* comment = cbComment;
             if (comment != nil){
                 if ([comment.cid compare:item.cid] == NSOrderedSame) {
-                    
                     if (comment.weights != item.weights){
                         same = NO;
                         [self.celebRecommends removeObject:comment];
                     } else {
                         same = YES;
-                        break;
                     }
+                    break;
                 }
-                
-//                if (comment.releaseTime < item.releaseTime) {
-//                    [self.celebRecommends insertObject:item atIndex:i];
-//                    ret = YES;
-//                    break;
-//                }
             }
         }
     }

@@ -72,6 +72,7 @@
     self.backBtn.layer.shadowOffset = CGSizeMake(1, 1);
     self.backBtn.layer.shadowOpacity = 0.7;
     self.backBtn.layer.shadowColor =  [UIColor blackColor].CGColor;
+    self.backBtn.hidden = YES;
 //    [self.backBtn setImage:[UIImage imageNamed:@"PinLeft"] forState:UIControlStateNormal];
     [self.webView addSubview:self.backBtn];
     
@@ -81,6 +82,9 @@
     bgImage.image = [UIImage imageNamed:@"PinLeft"];
     [self.backBtn addSubview:bgImage];
     
+    self.isLoadingFinish = NO;
+    self.isGoBack = NO;
+    self.pageCount = 0;
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -89,15 +93,38 @@
     [super viewWillAppear:animated];
 }
 - (void)btnClick {
-    [self.webView goBack];
+//    if (self.pageCount > 0){
+//        self.isGoBack = YES;
+//        [self.webView goBack];
+//    }
+    
+    if ([self.webView canGoBack])
+        [self.webView goBack];
 }
 //- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-////
+//
 //    NSString *strRequest = [navigationAction.request.URL.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    
-//    NSLog(@"!!!!!!!!!!!!!!!!!!%@",strRequest);
+//    NSLog(@"!!!!!!!!!!!!!!!!!! %@",strRequest);
+//    decisionHandler(WKNavigationActionPolicyAllow);
 //    
-//    
+//    if (self.isLoadingFinish == YES) {
+//        if (self.isGoBack == YES){
+//            self.pageCount--;
+//            if (self.pageCount < 0)
+//                self.pageCount = 0;
+//            self.isGoBack = NO;
+//        } else {
+//            self.pageCount++;
+//        }
+//        
+//        if (self.pageCount > 0){
+//            self.backBtn.hidden = NO;
+//        } else {
+//            self.backBtn.hidden = YES;
+//        }
+//    }
+
 //    if([strRequest isEqualToString:@"about:blank"]) {//主页面加载内容
 //    
 ////        decisionHandler(WKNavigationActionPolicyAllow);//允许跳转
@@ -115,12 +142,17 @@
     self.backView.hidden = NO;
     self.backBtn.hidden = YES;
     [self.testActivityIndicato startAnimating];
+    
+    //NSLog(@"==========================================  start ");
 }
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     
     self.backView.hidden = YES;
     [self.testActivityIndicato stopAnimating];
     self.backBtn.hidden = NO;
+    
+    self.isLoadingFinish = YES;
+    //NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  finish");
     
 //    NSString *strRequest = webView.URL.absoluteString;
 //    for (NSInteger i = 0; i < self.arr.count; i++) {
@@ -142,6 +174,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

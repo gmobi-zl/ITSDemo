@@ -1573,4 +1573,70 @@
     }];
 }
 
+-(void) setCelebCommentTop: (NSString*) fid{
+    if (fid == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/pin?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
+    MMLogDebug(@"setCelebCommentTop URL: %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"setCelebCommentTop RSP: %@",dataDic);
+             
+//             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+//             NSString* fid = [dataDic objectForKey:@"fid"];
+//             BOOL succ = [tmpNum boolValue];
+//
+//             if (succ == YES){
+//                 
+//             } else {
+//                 
+//             }
+         }
+     }];
+}
+
+-(void) getTopCelebComment{
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@?top=1&size=1&_s=%@",[self getBaseUrl], [cs getChannel], user.session];
+    
+    MMLogDebug(@"Celeb Top comment url = %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doGet:url reqHeader:nil callback:^(int status, int code, NSDictionary *resultData) {
+        MMLogDebug(@"Celeb Top comment rsp: status = %d , code = %d", status, code);
+        
+        if (code == 200){
+            NSData* data = [resultData objectForKey:@"data"];
+            NSError* err;
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSArray* dataArr = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            
+            MMLogDebug(@"Celeb Top comment Data rsp data: %@", dataStr);
+            
+            
+        } else {
+            
+        }
+    }];
+}
+
 @end

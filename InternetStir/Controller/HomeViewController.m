@@ -166,7 +166,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
         [ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_AFTER];
-        
+        //[itsApp.remoteSvr getTopCelebComment];
 //        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
 //        [eParams setObject:self.cid forKey:@"id"];
 //        NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
@@ -328,8 +328,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
         
         if (buttonIndex == 0) {
-            
-        }else if (buttonIndex == 1) {
+            [itsApp.remoteSvr setCelebCommentTop:item.fid];
+        } else if (buttonIndex == 1) {
             itsApp.dataSvr.selectUpdateComment = item;
             
             WriteArticleController *vc = [[WriteArticleController alloc] init];
@@ -338,7 +338,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
             vc.photoStr = imageUrl;
             vc.labelStr = item.context;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if (buttonIndex == 2) {
+        } else if (buttonIndex == 2) {
             itsApp.dataSvr.selectUpdateComment = item;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"set_delete", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
             alert.tag = 1001;

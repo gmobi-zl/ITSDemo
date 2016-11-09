@@ -47,7 +47,7 @@ static NSString * const kClientID =
 
     GAI *gai = [GAI sharedInstance];
     gai.trackUncaughtExceptions = YES;
-    gai.logger.logLevel = kGAILogLevelVerbose;
+    gai.logger.logLevel = kGAILogLevelNone;
     
     
 //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

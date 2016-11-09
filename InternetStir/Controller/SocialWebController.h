@@ -16,4 +16,8 @@
 @property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIButton *backBtn;
+
+@property (assign) BOOL isLoadingFinish;
+@property (assign) BOOL isGoBack;
+@property (assign) NSInteger pageCount;
 @end
