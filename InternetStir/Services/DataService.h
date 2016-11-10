@@ -361,6 +361,12 @@ typedef enum{
 -(BOOL) insertCurrentReplyCommentItem: (FansComment*) item;
 -(BOOL) userInsertCurrentReplyCommentItem: (FansComment*) item;
 -(BOOL) userInsertUserTrackCommentItem: (FansComment*) item;
+
+
+
+-(void) refreshTopCelebComments: (BOOL) isRefreshComments;
+
+
 @end
 
 #endif

@@ -33,5 +33,11 @@
 @property (nonatomic, assign) CGFloat replyViewDraw;
 //@property (assign) BOOL isTrackComment;
 
+@property NSThread* checkReadThread;
+@property (nonatomic, strong) NSMutableArray *currentShowItem;
+@property (nonatomic, assign) UInt64 currentShowDataCount;
+@property (nonatomic, assign) NSUInteger sleepTimeCount;
+@property (nonatomic, assign) NSUInteger readZeroCount;
+
 
 @end

@@ -96,8 +96,124 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-
+    
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == YES && us.user.isCBADM == YES){
+        if (self.currentShowItem == nil)
+            self.currentShowItem = [NSMutableArray arrayWithCapacity:1];
+        self.currentShowDataCount = 0;
+        self.sleepTimeCount = 3;
+        self.readZeroCount = 0;
+        [self initReadCheckListener];
+    }
 }
+
+-(void) viewWillDisappear:(BOOL)animated{
+    if (self.checkReadThread != nil)
+        [self.checkReadThread cancel];
+    [super viewWillDisappear:animated];
+}
+
+- (void) initReadCheckListener{
+    self.checkReadThread = [[NSThread alloc] initWithTarget:self
+                                                 selector:@selector(runCheckService)
+                                                   object:nil];
+    [self.checkReadThread start];
+}
+
+-(void) runCheckService{
+    [[NSThread currentThread] setName:@"CBCheckRead"];
+    //NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    //[runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+    
+    while (![[NSThread currentThread] isCancelled]) {
+        @try {
+            //MMLogDebug(@"=======================================    checkThread");
+            if (self == nil){
+                return;
+            }
+            
+            ITSApplication* itsApp = [ITSApplication get];
+            DataService* ds = itsApp.dataSvr;
+            CelebComment* currentComment = ds.currentCelebComment;
+            NSMutableArray* replyList = currentComment.replayComments;
+            NSInteger replyCount = replyList == nil ? 0 : [replyList count];
+            
+            //MMLogDebug(@"***************************************    %@", currentComment.fid);
+            
+            if (self.currentShowDataCount == 0 || self.currentShowDataCount != replyCount){
+                self.readZeroCount = 0;
+                self.sleepTimeCount = 3;
+                
+                self.currentShowDataCount = replyCount;
+                [self.currentShowItem removeAllObjects];
+                
+                for (int i = 0; i < [self.tableView.indexPathsForVisibleRows count] ; i++) {
+                    NSIndexPath* iPath = [self.tableView.indexPathsForVisibleRows objectAtIndex:i];
+                    [self.currentShowItem addObject:iPath];
+                }
+            } else {
+                NSMutableArray* readList = [NSMutableArray arrayWithCapacity:1];
+                for (int i = 0; i < [self.tableView.indexPathsForVisibleRows count] ; i++) {
+                    NSIndexPath* iPath = [self.tableView.indexPathsForVisibleRows objectAtIndex:i];
+                    if (iPath.row > 0){
+                        for (int j = 0; j < [self.currentShowItem count]; j++) {
+                            NSIndexPath* oPath = [self.currentShowItem objectAtIndex:j];
+                            if (iPath.row == oPath.row && iPath.row > 0 && oPath.row > 0){
+                                FansComment* fc = [replyList objectAtIndex:oPath.row-1];
+                                if (fc.isCelebRead == NO){
+                                    [readList addObject:fc.cid];
+                                    fc.isCelebRead = YES;
+                                }
+                                
+                                if (fc.replayComments != nil){
+                                    for (int m = 0; m < [fc.replayComments count]; m++) {
+                                        FansComment* rfc = [fc.replayComments objectAtIndex:m];
+                                        if (rfc.isCelebRead == NO){
+                                            [readList addObject:rfc.cid];
+                                            rfc.isCelebRead = YES;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                [itsApp.remoteSvr sendCelebReadReplys:currentComment.fid replys:readList];
+                if ([readList count] == 0){
+                    self.readZeroCount++;
+                    if (self.readZeroCount >= 10){
+                        self.readZeroCount = 0;
+                        self.sleepTimeCount += self.sleepTimeCount;
+                        if (self.sleepTimeCount > 10)
+                            self.sleepTimeCount = 10;
+                    }
+                } else {
+                    self.readZeroCount = 0;
+                    self.sleepTimeCount = 3;
+                }
+                
+                self.currentShowDataCount = replyCount;
+                [self.currentShowItem removeAllObjects];
+                for (int i = 0; i < [self.tableView.indexPathsForVisibleRows count] ; i++) {
+                    NSIndexPath* iPath = [self.tableView.indexPathsForVisibleRows objectAtIndex:i];
+                    [self.currentShowItem addObject:iPath];
+                }
+            }
+            
+            [NSThread sleepForTimeInterval:self.sleepTimeCount];
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
+    }
+}
+
+
+
+
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     //获得键盘的尺寸
 //    NSDictionary *dic = aNotification.userInfo;
@@ -115,6 +231,7 @@ NSString *const CommentTableViewCellIdentifier = @"CommentCell";
 //        self.tableView.contentOffset = point;
 //    }];
 }
+
 - (void)keyboardWillHide:(NSNotification *)aNotification {
 }
 

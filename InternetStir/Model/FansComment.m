@@ -47,6 +47,7 @@
     if (tmpData != nil)
         self.rid = tmpData;
     
+    self.comment = @"";
     tmpData = [dic objectForKey:FANS_COMMENT_ITEM_COMMENT];
     if (tmpData != nil)
         self.comment = tmpData;

@@ -148,9 +148,13 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 -(void) getCelebRecommendListData: (NSString*) utc_time
                          timeType: (int) type;
 
--(void) setCelebCommentTop: (NSString*) fid;
+-(void) setCelebCommentTop: (NSString*) fid
+                  callback: (RemoteCallback) callback;
 
--(void) getTopCelebComment;
+-(void) getTopCelebComment: (RemoteCallback) callback;
+
+-(void) sendCelebReadReplys: (NSString*) fid
+                     replys: (NSMutableArray*) replys;
 
 @end
 

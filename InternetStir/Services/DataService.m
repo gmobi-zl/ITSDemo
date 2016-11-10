@@ -2222,6 +2222,31 @@
     //[[ITSApplication get].remoteSvr getNewsById:nId isShowDetailPage:isShowDetailPage];
 }
 
+-(NSString*) getCelebCommentLastestTimeStamp {
+    
+    if (self.celebComments == nil || [self.celebComments count] <= 0)
+        return nil;
+    
+    UInt64 maxTime = 0;
+    for (int i = 0; i < [self.celebComments count]; i++) {
+        CelebComment* comment = [self.celebComments objectAtIndex:i];
+        if (comment.weight <= 0){
+            if (maxTime < comment.uts){
+                maxTime = comment.uts;
+                break;
+            }
+        } else {
+            if (maxTime < comment.uts){
+                maxTime = comment.uts;
+            }
+        }
+    }
+    
+    if (maxTime > 0)
+        return [NSString stringWithFormat:@"%llu", maxTime];
+    else
+        return nil;
+}
 
 
 -(void) refreshCelebComments: (int) type {
@@ -2281,9 +2306,12 @@
             if (count > 0){
                 if (type == CB_COMMENT_REFRESH_TYPE_AFTER){
                     // do nothing
-                    CelebComment* topComment = [self.celebComments objectAtIndex:0];
-                    if (topComment != nil)
-                        newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+                    //CelebComment* topComment = [self.celebComments objectAtIndex:0];
+                    //if (topComment != nil)
+                    //    newsTime = [NSString stringWithFormat:@"%llu", topComment.uts];
+                    
+                    newsTime = [self getCelebCommentLastestTimeStamp];
+                    
                 } else if (type == CB_COMMENT_REFRESH_TYPE_BEFORE){
                     CelebComment* latestComment = [self.celebComments objectAtIndex:count-1];
                     if (latestComment != nil)
@@ -2335,27 +2363,46 @@
             CelebComment* comment = cbComment;
             if (comment != nil){
                 if ([comment.fid compare:item.fid] == NSOrderedSame) {
-                    same = YES;
+                    if (comment.weight < item.weight){
+                        same = NO;
+                        [self.celebComments removeObjectAtIndex:i];
+                    } else {
+                        same = YES;
+                    }
                     
-                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
-                    //    newItem.isOfflineDL = YES;
-                    //}
-                    
-                    break;
-                }
-                
-                if (comment.pts < item.pts) {
-                    [self.celebComments insertObject:item atIndex:i];
-                    ret = YES;
                     break;
                 }
             }
         }
     }
     
-    if (same == NO && ret == NO){
-        [self.celebComments addObject:item];
-        ret = YES;
+    if (same == NO){
+        if (item.weight > 0){
+            if ([self.celebComments count] > 0)
+                [self.celebComments insertObject:item atIndex:0];
+            else
+                [self.celebComments addObject:item];
+            ret = YES;
+        } else {
+            BOOL isAdd = NO;
+            for (i = 0; i < listCount; i++) {
+                CelebComment* comment = [self.celebComments objectAtIndex:i];
+                
+                if (comment.weight <= item.weight){
+                    if (comment.pts < item.pts) {
+                        [self.celebComments insertObject:item atIndex:i];
+                        ret = YES;
+                        isAdd = YES;
+                        break;
+                    }
+                }
+            }
+            
+            if (isAdd == NO){
+                [self.celebComments addObject:item];
+                ret = YES;
+            }
+        }
     }
     
     return ret;
@@ -2984,6 +3031,76 @@
     ret = YES;
 
     return ret;
+}
+
+-(void) refreshTopCelebComments: (BOOL) isRefreshComments {
+    
+    if (self.celebComments == nil)
+        self.celebComments = [NSMutableArray arrayWithCapacity:1];
+    
+    [[ITSApplication get].remoteSvr getTopCelebComment:^(int status, int code, NSDictionary *resultData) {
+        if (status == 1){
+            if (resultData != nil){
+                ITSApplication* itsApp = [ITSApplication get];
+                
+                NSNumber* countNum = [resultData objectForKey:@"count"];
+                if (countNum != nil){
+                    NSInteger count = [countNum integerValue];
+                    if (count > 0){
+                        NSArray* topCommnets = [resultData objectForKey:@"contexts"];
+                        NSMutableArray* currentTopCommnets = [NSMutableArray arrayWithCapacity:1];
+                        
+                        NSInteger i = 0;
+                        NSInteger commentCount = [self.celebComments count];
+                        for (i = 0; i < commentCount; i++) {
+                            CelebComment* comment = [self.celebComments objectAtIndex:i];
+                            if (comment.weight > 0){
+                                [currentTopCommnets addObject:comment];
+                                [self.celebComments removeObjectAtIndex:i];
+                                i--;
+                                commentCount--;
+                            } else {
+                                break;
+                            }
+                        }
+                        
+                        NSInteger m = [topCommnets count] - 1;
+                        for (m; m >= 0; m--) {
+                            NSDictionary* tData = [topCommnets objectAtIndex:m];
+                            CelebComment* tComment = [[CelebComment alloc] initWithDictionary:tData];
+                            tComment.name = itsApp.dataSvr.celebInfo.name;
+                            tComment.avator = itsApp.dataSvr.celebInfo.avator;
+                            tComment.weight = 100;
+                            
+                            for (int mm = 0; mm < [currentTopCommnets count]; mm++) {
+                                CelebComment* comment = [currentTopCommnets objectAtIndex:mm];
+                                if ([comment.fid isEqualToString:tComment.fid]){
+                                    [currentTopCommnets removeObjectAtIndex:mm];
+                                    break;
+                                }
+                            }
+                            
+                            [self insertCelebCommentItem:tComment];
+                        }
+                        
+                        for (int mmm = 0; mmm < [currentTopCommnets count]; mmm++) {
+                            CelebComment* comment = [currentTopCommnets objectAtIndex:mmm];
+                            comment.weight = 0;
+                            [self insertCelebCommentItem:comment];
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (isRefreshComments == YES)
+            [self refreshCelebComments:CB_COMMENT_REFRESH_TYPE_AFTER];
+        else {
+            MMEventService *es = [MMEventService getInstance];
+            [es send:EVENT_CELEB_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REFRESH_SUCCESS];
+        }
+    }];
+    
 }
 
 @end

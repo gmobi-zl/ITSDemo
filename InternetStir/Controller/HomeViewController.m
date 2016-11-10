@@ -165,8 +165,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         self.refreshType = CB_COMMENT_REFRESH_TYPE_AFTER;
         ITSApplication* itsApp = [ITSApplication get];
         DataService* ds = itsApp.dataSvr;
-        [ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_AFTER];
-        //[itsApp.remoteSvr getTopCelebComment];
+        [ds refreshTopCelebComments:YES];
+        //[ds refreshCelebComments:CB_COMMENT_REFRESH_TYPE_AFTER];
+        
 //        NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
 //        [eParams setObject:self.cid forKey:@"id"];
 //        NewsCategory* cate = [poApp.dataSvr getCategoryByID:self.cid];
@@ -328,7 +329,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
         
         if (buttonIndex == 0) {
-            [itsApp.remoteSvr setCelebCommentTop:item.fid];
+            [itsApp.remoteSvr setCelebCommentTop:item.fid callback:^(int status, int code, NSDictionary *resultData) {
+                ITSApplication* app = [ITSApplication get];
+                [app.dataSvr refreshTopCelebComments:YES];
+            }];
         } else if (buttonIndex == 1) {
             itsApp.dataSvr.selectUpdateComment = item;
             

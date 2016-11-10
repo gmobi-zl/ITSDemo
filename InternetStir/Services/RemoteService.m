@@ -1573,7 +1573,8 @@
     }];
 }
 
--(void) setCelebCommentTop: (NSString*) fid{
+-(void) setCelebCommentTop: (NSString*) fid
+                  callback: (RemoteCallback) callback{
     if (fid == nil)
         return;
     
@@ -1597,26 +1598,33 @@
              NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
              MMLogDebug(@"setCelebCommentTop RSP: %@",dataDic);
              
-//             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
-//             NSString* fid = [dataDic objectForKey:@"fid"];
-//             BOOL succ = [tmpNum boolValue];
-//
-//             if (succ == YES){
-//                 
-//             } else {
-//                 
-//             }
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             BOOL succ = [tmpNum boolValue];
+
+             int retStatus = 0;
+             if (succ == YES){
+                 retStatus = 1;
+             }
+             
+             if (callback != nil){
+                 callback(retStatus, code, dataDic);
+             }
          }
      }];
 }
 
--(void) getTopCelebComment{
+-(void) getTopCelebComment: (RemoteCallback) callback{
     
     ConfigService* cs = [ConfigService get];
     ITSApplication* itsApp = [ITSApplication get];
     CelebUser* user = itsApp.cbUserSvr.user;
     
-    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@?top=1&size=1&_s=%@",[self getBaseUrl], [cs getChannel], user.session];
+    NSString *userSession = @"";
+    if (user.isLogin == YES){
+        userSession = [NSString stringWithFormat:@"?_s=%@", user.session];
+    }
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/pin%@",[self getBaseUrl], [cs getChannel], userSession];
     
     MMLogDebug(@"Celeb Top comment url = %@", url);
     
@@ -1628,15 +1636,57 @@
             NSData* data = [resultData objectForKey:@"data"];
             NSError* err;
             NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSArray* dataArr = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+            NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
             
             MMLogDebug(@"Celeb Top comment Data rsp data: %@", dataStr);
             
-            
+            if (callback != nil){
+                callback(1, code, dataDic);
+            }
         } else {
-            
+            if (callback != nil){
+                callback(0, code, nil);
+            }
         }
     }];
+}
+
+-(void) sendCelebReadReplys: (NSString*) fid
+                     replys: (NSMutableArray*) replys{
+    if (fid == nil || replys == nil || [replys count] <= 0)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    NSString *userSession = @"";
+    if (user.isLogin == YES){
+        userSession = [NSString stringWithFormat:@"?_s=%@", user.session];
+    }
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments/read%@",[self getBaseUrl], [cs getChannel], fid, userSession];
+    MMLogDebug(@"sendCelebReadReplys URL: %@", url);
+    
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:1];
+    [param setObject:replys forKey:@"cids"];
+    
+    MMLogDebug(@"sendCelebReadReplys data : %@", param);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doPostJSON:url reqHeader:nil reqBody:param callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"sendCelebReadReplys RSP: %@",dataDic);
+         }
+     }];
 }
 
 @end

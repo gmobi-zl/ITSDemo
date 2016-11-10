@@ -90,6 +90,8 @@
         self.topFansComments = tmpArray;
     }
     
+    self.weight = 0;
+    
     return self;
 }
 

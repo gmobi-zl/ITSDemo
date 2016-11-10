@@ -56,6 +56,8 @@
 @property UInt64 pts;
 @property UInt64 uts;
 
+@property NSInteger weight;
+
 @property HomeCommentFrame* uiFrame;
 
 -(CelebComment*) initWithDictionary: (NSDictionary*) dic;
