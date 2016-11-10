@@ -129,6 +129,7 @@
 		E1EB48301D6C4BC8003C42BC /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1EB482C1D6C4BC8003C42BC /* TwitterKitResources.bundle */; };
 		E1EB48311D6C4BC8003C42BC /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1EB482D1D6C4BC8003C42BC /* TwitterCore.framework */; };
 		E1EB48341D6C4C93003C42BC /* TwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EB48331D6C4C93003C42BC /* TwitterService.m */; };
+		E1EC2B681DD2F2FF00D244F5 /* CommentOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC2B671DD2F2FF00D244F5 /* CommentOneCell.m */; };
 		E1F030611D741C4100060559 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1F030341D741C4100060559 /* MJRefresh.bundle */; };
 		E1F030621D741C4100060559 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F030371D741C4100060559 /* MJRefreshBaseView.m */; };
 		E1F030631D741C4100060559 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F030391D741C4100060559 /* MJRefreshConst.m */; };
@@ -379,6 +380,8 @@
 		E1EB482D1D6C4BC8003C42BC /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		E1EB48321D6C4C93003C42BC /* TwitterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterService.h; sourceTree = "<group>"; };
 		E1EB48331D6C4C93003C42BC /* TwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterService.m; sourceTree = "<group>"; };
+		E1EC2B661DD2F2FF00D244F5 /* CommentOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentOneCell.h; sourceTree = "<group>"; };
+		E1EC2B671DD2F2FF00D244F5 /* CommentOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentOneCell.m; sourceTree = "<group>"; };
 		E1F030341D741C4100060559 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		E1F030351D741C4100060559 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		E1F030361D741C4100060559 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -782,6 +785,8 @@
 				E189F5EA1D64158E008587CE /* HomeCommentCell.m */,
 				E189F5EB1D64158E008587CE /* CommentCell.h */,
 				E189F5EC1D64158E008587CE /* CommentCell.m */,
+				E1EC2B661DD2F2FF00D244F5 /* CommentOneCell.h */,
+				E1EC2B671DD2F2FF00D244F5 /* CommentOneCell.m */,
 				E19DFD091D8F87370042C777 /* DetailCommentCell.h */,
 				E19DFD0A1D8F87370042C777 /* DetailCommentCell.m */,
 				E189F5ED1D64158E008587CE /* MenuViewCell.h */,
@@ -1121,6 +1126,7 @@
 				18F664FF1D5B29E900BDB2E8 /* NewsService.m in Sources */,
 				E189F6071D6415BF008587CE /* CommentFrame.m in Sources */,
 				E198450F1D9132FF006A3ED2 /* MyCommentCell.m in Sources */,
+				E1EC2B681DD2F2FF00D244F5 /* CommentOneCell.m in Sources */,
 				E19DFD111D8F893B0042C777 /* DetailCommentFrame.m in Sources */,
 				E189F6411D6450AE008587CE /* SettingCell.m in Sources */,
 				18F665151D5B311400BDB2E8 /* AdItem.m in Sources */,

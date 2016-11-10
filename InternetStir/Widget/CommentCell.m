@@ -47,13 +47,13 @@ NSIndexPath *indexP;
         self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
         [self.contentView addSubview:self.nameLabel];
         
-        self.commentLabel = [[TQRichTextView alloc] init];
+        self.commentLabel = [[UILabel alloc] init];
 //        self.commentLabel.numberOfLines = 0;
 //        self.commentLabel.userInteractionEnabled = YES;
         self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
         self.commentLabel.font = [UIFont systemFontOfSize:16];
-        self.commentLabel.lineSpace = 0.5;
-        self.commentLabel.type = 2;
+//        self.commentLabel.lineSpace = 0.5;
+//        self.commentLabel.type = 2;
 //        self.commentLabel.backgroundColor = [UIColor redColor];
         self.commentLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.commentLabel];
@@ -91,6 +91,7 @@ NSIndexPath *indexP;
         self.replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.replyButton setTitle:NSLocalizedString (@"comment_reply", nil) forState:UIControlStateNormal];
+        self.replyButton.userInteractionEnabled = YES;
         [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.replyButton];
         
@@ -287,54 +288,57 @@ NSIndexPath *indexP;
     [self removeOldReplys];
     ITSApplication* itsApp = [ITSApplication get];
     CBUserService* us = itsApp.cbUserSvr;
-    if ([comment isKindOfClass:[CelebComment class]]) {
-        CelebComment *data = comment;
-        self.icon.frame = CGRectMake(15, 13, 40, 40);
-        self.icon.contentMode = UIViewContentModeScaleAspectFill;
-        self.icon.layer.masksToBounds = YES;
-        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
-        [self.contentView addSubview:self.icon];
-        self.nameLabel.text = data.name;
-        CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
-        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
-        CGFloat nameLabelY = 13;
-        CGFloat nameLabelWidth = nameLabelSize.width + 20;
-        CGFloat nameLabelHeight = nameLabelSize.height;
-        self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 20);
-        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
-        [self.contentView addSubview:self.nameLabel];
-        CGFloat contentLabelX = nameLabelX;
-        CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
+//    if ([comment isKindOfClass:[CelebComment class]]) {
+//        CelebComment *data = comment;
+//        self.icon.frame = CGRectMake(15, 13, 40, 40);
+//        self.icon.contentMode = UIViewContentModeScaleAspectFill;
+//        self.icon.layer.masksToBounds = YES;
+//        [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+//        [self.contentView addSubview:self.icon];
+//        self.nameLabel.text = data.name;
+//        CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
+//        CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
+//        CGFloat nameLabelY = 13;
+//        CGFloat nameLabelWidth = nameLabelSize.width + 20;
+//        CGFloat nameLabelHeight = nameLabelSize.height;
+//        self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 20);
+//        self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+//        [self.contentView addSubview:self.nameLabel];
+//        CGFloat contentLabelX = nameLabelX;
+//        CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
 //        CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-        CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:data.context lineSpace:0.5 type:2];
-
-        CGFloat contentLabelWidth = rect.size.width;
-        CGFloat contentLabelHeight = rect.size.height;
-        self.commentLabel.frame = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
-        self.commentLabel.text = data.context;
-        [self.contentView addSubview:self.commentLabel];
-        NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
-        CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
-        self.timeLabel.frame = CGRectMake(nameLabelX, self.commentLabel.frame.origin.y + self.commentLabel.frame.size.height + 4, timeLabelSize.width, 20);
-        self.timeLabel.text = time;
-        [self.contentView addSubview:self.timeLabel];
-        self.replyButton.frame = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.timeLabel.frame.origin.y, 40, 20);
-        self.line.frame = CGRectMake(nameLabelX, self.timeLabel.frame.size.height + self.timeLabel.frame.origin.y + 10 - 0.5, [MMSystemHelper getScreenWidth] - nameLabelX - 10, 0.5);
-        [self.contentView addSubview:self.replyButton];
-        self.iconBtn.frame = self.icon.bounds;
-    }else if ([comment isKindOfClass:[FansComment class]]) {
+////        CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:data.context lineSpace:0.5 type:2];
+//
+//        CGFloat contentLabelWidth = contentLabelSize.width;
+//        CGFloat contentLabelHeight = contentLabelSize.height;
+//        self.commentLabel.frame = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
+//        self.commentLabel.text = data.context;
+//        [self.contentView addSubview:self.commentLabel];
+//        NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
+//        CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
+//        self.timeLabel.frame = CGRectMake(nameLabelX, self.commentLabel.frame.origin.y + self.commentLabel.frame.size.height + 4, timeLabelSize.width, 20);
+//        self.timeLabel.text = time;
+//        [self.contentView addSubview:self.timeLabel];
+//        self.replyButton.frame = CGRectMake(nameLabelX + timeLabelSize.width + 10, self.timeLabel.frame.origin.y, 40, 20);
+//        self.replyButton.userInteractionEnabled = YES;
+//        self.line.frame = CGRectMake(nameLabelX, self.timeLabel.frame.size.height + self.timeLabel.frame.origin.y + 10 - 0.5, [MMSystemHelper getScreenWidth] - nameLabelX - 10, 0.5);
+//        [self.contentView addSubview:self.replyButton];
+//        self.iconBtn.frame = self.icon.bounds;
+//    }else
+    if ([comment isKindOfClass:[FansComment class]]) {
         FansComment *data = comment;
-//        if ([us.user.uId compare:data.uuid] == NSOrderedSame) {
-//            self.bgView.scrollEnabled = YES;
-//        }else {
-//            self.bgView.scrollEnabled = NO;
-//        }
+        //        if ([us.user.uId compare:data.uuid] == NSOrderedSame) {
+        //            self.bgView.scrollEnabled = YES;
+        //        }else {
+        //            self.bgView.scrollEnabled = NO;
+        //        }
         self.bgView.userInteractionEnabled = NO;
         self.icon.contentMode = UIViewContentModeScaleAspectFill;
         self.icon.layer.masksToBounds = YES;
         [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
         self.nameLabel.text = data.name;
         self.commentLabel.text = data.comment;
+        self.commentLabel.numberOfLines = 0;
         NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
         self.timeLabel.text = time;
         self.nameLabel.textColor = [UIColor blackColor];
@@ -347,7 +351,7 @@ NSIndexPath *indexP;
             replyLabel.text = item.comment;
             replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
             self.replyLabel = replyLabel;
-//            self.replyLabel.backgroundColor = [UIColor redColor];
+            //            self.replyLabel.backgroundColor = [UIColor redColor];
             [self.contentView addSubview:replyLabel];
             [self.replysView addObject:replyLabel];
             
@@ -364,7 +368,7 @@ NSIndexPath *indexP;
             UILabel *replyName = [[UILabel alloc] init];
             replyName.text = item.name;
             replyName.textColor = [UIColor blackColor];
-//            replyName.backgroundColor = [UIColor redColor];
+            //            replyName.backgroundColor = [UIColor redColor];
             replyName.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
             
             self.replyNameLabel = replyName;

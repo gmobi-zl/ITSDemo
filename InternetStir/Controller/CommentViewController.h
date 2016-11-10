@@ -13,6 +13,7 @@
 #import "GAITrackedViewController.h"
 #import "LoginView.h"
 #import "CommentCell.h"
+#import "CommentOneCell.h"
 @interface CommentViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,ViewCellDelegate,TQRichTextViewDelegate>
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) UITableView *tableView;
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) LoginView *loginView;
 
 @property (nonatomic, assign) CGFloat replyViewDraw;
+@property (nonatomic, assign) CGFloat offset;
 //@property (assign) BOOL isTrackComment;
 
 

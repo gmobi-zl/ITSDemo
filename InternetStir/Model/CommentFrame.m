@@ -176,10 +176,10 @@
     
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = CGRectGetMaxY(self.nameF) + padding/2;
-//    CGSize contentLabelSize = [MMSystemHelper sizeWithString:fansComment.comment font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:fansComment.comment lineSpace:0.5 type:2];
-    CGFloat contentLabelWidth = rect.size.width;
-    CGFloat contentLabelHeight = rect.size.height;
+    CGSize contentLabelSize = [MMSystemHelper sizeWithString:fansComment.comment font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
+//    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(screenW - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:fansComment.comment lineSpace:0.5 type:2];
+    CGFloat contentLabelWidth = contentLabelSize.width;
+    CGFloat contentLabelHeight = contentLabelSize.height;
     self.contentF = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
     
     self.cellHeight = CGRectGetMaxY(self.contentF) + padding/2;

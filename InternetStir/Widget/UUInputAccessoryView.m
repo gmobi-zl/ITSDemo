@@ -72,7 +72,7 @@
         saveBtn.frame = CGRectMake(UUIAV_MAIN_W-50, UUIAV_Edge_Vert, UUIAV_Btn_W, UUIAV_Btn_H);
         saveBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         saveBtn.backgroundColor = [UIColor clearColor];
-        [saveBtn setTitle: @"發佈" forState:UIControlStateNormal];
+        [saveBtn setTitle: NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
         [saveBtn setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
         [saveBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [saveBtn addTarget:sharedView action:@selector(saveContent) forControlEvents:UIControlEventTouchUpInside];
