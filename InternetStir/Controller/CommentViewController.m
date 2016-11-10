@@ -549,6 +549,12 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
    
 #endif
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        self.offset = self.tableView.contentOffset.y;
+    }
+}
 //#pragma mark - UIGestureRecognizerDelegate
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 //{

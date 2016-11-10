@@ -30,7 +30,7 @@ NSString *const PopNewsSettingsTableViewCellIdentifier = @"PNewsSettingsCell";
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-    self.title = @"設定";
+    self.title = NSLocalizedString(@"set", nil);
     [self initViews];
    
 }

@@ -26,6 +26,7 @@
 #import "MMEventService.h"
 #import "ConfigService.h"
 #import "WebviewController.h"
+#import "ShareView.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -393,7 +394,15 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSArray* dataArr = itsApp.dataSvr.celebComments;
     CelebComment *item = [dataArr objectAtIndex:button.tag];
     NSString *content = item.context;
-    
+
+//
+//    [UIView animateWithDuration:0.1 animations:^{
+//
+//    }];
+//    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 300, screenW, 120 + 72)];
+//    [shareView.effectView addSubview:shareView];
+
+//    [self.view addSubview:shareView];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [eParams setObject:@"forumid" forKey:@"fid"];
     [eParams setObject:content forKey:@"context"];

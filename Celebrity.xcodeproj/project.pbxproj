@@ -112,6 +112,7 @@
 		E1B27D491DC0A62200C3E025 /* MMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B27D481DC0A62200C3E025 /* MMWebView.m */; };
 		E1B9611E1D936E0C00B779A1 /* WriteArticleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B9611D1D936E0C00B779A1 /* WriteArticleCell.m */; };
 		E1BA8BE71D9282F6002758D1 /* WriteArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BA8BE61D9282F6002758D1 /* WriteArticleController.m */; };
+		E1BAACD61DD45BAF00F00DBA /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BAACD51DD45BAF00F00DBA /* ShareView.m */; };
 		E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF671D6544030053F00D /* HomeViewController.m */; };
 		E1E3CF6B1D6547D40053F00D /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF6A1D6547D40053F00D /* TabBarController.m */; };
 		E1E3CF6E1D6548FB0053F00D /* ContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E3CF6D1D6548FB0053F00D /* ContentController.m */; };
@@ -354,6 +355,8 @@
 		E1B9611D1D936E0C00B779A1 /* WriteArticleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteArticleCell.m; sourceTree = "<group>"; };
 		E1BA8BE51D9282F6002758D1 /* WriteArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteArticleController.h; sourceTree = "<group>"; };
 		E1BA8BE61D9282F6002758D1 /* WriteArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteArticleController.m; sourceTree = "<group>"; };
+		E1BAACD41DD45BAF00F00DBA /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		E1BAACD51DD45BAF00F00DBA /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		E1E3CF661D6544030053F00D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E1E3CF671D6544030053F00D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E1E3CF691D6547D40053F00D /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
@@ -826,6 +829,8 @@
 				E198450B1D9111D4006A3ED2 /* LoginView.m */,
 				E18F06A01D991FA9008EC403 /* MMTabPagerView.m */,
 				E18F06A11D991FA9008EC403 /* MMTabPagerView.h */,
+				E1BAACD41DD45BAF00F00DBA /* ShareView.h */,
+				E1BAACD51DD45BAF00F00DBA /* ShareView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1139,6 +1144,7 @@
 				E1F0306F1D741C4100060559 /* SDWebImageManager.m in Sources */,
 				18F664CD1D5AC9FF00BDB2E8 /* MMHttpSession.m in Sources */,
 				E1E4A4491D8E70E000380026 /* FanController.m in Sources */,
+				E1BAACD61DD45BAF00F00DBA /* ShareView.m in Sources */,
 				E1F0306B1D741C4100060559 /* SDWebImageCompat.m in Sources */,
 				E1F89E921DCC7ACB0099F117 /* TQRichTextRun.m in Sources */,
 				E189F6111D6415DB008587CE /* MenuViewController.m in Sources */,

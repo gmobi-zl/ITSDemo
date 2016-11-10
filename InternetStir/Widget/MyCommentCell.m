@@ -83,16 +83,31 @@
         self.photo = [[UIImageView alloc] init];
         [self.bgView addSubview:self.photo];
         
-        self.readBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.readBtn.layer.masksToBounds = YES;
-        self.readBtn.frame = CGRectMake(screenW - 45, 8, 30, 30);
-        self.readBtn.layer.cornerRadius = 3;
-        self.readBtn.layer.borderWidth = 1;
-        self.readBtn.layer.borderColor = [UIColor grayColor].CGColor;
+        self.unreadBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.unreadBtn.layer.masksToBounds = YES;
+        self.unreadBtn.frame = CGRectMake(screenW - 45, 13, 30, 30);
+        self.unreadBtn.layer.cornerRadius = 3;
+        self.unreadBtn.layer.borderWidth = 1;
+        self.unreadBtn.userInteractionEnabled = NO;
+        self.unreadBtn.hidden = YES;
+        self.unreadBtn.layer.borderColor = [UIColor grayColor].CGColor;
         UIImage *btnIcon = [UIImage imageNamed:@"rectangle.unread"];
-        [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
-
+        [self.unreadBtn setImage:btnIcon forState:UIControlStateNormal];
+        self.unreadBtn.layer.cornerRadius = 5;
+        [self.contentView addSubview:self.unreadBtn];
+        
+        self.readBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.readBtn.frame = CGRectMake(screenW - 75, 13, 60, 30);
+        self.readBtn.userInteractionEnabled = NO;
+        self.readBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.readBtn.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
+        [self.readBtn setTitle:@"Read" forState:UIControlStateNormal];
+        self.readBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 3, 0, 0);
+        self.readBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        UIImage *icon = [UIImage imageNamed:@"Rectangle.read"];
+        [self.readBtn setImage:icon forState:UIControlStateNormal];
         self.readBtn.layer.cornerRadius = 5;
+        self.readBtn.hidden = YES;
         [self.contentView addSubview:self.readBtn];
         
         self.line = [[UILabel alloc] init];
@@ -155,19 +170,11 @@
         [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         
         if (data.isCelebRead == YES) {
-            self.readBtn.frame = CGRectMake(screenW - 75, 13, 60, 30);
-            self.readBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-            self.readBtn.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
-            [self.readBtn setTitle:@"Read" forState:UIControlStateNormal];
-            self.readBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 3, 0, 0);
-            self.readBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-            UIImage *btnIcon = [UIImage imageNamed:@"Rectangle.read"];
-            [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
-
+            self.readBtn.hidden = NO;
+            self.unreadBtn.hidden = YES;
         }else {
-            self.readBtn.frame = CGRectMake(screenW - 45, 13, 30, 30);
-            UIImage *btnIcon = [UIImage imageNamed:@"rectangle.unread"];
-            [self.readBtn setImage:btnIcon forState:UIControlStateNormal];
+            self.unreadBtn.hidden = NO;
+            self.readBtn.hidden = YES;
         }
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             

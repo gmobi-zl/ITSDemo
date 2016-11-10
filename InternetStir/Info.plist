@@ -30,7 +30,7 @@
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>CelebrityBaseUrl</key>
-	<string>http://api.tomoto.io/</string>
+	<string>http://106.185.48.211:8080/</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
