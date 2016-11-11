@@ -70,6 +70,9 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    gradient.colors = [NSArray arrayWithObjects:(id)oneColor.CGColor, (id)twoColor.CGColor, (id)threeColor.CGColor, nil];
 //    [self.effectView.layer insertSublayer:gradient atIndex:0];
 //
+    self.shareView = [[ShareView alloc] init];
+    self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
     
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
@@ -279,7 +282,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
-    [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.shareBtn.tag = indexPath.row;
     tmpCell.btn.tag = indexPath.row;
     [tmpCell.delBtn addTarget:self action:@selector(pushSheet:) forControlEvents:UIControlEventTouchUpInside];
@@ -388,26 +391,23 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
 }
 
-- (void)shareBtn: (UIButton *)button {
-    
-    ITSApplication* itsApp = [ITSApplication get];
-    NSArray* dataArr = itsApp.dataSvr.celebComments;
-    CelebComment *item = [dataArr objectAtIndex:button.tag];
-    NSString *content = item.context;
-
+//- (void)shareBtn: (UIButton *)button {
+//    
+//    ITSApplication* itsApp = [ITSApplication get];
+//    NSArray* dataArr = itsApp.dataSvr.celebComments;
+//    CelebComment *item = [dataArr objectAtIndex:button.tag];
+//    NSString *content = item.context;
 //
+////
 //    [UIView animateWithDuration:0.1 animations:^{
-//
+//        self.shareView.frame = CGRectMake(0, screenH - 192, screenW, 192);
 //    }];
-//    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 300, screenW, 120 + 72)];
-//    [shareView.effectView addSubview:shareView];
-
-//    [self.view addSubview:shareView];
-    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-    [eParams setObject:@"forumid" forKey:@"fid"];
-    [eParams setObject:content forKey:@"context"];
-    [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
-}
+//
+//    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+//    [eParams setObject:@"forumid" forKey:@"fid"];
+//    [eParams setObject:content forKey:@"context"];
+//    [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
+//}
 - (void)favBtnClick:(UIButton *)button {
     
     HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;

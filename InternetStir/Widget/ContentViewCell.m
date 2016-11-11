@@ -61,7 +61,7 @@
     CGFloat screenW = [MMSystemHelper getScreenWidth];
 //    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
     
-    self.titleLabel.frame = CGRectMake(15, 20, self.bounds.size.width - 30, 0);
+    self.titleLabel.frame = CGRectMake(15, 10, self.bounds.size.width - 30, 0);
     self.titleLabel.font = [UIFont systemFontOfSize:18];
     self.titleLabel.textColor = [MMSystemHelper string2UIColor:@"#4A4A4A"];
     self.titleLabel.text = item.title;
@@ -77,18 +77,19 @@
     NewsImage *image = [item.images objectAtIndex:0];
     CGFloat height;
     height = image.h * screenW / image.w;
-    self.icon.frame = CGRectMake(0, frame.size.height + 20 , screenW, height);
+    self.icon.frame = CGRectMake(0, frame.size.height + 10 , screenW, height);
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
     [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
-    self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 20);
+    self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 10);
+//    self.sourceLabel.backgroundColor = [UIColor redColor];
     self.sourceLabel.font = [UIFont systemFontOfSize:10];
     self.sourceLabel.text = item.pdomain;
     
 //    self.timeLabel.frame = CGRectMake(self.sourceLabel.frame.size.width + self.sourceLabel.frame.origin.x + 10, self.sourceLabel.frame.origin.y, 40, 20);
 //    self.timeLabel.text = @"4小时前";
     
-    self.line.frame = CGRectMake(0, self.sourceLabel.frame.origin.y + 20, screenW, 0.5);
+    self.line.frame = CGRectMake(0, self.sourceLabel.frame.origin.y + self.sourceLabel.frame.size.height + 10, screenW, 0.5);
 
 }
 

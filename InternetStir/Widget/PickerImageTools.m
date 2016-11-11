@@ -43,18 +43,16 @@ static PickerImageTools *_tools = nil;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     picker.delegate = self;
     picker.allowsEditing = YES;
-    picker.showsCameraControls = YES;
-    picker.allowsImageEditing=YES;///这两句保证了图片可以裁剪为正方形
+    
+    //    picker.allowsImageEditing=YES;///这两句保证了图片可以裁剪为正方形
     picker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         
-        mySelf.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        mySelf.modalPresentationStyle = UIModalPresentationCustom;
     }
     [mySelf presentViewController:picker animated:YES completion:nil];
-
 }
-
 
 - (void)selectPhotograph:(UIViewController *)mySelf
 {
@@ -63,8 +61,9 @@ static PickerImageTools *_tools = nil;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.delegate = self;
     picker.allowsEditing = YES;
-    picker.allowsImageEditing=YES;///这两句保证了图片可以裁剪为正方形
-    
+//    picker.allowsImageEditing=YES;///这两句保证了图片可以裁剪为正方形
+    picker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0)
     {
         mySelf.modalPresentationStyle = UIModalPresentationOverCurrentContext;

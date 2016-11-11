@@ -13,6 +13,7 @@
 #import "ITSAppConst.h"
 #import "GAITrackedViewController.h"
 #import "HomeCommentCell.h"
+#import "ShareView.h"
 
 @interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TQRichTextViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) UIVisualEffectView *effectView;
 @property (nonatomic, strong) LoginView *loginView;
 @property (nonatomic, strong) UIButton* Btn;
+
+@property (nonatomic, strong) ShareView *shareView;
 
 @property (nonatomic, strong) UIActionSheet *photoSheet;
 @property (nonatomic, strong) UIActionSheet *sheet;

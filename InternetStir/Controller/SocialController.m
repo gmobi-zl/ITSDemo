@@ -143,7 +143,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     NewsImage *image = [comment.images objectAtIndex:0];
     
     UILabel *label = [[UILabel alloc] init];
-    label.frame = CGRectMake(15, 0, screenW - 30, 40);
+    label.frame = CGRectMake(15, 10, screenW - 30, 40);
     label.font = [UIFont systemFontOfSize:18];
     label.text = comment.title;
     label.numberOfLines = 2;
@@ -152,7 +152,7 @@ NSString *const ContentCellIdentifier = @"ContentViewCell";
     CGFloat height;
     height = image.h * screenW / image.w;
     
-    return size.height + height + 30 + 0.5 + 15;
+    return size.height + 10 + height + 10 + 15 + 0.5;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     

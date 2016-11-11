@@ -86,9 +86,9 @@
         [self.commentBtn setBackgroundImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.commentBtn];
         
-        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.shareBtn];
+//        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+//        [self.contentView addSubview:self.shareBtn];
         
         self.line = [[UILabel alloc] init];
         self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
