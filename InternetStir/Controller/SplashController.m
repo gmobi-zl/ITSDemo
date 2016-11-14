@@ -78,7 +78,7 @@
 
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-    [eParams setObject:@"tomotoc001" forKey:@"ch"];
+    [eParams setObject:@"tomotoc005" forKey:@"ch"];
     [eParams setObject:@"" forKey:@"cid"];
     [poApp.reportSvr recordEvent:@"ch" params:eParams eventCategory:@"launch.view"];
     
@@ -108,30 +108,36 @@
 -(void) pushNextVc{
 
     ITSApplication* itsApp = [ITSApplication get];
-    //CBUserService* us = itsApp.cbUserSvr;
+    CBUserService* us = itsApp.cbUserSvr;
     if (itsApp.isFirstOpen == NO) {
         TabBarController *tabBar = [[TabBarController alloc] init];
         tabBar.selectedIndex = 1;
+
         [self.navigationController pushViewController:tabBar animated:YES];
     }else {
 
-        NSString *str = @"Content with Facebook";
-        CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
-        CGFloat width = size.width + 30 + 10 + 60;
+        if (us.user.isLogin == YES) {
+            
+        }else {
+            NSString *str = @"Content with Facebook";
+            CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
+            CGFloat width = size.width + 30 + 10 + 60;
+            
+            self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190) viewController:self];
+            self.loginView.backgroundColor = [UIColor whiteColor];
+            self.loginView.layer.masksToBounds = YES;
+            self.loginView.layer.cornerRadius = 10;
+            self.loginView.alpha = 0;
+            self.loginView.center = self.view.center;
+            [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+            [UIView animateWithDuration:0.5 animations:^{
+                self.loginView.effectView.alpha = 1;
+            }];
+            [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
+            
+            [self.loginView.effectView addSubview:self.loginView];
 
-        self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190) viewController:self];
-        self.loginView.backgroundColor = [UIColor whiteColor];
-        self.loginView.layer.masksToBounds = YES;
-        self.loginView.layer.cornerRadius = 10;
-        self.loginView.alpha = 0;
-        self.loginView.center = self.view.center;
-        [self.loginView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.loginView.effectView.alpha = 1;
-        }];
-        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
-
-        [self.loginView.effectView addSubview:self.loginView];
+        }
     }
 }
 - (void)delayMethod {
@@ -159,6 +165,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         TabBarController *tabBar = [[TabBarController alloc] init];
         tabBar.selectedIndex = 1;
+        self.loginView.effectView.alpha = 0;
+        self.loginView.alpha = 0;
         [self.navigationController pushViewController:tabBar animated:YES];
     });
 }
