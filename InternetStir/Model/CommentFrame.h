@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "CommentItem.h"
-#import "TQRichTextView.h"
+//#import "TQRichTextView.h"
 @interface CommentFrame : NSObject
 //@property (nonatomic, strong) ReplyItem *item;
 #ifdef DEMO_DATA

@@ -104,8 +104,13 @@
         [self.contentView addSubview:self.likeNum];
         
         self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"icon_ios_addition"] forState:UIControlStateNormal];
+//        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"icon_ios_addition"] forState:UIControlStateNormal];
+//        self.delBtn setImageEdgeInsets:<#(UIEdgeInsets)#>
         [self.contentView addSubview:self.delBtn];
+        UIImageView *imageview = [[UIImageView alloc] init];
+        imageview.frame = CGRectMake(8, 8, 20, 20);
+        imageview.image = [UIImage imageNamed:@"icon_ios_addition"];
+        [self.delBtn addSubview:imageview];
 
 //        ITSApplication* itsApp = [ITSApplication get];
 //        CBUserService* us = itsApp.cbUserSvr;

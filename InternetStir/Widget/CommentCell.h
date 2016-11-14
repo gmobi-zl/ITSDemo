@@ -12,7 +12,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "CelebComment.h"
 #import "HomeCommentFrame.h"
-#import "TQRichTextView.h"
+//#import "TQRichTextView.h"
 
 @protocol ViewCellDelegate <NSObject>
 
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) CommentFrame *detailCommentFrame;
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) TQRichTextView *commentLabel;
+@property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) NSMutableArray *replysView;
 @property (nonatomic, strong) NSMutableArray *replyIconView;
 @property (nonatomic, strong) NSMutableArray *replyNameView;

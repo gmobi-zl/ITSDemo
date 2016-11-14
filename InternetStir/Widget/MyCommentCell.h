@@ -27,6 +27,8 @@
 @property (nonatomic, strong) UIImageView *photo;
 @property (nonatomic, strong) UIButton *replyButton;
 @property (nonatomic, strong) UIButton *readBtn;
+@property (nonatomic, strong) UIButton *unreadBtn;
+
 @property (nonatomic, strong) UILabel *line;
 
 @property (nonatomic, strong) NSMutableArray *replysView;
