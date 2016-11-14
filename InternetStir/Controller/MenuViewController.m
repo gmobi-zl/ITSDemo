@@ -56,11 +56,10 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
     [self.view addSubview:self.bgImage];
     
     self.icon = [[UIImageView alloc] init];
-    self.icon.backgroundColor = [UIColor redColor];
-    self.icon.frame = CGRectMake(20, (screenH/3  - 70) / 2, 72, 72);
+    self.icon.frame = CGRectMake(20, (screenH/3 - 70) / 2, 72, 72);
     self.icon.layer.cornerRadius = 35;
     self.icon.layer.masksToBounds = YES;
-    self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
+    self.icon.image = [UIImage imageNamed:@"icon_profile_photo"];
     [self.bgImage addSubview:self.icon];
 
 //    [self creatButton];
@@ -237,7 +236,7 @@ NSString *const MenuTableViewCellIdentifier = @"MenuCell";
         self.userEmailLabel.text = NSLocalizedString(@"login_fans_tool", nil);
         self.label.hidden = NO;
         self.loginButton.hidden = NO;
-        self.icon.image = [UIImage imageNamed:@"icon_defaultavatar"];
+        self.icon.image = [UIImage imageNamed:@"icon_profile_photo"];
         self.imageview.hidden = NO;
         button.hidden = YES;
         [self.tableView reloadData];

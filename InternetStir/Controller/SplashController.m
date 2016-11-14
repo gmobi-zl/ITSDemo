@@ -112,7 +112,6 @@
     if (itsApp.isFirstOpen == NO) {
         TabBarController *tabBar = [[TabBarController alloc] init];
         tabBar.selectedIndex = 1;
-
         [self.navigationController pushViewController:tabBar animated:YES];
     }else {
 

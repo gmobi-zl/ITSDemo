@@ -77,7 +77,7 @@
     if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"]) {
         CGFloat newprogress = [[change objectForKey:NSKeyValueChangeNewKey] doubleValue];
         if (newprogress == 1) {
-            //            self.progressView.hidden = YES;
+//            self.progressView.hidden = YES;
             [self.progressView setProgress:1 animated:NO];
         }else {
             self.progressView.hidden = NO;
