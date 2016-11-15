@@ -2227,6 +2227,7 @@
     if (self.celebComments == nil || [self.celebComments count] <= 0)
         return nil;
     
+    BOOL isHadComment = NO;
     UInt64 maxTime = 0;
     for (int i = 0; i < [self.celebComments count]; i++) {
         CelebComment* comment = [self.celebComments objectAtIndex:i];
@@ -2235,6 +2236,7 @@
                 maxTime = comment.uts;
                 break;
             }
+            isHadComment = YES;
         } else {
             if (maxTime < comment.uts){
                 maxTime = comment.uts;
@@ -2242,7 +2244,7 @@
         }
     }
     
-    if (maxTime > 0)
+    if (maxTime > 0 && isHadComment == YES)
         return [NSString stringWithFormat:@"%llu", maxTime];
     else
         return nil;
@@ -3043,26 +3045,26 @@
             if (resultData != nil){
                 ITSApplication* itsApp = [ITSApplication get];
                 
+                NSMutableArray* currentTopCommnets = [NSMutableArray arrayWithCapacity:1];
+                NSInteger i = 0;
+                NSInteger commentCount = [self.celebComments count];
+                for (i = 0; i < commentCount; i++) {
+                    CelebComment* comment = [self.celebComments objectAtIndex:i];
+                    if (comment.weight > 0){
+                        [currentTopCommnets addObject:comment];
+                        [self.celebComments removeObjectAtIndex:i];
+                        i--;
+                        commentCount--;
+                    } else {
+                        break;
+                    }
+                }
+                
                 NSNumber* countNum = [resultData objectForKey:@"count"];
                 if (countNum != nil){
                     NSInteger count = [countNum integerValue];
-                    if (count > 0){
+                    if (count > 0) {
                         NSArray* topCommnets = [resultData objectForKey:@"contexts"];
-                        NSMutableArray* currentTopCommnets = [NSMutableArray arrayWithCapacity:1];
-                        
-                        NSInteger i = 0;
-                        NSInteger commentCount = [self.celebComments count];
-                        for (i = 0; i < commentCount; i++) {
-                            CelebComment* comment = [self.celebComments objectAtIndex:i];
-                            if (comment.weight > 0){
-                                [currentTopCommnets addObject:comment];
-                                [self.celebComments removeObjectAtIndex:i];
-                                i--;
-                                commentCount--;
-                            } else {
-                                break;
-                            }
-                        }
                         
                         NSInteger m = [topCommnets count] - 1;
                         for (m; m >= 0; m--) {
@@ -3082,13 +3084,13 @@
                             
                             [self insertCelebCommentItem:tComment];
                         }
-                        
-                        for (int mmm = 0; mmm < [currentTopCommnets count]; mmm++) {
-                            CelebComment* comment = [currentTopCommnets objectAtIndex:mmm];
-                            comment.weight = 0;
-                            [self insertCelebCommentItem:comment];
-                        }
                     }
+                }
+                
+                for (int mmm = 0; mmm < [currentTopCommnets count]; mmm++) {
+                    CelebComment* comment = [currentTopCommnets objectAtIndex:mmm];
+                    comment.weight = 0;
+                    [self insertCelebCommentItem:comment];
                 }
             }
         }

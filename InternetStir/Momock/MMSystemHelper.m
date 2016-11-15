@@ -91,13 +91,14 @@ static NetWorkType currentNetType = NoNet;
     // iOS 5.X or earlier
     NSString* DeviceID = [[UIDevice currentDevice] uniqueIdentifier];
 #endif
-    
+
     return DeviceID;
 }
 
 +(NSString*) getIdForAD{
-    NSString* adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    return adId;
+//    NSString* adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    return adId;
+    return @"";
 }
 
 +(NSString*) getUA {
@@ -436,7 +437,8 @@ static NetWorkType currentNetType = NoNet;
 }
 
 +(NSString*) getAdvertisingID{
-    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    //return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    return @"";
 }
 
 

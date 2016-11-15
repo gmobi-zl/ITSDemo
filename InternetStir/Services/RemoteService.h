@@ -150,6 +150,8 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
 
 -(void) setCelebCommentTop: (NSString*) fid
                   callback: (RemoteCallback) callback;
+-(void) cancelCelebCommentTop: (NSString*) fid
+                     callback: (RemoteCallback) callback;
 
 -(void) getTopCelebComment: (RemoteCallback) callback;
 

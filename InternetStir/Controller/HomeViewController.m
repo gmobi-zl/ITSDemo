@@ -313,7 +313,17 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)pushSheet:(UIButton *)button {
     
     self.index = button.tag;
-     self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"set_top", nil),NSLocalizedString(@"set_editor", nil),NSLocalizedString(@"set_delete", nil), nil];
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:self.index];
+    if (item.weight > 0){
+        self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"cancel_top", nil),NSLocalizedString(@"set_editor", nil),NSLocalizedString(@"set_delete", nil), nil];
+    } else {
+        self.sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"set_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"set_top", nil),NSLocalizedString(@"set_editor", nil),NSLocalizedString(@"set_delete", nil), nil];
+    }
+    
+    
     self.sheet.tag = 80;
     [self.sheet showInView:self.view];
 }
@@ -333,10 +343,17 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
         
         if (buttonIndex == 0) {
-            [itsApp.remoteSvr setCelebCommentTop:item.fid callback:^(int status, int code, NSDictionary *resultData) {
-                ITSApplication* app = [ITSApplication get];
-                [app.dataSvr refreshTopCelebComments:YES];
-            }];
+            if (item.weight > 0){
+                [itsApp.remoteSvr cancelCelebCommentTop:item.fid callback:^(int status, int code, NSDictionary *resultData) {
+                    ITSApplication* app = [ITSApplication get];
+                    [app.dataSvr refreshTopCelebComments:YES];
+                }];
+            } else {
+                [itsApp.remoteSvr setCelebCommentTop:item.fid callback:^(int status, int code, NSDictionary *resultData) {
+                    ITSApplication* app = [ITSApplication get];
+                    [app.dataSvr refreshTopCelebComments:YES];
+                }];
+            }
         } else if (buttonIndex == 1) {
             itsApp.dataSvr.selectUpdateComment = item;
             
