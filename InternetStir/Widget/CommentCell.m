@@ -27,7 +27,7 @@ NSIndexPath *indexP;
         
 //        self.bgView = [[UIScrollView alloc] init];
 //        self.bgView.backgroundColor = [UIColor whiteColor];
-//        self.bgView.delegate = self;
+//          = self;
 //        self.bgView.bounces = YES;
 //        self.bgView.showsHorizontalScrollIndicator = NO;
 //        [self.contentView addSubview:self.bgView];
@@ -211,7 +211,7 @@ NSIndexPath *indexP;
         [self.replysView addObject:replyLabel];
         
         UIImageView *replyIcon = [[UIImageView alloc] init];
-        replyIcon.backgroundColor = [UIColor redColor];
+//        replyIcon.backgroundColor = [UIColor redColor];
         replyIcon.layer.cornerRadius = 15;
         replyIcon.layer.masksToBounds = YES;
         [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
@@ -356,7 +356,7 @@ NSIndexPath *indexP;
             [self.replysView addObject:replyLabel];
             
             UIImageView *replyIcon = [[UIImageView alloc] init];
-            replyIcon.backgroundColor = [UIColor redColor];
+//            replyIcon.backgroundColor = [UIColor redColor];
             replyIcon.layer.cornerRadius = 15;
             replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;

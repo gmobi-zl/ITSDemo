@@ -72,6 +72,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //
     self.shareView = [[ShareView alloc] init];
     self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+    [self.shareView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareView.bgView addTarget:self action:@selector(bgButton) forControlEvents:UIControlEventTouchUpInside];
     [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
     
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
@@ -183,7 +185,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     //self.goTopButton.hidden = YES;
 }
 
-
 - (void)footerRereshing
 {
     
@@ -283,7 +284,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
-//    [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.shareBtn.tag = indexPath.row;
     tmpCell.btn.tag = indexPath.row;
     [tmpCell.delBtn addTarget:self action:@selector(pushSheet:) forControlEvents:UIControlEventTouchUpInside];
@@ -318,7 +319,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
    
-
     WEAKSELF
     if (actionSheet.tag == 80) {
         
@@ -384,7 +384,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1001){
+    if (alertView.tag == 1001) {
         if (buttonIndex == 1) {
             ITSApplication* itsApp = [ITSApplication get];
             if (itsApp.dataSvr.selectUpdateComment != nil){
@@ -394,24 +394,36 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }
     }
 }
+- (void)bgButton {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.shareView.bgView.hidden = YES;
+        self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+    }];
+}
+- (void)cancelBtn {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.shareView.bgView.hidden = YES;
+        self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+    }];
+}
+- (void)shareBtn: (UIButton *)button {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:button.tag];
+    NSString *content = item.context;
 
-//- (void)shareBtn: (UIButton *)button {
-//    
-//    ITSApplication* itsApp = [ITSApplication get];
-//    NSArray* dataArr = itsApp.dataSvr.celebComments;
-//    CelebComment *item = [dataArr objectAtIndex:button.tag];
-//    NSString *content = item.context;
 //
-////
-//    [UIView animateWithDuration:0.1 animations:^{
-//        self.shareView.frame = CGRectMake(0, screenH - 192, screenW, 192);
-//    }];
-//
-//    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
-//    [eParams setObject:@"forumid" forKey:@"fid"];
-//    [eParams setObject:content forKey:@"context"];
-//    [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
-//}
+    [UIView animateWithDuration:0.3 animations:^{
+        self.shareView.bgView.hidden = NO;
+        self.shareView.frame = CGRectMake(0, screenH - 192, screenW, 192);
+    }];
+
+    NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+    [eParams setObject:@"forumid" forKey:@"fid"];
+    [eParams setObject:content forKey:@"context"];
+    [itsApp.reportSvr recordEvent:@"share" params:eParams eventCategory:@"comment.click"];
+}
 - (void)favBtnClick:(UIButton *)button {
     
     HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;

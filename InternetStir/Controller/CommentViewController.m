@@ -214,12 +214,6 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     }
 }
 
-
-
-
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-
-}
 - (void)keyChange:(NSNotification *)notification {
     //获得键盘的尺寸
 //        CGFloat curkeyBoardHeight = [[[notification userInfo] objectForKey:@"UIKeyboardBoundsUserInfoKey"] CGRectValue].size.height;

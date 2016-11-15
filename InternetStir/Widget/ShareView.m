@@ -18,6 +18,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.bgView = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.bgView.frame = CGRectMake(0, 0, screenW, screenH);
+        self.bgView.backgroundColor = [UIColor clearColor];
+        self.bgView.hidden = YES;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.bgView];
+        
         self.backgroundColor = [MMSystemHelper string2UIColor:@"#FFFFFF"];
 //        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         self.shareLabel = [[UILabel alloc] init];
@@ -42,12 +48,11 @@
         self.cancelButton.frame = CGRectMake(screenW/2 - 25, 156, 50, 36);
         [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.cancelButton];
     }
     return self;
 }
-- (void)cancelBtn {
-    
-}
+//- (void)cancelBtn {
+//    
+//}
 @end

@@ -58,8 +58,10 @@
     progressView.trackTintColor = [UIColor whiteColor];
     [self.view addSubview:progressView];
     self.progressView = progressView;
+    if ([self.path hasPrefix:@"http://"] == NO && [self.path hasPrefix:@"https://"] == NO) {
+        self.path = [NSString stringWithFormat:@"http://%@",self.path];
+    }
     NSURL* url = [NSURL URLWithString:self.path];
-    
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     self.webView.backgroundColor = [UIColor whiteColor];

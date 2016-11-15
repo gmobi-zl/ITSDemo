@@ -152,7 +152,7 @@
     CGFloat iconViewHeight = 36;
     self.iconF = CGRectMake(iconViewX, iconViewY, iconViewWidth, iconViewHeight);
     
-    self.delBtnF = CGRectMake(screenW - 50, 10, 36, 36);
+    self.delBtnF = CGRectMake(screenW - 51, 10, 36, 36);
     //nameF昵称
     CGFloat nameLabelX = CGRectGetMaxX(self.iconF) + 10;
     CGSize nameLabelSize = [MMSystemHelper sizeWithString:comment.name font:[UIFont fontWithName:@"PingFangTC-Semibold" size:HOME_USER_NAME_FONT_SIZE] maxSize:CGSizeMake(MAXFLOAT,30)];

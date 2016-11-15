@@ -106,9 +106,10 @@
         self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"icon_ios_addition"] forState:UIControlStateNormal];
 //        self.delBtn setImageEdgeInsets:<#(UIEdgeInsets)#>
+//        self.delBtn.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:self.delBtn];
         UIImageView *imageview = [[UIImageView alloc] init];
-        imageview.frame = CGRectMake(8, 8, 20, 20);
+        imageview.frame = CGRectMake(16, 8, 20, 20);
         imageview.image = [UIImage imageNamed:@"icon_ios_addition"];
         [self.delBtn addSubview:imageview];
 
