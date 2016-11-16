@@ -38,6 +38,12 @@
     [self.webView setWebViewDelegate:self];
     [self.webView setOpaque: NO];  //透明
     [self.view addSubview:self.webView];
+    
+    self.testActivityIndicato = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.testActivityIndicato.frame = CGRectMake(0, screenH/2 - 64, screenW, 50);
+    [self.webView addSubview:self.testActivityIndicato];
+    [self.testActivityIndicato startAnimating];
+
 }
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -237,6 +243,8 @@
 {
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
     self.webView.hidden = NO;
+    [self.testActivityIndicato stopAnimating];
+
     //   [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#ff000000'"];
 //    [self stopLoadingView];
 }

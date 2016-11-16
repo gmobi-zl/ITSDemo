@@ -14,6 +14,7 @@
 @property (strong, nonatomic) MMWebView* webView;
 @property (assign) int downloadFailedCount;
 @property (copy) NSString* cid;
+@property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
 
 
 @end
