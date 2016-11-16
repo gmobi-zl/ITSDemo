@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Celebrity
+
+  Created by apple on 16/11/16.
+  Copyright © 2016年 Gmobi. All rights reserved.
+*/
+"NSPhotoLibraryUsageDescription" = "\"肆一\"想要使用你的照片 ?";
+"NSCameraUsageDescription" = "\"肆一\"想要使用你的相机 ?";

@@ -13,6 +13,7 @@
 		1807B1EC1D8261AF00CBD6FE /* AppStyleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807B1EB1D8261AF00CBD6FE /* AppStyleConfiguration.m */; };
 		1807B1EE1D926B8300CBD6FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */; };
 		1837D62B1DAB3DC9004653F2 /* UserTrackComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837D62A1DAB3DC9004653F2 /* UserTrackComment.m */; };
+		18D82AD71DDC3252008811F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18D82AD91DDC3252008811F7 /* InfoPlist.strings */; };
 		18F6649B1D59BA9B00BDB2E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649A1D59BA9B00BDB2E8 /* main.m */; };
 		18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */; };
 		18F664A41D59BA9B00BDB2E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F664A21D59BA9B00BDB2E8 /* Main.storyboard */; };
@@ -176,6 +177,10 @@
 		1807B1ED1D926B8200CBD6FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1837D6291DAB3DB3004653F2 /* UserTrackComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTrackComment.h; sourceTree = "<group>"; };
 		1837D62A1DAB3DC9004653F2 /* UserTrackComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTrackComment.m; sourceTree = "<group>"; };
+		18D82AD81DDC3252008811F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18D82ADA1DDC3257008811F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18D82ADB1DDC325A008811F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		18D82ADC1DDC325C008811F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		18F664961D59BA9B00BDB2E8 /* 肆一.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "肆一.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -519,6 +524,7 @@
 				18F664A21D59BA9B00BDB2E8 /* Main.storyboard */,
 				18F664A51D59BA9B00BDB2E8 /* Assets.xcassets */,
 				18F664A71D59BA9B00BDB2E8 /* LaunchScreen.storyboard */,
+				18D82AD91DDC3252008811F7 /* InfoPlist.strings */,
 				18F664AA1D59BA9B00BDB2E8 /* Info.plist */,
 				18F664B01D59E4B000BDB2E8 /* Images.xcassets */,
 				18F664991D59BA9B00BDB2E8 /* Supporting Files */,
@@ -991,6 +997,7 @@
 				18F664B51D5AC9ED00BDB2E8 /* Go2Reach.bundle in Resources */,
 				18F664DF1D5ACA1900BDB2E8 /* handlebars-v2.0.0.js in Resources */,
 				18F664DD1D5ACA1900BDB2E8 /* ad.png in Resources */,
+				18D82AD71DDC3252008811F7 /* InfoPlist.strings in Resources */,
 				18F664E21D5ACA1900BDB2E8 /* style.css in Resources */,
 				18F664A41D59BA9B00BDB2E8 /* Main.storyboard in Resources */,
 				1807B1EE1D926B8300CBD6FE /* GoogleService-Info.plist in Resources */,
@@ -1193,6 +1200,18 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		18D82AD91DDC3252008811F7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18D82AD81DDC3252008811F7 /* Base */,
+				18D82ADA1DDC3257008811F7 /* en */,
+				18D82ADB1DDC325A008811F7 /* zh-Hant */,
+				18D82ADC1DDC325C008811F7 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			path = InternetStir;
+			sourceTree = SOURCE_ROOT;
+		};
 		18F664A21D59BA9B00BDB2E8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

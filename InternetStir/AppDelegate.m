@@ -127,7 +127,9 @@ static NSString * const kClientID =
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
 /* ios push delegate */
+/*
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     NSString* token = [NSString stringWithFormat:@"%@", deviceToken];
     NSLog(@"push device token : %@", token);
@@ -180,5 +182,6 @@ static NSString * const kClientID =
     
     //[[[UIAlertView alloc] initWithTitle:@"push" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
+*/
 
 @end
