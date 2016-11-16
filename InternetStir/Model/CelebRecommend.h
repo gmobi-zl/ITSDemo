@@ -22,7 +22,6 @@
 #define CELEB_RECOMMEND_ITEM_PREVIEW @"preview"
 #define CELEB_RECOMMEND_ITEM_WEIGHT @"weights"
 
-
 @interface CelebRecommend : NSObject
 
 @property (copy) NSString* preview;

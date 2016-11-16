@@ -10,6 +10,7 @@
 #import "MMSystemHelper.h"
 #import "ITSAppConst.h"
 #import "UIImageView+WebCache.h"
+#import "ITSApplication.h"
 
 @implementation ContentViewCell
 
@@ -58,6 +59,9 @@
 }
 -(void)showDataWithModel:(CelebRecommend*)item{
     
+    ITSApplication* app = [ITSApplication get];
+    NSString* baseUrl = [app.remoteSvr getBaseUrl];
+    
     CGFloat screenW = [MMSystemHelper getScreenWidth];
 //    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
     
@@ -80,7 +84,11 @@
     self.icon.frame = CGRectMake(0, frame.size.height + 10 , screenW, height);
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    
+    NSString* imageUrl = [NSString stringWithFormat:@"%@v0/files/%@", baseUrl, image.image];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    
+    //[self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 10);
 //    self.sourceLabel.backgroundColor = [UIColor redColor];
     self.sourceLabel.font = [UIFont systemFontOfSize:10];
