@@ -185,6 +185,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     //self.goTopButton.hidden = YES;
 }
 
+
 - (void)footerRereshing
 {
     

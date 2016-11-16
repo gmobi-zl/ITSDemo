@@ -55,7 +55,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     [self.view addSubview:self.tableView];
     
     self.page = 1;
-    self.offset = -64;
+//    self.offset = -64;
     self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 40, screenW, 44)];
     self.commentView.backgroundColor = [MMSystemHelper string2UIColor:COMMENT_BOTTOM_BG_COLOR];
 //    [self.commentView.icon addTarget:self action:@selector(push) forControlEvents:UIControlEventTouchUpInside];
@@ -246,7 +246,10 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 //                CGPoint point = self.tableView.contentOffset;
 //                point.y += (keyboardRect.origin.y - self.replyViewDraw);
 //                self.tableView.contentOffset = point;
-                self.tableView.contentOffset = CGPointMake(0, self.offset);
+//                self.tableView.contentOffset = CGPointMake(0, self.offset);
+                NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
+                [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
+                                        atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         }];
     }
 }
@@ -378,50 +381,50 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 //       
 //    };
 }
-#ifdef DEMO_DATA
--(NSMutableArray *)commentData
-{
-    if (!_commentData) {
-        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
-        NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
-        NSArray *dataArr = [dictArray objectAtIndex:self.index];
-        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
-        for (NSDictionary *dict in dataArr) {
-            CommentItem *item = [[CommentItem alloc] init];
-            
-//            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
-            CommentFrame *commentFrame = [[CommentFrame alloc]init];
-            item.name = [dict objectForKey:@"name"];
-            item.icon = [dict objectForKey:@"icon"];
-            item.comment = [dict objectForKey:@"comment"];
-            commentFrame.detailCommentItem = item;
-            [models addObject:commentFrame];
-//            commentItem.replys = [[NSMutableArray alloc] init];
-//            commentItem.name = [dict objectForKey:@"name"];
-//            commentItem.icon = [dict objectForKey:@"icon"];
-//            commentItem.pictures = [dict objectForKey:@"pictures"];
-//            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
-//            NSMutableArray *reply = [dict objectForKey:@"replys"];
-//            for (NSDictionary *dic in reply) {
-//                ReplyItem *item = [[ReplyItem alloc] init];
-//                item.name = [dic objectForKey:@"name"];
-//                item.comment = [dic objectForKey:@"comment"];
-//                item.icon = [dic objectForKey:@"icon"];
-//                [item setValuesForKeysWithDictionary:dic];
-//                commentItem.item = item;
-//                [commentItem.replys addObject:item];
-//            }
-//            commentFrame.detailCommentItem = commentItem;
-            
+//#ifdef DEMO_DATA
+//-(NSMutableArray *)commentData
+//{
+//    if (!_commentData) {
+//        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
+//        NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
+//        NSArray *dataArr = [dictArray objectAtIndex:self.index];
+//        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
+//        for (NSDictionary *dict in dataArr) {
+//            CommentItem *item = [[CommentItem alloc] init];
+//            
+////            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
+//            CommentFrame *commentFrame = [[CommentFrame alloc]init];
+//            item.name = [dict objectForKey:@"name"];
+//            item.icon = [dict objectForKey:@"icon"];
+//            item.comment = [dict objectForKey:@"comment"];
+//            commentFrame.detailCommentItem = item;
 //            [models addObject:commentFrame];
-        }
-        _commentData = [models copy];
-        
-    }
-
-    return _commentData;
-}
-#endif
+////            commentItem.replys = [[NSMutableArray alloc] init];
+////            commentItem.name = [dict objectForKey:@"name"];
+////            commentItem.icon = [dict objectForKey:@"icon"];
+////            commentItem.pictures = [dict objectForKey:@"pictures"];
+////            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
+////            NSMutableArray *reply = [dict objectForKey:@"replys"];
+////            for (NSDictionary *dic in reply) {
+////                ReplyItem *item = [[ReplyItem alloc] init];
+////                item.name = [dic objectForKey:@"name"];
+////                item.comment = [dic objectForKey:@"comment"];
+////                item.icon = [dic objectForKey:@"icon"];
+////                [item setValuesForKeysWithDictionary:dic];
+////                commentItem.item = item;
+////                [commentItem.replys addObject:item];
+////            }
+////            commentFrame.detailCommentItem = commentItem;
+//            
+////            [models addObject:commentFrame];
+//        }
+//        _commentData = [models copy];
+//        
+//    }
+//
+//    return _commentData;
+//}
+//#endif
 
 - (void)writeNewComment{
     
@@ -513,12 +516,13 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                                  
                                  dispatch_async(dispatch_get_main_queue(), ^{
                                      [self.tableView reloadData];
+                                     
+                                     [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height) animated:YES];
                                  });
                              }
                          }
                      }
                  }];
-
              }
 #endif
          }
@@ -664,12 +668,12 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
    
 #endif
 }
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    if ([scrollView isKindOfClass:[UITableView class]]) {
-        self.offset = self.tableView.contentOffset.y;
-    }
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    
+//    if ([scrollView isKindOfClass:[UITableView class]]) {
+//        self.offset = self.tableView.contentOffset.y;
+//    }
+//}
 //#pragma mark - UIGestureRecognizerDelegate
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 //{
@@ -755,14 +759,13 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
              newsItem.type = 2;
              frameNeedChanged.detailCommentItem = newReplyItem;
              [self.tableView reloadData];
-             
 #endif
-
          }
     }];
 }
 - (void)replyClick:(UIButton *)btn {
     
+    self.index = btn.tag;
     if (btn.tag == 0) {
         CommentOneCell *cell = (CommentOneCell *)btn.superview.superview;
         self.replyViewDraw = [cell convertRect:cell.bounds toView:self.view.window].origin.y + cell.frame.size.height;
@@ -867,6 +870,11 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                              
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.tableView reloadData];
+                                 
+                                 NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+                                 [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
+                                                         atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                                 
                              });
                          }
                      }

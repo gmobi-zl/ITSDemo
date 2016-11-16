@@ -169,8 +169,8 @@
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;
     
     self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 32, 32);
-    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 25 + HOME_ICON_PADDING, self.cellHeight, 32, 32);
-    self.shareF = CGRectMake(self.commentF.origin.x + 2 * HOME_ICON_PADDING, self.cellHeight, 32, 32);
+    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 16 + HOME_ICON_PADDING, self.cellHeight, 32, 32);
+    self.shareF = CGRectMake(self.commentF.origin.x + 32 + 16, self.cellHeight, 32, 32);
     self.cellHeight = self.photoF.origin.y + self.photoF.size.height + 50;
     self.lineF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight - 1, screenW - 2*HOME_CONTENT_LEFT_PADDING, 1);
     
