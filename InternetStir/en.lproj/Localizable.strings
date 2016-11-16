@@ -11,6 +11,7 @@
 "time_util_hour"="h";
 "time_util_yesterday"="d";
 "set_top"="Sticky";
+"cancel_top"="cancel sticky";
 "set_editor"="Edit";
 "set_delete"="Del";
 "set_cancel"="Cancel";

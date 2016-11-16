@@ -1613,6 +1613,48 @@
      }];
 }
 
+
+-(void) cancelCelebCommentTop: (NSString*) fid
+                  callback: (RemoteCallback) callback{
+    if (fid == nil)
+        return;
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+    
+    if (user == nil || user.isLogin == NO)
+        return;
+    
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/pin?_s=%@",[self getBaseUrl], [cs getChannel], fid, user.session];
+    MMLogDebug(@"cancelCelebCommentTop URL: %@", url);
+    
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doDelete:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             //        NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"cancelCelebCommentTop RSP: %@",dataDic);
+             
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             BOOL succ = [tmpNum boolValue];
+             
+             int retStatus = 0;
+             if (succ == YES){
+                 retStatus = 1;
+             }
+             
+             if (callback != nil){
+                 callback(retStatus, code, dataDic);
+             }
+         }
+     }];
+}
+
+
 -(void) getTopCelebComment: (RemoteCallback) callback{
     
     ConfigService* cs = [ConfigService get];
