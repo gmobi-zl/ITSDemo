@@ -300,7 +300,7 @@
     for (NSInteger i = 0; i < maxHotCommentCount; i++) {
         FansComment *item;
         if (data.replayComments != nil) {
-            item = [data.replayComments objectAtIndex:i];
+            item = [data.replayComments objectAtIndex: data.replayComments.count - i - 1];
         }else {
             item = [data.topFansComments objectAtIndex:i];
         }

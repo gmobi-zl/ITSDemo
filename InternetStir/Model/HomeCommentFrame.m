@@ -220,7 +220,7 @@
         }
         for (int i = 0; i < maxHotCommentCount; i++) {
             
-            FansComment *item = [comment.replayComments objectAtIndex:i];
+            FansComment *item = [comment.replayComments objectAtIndex:comment.replayComments.count - i - 1];
             CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
             CGFloat replyLabelY = self.cellHeight + 5;
             CGFloat replyLabelWidth = screenW - 50;
