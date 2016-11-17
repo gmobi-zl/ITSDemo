@@ -347,7 +347,7 @@
         //        imageView.layer.cornerRadius = 15;
         //        imageView.layer.masksToBounds = YES;
         //        [self.contentView addSubview:imageView];
-        ////        [self.replyIconView addObject:imageView];
+        //        [self.replyIconView addObject:imageView];
         
         //        UILabel *replyName = [[UILabel alloc] init];
         //        replyName.font = [UIFont systemFontOfSize:12];

@@ -178,7 +178,7 @@
         }
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
-            FansComment *item = [data.replayComments objectAtIndex:i];
+            FansComment *item = [data.replayComments objectAtIndex:data.replayComments.count - i - 1];
             UILabel *replyLabel = [[UILabel alloc]init];
             replyLabel.font = [UIFont systemFontOfSize:16];
             replyLabel.numberOfLines = 0;

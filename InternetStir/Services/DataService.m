@@ -3028,8 +3028,8 @@
         cbComment.replayComments = [[NSMutableArray alloc] init];
     }
         
-    NSInteger replyCount = [cbComment.replayComments count];
-    [cbComment.replayComments addObject:item];
+//    NSInteger replyCount = [cbComment.replayComments count];
+    [cbComment.replayComments insertObject:item atIndex:0];
     ret = YES;
 
     return ret;
