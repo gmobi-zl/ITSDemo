@@ -2667,6 +2667,22 @@
     // check rid
     if (item.rid == nil || [item.rid isKindOfClass:[NSNull class]] || [item.rid isEqualToString:@""]){
         int listCount = (int)[self.userTrackComments count];
+        // check rid == cid
+        for (i = 0; i < listCount; i++) {
+            id uComment = [self.userTrackComments objectAtIndex:i];
+            if ([uComment isKindOfClass:[UserTrackComment class]]) {
+                UserTrackComment* comment = uComment;
+                if (comment != nil){
+                    if (comment.rid != nil && ![item.rid isKindOfClass:[NSNull class]] && ![item.rid isEqualToString:@""]){
+                        if ([comment.rid compare:item.cid] == NSOrderedSame) {
+                            [self.userTrackComments removeObjectAtIndex:i];
+                        }
+                    }
+                }
+            }
+        }
+        
+        listCount = (int)[self.userTrackComments count];
         for (i = 0; i < listCount; i++) {
             
             id uComment = [self.userTrackComments objectAtIndex:i];
