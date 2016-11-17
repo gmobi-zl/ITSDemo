@@ -59,7 +59,7 @@
 //        CGFloat replyLabelX = nameLabelX + padding;
         for (int i = 0; i < [trackComment.replayComments count]; i++) {
             
-            FansComment *item = [trackComment.replayComments objectAtIndex:i];
+            FansComment *item = [trackComment.replayComments objectAtIndex:trackComment.replayComments.count - i - 1];
             CGRect pictureF = CGRectMake(nameLabelX, self.cellHeight - 5, 30, 30);
             CGSize size = [MMSystemHelper sizeWithString:item.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];
             CGRect nameF = CGRectMake(nameLabelX + 40, self.cellHeight, size.width, 20);
