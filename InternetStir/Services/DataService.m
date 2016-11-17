@@ -2673,9 +2673,12 @@
             if ([uComment isKindOfClass:[UserTrackComment class]]) {
                 UserTrackComment* comment = uComment;
                 if (comment != nil){
-                    if (comment.rid != nil && ![item.rid isKindOfClass:[NSNull class]] && ![item.rid isEqualToString:@""]){
+                    if (comment.rid != nil && ![comment.rid isKindOfClass:[NSNull class]] && ![comment.rid isEqualToString:@""]){
                         if ([comment.rid compare:item.cid] == NSOrderedSame) {
-                            [self.userTrackComments removeObjectAtIndex:i];
+                            MMLogDebug(@"Remove same rid data %@  at %d", comment.rid, i);
+                            [self.userTrackComments removeObject:comment];
+                            i--;
+                            listCount--;
                         }
                     }
                 }

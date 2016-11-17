@@ -219,8 +219,13 @@
             maxHotCommentCount = comment.replayComments.count;
         }
         for (int i = 0; i < maxHotCommentCount; i++) {
+            FansComment *item;
+            if (maxHotCommentCount >= 3) {
+                 item = [comment.replayComments objectAtIndex:comment.replayComments.count + i - 3];
+            }else {
+                item = [comment.replayComments objectAtIndex:comment.replayComments.count - i - 1];
+            }
             
-            FansComment *item = [comment.replayComments objectAtIndex:comment.replayComments.count + i - 3];
             CGFloat height = [self height:[NSString stringWithFormat:@"%@   %@",item.name,item.comment]];
             CGFloat replyLabelY = self.cellHeight + 5;
             CGFloat replyLabelWidth = screenW - 50;

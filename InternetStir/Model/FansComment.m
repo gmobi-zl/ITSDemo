@@ -123,7 +123,7 @@
                     break;
                 }
                 
-                if (comment.pts < item.pts) {
+                if (comment.pts > item.pts) {
                     [self.replayComments insertObject:item atIndex:i];
                     ret = YES;
                     break;
