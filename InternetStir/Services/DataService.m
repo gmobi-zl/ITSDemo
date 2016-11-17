@@ -2638,10 +2638,19 @@
     if (dicData == nil)
         return;
     
-    for (NSDictionary* commentDataItem in dicData) {
-        UserTrackComment* tmpItem = [[UserTrackComment alloc] initWithDictionary:commentDataItem];
-        [self insertUserTrackCommentItem:tmpItem];
+    NSInteger dicCount = [dicData count];
+    if (dicCount > 0){
+        for (int i = dicCount-1; i >= 0; i--) {
+            NSDictionary* commentDataItem = [dicData objectAtIndex:i];
+            UserTrackComment* tmpItem = [[UserTrackComment alloc] initWithDictionary:commentDataItem];
+            [self insertUserTrackCommentItem:tmpItem];
+        }
     }
+    
+//    for (NSDictionary* commentDataItem in dicData) {
+//        UserTrackComment* tmpItem = [[UserTrackComment alloc] initWithDictionary:commentDataItem];
+//        [self insertUserTrackCommentItem:tmpItem];
+//    }
 }
 
 -(BOOL) insertUserTrackCommentItem: (UserTrackComment*) item{
@@ -2655,39 +2664,139 @@
     if (self.userTrackComments == nil || item == nil)
         return ret;
     
-    int listCount = (int)[self.userTrackComments count];
-    for (i = 0; i < listCount; i++) {
-        
-        id uComment = [self.userTrackComments objectAtIndex:i];
-        if ([uComment isKindOfClass:[UserTrackComment class]]) {
-            UserTrackComment* comment = uComment;
-            if (comment != nil){
-                if ([comment.cid compare:item.cid] == NSOrderedSame) {
-                    same = YES;
+    // check rid
+    if (item.rid == nil || [item.rid isKindOfClass:[NSNull class]] || [item.rid isEqualToString:@""]){
+        int listCount = (int)[self.userTrackComments count];
+        for (i = 0; i < listCount; i++) {
+            
+            id uComment = [self.userTrackComments objectAtIndex:i];
+            if ([uComment isKindOfClass:[UserTrackComment class]]) {
+                UserTrackComment* comment = uComment;
+                if (comment != nil){
+                    if ([comment.cid compare:item.cid] == NSOrderedSame) {
+                        same = YES;
+                        
+                        //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
+                        //    newItem.isOfflineDL = YES;
+                        //}
+                        [self.userTrackComments replaceObjectAtIndex:i withObject:item];
+                        break;
+                    }
                     
-                    //if (item.isOfflineDL == YES && newItem.isOfflineDL == NO){
-                    //    newItem.isOfflineDL = YES;
-                    //}
-                    [self.userTrackComments replaceObjectAtIndex:i withObject:item];
-                    break;
-                }
-                
-                if (comment.pts < item.pts) {
-                    [self.userTrackComments insertObject:item atIndex:i];
-                    ret = YES;
-                    break;
+                    if (comment.pts < item.pts) {
+                        [self.userTrackComments insertObject:item atIndex:i];
+                        ret = YES;
+                        break;
+                    }
                 }
             }
         }
-    }
-    
-    if (same == NO && ret == NO){
-        [self.userTrackComments addObject:item];
-        ret = YES;
+        
+        if (same == NO && ret == NO){
+            [self.userTrackComments addObject:item];
+            ret = YES;
+        }
+    } else {
+        int listCount = (int)[self.userTrackComments count];
+        for (i = 0; i < listCount; i++) {
+            
+            id uComment = [self.userTrackComments objectAtIndex:i];
+            if ([uComment isKindOfClass:[UserTrackComment class]]) {
+                UserTrackComment* comment = uComment;
+                if (comment != nil){
+                    if ([comment.cid compare:item.rid] == NSOrderedSame) {
+                        same = YES;
+                        
+                        if (comment.replayComments != nil){
+                            NSUInteger replyCount = [comment.replayComments count];
+                            BOOL isSameInReplys = NO;
+                            for (int j = 0; j < replyCount; j++) {
+                                FansComment* fComment = [comment.replayComments objectAtIndex:j];
+                                if ([fComment.cid isEqualToString:item.cid]){
+                                    isSameInReplys = YES;
+                                    break;
+                                }
+                            }
+                            
+                            if (isSameInReplys == NO){
+                                BOOL isAdd2Replys = NO;
+                                FansComment* newFComment = [self trackComment2FansComment:item];
+                                for (int j = 0; j < replyCount; j++) {
+                                    FansComment* fComment = [comment.replayComments objectAtIndex:j];
+                                    if (fComment.pts < newFComment.pts){
+                                        [comment.replayComments insertObject:newFComment atIndex:j];
+                                        isAdd2Replys = YES;
+                                        ret = YES;
+                                        break;
+                                    }
+                                }
+                                if (isAdd2Replys == NO){
+                                    ret = YES;
+                                    [comment.replayComments addObject:newFComment];
+                                }
+                            }
+                        } else {
+                            comment.replayComments = [NSMutableArray arrayWithCapacity:1];
+                            FansComment* newFComment = [self trackComment2FansComment:item];
+                            [comment.replayComments addObject:newFComment];
+                            ret = YES;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (same == NO){
+            BOOL isAddTrackComment = NO;
+            for (i = 0; i < listCount; i++) {
+                id uComment = [self.userTrackComments objectAtIndex:i];
+                if ([uComment isKindOfClass:[UserTrackComment class]]) {
+                    UserTrackComment* comment = uComment;
+                    if (comment != nil){
+                        if (comment.pts < item.pts) {
+                            [self.userTrackComments insertObject:item atIndex:i];
+                            isAddTrackComment = YES;
+                            ret = YES;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (isAddTrackComment == NO){
+                [self.userTrackComments addObject:item];
+                ret = YES;
+            }
+        }
+
     }
     
     return ret;
 }
+
+-(FansComment*) trackComment2FansComment: (UserTrackComment*) trackComment{
+    if (trackComment == nil)
+        return nil;
+    
+    FansComment* newFComment = [[FansComment alloc] init];
+    
+    newFComment.uuid = trackComment.uuid;
+    newFComment.name = trackComment.name;
+    newFComment.celeb = trackComment.celeb;
+    newFComment.avator = trackComment.avator;
+    newFComment.fid = trackComment.fid;
+    newFComment.cid = trackComment.cid;
+    newFComment.rid = trackComment.rid;
+    newFComment.comment = trackComment.comment;
+    newFComment.pts = trackComment.pts;
+    newFComment.uts = trackComment.uts;
+    newFComment.isCelebRead = trackComment.isCelebRead;
+    newFComment.u_role = trackComment.u_role;
+    
+    return newFComment;
+}
+
+
 
 -(void) refreshReplyComments:(int)page fid:(NSString *)fid {
 

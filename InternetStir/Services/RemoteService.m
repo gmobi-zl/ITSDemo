@@ -1206,7 +1206,7 @@
             //[poApp.dataSvr setRefreshCategoryNews:cid newsList:dataDic isClearData:isClear type:type];
             
             NSArray* commentArr = [dataDic objectForKey:@"comments"];
-            [itsApp.dataSvr setRefreshReplyComments:commentArr fid:fid ];
+            [itsApp.dataSvr setRefreshReplyComments:commentArr fid:fid];
             
             MMEventService *es = [MMEventService getInstance];
             [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_SUCCESS];

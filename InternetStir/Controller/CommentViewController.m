@@ -347,8 +347,11 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     CelebComment* currentComment = ds.currentCelebComment;
+    
     if (currentComment.replayComments == nil){
         [self headerRereshing];
+    } else {
+        [self footerRereshing];
     }
     
 //    SettingService* ss = [SettingService get];

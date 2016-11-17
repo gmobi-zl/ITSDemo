@@ -258,7 +258,12 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
                  return;
              }
              
-             [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:currentFansComment.cid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+             NSString* replyCId = currentFansComment.cid;
+             if (currentFansComment.rid != nil && ![currentFansComment.rid isKindOfClass:[NSNull class]] && ![currentFansComment.rid isEqualToString:@""]){
+                 replyCId = currentFansComment.rid;
+             }
+             
+             [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:replyCId comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
                  if (resultData != nil){
                      NSNumber* retNum = [resultData objectForKey:@"success"];
                      if (retNum != nil){
