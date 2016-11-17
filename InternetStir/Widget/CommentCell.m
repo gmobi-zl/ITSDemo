@@ -51,7 +51,7 @@ NSIndexPath *indexP;
 //        self.commentLabel.numberOfLines = 0;
 //        self.commentLabel.userInteractionEnabled = YES;
         self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
-        self.commentLabel.font = [UIFont systemFontOfSize:16];
+        self.commentLabel.font = [UIFont systemFontOfSize:14];
 //        self.commentLabel.lineSpace = 0.5;
 //        self.commentLabel.type = 2;
 //        self.commentLabel.backgroundColor = [UIColor redColor];
@@ -346,7 +346,7 @@ NSIndexPath *indexP;
             
             FansComment *item = [data.replayComments objectAtIndex:i];
             UILabel *replyLabel = [[UILabel alloc]init];
-            replyLabel.font = [UIFont systemFontOfSize:16];
+            replyLabel.font = [UIFont systemFontOfSize:14];
             replyLabel.numberOfLines = 0;
             replyLabel.text = item.comment;
             replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];

@@ -34,7 +34,7 @@
         
         self.commentLabel = [[TQRichTextView alloc] init];
         self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
-        self.commentLabel.font = [UIFont systemFontOfSize:16];
+        self.commentLabel.font = [UIFont systemFontOfSize:14];
         self.commentLabel.lineSpace = 0.5;
         self.commentLabel.type = 2;
         self.commentLabel.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,7 @@
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
     //        CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:data.context lineSpace:0.5 type:2];
+    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:14] string:data.context lineSpace:0.5 type:2];
     
     CGFloat contentLabelWidth = rect.size.width;
     CGFloat contentLabelHeight = rect.size.height;

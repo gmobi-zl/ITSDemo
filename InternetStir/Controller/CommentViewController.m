@@ -55,6 +55,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     [self.view addSubview:self.tableView];
     
     self.page = 1;
+    self.index = 0;
 //    self.offset = -64;
     self.commentView = [[CommentView alloc] initWithFrame:CGRectMake(0, screenH - 40, screenW, 44)];
     self.commentView.backgroundColor = [MMSystemHelper string2UIColor:COMMENT_BOTTOM_BG_COLOR];
@@ -513,11 +514,13 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                                  sendComment.uiFrame = frame;
                                  
                                  [ds userInsertCurrentReplyCommentItem:sendComment];
-                                 
+                                 CGFloat screenH = [MMSystemHelper getScreenHeight];
+
                                  dispatch_async(dispatch_get_main_queue(), ^{
                                      [self.tableView reloadData];
-                                     
-                                     [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height) animated:YES];
+                                     if (self.tableView.contentSize.height > screenH - 49) {
+                                        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height) animated:YES];
+                                     }
                                  });
                              }
                          }
