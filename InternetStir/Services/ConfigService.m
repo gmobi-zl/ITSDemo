@@ -53,7 +53,8 @@ ConfigService* configInstance = nil;
 -(NSString*) getChannel{
     //return self.currentChannel;
     // Release Server
-    return @"238dc0b4-729d-4fa9-ac9c-9ba57c91c1e8";  // 肆一
+    //return @"238dc0b4-729d-4fa9-ac9c-9ba57c91c1e8";  // 肆一
+    return @"30430e9d-92fc-4d66-9950-36225350a0bb";  // 我是马克
     
     
     // Test Server

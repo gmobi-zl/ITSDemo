@@ -181,7 +181,7 @@
 		18D82ADA1DDC3257008811F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		18D82ADB1DDC325A008811F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		18D82ADC1DDC325C008811F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		18F664961D59BA9B00BDB2E8 /* 肆一.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "肆一.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F664961D59BA9B00BDB2E8 /* 我是馬克.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "我是馬克.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F6649A1D59BA9B00BDB2E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18F6649C1D59BA9B00BDB2E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18F6649D1D59BA9B00BDB2E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -498,7 +498,7 @@
 		18F664971D59BA9B00BDB2E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18F664961D59BA9B00BDB2E8 /* 肆一.app */,
+				18F664961D59BA9B00BDB2E8 /* 我是馬克.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -940,7 +940,7 @@
 			);
 			name = Celebrity;
 			productName = CelebrityApp;
-			productReference = 18F664961D59BA9B00BDB2E8 /* 肆一.app */;
+			productReference = 18F664961D59BA9B00BDB2E8 /* 我是馬克.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1359,8 +1359,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c005;
-				PRODUCT_NAME = "肆一";
+				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c001;
+				PRODUCT_NAME = "我是馬克";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1391,8 +1391,8 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c005;
-				PRODUCT_NAME = "肆一";
+				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c001;
+				PRODUCT_NAME = "我是馬克";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
