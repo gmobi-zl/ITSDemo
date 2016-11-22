@@ -66,10 +66,10 @@
         [self.button setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.button];
         
-//        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
-//        [self.btn setTitle:@"繼續閱讀" forState:UIControlStateNormal];
-//        [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
+        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [self.btn setTitle:@"继续阅读" forState:UIControlStateNormal];
+        [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
 //        [self.contentView addSubview:self.btn];
         
         self.timeLabel = [[UILabel alloc] init];
@@ -85,9 +85,9 @@
         self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.commentBtn setBackgroundImage:[UIImage imageNamed:@"icon_comment"] forState:UIControlStateNormal];
         [self.contentView addSubview:self.commentBtn];
-        
-//        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+
+        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
 //        [self.contentView addSubview:self.shareBtn];
         
         self.line = [[UILabel alloc] init];

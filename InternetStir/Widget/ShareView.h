@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UIButton *iconButton;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UILabel *line;
-@property (nonatomic, strong) UIVisualEffectView *effectView;
 @property (nonatomic, strong) UIButton *bgView;
+@property (nonatomic, strong) UIButton *iconBtn;
 
 @end

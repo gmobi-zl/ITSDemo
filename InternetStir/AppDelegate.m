@@ -39,6 +39,9 @@ static NSString * const kClientID =
 
     [Fabric with:@[[Twitter sharedInstance]]];
     
+    __weak id weakSelf = self;
+    self.tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"222222" andDelegate:weakSelf];
+//    [WXApi registerApp:@"wx6c162ed458fe4b42"];
     //[FIRApp configure];
     
     NSError *configureError;
@@ -101,8 +104,20 @@ static NSString * const kClientID =
                                                     sourceApplication:sourceApplication
                                                            annotation:annotation]){
         success = YES;
+    }else if ([TencentOAuth HandleOpenURL:url] == YES) {
+        success = YES;
     }
     return success;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    
+    if (YES == [TencentOAuth CanHandleOpenURL:url])
+    {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    return YES;
 }
 
 

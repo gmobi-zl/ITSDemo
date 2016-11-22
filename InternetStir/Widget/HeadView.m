@@ -10,21 +10,23 @@
 #import "HeadView.h"
 #import "AppStyleConfiguration.h"
 #import "MMSystemHelper.h"
-
+#import "UIImageView+WebCache.h"
+#import "ITSApplication.h"
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
 
 @implementation HeadView
 
-- (instancetype)initWithFrame:(CGRect)frame CommentItem:(HomeCommentItem *)item {
+- (instancetype)initWithFrame:(CGRect)frame CommentItem:(CelebComment *)item {
 
     self = [super initWithFrame:frame];
     if (self) {
         self.icon = [[UIImageView alloc] init];
-        self.icon.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, 10, 50, 50);
-        self.icon.image = [UIImage imageNamed:item.icon];
+        self.icon.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, 10, 36, 36);
+        [self.icon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
+//        self.icon.image = [UIImage imageNamed:item.avator];
         self.icon.layer.masksToBounds = YES;
-        self.icon.layer.cornerRadius = 25;
+        self.icon.layer.cornerRadius = 18;
         [self addSubview:self.icon];
         
         CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 10;
@@ -32,25 +34,34 @@
         CGFloat nameLabelWidth = nameLabelSize.width;
         CGFloat nameLabelHeight = nameLabelSize.height;
         self.nameLabel = [[UILabel alloc] init];
-        self.nameLabel.frame = CGRectMake(nameLabelX, 10, nameLabelWidth, 30);
+        self.nameLabel.frame = CGRectMake(nameLabelX, 5, nameLabelWidth, 30);
         self.nameLabel.text = item.name;
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         self.nameLabel.font = [UIFont systemFontOfSize:HOME_USER_NAME_FONT_SIZE];
         [self addSubview:self.nameLabel];
         
-        CGSize timeLabelSize = [MMSystemHelper sizeWithString:item.time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
+        NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", item.pts]];
+        CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize :HOME_TIME_FONT_SIEZ] maxSize:CGSizeMake(MAXFLOAT, 20)];
         self.timeLabel = [[UILabel alloc] init];
-        self.timeLabel.frame = CGRectMake(nameLabelX, 15 + nameLabelHeight + 5, timeLabelSize.width, 20);
+        self.timeLabel.frame = CGRectMake(nameLabelX, 10 + nameLabelHeight, timeLabelSize.width, 20);
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
-        self.timeLabel.text = item.time;
+        self.timeLabel.text = time;
         self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
         self.timeLabel.font = [UIFont systemFontOfSize:14];
         [self addSubview:self.timeLabel];
         
+        ITSApplication* itsApp = [ITSApplication get];
+        NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+        CelebAttachment* cbAtt = [item.attachments objectAtIndex:0];
+        NSString* image = cbAtt.fd;
+        
         self.photo = [[UIImageView alloc] init];
-        self.photo.frame = CGRectMake(0, 10 + 50 + HOME_ICON_PHOTO_PADDING, screenW, 9 * (screenW - 20) / 16);
-        self.photo.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",item.pictures]];
+        self.photo.frame = CGRectMake(0, 36 + 10 + HOME_ICON_PHOTO_PADDING, screenW, cbAtt.h * screenW / cbAtt.w);
+        NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
+        self.photo.contentMode = UIViewContentModeScaleAspectFill;
+        self.photo.clipsToBounds = YES;
+        [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
         [self addSubview:self.photo];
         
         self.favBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -86,23 +97,39 @@
         self.likeNum.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self addSubview:self.likeNum];
         
-        self.contentLabel = [[UILabel alloc] init];
-        CGSize size = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@  %@",item.name,item.shuoshuoText] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
-        self.contentLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.like.frame) + 10, screenW - 50, size.height);
-        self.contentLabel.numberOfLines = 0;
+        NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.context];
+
+        CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - 50, MAXFLOAT) font:[UIFont systemFontOfSize:14] string: str lineSpace:0.5 type:1];
+
+        self.contentLabel = [[TQRichTextView alloc] init];
+        self.contentLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.like.frame) + 10, screenW - 50, rect.size.height);
         self.contentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.contentLabel.text = [NSString stringWithFormat:@"%@   %@",item.name,item.shuoshuoText];
+        self.contentLabel.lineSpace = 0.5;
+        self.contentLabel.type = 1;
+        self.contentLabel.text = str;
+        self.contentLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.contentLabel];
         
-        NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.shuoshuoText];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
-        NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+
         
-        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_REPLY_COLOR] range:replyRange];
-        [self.contentLabel setAttributedText:noteStr] ;
-        [self.contentLabel sizeToFit];
+//        self.contentLabel = [[TQRichTextView alloc] init];
+//        CGSize size = [MMSystemHelper sizeWithString:[NSString stringWithFormat:@"%@  %@",item.name,item.shuoshuoText] font:[UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE] maxSize:CGSizeMake(screenW - 50, MAXFLOAT)];
+//        self.contentLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.like.frame) + 10, screenW - 50, size.height);
+//        self.contentLabel.numberOfLines = 0;
+//        self.contentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
+//        self.contentLabel.text = [NSString stringWithFormat:@"%@   %@",item.name,item.shuoshuoText];
+//        self.contentLabel.backgroundColor = [UIColor redColor];
+//        [self addSubview:self.contentLabel];
+        
+//        NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.shuoshuoText];
+//        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
+//        NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+//        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] range:Range];
+//        
+//        NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"   "].location, [[noteStr string] rangeOfString:str].length - [[noteStr string] rangeOfString:@" "].location);
+//        [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_REPLY_COLOR] range:replyRange];
+//        [self.contentLabel setAttributedText:noteStr] ;
+//        [self.contentLabel sizeToFit];
         
         self.lineLabel = [[UILabel alloc] init];
         self.lineLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.contentLabel.frame) + 14, screenW - 2 * HOME_CONTENT_LEFT_PADDING, 1);

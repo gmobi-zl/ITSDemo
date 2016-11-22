@@ -92,7 +92,6 @@
 }
 -(CGFloat)height: (NSString *)content {
  
-    
     UILabel *dataLabel = [[UILabel alloc] init];
     dataLabel.backgroundColor = [UIColor clearColor];
     dataLabel.textColor = [UIColor redColor];
@@ -169,15 +168,14 @@
     self.cellHeight = CGRectGetMaxY(self.photoF) + 10;
     
     self.favF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight, 32, 32);
-    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 16 + HOME_ICON_PADDING, self.cellHeight, 32, 32);
-    self.shareF = CGRectMake(self.commentF.origin.x + 32 + 16, self.cellHeight, 32, 32);
+    self.commentF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 32 + 8 , self.cellHeight, 32, 32);
+    self.shareF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 16 + 64, self.cellHeight, 32, 32);
     self.cellHeight = self.photoF.origin.y + self.photoF.size.height + 50;
     self.lineF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight - 1, screenW - 2*HOME_CONTENT_LEFT_PADDING, 1);
     
     self.likeF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_LINE_FAV_PADDING + 3, 16, 13);
     self.likeNumF = CGRectMake(HOME_CONTENT_LEFT_PADDING + 20, self.cellHeight + HOME_LINE_FAV_PADDING, 200, 20);
     self.cellHeight = CGRectGetMaxY(self.lineF) + HOME_FAV_CONTENT_PADDING;
-    
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.context];
 //    CGFloat height = [self height:str];
@@ -186,7 +184,7 @@
     self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, height);
     
     CGFloat contentH = height;
-    self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 20;
+    self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5;
     
     self.userNameF = CGRectMake(50, self.cellHeight + HOME_CONTENT_LEFT_PADDING/2 + 2, 50, 20);
     //    self.imageF = CGRectMake(10, self.cellHeight, 30, 30);

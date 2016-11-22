@@ -47,6 +47,7 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
 }
 - (void)creatHeadView {
     self.headView = [[HeadView alloc] initWithFrame:CGRectMake(0, 64, screenW, self.headHeight) CommentItem:self.item];
+//    self.headView.backgroundColor = [UIColor redColor];
     [self.headView.commentBtn addTarget:self action:@selector(pushCommentVc:) forControlEvents:UIControlEventTouchUpInside];
     self.headView.tag = self.index;
     [self.view addSubview:self.headView];
@@ -67,11 +68,12 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     [self.tableView registerClass:[DetailCommentCell class] forCellReuseIdentifier:DetailCommentCellIdentifier];
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DetailCommentFrame *frame = self.commentData[indexPath.row];
+//    DetailCommentFrame *frame = self.commentData[indexPath.row];
+    HomeCommentFrame *frame = self.item.uiFrame;
     return frame.cellHeight;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.commentData.count;
+    return self.item.topFansComments.count;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell = nil;
@@ -81,7 +83,7 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     }
     DetailCommentCell *tmpCell = (DetailCommentCell*)cell;
     [tmpCell.bgButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
-    tmpCell.bgButton.tag = indexPath.row ;
+    tmpCell.bgButton.tag = indexPath.row;
     tmpCell.detailCommentFrame = self.commentData[indexPath.row];
     
     for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
@@ -285,29 +287,29 @@ NSString *const DetailCommentCellIdentifier = @"DetailCommentCell";
     
     [self.navigationController popViewControllerAnimated:YES];
 }
--(NSMutableArray *)commentData
-{
-    if (!_commentData) {
-        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
-        NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
-        NSArray *dataArr = [dictArray objectAtIndex:self.index];
-        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
-        for (NSDictionary *dict in dataArr) {
-            DetailCommentItem *item = [[DetailCommentItem alloc] init];
-            
-            DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
-            item.name = [dict objectForKey:@"name"];
-            item.icon = [dict objectForKey:@"icon"];
-            item.comment = [dict objectForKey:@"comment"];
-            commentFrame.detailCommentItem = item;
-            [models addObject:commentFrame];
-        }
-        [models removeObjectAtIndex:0];
-        _commentData = [models copy];
-//        [_commentData removeObjectAtIndex:0];
-    }
-    return _commentData;
-}
+//-(NSMutableArray *)commentData
+//{
+//    if (!_commentData) {
+//        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
+//        NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
+//        NSArray *dataArr = [dictArray objectAtIndex:self.index];
+//        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
+//        for (NSDictionary *dict in dataArr) {
+//            DetailCommentItem *item = [[DetailCommentItem alloc] init];
+//            
+//            DetailCommentFrame *commentFrame = [[DetailCommentFrame alloc]init];
+//            item.name = [dict objectForKey:@"name"];
+//            item.icon = [dict objectForKey:@"icon"];
+//            item.comment = [dict objectForKey:@"comment"];
+//            commentFrame.detailCommentItem = item;
+//            [models addObject:commentFrame];
+//        }
+//        [models removeObjectAtIndex:0];
+//        _commentData = [models copy];
+////        [_commentData removeObjectAtIndex:0];
+//    }
+//    return _commentData;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

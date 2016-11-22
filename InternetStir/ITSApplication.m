@@ -53,7 +53,7 @@ NSString* customerLocal = nil;
 }
 
 -(void) initServices {
-    //[MMLogger openLog:@"Celeb" logLevel:MM_LOG_I_LEVEL_DEBUG maxLogCount:5];
+    [MMLogger openLog:@"Celeb" logLevel:MM_LOG_I_LEVEL_DEBUG maxLogCount:5];
     
     self.remoteSvr = [RemoteService alloc];
     self.dataSvr = [DataService alloc];

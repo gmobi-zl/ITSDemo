@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HomeCommentItem.h"
+#import "CelebComment.h"
 #import "HeadView.h"
 #import "DetailCommentFrame.h"
 #import "CommentView.h"
@@ -19,6 +19,6 @@
 @property (nonatomic, strong) NSMutableArray *commentData;
 @property (assign) CGFloat headHeight;
 @property (nonatomic, strong) HeadView *headView;
-@property (nonatomic, strong) HomeCommentItem *item;
+@property (nonatomic, strong) CelebComment *item;
 @property (nonatomic, assign) NSInteger index;
 @end

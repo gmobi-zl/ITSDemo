@@ -18,7 +18,7 @@
 #import "AppStyleConfiguration.h"
 #import "TestController.h"
 #import "ITSApplication.h"
-//#import "DetailCommentController.h"
+#import "DetailCommentController.h"
 #import "SettingService.h"
 #import "WriteArticleController.h"
 #import "ErrorController.h"
@@ -27,6 +27,7 @@
 #import "ConfigService.h"
 #import "WebviewController.h"
 #import "ShareView.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -52,30 +53,29 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.tableView registerClass:[HomeCommentCell class] forCellReuseIdentifier:HomeCommentCellIdentifier];
     [self.view addSubview:self.tableView];
 
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
+    self.effectView.alpha = 1;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.effectView.bounds;
+    UIColor *oneColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5];
+    gradient.colors = [NSArray arrayWithObjects:(id)oneColor.CGColor, nil];
+    [self.effectView.layer insertSublayer:gradient atIndex:0];
+    
+    self.shareView = [[ShareView alloc] init];
+    self.shareView.frame = CGRectMake(0, 0, screenW, 192);
+    [self.shareView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareView.bgView addTarget:self action:@selector(bgButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareView.iconBtn addTarget:self action:@selector(shareFb:) forControlEvents:UIControlEventTouchUpInside];
+    //    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+    [self.effectView addSubview:self.shareView];
+    
     NSString *str = @"Content with Facebook";
     CGSize size = [MMSystemHelper sizeWithString:str font:[UIFont systemFontOfSize:18] maxSize:CGSizeMake(MAXFLOAT, 45)];
     CGFloat width = size.width + 30 + 10 + 60;
-//
-//    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//    self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-//    self.effectView.frame = CGRectMake(0, 0, screenW, screenH);
-//    self.effectView.alpha = 0;
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.effectView];
-//    
-//    CAGradientLayer *gradient = [CAGradientLayer layer];
-//    gradient.frame = self.effectView.bounds;
-//    UIColor *oneColor = [UIColor colorWithRed:246/255.0 green:123/255.0 blue:226/255.0 alpha:0.36];
-//    UIColor *twoColor = [UIColor colorWithRed:209/255.0 green:74/255.0 blue:138/255.0 alpha:0.34];
-//    UIColor *threeColor = [UIColor colorWithRed:45/255.0 green:65/255.0 blue:213/255.0 alpha:0.36];
-//    gradient.colors = [NSArray arrayWithObjects:(id)oneColor.CGColor, (id)twoColor.CGColor, (id)threeColor.CGColor, nil];
-//    [self.effectView.layer insertSublayer:gradient atIndex:0];
-//
-    self.shareView = [[ShareView alloc] init];
-    self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
-    [self.shareView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.shareView.bgView addTarget:self action:@selector(bgButton) forControlEvents:UIControlEventTouchUpInside];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
-    
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, width, 190)viewController:self];
     self.loginView.backgroundColor = [UIColor whiteColor];
     self.loginView.layer.masksToBounds = YES;
@@ -92,6 +92,92 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     ITSApplication* poApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [poApp.reportSvr recordEvent:@"comment" params:eParams eventCategory:@"tabbar.click"];
+}
+#pragma mark - share
+- (void)shareFb:(UIButton *)button {
+    
+    self.shareView.bgView.hidden = NO;
+    self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
+    ConfigService *cf = [ConfigService get];
+    NSString *channel = [cf getChannel];
+    self.shareLink = [NSString stringWithFormat:@"http://api.tomoto.io/v0/share/%@/%@.html",channel,self.fid];
+
+//    [self shareNewsToFacebook];
+    [self shareNewsToQQ];
+}
+- (void)shareNewsToQQ {
+    
+    QQApiSendResultCode sent;
+    QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:self.shareLink] title:self.shareTitle description:nil previewImageURL:[NSURL URLWithString:self.sharePhoto]];
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:newsObj];
+    
+    sent = [QQApiInterface sendReq:req];
+    [self handleSendResult:sent];
+}
+
+- (void)handleSendResult:(QQApiSendResultCode)sendResult
+{
+    switch (sendResult)
+    {
+        case EQQAPIAPPNOTREGISTED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"App未注册" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIMESSAGECONTENTINVALID:
+        case EQQAPIMESSAGECONTENTNULL:
+        case EQQAPIMESSAGETYPEINVALID:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送参数错误" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIQQNOTINSTALLED:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"" message:@"未安装手Q" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            break;
+        }
+        case EQQAPIQQNOTSUPPORTAPI:
+        {
+            BOOL isInstall = [QQApiInterface isQQInstalled];
+            if (isInstall == NO) {
+                UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"" message:@"未安装手Q" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+                [msgbox show];
+            }else{
+                UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"API接口不支持" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+                [msgbox show];
+            }
+            break;
+        }
+        case EQQAPISENDFAILD:
+        {
+            UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+            [msgbox show];
+            
+            
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+
+- (void) shareNewsToFacebook {
+    
+//    ConfigService *cf = [ConfigService get];
+//    NSString *channel = [cf getChannel];
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:self.shareLink];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:nil];
 }
 - (void)passMessage {
     
@@ -282,7 +368,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.commentBtn.tag = indexPath.row;
-//    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
+    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
     [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -415,13 +501,13 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 - (void)bgButton {
     [UIView animateWithDuration:0.3 animations:^{
         self.shareView.bgView.hidden = YES;
-        self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+        self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
     }];
 }
 - (void)cancelBtn {
     [UIView animateWithDuration:0.3 animations:^{
         self.shareView.bgView.hidden = YES;
-        self.shareView.frame = CGRectMake(0, screenH, screenW, 192);
+        self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
     }];
 }
 - (void)shareBtn: (UIButton *)button {
@@ -430,11 +516,17 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSArray* dataArr = itsApp.dataSvr.celebComments;
     CelebComment *item = [dataArr objectAtIndex:button.tag];
     NSString *content = item.context;
+    self.fid = item.fid;
 
-//
+    NSString* fileBaseUrl = [itsApp.remoteSvr getBaseFileUrl];
+    CelebAttachment* cbAtt = [item.attachments objectAtIndex:0];
+    NSString* image = cbAtt.fd;
+    
+    self.sharePhoto = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
+    self.shareTitle = item.context;
     [UIView animateWithDuration:0.3 animations:^{
         self.shareView.bgView.hidden = NO;
-        self.shareView.frame = CGRectMake(0, screenH - 192, screenW, 192);
+        self.effectView.frame = CGRectMake(0, screenH - 192, screenW, 192);
     }];
 
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -497,31 +589,32 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 //    vc.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:vc animated:YES];
 }
-//- (void)pushDetailVc:(UIButton *)button {
-//#ifdef DEMO_DATA
-//    DetailCommentController *detail = [[DetailCommentController alloc] init];
-//    HomeCommentFrame *frame = self.commentData[button.tag];
-//    detail.hidesBottomBarWhenPushed = YES;
-//    detail.index = button.tag;
-//    detail.headHeight = frame.headH;
-//    detail.item = frame.commentItem;
-//    [self.navigationController pushViewController:detail animated:YES];
-//#else
-//    
-//    ITSApplication* itsApp = [ITSApplication get];
-//    NSArray* dataArr = itsApp.dataSvr.celebComments;
-//    
-//    if (dataArr != nil){
-//        CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
-//        [itsApp.dataSvr setCurrentCelebComment:cbComment];
-//        DetailCommentController *detail = [[DetailCommentController alloc] init];
-//        detail.hidesBottomBarWhenPushed = YES;
-//        detail.headHeight = cbComment.uiFrame.headH;
-//        [self.navigationController pushViewController:detail animated:YES];
-//    }
-//    
-//#endif
-//}
+- (void)pushDetailVc:(UIButton *)button {
+#ifdef DEMO_DATA
+    DetailCommentController *detail = [[DetailCommentController alloc] init];
+    HomeCommentFrame *frame = self.commentData[button.tag];
+    detail.hidesBottomBarWhenPushed = YES;
+    detail.index = button.tag;
+    detail.headHeight = frame.headH;
+    detail.item = frame.commentItem;
+    [self.navigationController pushViewController:detail animated:YES];
+#else
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    NSArray* dataArr = itsApp.dataSvr.celebComments;
+    
+    if (dataArr != nil){
+        CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
+        [itsApp.dataSvr setCurrentCelebComment:cbComment];
+        DetailCommentController *detail = [[DetailCommentController alloc] init];
+        detail.hidesBottomBarWhenPushed = YES;
+        detail.item = cbComment;
+        detail.headHeight = cbComment.uiFrame.headH;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
+    
+#endif
+}
 - (void)pushNextVc:(UIButton *)button{
     ITSApplication* itsApp = [ITSApplication get];
     NSArray* dataArr = itsApp.dataSvr.celebComments;

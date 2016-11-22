@@ -14,6 +14,7 @@
 #import "GAITrackedViewController.h"
 #import "HomeCommentCell.h"
 #import "ShareView.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TQRichTextViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -25,7 +26,10 @@
 @property (nonatomic, strong) UIButton* Btn;
 
 @property (nonatomic, strong) ShareView *shareView;
-
+@property (nonatomic, copy) NSString *fid;
+@property (nonatomic, copy) NSString *shareLink;
+@property (nonatomic, copy) NSString *sharePhoto;
+@property (nonatomic, copy) NSString *shareTitle;
 @property (nonatomic, strong) UIActionSheet *photoSheet;
 @property (nonatomic, strong) UIActionSheet *sheet;
 
