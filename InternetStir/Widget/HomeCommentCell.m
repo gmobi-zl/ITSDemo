@@ -44,13 +44,18 @@
         [self.contentView addSubview:self.nameLabel];
         
         self.photo = [[UIImageView alloc] init];
+        self.photo.userInteractionEnabled = YES;
         [self.contentView addSubview:self.photo];
         
-        self.commentLabel = [[TQRichTextView alloc] init];
+        self.heartIcon = [[UIImageView alloc] init];
+        self.heartIcon.image = [UIImage imageNamed:@"icon_like_animation"];
+        [self.photo addSubview:self.heartIcon];
+        
+        self.commentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.commentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.commentLabel.lineSpace = 0.5;
-        self.commentLabel.type = 1;
-//        self.commentLabel.delegage = self;
+        self.commentLabel.lineSpacing = 0.5;
+        self.commentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+        self.commentLabel.numberOfLines = 3;
         self.commentLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.commentLabel];
         
@@ -70,7 +75,8 @@
         self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
         [self.btn setTitle:@"继续阅读" forState:UIControlStateNormal];
         [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
-//        [self.contentView addSubview:self.btn];
+        self.btn.hidden = YES;
+        [self.contentView addSubview:self.btn];
         
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_TIME_COLOR];
@@ -88,7 +94,7 @@
 
         self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.shareBtn setBackgroundImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
-//        [self.contentView addSubview:self.shareBtn];
+        [self.contentView addSubview:self.shareBtn];
         
         self.line = [[UILabel alloc] init];
         self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
@@ -245,7 +251,34 @@
     }else {
         self.delBtn.hidden = YES;
     }
-
+    
+    NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
+    TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    label.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
+    label.lineSpacing = 0.5;
+    label.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    label.numberOfLines = 0;
+    label.backgroundColor = [UIColor clearColor];
+    __block CGSize size;
+    [label setText:str afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - 30, MAXFLOAT)
+                                         limitedToNumberOfLines:3];
+        return mutableAttributedString;
+    }];
+    
+    __block CGSize size1;
+    [label setText:str afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size1 = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                 withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - 30, MAXFLOAT)
+                                          limitedToNumberOfLines:0];
+        return mutableAttributedString;
+    }];
+    if (size.height < size1.height) {
+        self.btn.hidden = NO;
+    }else {
+        self.btn.hidden = YES;
+    }
     self.nameLabel.text = data.name;
     self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:16];
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
@@ -263,21 +296,21 @@
     self.photo.clipsToBounds = YES;
     [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
     
-    NSString *str = [NSString stringWithFormat:@"%@   %@",data.name,data.context];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-//    paragraphStyle.lineSpacing = 0.5;
-//    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle};
-//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];;
-//
-//    NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
-//    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
-//    [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+    if (data.isShow == NO) {
+        self.commentLabel.numberOfLines = 3;
+    }else {
+        self.commentLabel.numberOfLines = 0;
+        self.btn.hidden = YES;
+    }
+    [self.commentLabel setText:str afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        NSMutableAttributedString *noteStr = mutableAttributedString;
+        NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"   "].location);
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:Range];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFangTC-Semibold" size:16] range:Range];
+        
+        return mutableAttributedString;
+    }];
     
-//    NSRange urlRange = [MMSystemHelper getRangeOfEmailAddress:str];
-//    [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:urlRange];
-//    self.commentLabel.attributedText = noteStr;
-    self.commentLabel.text = str;
-//    self.commentLabel.backgroundColor = [UIColor redColor];
     NSInteger maxHotCommentCount = data.topFansComments.count;
     NSInteger maxReplyCommentCount = data.replayComments.count;
     
@@ -344,23 +377,7 @@
         
         self.replyLabel = replyLabel;
         [self.contentView addSubview:replyLabel];
-        [self.replysView addObject:replyLabel];
-        
-        //        UIImageView *imageView = [[UIImageView alloc] init];
-        //        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",item.icon]];
-        ////        self.replyIcon = imageView;
-        //        imageView.layer.cornerRadius = 15;
-        //        imageView.layer.masksToBounds = YES;
-        //        [self.contentView addSubview:imageView];
-        //        [self.replyIconView addObject:imageView];
-        
-        //        UILabel *replyName = [[UILabel alloc] init];
-        //        replyName.font = [UIFont systemFontOfSize:12];
-        //        replyName.text = item.name;
-        //        replyName.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
-        //        self.replyName = replyName;
-        //        [self.contentView addSubview:replyName];
-        //        [self.replyNameView addObject:replyName];
+        [self.replysView addObject:replyLabel];        
     }
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
     
@@ -374,6 +391,7 @@
     self.icon.frame = self.commentFrame.iconF;
     self.nameLabel.frame = self.commentFrame.nameF;
     self.photo.frame = self.commentFrame.photoF;
+    self.heartIcon.frame = CGRectMake(self.commentFrame.photoF.size.width/2 - 20, self.commentFrame.photoF.size.height/2 - 20, 40, 40);
 //    self.name.frame = self.commentFrame.userNameF;
 //    self.imageview.frame = self.commentFrame.imageF;
     self.timeLabel.frame = self.commentFrame.timeF;

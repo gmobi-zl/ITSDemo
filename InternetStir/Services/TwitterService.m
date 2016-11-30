@@ -57,5 +57,18 @@
         }
     }];
 }
+- (void)systemAccountTypeIdentifier {
+    
+//    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+//    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+//    
+//    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (error) {
+//                NSLog(@"System account access request denied: %@", error.localizedDescription);
+//            }
+//        });
+//    }];
+}
 
 @end

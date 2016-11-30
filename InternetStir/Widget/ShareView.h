@@ -17,5 +17,6 @@
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIButton *bgView;
 @property (nonatomic, strong) UIButton *iconBtn;
+- (void)initShareMessage:(NSString *)title url:(NSString *)url photo:(NSString *)photo;
 
 @end

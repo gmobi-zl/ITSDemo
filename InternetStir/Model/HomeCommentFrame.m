@@ -11,7 +11,8 @@
 #import "AppStyleConfiguration.h"
 #import "CelebComment.h"
 #import "FansComment.h"
-#import "TQRichTextView.h"
+//#import "TQRichTextView.h"
+#import "TTTAttributedLabel.h"
 
 //#define padding 10
 
@@ -178,20 +179,43 @@
     self.cellHeight = CGRectGetMaxY(self.lineF) + HOME_FAV_CONTENT_PADDING;
     
     NSString *str = [NSString stringWithFormat:@"%@   %@",comment.name,comment.context];
-//    CGFloat height = [self height:str];
-    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(screenW - 30, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:str lineSpace:0.5 type:1];
-    CGFloat height = rect.size.height;
-    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, height);
+    TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    label.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
+    label.lineSpacing = 0.5;
+    label.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    label.numberOfLines = 0;
+    label.backgroundColor = [UIColor clearColor];
+    __block CGSize size;
+    [label setText:str afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - 30, MAXFLOAT)
+                                         limitedToNumberOfLines:3];
+        return mutableAttributedString;
+    }];
     
+    __block CGSize size1;
+    [label setText:str afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size1 = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - 30, MAXFLOAT)
+                                         limitedToNumberOfLines:0];
+        return mutableAttributedString;
+    }];
+    CGFloat height;
+    if (comment.isShow == NO) {
+        height = size.height ;
+    }else {
+        height = size1.height;
+    }
+    self.contentF = CGRectMake(HOME_CONTENT_LEFT_PADDING, self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5,screenW - 30, height);
+    CGFloat btnW = [MMSystemHelper sizeWithString:@"繼續閱讀" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
+    self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
     CGFloat contentH = height;
     self.headH = contentH + self.cellHeight + HOME_CONTENT_LEFT_PADDING + 5;
     
     self.userNameF = CGRectMake(50, self.cellHeight + HOME_CONTENT_LEFT_PADDING/2 + 2, 50, 20);
     //    self.imageF = CGRectMake(10, self.cellHeight, 30, 30);
     self.cellHeight = CGRectGetMaxY(self.contentF);
-    CGFloat btnW = [MMSystemHelper sizeWithString:@"繼續閱讀" font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
-    self.BtnF = CGRectMake(screenW - HOME_CONTENT_LEFT_PADDING - btnW, self.contentF.origin.y + height + 5, btnW, 25);
-    
+ 
     CGFloat buttonW = [MMSystemHelper sizeWithString:NSLocalizedString(@"comment_leave_more", nil) font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, 25)].width;
     if (comment.replayComments.count ) {
         if (comment.replayComments.count > CB_MAX_COUNT) {

@@ -228,4 +228,8 @@
     
 #endif
 }
+//+ (NSString *)systemAccountTypeIdentifier {
+//    return ACAccountTypeIdentifierFacebook;
+//}
+
 @end

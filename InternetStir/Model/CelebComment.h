@@ -57,6 +57,7 @@
 @property UInt64 uts;
 
 @property NSInteger weight;
+@property (assign) BOOL isShow;
 
 @property HomeCommentFrame* uiFrame;
 

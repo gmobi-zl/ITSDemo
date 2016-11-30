@@ -22,7 +22,9 @@ typedef void (^PoPoTWLoginCallback)(int resultCode);
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *icon;
 @property (nonatomic, copy) NSString *uId;
+@property (nonatomic, strong) ACAccountStore *accountStore;
 
+- (void)systemAccountTypeIdentifier;
 -(void) getUserInfo;
 -(void) twitterLogin:(PoPoTWLoginCallback) cb;
 @end

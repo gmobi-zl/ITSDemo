@@ -11,11 +11,16 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
+#import "WeiboSDK.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WeiboSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (retain) TencentOAuth *tencentOAuth;//保存auth权限对象
+@property (strong, nonatomic) NSString *wbtoken;
+@property (strong, nonatomic) NSString *wbCurrentUserID;
+@property (strong, nonatomic) NSString *wbRefreshToken;
 
 
 @end

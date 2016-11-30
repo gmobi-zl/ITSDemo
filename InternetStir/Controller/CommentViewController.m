@@ -92,15 +92,15 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     [itsApp.reportSvr recordEvent:@"本文" params:eParams eventCategory:@"comment.more.view"];
     
     //获取通知中心
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(keyChange:) name:UIKeyboardDidShowNotification object:nil];
-    
-    //增加监听，当键退出时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
+//    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+//    [notificationCenter addObserver:self selector:@selector(keyChange:) name:UIKeyboardDidShowNotification object:nil];
+//    
+//    //增加监听，当键退出时收出消息
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillHide:)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
+//    
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == YES && us.user.isCBADM == YES){
         if (self.currentShowItem == nil)
@@ -215,46 +215,46 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     }
 }
 
-- (void)keyChange:(NSNotification *)notification {
-    //获得键盘的尺寸
-//        CGFloat curkeyBoardHeight = [[[notification userInfo] objectForKey:@"UIKeyboardBoundsUserInfoKey"] CGRectValue].size.height;
-    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
-    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-        // 第三方键盘回调三次问题，监听仅执行最后一次
-    if(begin.size.height > 0 && (begin.origin.y - end.origin.y > 0)){
-        NSDictionary *dic = notification.userInfo;
-        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-        if (keyboardRect.size.height > 250 && self.replyViewDraw > keyboardRect.origin.y) {
-            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-                    
-                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
-                CGPoint point = self.tableView.contentOffset;
-                self.offset = point.y;
-                point.y -= (keyboardRect.origin.y - self.replyViewDraw);
-                self.tableView.contentOffset = point;
-            }];
-        }
-    }
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-        NSDictionary *dic = notification.userInfo;
-        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-        if (keyboardRect.size.height > 250) {
-            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-                
-                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
+//- (void)keyChange:(NSNotification *)notification {
+//    //获得键盘的尺寸
+////        CGFloat curkeyBoardHeight = [[[notification userInfo] objectForKey:@"UIKeyboardBoundsUserInfoKey"] CGRectValue].size.height;
+//    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+//    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//        // 第三方键盘回调三次问题，监听仅执行最后一次
+//    if(begin.size.height > 0 && (begin.origin.y - end.origin.y > 0)){
+//        NSDictionary *dic = notification.userInfo;
+//        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//        if (keyboardRect.size.height > 250 && self.replyViewDraw > keyboardRect.origin.y) {
+//            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+//                    
+//                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
 //                CGPoint point = self.tableView.contentOffset;
-//                point.y += (keyboardRect.origin.y - self.replyViewDraw);
+//                self.offset = point.y;
+//                point.y -= (keyboardRect.origin.y - self.replyViewDraw);
 //                self.tableView.contentOffset = point;
-//                self.tableView.contentOffset = CGPointMake(0, self.offset);
-                NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
-                [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
-                                        atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-        }];
-    }
-}
-
+//            }];
+//        }
+//    }
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)notification {
+//        NSDictionary *dic = notification.userInfo;
+//        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+//        if (keyboardRect.size.height > 250) {
+//            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+//                
+//                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
+////                CGPoint point = self.tableView.contentOffset;
+////                point.y += (keyboardRect.origin.y - self.replyViewDraw);
+////                self.tableView.contentOffset = point;
+////                self.tableView.contentOffset = CGPointMake(0, self.offset);
+//                NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
+//                [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
+//                                        atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+//        }];
+//    }
+//}
+//
 -(void)celebReplyCommentsDataRefreshListener: (id) data{
     if (self.view.hidden == NO){
         
@@ -379,56 +379,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     {
         [[PickerImageTools ShareInstance] selectPhotograph:weakSelf];
     }
-    
-//    [PickerImageTools ShareInstance].pickerImageCameraBlock = ^(NSData *pickerImage){
-//        
-//       
-//    };
-}
-//#ifdef DEMO_DATA
-//-(NSMutableArray *)commentData
-//{
-//    if (!_commentData) {
-//        NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"replyGroup.plist" ofType:nil];
-//        NSArray *dictArray = [NSArray arrayWithContentsOfFile:fullPath];
-//        NSArray *dataArr = [dictArray objectAtIndex:self.index];
-//        NSMutableArray *models = [NSMutableArray arrayWithCapacity:[dataArr count]];
-//        for (NSDictionary *dict in dataArr) {
-//            CommentItem *item = [[CommentItem alloc] init];
-//            
-////            DetailCommentItem *commentItem = [[DetailCommentItem alloc] init];
-//            CommentFrame *commentFrame = [[CommentFrame alloc]init];
-//            item.name = [dict objectForKey:@"name"];
-//            item.icon = [dict objectForKey:@"icon"];
-//            item.comment = [dict objectForKey:@"comment"];
-//            commentFrame.detailCommentItem = item;
-//            [models addObject:commentFrame];
-////            commentItem.replys = [[NSMutableArray alloc] init];
-////            commentItem.name = [dict objectForKey:@"name"];
-////            commentItem.icon = [dict objectForKey:@"icon"];
-////            commentItem.pictures = [dict objectForKey:@"pictures"];
-////            commentItem.shuoshuoText = [dict objectForKey:@"shuoshuoText"];
-////            NSMutableArray *reply = [dict objectForKey:@"replys"];
-////            for (NSDictionary *dic in reply) {
-////                ReplyItem *item = [[ReplyItem alloc] init];
-////                item.name = [dic objectForKey:@"name"];
-////                item.comment = [dic objectForKey:@"comment"];
-////                item.icon = [dic objectForKey:@"icon"];
-////                [item setValuesForKeysWithDictionary:dic];
-////                commentItem.item = item;
-////                [commentItem.replys addObject:item];
-////            }
-////            commentFrame.detailCommentItem = commentItem;
-//            
-////            [models addObject:commentFrame];
-//        }
-//        _commentData = [models copy];
-//        
-//    }
-//
-//    return _commentData;
-//}
-//#endif
+    }
 
 - (void)writeNewComment{
     
@@ -546,22 +497,35 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     DataService* ds = itsApp.dataSvr;
     CelebComment* currentComment = ds.currentCelebComment;
     NSArray* replyList = currentComment.replayComments;
+    TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    label.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
+    label.font = [UIFont systemFontOfSize:14];
+    label.lineSpacing = 0.5;
+    label.numberOfLines = 0;
+    label.backgroundColor = [UIColor clearColor];
+    label.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+
+    __block CGSize size;
+    [label setText:currentComment.context afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)
+                                         limitedToNumberOfLines:0];
+        return mutableAttributedString;
+    }];
+    
     if (currentComment != nil){
         if (replyList != nil) {
             if (indexPath.row == 0) {
-                
-                CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:currentComment.context lineSpace:0.5 type:2];
-                height = 13 + 20 + 4 + rect.size.height + 4 + 20 + 10;
+                height = 13 + 20 + 4 + size.height + 4 + 20 + 10;
             }else {
                 FansComment* c = [replyList objectAtIndex:indexPath.row - 1];
                 height = c.uiFrame.cellHeight;
             }
         }else {
-
-            CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - 63 - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:16] string:currentComment.context lineSpace:0.5 type:2];
-            height = 13 + 20 + 4 + rect.size.height + 4 + 20 + 10;
+            height = 13 + 20 + 4 + size.height + 4 + 20 + 10;
         }
     }
+    NSLog(@"-------------%f",height);
     return height;
 #endif
 }
@@ -574,24 +538,24 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     CelebComment* currentComment = ds.currentCelebComment;
     NSArray* replyList = currentComment.replayComments;
     
-    if (replyList != nil){
-        NSInteger count = [replyList count];
-        for (int i = 0; i < count; i++) {
-            FansComment* c = [replyList objectAtIndex:i];
-            if (c.uiFrame == nil){
-                CommentFrame* frame = [CommentFrame alloc];
-                [frame initWithCommentData:c];
-                c.uiFrame = frame;
-            }
-        }
-    }
-    
+//    if (replyList != nil){
+//        NSInteger count = [replyList count];
+//        for (int i = 0; i < count; i++) {
+//            FansComment* c = [replyList objectAtIndex:i];
+//            if (c.uiFrame == nil){
+//                CommentFrame* frame = [CommentFrame alloc];
+//                [frame initWithCommentData:c];
+//                c.uiFrame = frame;
+//            }
+//        }
+//    }
+//
     if (replyList != nil){
         return replyList.count + 1;
     }else {
         return 1;
     }
-//    return 0;
+ 
 #endif
     
 }
@@ -612,7 +576,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
             cell = [[CommentOneCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentOneTableViewCellIdentifier];
         }
         CommentOneCell *tmpCell = (CommentOneCell*)cell;
-        tmpCell.commentLabel.delegage = self;
+        tmpCell.commentLabel.delegate = self;
 
         [tmpCell setShowData:currentComment];
 //        tmpCell.delButton.hidden = YES;
@@ -624,12 +588,11 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 
     }else {
 
-        cell = [tableView dequeueReusableCellWithIdentifier:CommentTableViewCellIdentifier forIndexPath:indexPath];
+        cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
         }
         CommentCell *tmpCell = (CommentCell*)cell;
-
         NSArray* replyList = currentComment.replayComments;
         if (replyList != nil){
             [tmpCell.replyButton addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -664,11 +627,15 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
             tmpCell.replyNameLabel.userInteractionEnabled = YES;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = CGRectMake(0, 0, tmpCell.replyNameLabel.frame.size.width, tmpCell.replyNameLabel.frame .size.height);
-            //        [button addTarget:self action:@selector(tapReply:) forControlEvents:UIControlEventTouchUpInside];
             button.userInteractionEnabled = YES;
             button.tag = indexPath.row;
             [tmpCell.replyNameLabel addSubview:button];
         }
+//        if (indexPath.row % 2 == 1) {
+//            tmpCell.contentView.backgroundColor = [UIColor cyanColor];
+//        }else {
+//            tmpCell.contentView.backgroundColor = [UIColor orangeColor];
+//        }
         return tmpCell;
     }
    
@@ -681,39 +648,47 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 //    }
 //}
 //#pragma mark - UIGestureRecognizerDelegate
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-//{
-//    // 输出点击的view的类名
-//    NSLog(@"%@", NSStringFromClass([touch.view class]));
-//    
-//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
-//    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-//        return YES;
-//    }
-//    return  NO;
-//}  
-
-- (void)richTextView:(TQRichTextView *)view touchBeginRun:(TQRichTextRun *)run
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+    // 输出点击的view的类名
+    NSLog(@"%@", NSStringFromClass([touch.view class]));
     
-}
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return YES;
+    }
+    return  NO;
+}  
 
-- (void)richTextView:(TQRichTextView *)view touchEndRun:(TQRichTextRun *)run
-{
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url{
     WebviewController *webView = [[WebviewController alloc] init];
-    webView.path = run.text;
+    webView.path = [url absoluteString];
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }
-//-(void)viewCellInitial:(NSIndexPath *)indepath scr:(UIScrollView *)scr{
-//    CommentCell *cell = [self.tableView cellForRowAtIndexPath:indepath];
-//    CGFloat screenW = [MMSystemHelper getScreenWidth];
-//
-//    [UIView animateWithDuration:0.3 animations:^{
-//        cell.bgView.frame =  CGRectMake(0, 0, screenW, cell.detailCommentFrame.BgViewF.size.height);
-//    }];
-//}
+/*
+-(void)viewCellInitial:(NSIndexPath *)indepath index:(NSInteger)tag frame:(CGRect)frame{
 
+    CommentCell *cell = [self.tableView cellForRowAtIndexPath:indepath];
+    CGFloat screenW = [MMSystemHelper getScreenWidth];
+
+    if (cell.type == 1) {
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.bgView.frame = CGRectMake(0, 0, screenW, cell.detailCommentFrame.BgViewF.size.height);
+            cell.bgView.contentOffset = CGPointMake(0, 0);
+        }];
+
+    }else if (cell.type == 2) {
+        UIScrollView *scrollview = [cell.replyScrollView objectAtIndex:cell.tag];
+
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame = cell.frame;
+            scrollview.contentOffset = CGPointMake(0, 0);
+        }];
+    }
+}
+*／
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 

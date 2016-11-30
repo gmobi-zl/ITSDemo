@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CelebComment.h"
-#import "TQRichTextView.h"
 
 @interface HeadView : UIView
 @property (nonatomic, strong) UIImageView *icon;
@@ -22,7 +21,7 @@
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIImageView *like;
 @property (nonatomic, strong) UILabel *likeNum;
-@property (nonatomic, strong) TQRichTextView *contentLabel;
+//@property (nonatomic, strong) TQRichTextView *contentLabel;
 @property (nonatomic, strong) UILabel *lineLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame CommentItem:(CelebComment*)item;

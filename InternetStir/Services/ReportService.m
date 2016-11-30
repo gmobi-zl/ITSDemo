@@ -384,7 +384,7 @@
 //    [tracker send:[b build]];
     // report to GA
     NSString* pLabel = [MMSystemHelper DictTOjsonString:params];
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-83420163-6"];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-86289269-3"];
     GAIDictionaryBuilder* b = [GAIDictionaryBuilder createEventWithCategory:category action:eventId label:pLabel value:nil];
     [tracker send:[b build]];
 

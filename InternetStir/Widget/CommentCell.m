@@ -20,23 +20,24 @@ NSIndexPath *indexP;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;   //cell选中时的颜色，无色
-//        self.delButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.delButton setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
-//        self.delButton.backgroundColor = [UIColor redColor];
-//        [self.contentView addSubview:self.delButton];
         
-//        self.bgView = [[UIScrollView alloc] init];
-//        self.bgView.backgroundColor = [UIColor whiteColor];
-//          = self;
-//        self.bgView.bounces = YES;
-//        self.bgView.showsHorizontalScrollIndicator = NO;
-//        [self.contentView addSubview:self.bgView];
+        self.delButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.delButton setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
+        self.delButton.backgroundColor = [UIColor redColor];
+        [self.contentView addSubview:self.delButton];
+
+        self.bgView = [[UIScrollView alloc] init];
+        self.bgView.backgroundColor = [UIColor whiteColor];
+        self.bgView.bounces = YES;
+        self.bgView.delegate = self;
+        self.bgView.showsHorizontalScrollIndicator = NO;
+        [self.contentView addSubview:self.bgView];
         
         self.icon = [[UIImageView alloc] init];
         self.icon.backgroundColor = [UIColor whiteColor];
         self.icon.layer.masksToBounds = YES;
         self.icon.layer.cornerRadius = 20;
-        [self.contentView addSubview:self.icon];
+        [self.bgView addSubview:self.icon];
         
         self.iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.iconBtn.backgroundColor = [UIColor clearColor];
@@ -45,7 +46,7 @@ NSIndexPath *indexP;
         self.nameLabel = [[UILabel alloc] init];
 //        self.nameLabel.font = [UIFont systemFontOfSize:16];
         self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
-        [self.contentView addSubview:self.nameLabel];
+        [self.bgView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
 //        self.commentLabel.numberOfLines = 0;
@@ -56,20 +57,28 @@ NSIndexPath *indexP;
 //        self.commentLabel.type = 2;
 //        self.commentLabel.backgroundColor = [UIColor redColor];
         self.commentLabel.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.commentLabel];
+        [self.bgView addSubview:self.commentLabel];
+        
+        self.delImage = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.delImage = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.delImage setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
+        self.delImage.backgroundColor = [UIColor redColor];
+        [self.contentView addSubview:self.delImage];
+        
+        self.scrollView = [[UIScrollView alloc] init];
+        [self.contentView addSubview:self.scrollView];
         
         self.replyLabel = [[UILabel alloc] init];
         self.replyLabel.numberOfLines = 0;
         self.replyLabel.font = [UIFont systemFontOfSize:16];
-        [self.replyBackgroundView addSubview:self.replyLabel];
+        [self.scrollView addSubview:self.replyLabel];
         
         self.replyIcon = [[UIImageView alloc] init];
         self.replyIcon.layer.masksToBounds = YES;
         self.replyIcon.layer.cornerRadius = 15;
-        [self.contentView addSubview:self.replyIcon];
+        [self.scrollView addSubview:self.replyIcon];
         
         self.replyBackgroundView = [[UIImageView alloc] init];
-//        self.replyBackgroundView.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:self.replyBackgroundView];
         
         self.line = [[UILabel alloc] init];
@@ -80,61 +89,126 @@ NSIndexPath *indexP;
         [self.commentLabel addSubview:self.bgButton];
         
         self.replyNameLabel = [[UILabel alloc] init];
-        [self.contentView addSubview:self.replyNameLabel];
+        [self.scrollView addSubview:self.replyNameLabel];
         
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         self.timeLabel.font = [UIFont systemFontOfSize:14];
         self.timeLabel.textColor = [MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR];
-        [self.contentView addSubview:self.timeLabel];
+        [self.bgView addSubview:self.timeLabel];
         
         self.replyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.replyButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.replyButton setTitle:NSLocalizedString (@"comment_reply", nil) forState:UIControlStateNormal];
         self.replyButton.userInteractionEnabled = YES;
         [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.replyButton];
+        [self.bgView addSubview:self.replyButton];
+        
         
     }
     return self;
 }
-- (void)tapClick:(UITapGestureRecognizer*)sender {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.bgView.frame =  CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
-    }];
-}
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    NSInteger index = scrollView.contentOffset.x;
-//
-//    if (index < 32 ) {
-//        index = 0;
-//    }else {
-//        index = 64;
-//    }
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
 //    [UIView animateWithDuration:0.3 animations:^{
-//        self.bgView.frame =  CGRectMake(-index, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
-//    }];
-//
-//    if (indexP == nil) {
-//        indexP = self.myIndexPath;
-//    } else {
-//        if ([self.delegate respondsToSelector:@selector(viewCellInitial:scr:)]) {
-//            [self.delegate viewCellInitial:indexP scr:nil];
-//        }
-//        indexP = self.myIndexPath;
-//    }
-//
-//}
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//
-//    NSInteger index = scrollView.contentOffset.x;
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.bgView.frame =  CGRectMake(-index, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
-//        self.bgView.contentOffset = CGPointMake(0, 0);
+//        self.bgView.frame =  CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,  self.detailCommentFrame.BgViewF.size.height);
 //    }];
 //}
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+
+    NSInteger tag =  scrollView.tag;
+    NSInteger index = scrollView.contentOffset.x;
+
+//     NSLog(@"？？？？？？？？？@@@@@@@x=%f  y=%f   %f   %f    ",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    if (index < 25) {
+        index = 0;
+    }else {
+        index = 63;
+    }
+    if (scrollView == self.bgView) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.bgView.frame = CGRectMake(-index, self.detailCommentFrame.BgViewF.origin.y, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
+            if (index == 0) {
+                self.bgView.contentOffset = CGPointMake(0, 0);
+            }else if (index == 63) {
+                self.bgView.contentOffset = CGPointMake(63, 0);
+            }
+        }];
+    }else {
+        CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
+        UIScrollView *scrollview = [self.replyScrollView objectAtIndex:tag];
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+            if (index == 0) {
+                scrollView.contentOffset = CGPointMake(0, 0);
+            }else if (index == 63) {
+                scrollView.contentOffset = CGPointMake(63, 0);
+            }
+        }];
+    }
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
+    NSInteger tag =  scrollView.tag;
+    NSInteger index = scrollView.contentOffset.x;
+//    NSLog(@"@@@@@@@x=%f  y=%f   %f   %f    ",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
+    if (scrollView == self.bgView) {
+        self.type = 1;
+        if (indexP.row == _myIndexPath.row) {
+            if (self.otherScroll == self.bgView) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.bgView.frame = CGRectMake(-index, self.detailCommentFrame.BgViewF.origin.y, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
+                }];
+            }else {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.otherScroll.frame = self.frame;
+                    self.otherScroll.contentOffset = CGPointMake(0, 0);
+                }];
+            }
+        } else {
+            if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
+                [self.delegate viewCellInitial:indexP index:self.tag frame:self.frame];
+            }
+            [UIView animateWithDuration:0.3 animations:^{
+                self.bgView.frame = CGRectMake(-index, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.scrollViewF.size.height);
+            }];
+        }
+        indexP = _myIndexPath;
+        self.otherScroll = scrollView;
+        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,self.detailCommentFrame.BgViewF.size.height);
+
+    }else {
+        CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
+        self.type = 2;
+        UIScrollView *scrollview = [self.replyScrollView objectAtIndex:tag];
+        if (indexP.row == _myIndexPath.row) {
+            if (self.otherScroll == scrollView) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
+                }];
+            }else {
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.otherScroll.frame = self.frame;
+                    self.otherScroll.contentOffset = CGPointMake(0, 0);
+                }];
+            }
+        }else {
+            if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
+                [self.delegate viewCellInitial:indexP index:self.tag frame:self.frame];
+            }
+
+            [UIView animateWithDuration:0.3 animations:^{
+                scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
+            }];
+        }
+        self.otherScroll = scrollView;
+        self.frame = frame;
+        indexP = _myIndexPath;
+    }
+    self.tag = tag;
+
+}
 -(void)setDetailCommentFrame:(CommentFrame *)detailCommentFrame{
     
     _detailCommentFrame = detailCommentFrame;
@@ -166,69 +240,22 @@ NSIndexPath *indexP;
         }
     }
     for (int i = 0; i < [self.replyScrollView count]; i++) {
-        UIScrollView *scrlooView = [self.replyScrollView objectAtIndex:i];
-        if (scrlooView.superview) {
-            [scrlooView removeFromSuperview];
+        UIScrollView *scrollView = [self.replyScrollView objectAtIndex:i];
+        if (scrollView.superview) {
+            [scrollView removeFromSuperview];
         }
     }
-
+    for (int i = 0; i < [self.replyDel count]; i++) {
+        UIButton *del = [self.replyDel objectAtIndex:i];
+        if (del.superview) {
+            [del removeFromSuperview];
+        }
+    }
+    [self.replyDel removeAllObjects];
     [self.replysView removeAllObjects];
     [self.replyIconView removeAllObjects];
     [self.replyNameView removeAllObjects];
     [self.replyScrollView removeAllObjects];
-}
--(void)settingtData
-{
-#ifdef DEMO_DATA
-    CommentItem *comment = self.detailCommentFrame.detailCommentItem;
-//    self.icon.image = [UIImage imageNamed:comment.icon];
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:comment.icon] placeholderImage:[UIImage imageNamed:comment.icon] options:SDWebImageRefreshCached];
-    self.nameLabel.text = comment.name;
-    self.commentLabel.text = comment.comment;
-    self.timeLabel.text = @"3小時前";
-    for (NSInteger i = 0; i < comment.replys.count; i++) {
-        
-        ReplyItem *item = [comment.replys objectAtIndex:i];
-        UILabel *replyLabel = [[UILabel alloc]init];
-        replyLabel.font = [UIFont systemFontOfSize:16];
-        replyLabel.numberOfLines = 0;        
-        if (item.type == 1) {
-            replyLabel.text = item.comment;
-            replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
-        }else{
-            NSString *searchText = [NSString stringWithFormat:@"%@回复%@：%@",item.name,item.name,item.comment];
-            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:searchText];
-            NSRange Range = NSMakeRange(0, [[noteStr string] rangeOfString:@"："].location);
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:@"#0079b1"] range:Range];
-            
-            NSRange replyRange = NSMakeRange([[noteStr string] rangeOfString:@"回复"].location, [[noteStr string] rangeOfString:@"回复"].length);
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] range:replyRange];
-            [replyLabel setAttributedText:noteStr] ;
-            [replyLabel sizeToFit];
-        }
-        self.replyLabel = replyLabel;
-        [self.contentView addSubview:replyLabel];
-        [self.replysView addObject:replyLabel];
-        
-        UIImageView *replyIcon = [[UIImageView alloc] init];
-//        replyIcon.backgroundColor = [UIColor redColor];
-        replyIcon.layer.cornerRadius = 15;
-        replyIcon.layer.masksToBounds = YES;
-        [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.icon] placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRefreshCached];
-        [self.contentView addSubview:replyIcon];
-        self.replyIcon = replyIcon;
-        [self.replyIconView addObject:replyIcon];
-        
-        UILabel *replyName = [[UILabel alloc] init];
-        replyName.text = item.name;
-        replyName.textColor = [UIColor blackColor];
-        replyName.font = [UIFont systemFontOfSize:14];
-        
-        self.replyNameLabel = replyName;
-        [self.contentView addSubview:replyName];
-        [self.replyNameView addObject:replyName];
-    }
-#endif
 }
 -(void)settingFrame
 {
@@ -236,8 +263,16 @@ NSIndexPath *indexP;
     self.nameLabel.frame = self.detailCommentFrame.nameF;
     self.iconBtn.frame = self.icon.bounds;
     self.bgView.frame = self.detailCommentFrame.BgViewF;
-    self.delButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 64, 0, 64, self.detailCommentFrame.BgViewF.size.height);
-    self.bgView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width + 64, self.detailCommentFrame.BgViewF.size.height);
+    self.delButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 63, 0, 63, self.detailCommentFrame.BgViewF.size.height);
+    self.bgView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width + 63, self.detailCommentFrame.BgViewF.size.height);
+    for (int i = 0; i < [self.detailCommentFrame.replyScrollF count]; i++) {
+        ((UIScrollView *)[self.replyScrollView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replyScrollF objectAtIndex:i] CGRectValue];
+        CGRect rect = [[self.detailCommentFrame.replyScrollF objectAtIndex:i] CGRectValue];
+        
+        ((UIScrollView *)[self.replyScrollView objectAtIndex:i]).contentSize =             CGSizeMake([UIScreen mainScreen].bounds.size.width, rect.size.height);
+        ((UIButton *)[self.replyDel objectAtIndex:i]).frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 63, rect.origin.y, 63, rect.size.height);
+    }
+
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.detailCommentFrame.replysF objectAtIndex:i] CGRectValue];
     }
@@ -254,6 +289,18 @@ NSIndexPath *indexP;
     self.replyButton.frame = self.detailCommentFrame.replyBtnF;
     
     self.bgButton.frame = self.commentLabel.bounds;
+}
+- (NSMutableArray *)replyScrollView {
+    if (!_replyScrollView) {
+        _replyScrollView = [[NSMutableArray alloc]init];
+    }
+    return _replyScrollView;
+}
+-(NSMutableArray *)replyDel {
+    if (!_replyDel) {
+        _replyDel = [[NSMutableArray alloc] init];
+    }
+    return _replyDel;
 }
 -(NSMutableArray *)replysView
 {
@@ -327,12 +374,12 @@ NSIndexPath *indexP;
 //    }else
     if ([comment isKindOfClass:[FansComment class]]) {
         FansComment *data = comment;
-        //        if ([us.user.uId compare:data.uuid] == NSOrderedSame) {
-        //            self.bgView.scrollEnabled = YES;
-        //        }else {
-        //            self.bgView.scrollEnabled = NO;
-        //        }
-        self.bgView.userInteractionEnabled = NO;
+            if ([us.user.uId compare:data.uuid] == NSOrderedSame) {
+                self.bgView.scrollEnabled = YES;
+            }else {
+                self.bgView.scrollEnabled = NO;
+            }
+//        self.bgView.userInteractionEnabled = NO;
         self.icon.contentMode = UIViewContentModeScaleAspectFill;
         self.icon.layer.masksToBounds = YES;
         [self.icon sd_setImageWithURL:[NSURL URLWithString:data.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
@@ -344,6 +391,25 @@ NSIndexPath *indexP;
         self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
+            UIButton *delImage = [UIButton buttonWithType:UIButtonTypeCustom];
+            delImage = [UIButton buttonWithType:UIButtonTypeCustom];
+            [delImage setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
+            delImage.backgroundColor = [UIColor redColor];
+            [self.contentView addSubview:delImage];
+            self.delImage = delImage;
+            [self.contentView addSubview:delImage];
+            [self.replyDel addObject:delImage];
+            
+            UIScrollView *scrollView = [[UIScrollView alloc] init];
+            scrollView.bounces = YES;
+            scrollView.delegate = self;
+            scrollView.tag = i;
+            scrollView.showsHorizontalScrollIndicator = NO;
+            self.scrollView = scrollView;
+            self.scrollView.backgroundColor = [UIColor whiteColor];
+            [self.contentView addSubview:scrollView];
+            [self.replyScrollView addObject:scrollView];
+
             FansComment *item = [data.replayComments objectAtIndex:i];
             UILabel *replyLabel = [[UILabel alloc]init];
             replyLabel.font = [UIFont systemFontOfSize:14];
@@ -352,7 +418,7 @@ NSIndexPath *indexP;
             replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
             self.replyLabel = replyLabel;
             //            self.replyLabel.backgroundColor = [UIColor redColor];
-            [self.contentView addSubview:replyLabel];
+            [scrollView addSubview:replyLabel];
             [self.replysView addObject:replyLabel];
             
             UIImageView *replyIcon = [[UIImageView alloc] init];
@@ -361,18 +427,17 @@ NSIndexPath *indexP;
             replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;
             [replyIcon sd_setImageWithURL:[NSURL URLWithString:item.avator] placeholderImage:[UIImage imageNamed:@"Bitmap"] options:SDWebImageRefreshCached];
-            [self.contentView addSubview:replyIcon];
+            [scrollView addSubview:replyIcon];
             self.replyIcon = replyIcon;
             [self.replyIconView addObject:replyIcon];
             
             UILabel *replyName = [[UILabel alloc] init];
             replyName.text = item.name;
             replyName.textColor = [UIColor blackColor];
-            //            replyName.backgroundColor = [UIColor redColor];
             replyName.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
             
             self.replyNameLabel = replyName;
-            [self.contentView addSubview:replyName];
+            [scrollView addSubview:replyName];
             [self.replyNameView addObject:replyName];
         }
     }

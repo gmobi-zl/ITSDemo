@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TQRichTextView.h"
+#import "TTTAttributedLabel.h"
+//#import "TQRichTextView.h"
 
-
-@interface CommentOneCell : UITableViewCell<TQRichTextViewDelegate>
+@interface CommentOneCell : UITableViewCell<TTTAttributedLabelDelegate>
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) TQRichTextView *commentLabel;
+@property (nonatomic, strong) TTTAttributedLabel *commentLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIButton *replyButton;
 @property (nonatomic, strong) UILabel *line;

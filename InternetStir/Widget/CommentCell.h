@@ -16,7 +16,7 @@
 
 @protocol ViewCellDelegate <NSObject>
 
-- (void)viewCellInitial:(NSIndexPath *)indepath scr:(UIScrollView *)scr;
+-(void)viewCellInitial:(NSIndexPath *)indepath index:(NSInteger)tag frame:(CGRect)frame;
 
 @end
 
@@ -31,6 +31,15 @@
 @property (nonatomic, strong) NSMutableArray *replyIconView;
 @property (nonatomic, strong) NSMutableArray *replyNameView;
 @property (nonatomic, strong) NSMutableArray *replyScrollView;
+@property (nonatomic, strong) NSMutableArray *replyDel;
+
+@property (nonatomic, strong) UIScrollView *otherScroll;
+@property (nonatomic, assign) CGRect frame;
+@property (nonatomic, assign) int type;
+@property (nonatomic, assign) NSInteger tag;
+
+@property (nonatomic, strong) UIButton *delImage;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyNameLabel;
 @property (nonatomic, strong) UIImageView *replyIcon;

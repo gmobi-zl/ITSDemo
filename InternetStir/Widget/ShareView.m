@@ -26,8 +26,6 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-//        self.backgroundColor = [MMSystemHelper string2UIColor:@"#FFFFFF"];
-//        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         self.shareLabel = [[UILabel alloc] init];
         self.shareLabel.frame = CGRectMake(20, 0, screenW, 36);
         self.shareLabel.text = @"分享至:";
@@ -59,7 +57,7 @@
     }
     return self;
 }
-//- (void)cancelBtn {
-//    
-//}
+- (void)initShareMessage:(NSString *)title url:(NSString *)url photo:(NSString *)photo {
+
+}
 @end

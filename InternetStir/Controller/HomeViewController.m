@@ -28,6 +28,7 @@
 #import "WebviewController.h"
 #import "ShareView.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import "AppDelegate.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -102,9 +103,101 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSString *channel = [cf getChannel];
     self.shareLink = [NSString stringWithFormat:@"http://api.tomoto.io/v0/share/%@/%@.html",channel,self.fid];
 
-//    [self shareNewsToFacebook];
-    [self shareNewsToQQ];
+    
+    [self shareNewsToFacebook];
+//    [self shareNewsToQQ];
+//    [self RespImageContent];
+//    [self shareNewsToWB];
+//    [self shareNewsToMore];
+//    [self shareNewsToTwitter];
 }
+- (void) shareNewsToMore {
+    
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+    UIImage *image = [UIImage imageWithData:data];
+    UIActivityViewController *activeViewController = [[UIActivityViewController alloc]initWithActivityItems:@[self.shareTitle,image,[NSURL URLWithString:self.shareLink]] applicationActivities:nil];
+    activeViewController.excludedActivityTypes = @[UIActivityTypeAirDrop,UIActivityTypeCopyToPasteboard,UIActivityTypeAddToReadingList];
+    [self presentViewController:activeViewController animated:YES completion:nil];
+
+}
+- (void) shareNewsToTwitter {
+    
+    SLComposeViewController *tweetSheet = [SLComposeViewController
+                                           composeViewControllerForServiceType:SLServiceTypeTwitter];
+    
+    if (tweetSheet == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Twitter账号" message:@"这里没有配置好的twitter账号。你可以在设置中添加或者创建一个Twitter账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+
+    }else {
+        [tweetSheet setInitialText:self.shareTitle];
+        [tweetSheet addURL:[NSURL URLWithString:self.shareLink]];
+
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tweetSheet addImage:[UIImage imageWithData:data]];
+                [self presentViewController:tweetSheet animated:YES completion:nil];
+            });
+        });
+    }
+}
+- (void) shareNewsToWB {
+    
+    AppDelegate *myDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
+    authRequest.redirectURI = @"http://www.sina.com";
+    authRequest.scope = @"all";
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare] authInfo:authRequest access_token:myDelegate.wbtoken];
+    request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    [WeiboSDK sendRequest:request];
+}
+- (WBMessageObject *)messageToShare
+{
+    WBMessageObject *message = [WBMessageObject message];
+    message.text = [NSString stringWithFormat:@"%@%@",self.shareTitle,_shareLink];
+    WBImageObject *image = [WBImageObject object];
+    image.imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+    message.imageObject = image;
+    return message;
+}
+
+- (void) RespImageContent
+{
+    BOOL isInstall = [WXApi isWXAppInstalled];
+    if (isInstall == YES) {
+        WXMediaMessage *message = [WXMediaMessage message];
+        message.title = self.shareTitle;
+        message.description = @"";
+        // [message setThumbImage:[UIImage imageNamed:@"Icon-76"]];
+        
+        NSString *WH = [[NSString alloc] initWithFormat:@"%dx%d",128, 128];
+        NSString *linkPic = self.sharePhoto;
+        NSString *pic = [[NSString alloc] initWithFormat:@"%@.%@t5",linkPic,WH];
+        NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:pic]];
+        [message setThumbImage:[UIImage imageWithData:data]];
+        
+        WXWebpageObject *ext = [WXWebpageObject object];
+        ext.webpageUrl = self.shareLink;
+        
+        message.mediaObject = ext;
+        
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.bText = NO;
+        req.message = message;
+        req.scene = WXSceneTimeline;
+        
+        [WXApi sendReq:req];
+    }else{
+        UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"" message:@"未安装微信" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        [msgbox show];
+    }
+}
+
 - (void)shareNewsToQQ {
     
     QQApiSendResultCode sent;
@@ -171,13 +264,30 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
 - (void) shareNewsToFacebook {
     
-//    ConfigService *cf = [ConfigService get];
-//    NSString *channel = [cf getChannel];
-    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:self.shareLink];
-    [FBSDKShareDialog showFromViewController:self
-                                 withContent:content
-                                    delegate:nil];
+    SLComposeViewController *composeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+
+    if (composeVC == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Twitter账号" message:@"这里没有配置好的twitter账号。你可以在设置中添加或者创建一个Twitter账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+        
+    }else {
+        [composeVC setInitialText:self.shareTitle];
+        [composeVC addURL:[NSURL URLWithString:self.shareLink]];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [composeVC addImage:[UIImage imageWithData:data]];
+                [self presentViewController:composeVC animated:YES completion:nil];
+            });
+        });
+//        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+//        content.contentURL = [NSURL URLWithString:self.shareLink];
+//        [FBSDKShareDialog showFromViewController:self
+//                                     withContent:content
+//                                        delegate:nil];
+
+    }
+
 }
 - (void)passMessage {
     
@@ -335,7 +445,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         cell = [[HomeCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HomeCommentCellIdentifier];
     }
     HomeCommentCell *tmpCell = (HomeCommentCell*)cell;
-    
+    tmpCell.heartIcon.hidden = YES;
+    tmpCell.iiii = indexPath.row;
 #ifdef DEMO_DATA
     tmpCell.commentFrame = self.commentData[indexPath.row];
 #else
@@ -359,16 +470,16 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     if (isFav == YES) {
         //        self.zanImageView.image = self.zanImage;
         [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like_slected"] forState:UIControlStateNormal];
-        
     }else{
         [tmpCell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:UIControlStateNormal];
     }
-    tmpCell.commentLabel.delegage = self;
+    tmpCell.commentLabel.delegate = self;
     tmpCell.button.tag = indexPath.row;
     [tmpCell.button addTarget:self action:@selector(pushComment:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.commentBtn addTarget:self action:@selector(pushNextVc:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.commentBtn.tag = indexPath.row;
-    [tmpCell.btn addTarget:self action:@selector(pushDetailVc:) forControlEvents:UIControlEventTouchUpInside];
+    tmpCell.btn.tag = indexPath.row;
+    [tmpCell.btn addTarget:self action:@selector(showContent:) forControlEvents:UIControlEventTouchUpInside];
     [tmpCell.favBtn addTarget:self action:@selector(favBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     tmpCell.favBtn.tag = indexPath.row;
     [tmpCell.shareBtn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -382,17 +493,61 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         tmpCell.replyLabel.userInteractionEnabled = YES;
     }
     
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doubleTap:)];
+    [doubleTapGestureRecognizer setNumberOfTapsRequired:2];
+    [tmpCell.photo addGestureRecognizer:doubleTapGestureRecognizer];
+
+    UIView *singleTapView = [doubleTapGestureRecognizer view];
+    singleTapView.tag = indexPath.row;
     return cell;
 }
-- (void)richTextView:(TQRichTextView *)view touchBeginRun:(TQRichTextRun *)run
+- (void)doubleTap:(UIGestureRecognizer*)gestureRecognizer
 {
-    
+    UITapGestureRecognizer *singleTap = (UITapGestureRecognizer *)gestureRecognizer;
+    NSInteger index = [singleTap view].tag;
+    HomeCommentCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    ITSApplication* poApp = [ITSApplication get];
+    NSArray* dataArr = poApp.dataSvr.celebComments;
+    CelebComment *item = [dataArr objectAtIndex:index];
+    NSString *content = item.context;
+
+    SettingService* ss = [SettingService get];
+    BOOL isFav = [ss getBooleanValue:item.fid defValue:NO];
+    ITSApplication* itsApp = [ITSApplication get];
+    CBUserService* us = itsApp.cbUserSvr;
+    if (us.user.isLogin == NO) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.loginView.effectView.alpha = 1;
+        }];
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
+    }else {
+        // fav
+        if (isFav == NO) {
+            [UIView animateWithDuration:1 animations:^{
+                cell.heartIcon.hidden = NO;
+                cell.heartIcon.frame = CGRectMake(cell.commentFrame.photoF.size.width/2 - 60, cell.commentFrame.photoF.size.height/2 - 60, 120, 120);
+            } completion:^(BOOL finished) {
+//                cell.heartIcon.hidden = YES;
+                [self.tableView reloadData];
+            }];
+            item.likes ++;
+            cell.likeNum.text = [NSString stringWithFormat:@"%ld",item.likes];
+            [cell.favBtn setBackgroundImage:[UIImage imageNamed:@"icon_like_slected"] forState:UIControlStateNormal];
+            cell.commentFrame.commentItem.isFavour = YES;
+            [ss setBooleanValue:item.fid data:YES];
+            NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
+            [eParams setObject:@"forumid" forKey:@"fid"];
+            [eParams setObject:content forKey:@"context"];
+            [poApp.reportSvr recordEvent:@"+heart" params:eParams eventCategory:@"comment.click"];
+            [poApp.remoteSvr userLike:item.fid ];
+        }
+    }
 }
 
-- (void)richTextView:(TQRichTextView *)view touchEndRun:(TQRichTextRun *)run
-{
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url{
     WebviewController *webView = [[WebviewController alloc] init];
-    webView.path = run.text;
+    webView.path = [url absoluteString];
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }
@@ -580,40 +735,19 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }
     }
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)showContent:(UIButton *)button {
     
-//    DetailCommentController *vc = [[DetailCommentController alloc] init];
-//    HomeCommentFrame *frame = self.commentData[indexPath.row];
-//    vc.headHeight = frame.headH;
-//    vc.item = frame.commentItem;
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-}
-- (void)pushDetailVc:(UIButton *)button {
-#ifdef DEMO_DATA
-    DetailCommentController *detail = [[DetailCommentController alloc] init];
-    HomeCommentFrame *frame = self.commentData[button.tag];
-    detail.hidesBottomBarWhenPushed = YES;
-    detail.index = button.tag;
-    detail.headHeight = frame.headH;
-    detail.item = frame.commentItem;
-    [self.navigationController pushViewController:detail animated:YES];
-#else
-    
+    HomeCommentCell *cell = (HomeCommentCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
     ITSApplication* itsApp = [ITSApplication get];
     NSArray* dataArr = itsApp.dataSvr.celebComments;
-    
     if (dataArr != nil){
         CelebComment* cbComment = [dataArr objectAtIndex:button.tag];
+        cbComment.isShow = YES;
         [itsApp.dataSvr setCurrentCelebComment:cbComment];
-        DetailCommentController *detail = [[DetailCommentController alloc] init];
-        detail.hidesBottomBarWhenPushed = YES;
-        detail.item = cbComment;
-        detail.headHeight = cbComment.uiFrame.headH;
-        [self.navigationController pushViewController:detail animated:YES];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-    
-#endif
 }
 - (void)pushNextVc:(UIButton *)button{
     ITSApplication* itsApp = [ITSApplication get];

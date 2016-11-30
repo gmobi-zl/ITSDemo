@@ -14,7 +14,7 @@
 #import "LoginView.h"
 #import "CommentCell.h"
 #import "CommentOneCell.h"
-@interface CommentViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,ViewCellDelegate,TQRichTextViewDelegate>
+@interface CommentViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,CommentViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,ViewCellDelegate,TTTAttributedLabelDelegate>
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CommentView *commentView;

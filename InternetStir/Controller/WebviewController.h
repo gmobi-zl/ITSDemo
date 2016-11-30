@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UIProgressView *progressView;
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) UIActivityIndicatorView *testActivityIndicato;
-@property (nonatomic, copy) NSString *path;
+@property (nonatomic, strong) NSString *path;
 
 @end

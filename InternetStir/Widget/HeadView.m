@@ -99,17 +99,17 @@
         
         NSString *str = [NSString stringWithFormat:@"%@   %@",item.name,item.context];
 
-        CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - 50, MAXFLOAT) font:[UIFont systemFontOfSize:14] string: str lineSpace:0.5 type:1];
-
-        self.contentLabel = [[TQRichTextView alloc] init];
-        self.contentLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.like.frame) + 10, screenW - 50, rect.size.height);
-        self.contentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
-        self.contentLabel.lineSpace = 0.5;
-        self.contentLabel.type = 1;
-        self.contentLabel.text = str;
-        self.contentLabel.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.contentLabel];
-        
+//        CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - 50, MAXFLOAT) font:[UIFont systemFontOfSize:14] string: str lineSpace:0.5 type:1];
+//
+//        self.contentLabel = [[TQRichTextView alloc] init];
+//        self.contentLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.like.frame) + 10, screenW - 50, rect.size.height);
+//        self.contentLabel.font = [UIFont systemFontOfSize:HOME_VIPNAME_FONT_SIZE];
+//        self.contentLabel.lineSpace = 0.5;
+//        self.contentLabel.type = 1;
+//        self.contentLabel.text = str;
+//        self.contentLabel.backgroundColor = [UIColor clearColor];
+//        [self addSubview:self.contentLabel];
+//        
 
         
 //        self.contentLabel = [[TQRichTextView alloc] init];
@@ -132,7 +132,7 @@
 //        [self.contentLabel sizeToFit];
         
         self.lineLabel = [[UILabel alloc] init];
-        self.lineLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.contentLabel.frame) + 14, screenW - 2 * HOME_CONTENT_LEFT_PADDING, 1);
+//        self.lineLabel.frame = CGRectMake(HOME_CONTENT_LEFT_PADDING, CGRectGetMaxY(self.contentLabel.frame) + 14, screenW - 2 * HOME_CONTENT_LEFT_PADDING, 1);
         self.lineLabel.backgroundColor = [UIColor grayColor];
         self.lineLabel.alpha = 0.6;
         [self addSubview:self.lineLabel];

@@ -32,12 +32,13 @@
         self.icon.layer.cornerRadius = 20;
         [self.contentView addSubview:self.icon];
         
-        self.commentLabel = [[TQRichTextView alloc] init];
+        self.commentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
         self.commentLabel.font = [UIFont systemFontOfSize:14];
-        self.commentLabel.lineSpace = 0.5;
-        self.commentLabel.type = 2;
+        self.commentLabel.lineSpacing = 0.5;
+        self.commentLabel.numberOfLines = 0;
         self.commentLabel.backgroundColor = [UIColor clearColor];
+        self.commentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
         [self.contentView addSubview:self.commentLabel];
 
         self.timeLabel = [[UILabel alloc] init];
@@ -56,7 +57,6 @@
         self.line = [[UILabel alloc] init];
         self.line.backgroundColor = [MMSystemHelper string2UIColor:@"#ECECED"];
         [self.contentView addSubview:self.line];
-
     }
     return self;
 }
@@ -73,20 +73,36 @@
     CGFloat nameLabelX = CGRectGetMaxX(self.icon.frame) + 8;
     CGSize nameLabelSize = [MMSystemHelper sizeWithString:data.name font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT,20)];
     CGFloat nameLabelY = 13;
-    CGFloat nameLabelWidth = nameLabelSize.width + 20;
+    CGFloat nameLabelWidth = nameLabelSize.width + 10;
     CGFloat nameLabelHeight = nameLabelSize.height;
     self.nameLabel.frame = CGRectMake(nameLabelX, nameLabelY, nameLabelWidth, 20);
     self.nameLabel.textColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
     //        [self.contentView addSubview:self.nameLabel];
     CGFloat contentLabelX = nameLabelX;
     CGFloat contentLabelY = nameLabelY + nameLabelHeight + 4;
-    //        CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:16 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
-    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:14] string:data.context lineSpace:0.5 type:2];
+//    CGSize contentLabelSize = [MMSystemHelper sizeWithString:data.context font:[UIFont systemFontOfSize:14 ] maxSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)];
     
-    CGFloat contentLabelWidth = rect.size.width;
-    CGFloat contentLabelHeight = rect.size.height;
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+//    paragraphStyle.lineSpacing = 0.5;
+//    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:paragraphStyle};
+//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:data.context attributes:attributes];
+//
+//    CGSize contentLabelSize = [TTTAttributedLabel sizeThatFitsAttributedString:noteStr withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) limitedToNumberOfLines:0];
+
+//   CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT) font:[UIFont systemFontOfSize:14] string:data.context lineSpace:0.5 type:2];
+    __block CGSize size;
+    [self.commentLabel setText:data.context afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        size = [TTTAttributedLabel sizeThatFitsAttributedString:mutableAttributedString
+                                                  withConstraints:CGSizeMake([MMSystemHelper getScreenWidth] - nameLabelX - HOME_CONTENT_LEFT_PADDING, MAXFLOAT)
+                                           limitedToNumberOfLines:0];
+        return mutableAttributedString;
+    }];
+
+    CGFloat contentLabelWidth = size.width;
+    CGFloat contentLabelHeight = size.height;
     self.commentLabel.frame = CGRectMake(contentLabelX, contentLabelY, contentLabelWidth, contentLabelHeight);
-    self.commentLabel.text = data.context;
+    
+    
     //        [self.contentView addSubview:self.commentLabel];
     NSString* time = [MMSystemHelper compareCurrentTime:[NSString stringWithFormat:@"%lld", data.pts]];
     CGSize timeLabelSize = [MMSystemHelper sizeWithString:time font:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(MAXFLOAT, 20)];

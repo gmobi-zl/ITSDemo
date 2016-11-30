@@ -41,8 +41,11 @@ static NSString * const kClientID =
     
     __weak id weakSelf = self;
     self.tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"222222" andDelegate:weakSelf];
-//    [WXApi registerApp:@"wx6c162ed458fe4b42"];
+    [WXApi registerApp:@"wx6c162ed458fe4b42"];
+    //wb2045436852
     //[FIRApp configure];
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:@"2045436852"];
     
     NSError *configureError;
     [[GGLContext sharedInstance] configureWithError:&configureError];
@@ -91,6 +94,18 @@ static NSString * const kClientID =
 //    }
     return YES;
 }
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+
+    if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        self.wbtoken = [(WBAuthorizeResponse *)response accessToken];
+        self.wbCurrentUserID = [(WBAuthorizeResponse *)response userID];
+        self.wbRefreshToken = [(WBAuthorizeResponse *)response refreshToken];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     BOOL success = NO;
 //    if ([[GIDSignIn sharedInstance] handleURL:url
@@ -106,6 +121,8 @@ static NSString * const kClientID =
         success = YES;
     }else if ([TencentOAuth HandleOpenURL:url] == YES) {
         success = YES;
+    }else if ([WeiboSDK handleOpenURL:url delegate:self]) {
+        success = YES;
     }
     return success;
 }
@@ -116,6 +133,8 @@ static NSString * const kClientID =
     if (YES == [TencentOAuth CanHandleOpenURL:url])
     {
         return [TencentOAuth HandleOpenURL:url];
+    }else if ([WeiboSDK handleOpenURL:url delegate:self] ) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
     }
     return YES;
 }

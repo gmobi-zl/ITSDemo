@@ -15,8 +15,9 @@
 #import "HomeCommentCell.h"
 #import "ShareView.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-
-@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TQRichTextViewDelegate>
+#import "WXApi.h"
+#import<Social/Social.h>
+@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TTTAttributedLabelDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 #ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;
@@ -30,6 +31,7 @@
 @property (nonatomic, copy) NSString *shareLink;
 @property (nonatomic, copy) NSString *sharePhoto;
 @property (nonatomic, copy) NSString *shareTitle;
+
 @property (nonatomic, strong) UIActionSheet *photoSheet;
 @property (nonatomic, strong) UIActionSheet *sheet;
 

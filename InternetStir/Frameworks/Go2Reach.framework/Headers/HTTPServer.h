@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@class GCDAsyncSocket;
+@class GRGCDAsyncSocket;
 @class WebSocket;
 
 #if TARGET_OS_IPHONE
@@ -21,7 +21,7 @@
 @interface HTTPServer : NSObject IMPLEMENTED_PROTOCOLS
 {
 	// Underlying asynchronous TCP/IP socket
-	GCDAsyncSocket *asyncSocket;
+	GRGCDAsyncSocket *asyncSocket;
 	
 	// Dispatch queues
 	dispatch_queue_t serverQueue;
