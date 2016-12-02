@@ -141,7 +141,8 @@ typedef void (^RemoteCallback)(int status, int code, NSDictionary* resultData);
                 attachment: (NSMutableArray*) attachment;
 
 -(void) celebRemoveComment: (NSString*) fid;
-
+-(void) deleteFansComment: (NSString*) fid
+                      cid:(NSString *) cid;
 //下载launch
 - (void) downloadLaunchImage:(NSString *) file;
 

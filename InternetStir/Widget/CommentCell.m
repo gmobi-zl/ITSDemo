@@ -13,7 +13,7 @@
 #import "AppStyleConfiguration.h"
 #import "ITSApplication.h"
 NSIndexPath *indexP;
-
+NSInteger scrollTag;
 @implementation CommentCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -23,7 +23,7 @@ NSIndexPath *indexP;
         
         self.delButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.delButton setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
-        self.delButton.backgroundColor = [UIColor redColor];
+        self.delButton.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.delButton];
 
         self.bgView = [[UIScrollView alloc] init];
@@ -44,25 +44,18 @@ NSIndexPath *indexP;
         [self.icon addSubview:self.iconBtn];
         
         self.nameLabel = [[UILabel alloc] init];
-//        self.nameLabel.font = [UIFont systemFontOfSize:16];
         self.nameLabel.font = [UIFont fontWithName:@"PingFangTC-Semibold" size:14];
         [self.bgView addSubview:self.nameLabel];
         
         self.commentLabel = [[UILabel alloc] init];
-//        self.commentLabel.numberOfLines = 0;
-//        self.commentLabel.userInteractionEnabled = YES;
         self.commentLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
         self.commentLabel.font = [UIFont systemFontOfSize:14];
-//        self.commentLabel.lineSpace = 0.5;
-//        self.commentLabel.type = 2;
-//        self.commentLabel.backgroundColor = [UIColor redColor];
         self.commentLabel.backgroundColor = [UIColor clearColor];
         [self.bgView addSubview:self.commentLabel];
         
-        self.delImage = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.delImage = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.delImage setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
-        self.delImage.backgroundColor = [UIColor redColor];
+        self.delImage = [[UIView alloc] init];
+//        [self.delImage setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
+        self.delImage.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
         [self.contentView addSubview:self.delImage];
         
         self.scrollView = [[UIScrollView alloc] init];
@@ -119,7 +112,6 @@ NSIndexPath *indexP;
     NSInteger tag =  scrollView.tag;
     NSInteger index = scrollView.contentOffset.x;
 
-//     NSLog(@"？？？？？？？？？@@@@@@@x=%f  y=%f   %f   %f    ",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
     if (index < 25) {
         index = 0;
     }else {
@@ -134,7 +126,7 @@ NSIndexPath *indexP;
                 self.bgView.contentOffset = CGPointMake(63, 0);
             }
         }];
-    }else {
+    }else if(scrollView == self.scrollView){
         CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
         UIScrollView *scrollview = [self.replyScrollView objectAtIndex:tag];
         [UIView animateWithDuration:0.3 animations:^{
@@ -150,9 +142,10 @@ NSIndexPath *indexP;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
     NSInteger tag =  scrollView.tag;
-    NSInteger index = scrollView.contentOffset.x;
-//    NSLog(@"@@@@@@@x=%f  y=%f   %f   %f    ",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    NSLog(@"#######%ld",(long)scrollTag);
 
+    NSInteger index = scrollView.contentOffset.x;
+    NSLog(@"%@",[scrollView class]);
     if (scrollView == self.bgView) {
         self.type = 1;
         if (indexP.row == _myIndexPath.row) {
@@ -162,21 +155,21 @@ NSIndexPath *indexP;
                 }];
             }else {
                 [UIView animateWithDuration:0.3 animations:^{
-                    self.otherScroll.frame = self.frame;
+                    self.otherScroll.frame = self.scrollFrame;
                     self.otherScroll.contentOffset = CGPointMake(0, 0);
                 }];
             }
         } else {
             if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
-                [self.delegate viewCellInitial:indexP index:self.tag frame:self.frame];
+                [self.delegate viewCellInitial:indexP index:scrollTag frame:self.scrollFrame];
             }
             [UIView animateWithDuration:0.3 animations:^{
-                self.bgView.frame = CGRectMake(-index, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.scrollViewF.size.height);
+                self.bgView.frame = CGRectMake(-index, 0, [UIScreen mainScreen].bounds.size.width, self.detailCommentFrame.BgViewF.size.height);
             }];
         }
         indexP = _myIndexPath;
         self.otherScroll = scrollView;
-        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,self.detailCommentFrame.BgViewF.size.height);
+        self.scrollFrame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,self.detailCommentFrame.BgViewF.size.height);
 
     }else {
         CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
@@ -189,13 +182,13 @@ NSIndexPath *indexP;
                 }];
             }else {
                 [UIView animateWithDuration:0.3 animations:^{
-                    self.otherScroll.frame = self.frame;
+                    self.otherScroll.frame = self.scrollFrame;
                     self.otherScroll.contentOffset = CGPointMake(0, 0);
                 }];
             }
         }else {
             if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
-                [self.delegate viewCellInitial:indexP index:self.tag frame:self.frame];
+                [self.delegate viewCellInitial:indexP index:scrollTag frame:self.scrollFrame];
             }
 
             [UIView animateWithDuration:0.3 animations:^{
@@ -203,10 +196,11 @@ NSIndexPath *indexP;
             }];
         }
         self.otherScroll = scrollView;
-        self.frame = frame;
+        self.scrollFrame = frame;
         indexP = _myIndexPath;
     }
-    self.tag = tag;
+    scrollTag = tag;
+    NSLog(@"!!!!!%d",scrollView);
 
 }
 -(void)setDetailCommentFrame:(CommentFrame *)detailCommentFrame{
@@ -270,7 +264,7 @@ NSIndexPath *indexP;
         CGRect rect = [[self.detailCommentFrame.replyScrollF objectAtIndex:i] CGRectValue];
         
         ((UIScrollView *)[self.replyScrollView objectAtIndex:i]).contentSize =             CGSizeMake([UIScreen mainScreen].bounds.size.width, rect.size.height);
-        ((UIButton *)[self.replyDel objectAtIndex:i]).frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 63, rect.origin.y, 63, rect.size.height);
+        ((UIView *)[self.replyDel objectAtIndex:i]).frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 63, rect.origin.y + 1, 63, rect.size.height - 1);
     }
 
     for (int i = 0; i < [self.detailCommentFrame.replysF count]; i++) {
@@ -391,13 +385,13 @@ NSIndexPath *indexP;
         self.nameLabel.textColor = [UIColor blackColor];
         for (NSInteger i = 0; i < data.replayComments.count; i++) {
             
-            UIButton *delImage = [UIButton buttonWithType:UIButtonTypeCustom];
-            delImage = [UIButton buttonWithType:UIButtonTypeCustom];
-            [delImage setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
-            delImage.backgroundColor = [UIColor redColor];
+            UIView *delImage = [[UIView alloc] init];
+            delImage.backgroundColor = [MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR];
             [self.contentView addSubview:delImage];
+            delImage.userInteractionEnabled = YES;
             self.delImage = delImage;
             [self.contentView addSubview:delImage];
+            self.delImage.userInteractionEnabled = YES;
             [self.replyDel addObject:delImage];
             
             UIScrollView *scrollView = [[UIScrollView alloc] init];
@@ -411,18 +405,21 @@ NSIndexPath *indexP;
             [self.replyScrollView addObject:scrollView];
 
             FansComment *item = [data.replayComments objectAtIndex:i];
+            if ([us.user.uId compare:item.uuid] == NSOrderedSame) {
+                self.scrollView.scrollEnabled = YES;
+            }else {
+                self.scrollView.scrollEnabled = NO;
+            }
             UILabel *replyLabel = [[UILabel alloc]init];
             replyLabel.font = [UIFont systemFontOfSize:14];
             replyLabel.numberOfLines = 0;
             replyLabel.text = item.comment;
             replyLabel.textColor = [MMSystemHelper string2UIColor:HOME_COMMENT_COLOR];
             self.replyLabel = replyLabel;
-            //            self.replyLabel.backgroundColor = [UIColor redColor];
             [scrollView addSubview:replyLabel];
             [self.replysView addObject:replyLabel];
             
             UIImageView *replyIcon = [[UIImageView alloc] init];
-//            replyIcon.backgroundColor = [UIColor redColor];
             replyIcon.layer.cornerRadius = 15;
             replyIcon.contentMode = UIViewContentModeScaleAspectFill;
             replyIcon.layer.masksToBounds = YES;

@@ -34,11 +34,11 @@
 @property (nonatomic, strong) NSMutableArray *replyDel;
 
 @property (nonatomic, strong) UIScrollView *otherScroll;
-@property (nonatomic, assign) CGRect frame;
+@property (nonatomic, assign) CGRect scrollFrame;
 @property (nonatomic, assign) int type;
-@property (nonatomic, assign) NSInteger tag;
+//@property (nonatomic, assign) NSInteger scrollTag;
 
-@property (nonatomic, strong) UIButton *delImage;
+@property (nonatomic, strong) UIView *delImage;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UILabel *replyLabel;
 @property (nonatomic, strong) UILabel *replyNameLabel;

@@ -1463,6 +1463,43 @@
          }
      }];
 }
+-(void) deleteFansComment: (NSString*) fid
+                      cid:(NSString *) cid{
+    if (fid == nil || cid == nil) {
+        return;
+    }
+    
+    ConfigService* cs = [ConfigService get];
+    ITSApplication* itsApp = [ITSApplication get];
+    CelebUser* user = itsApp.cbUserSvr.user;
+
+    NSString *url = [[NSString alloc] initWithFormat:@"%@v0/forums/%@/%@/comments/%@?_s=%@",[self getBaseUrl], [cs getChannel], fid, cid,user.session];
+    MMHttpSession* httpSession = [MMHttpSession alloc];
+    [httpSession doDelete:url reqHeader:nil reqBody:nil callback:^(int status, int code, NSDictionary *resultData)
+     {
+         if (code == 200) {
+             NSData* data = [resultData objectForKey:@"data"];
+             NSError* err;
+             NSDictionary* dataDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&err];
+             MMLogDebug(@"celebRemoveComment RSP: %@",dataDic);
+             
+             NSNumber* tmpNum = [dataDic objectForKey:@"success"];
+             BOOL succ = [tmpNum boolValue];
+             
+             if (succ == YES){
+                 
+                 [itsApp.dataSvr removeFansCommentitem:fid cid:cid];
+                 
+                 // send success
+                 MMEventService *es = [MMEventService getInstance];
+                 [es send:EVENT_CELEB_REPLY_COMMENT_DATA_REFRESH eventData:CB_COMMENT_REPLY_REFRESH_SUCCESS];
+             } else {
+                 // send fial
+                 
+             }
+         }
+     }];
+}
 
 -(void) celebRemoveComment: (NSString*) fid{
     if (fid == nil)

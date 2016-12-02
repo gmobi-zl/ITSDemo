@@ -1,18 +1,20 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C4B009E1C1619EE08500A768D60B9797EEDF9147+++0A7128B",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C4B009E1C1619EE08500A768D60B9797EEDF9147+++E0E1FF1",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++E0E1FF1" : 9223372036854775807,
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++0A7128B" : 9223372036854775807,
     "C4B009E1C1619EE08500A768D60B9797EEDF9147+++BCF1BFF" : 9223372036854775807,
-    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++54011E8" : 9223372036854775807,
-    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++0A7128B" : 9223372036854775807
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++54011E8" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BAF3A52D-E2BE-4A0D-BD6F-689C9680DF5A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++E0E1FF1" : "ITSDemo_xing\/",
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++0A7128B" : "ITSDemo_zl\/",
     "C4B009E1C1619EE08500A768D60B9797EEDF9147+++BCF1BFF" : "",
-    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++54011E8" : "",
-    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++0A7128B" : "ITSDemo_zl\/"
+    "C4B009E1C1619EE08500A768D60B9797EEDF9147+++54011E8" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Jacob",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/gmobi-zl\/ITSDemo.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4B009E1C1619EE08500A768D60B9797EEDF9147+++BCF1BFF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/gmobi-zl\/ITSDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4B009E1C1619EE08500A768D60B9797EEDF9147+++E0E1FF1"
     }
   ]
 }

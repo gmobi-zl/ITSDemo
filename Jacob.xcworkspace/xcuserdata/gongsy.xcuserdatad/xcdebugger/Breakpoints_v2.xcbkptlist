@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Services/DataService.m"
-            timestampString = "501074218.975575"
+            timestampString = "502275812.324316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3078"
-            endingLineNumber = "3078"
+            startingLineNumber = "3098"
+            endingLineNumber = "3098"
             landmarkName = "-userInsertCurrentReplyCommentItem:"
             landmarkType = "7">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Services/DataService.m"
-            timestampString = "501074221.733847"
+            timestampString = "502275812.324316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3087"
-            endingLineNumber = "3087"
+            startingLineNumber = "3107"
+            endingLineNumber = "3107"
             landmarkName = "-userInsertCurrentReplyCommentItem:"
             landmarkType = "7">
          </BreakpointContent>
@@ -130,13 +130,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Widget/CommentCell.m"
-            timestampString = "502187502.881004"
+            timestampString = "502276320.956173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "@implementation CommentCell"
-            landmarkType = "3">
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -162,12 +162,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Controller/CommentViewController.m"
-            timestampString = "502187013.105996"
+            timestampString = "502256133.228925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "517"
             endingLineNumber = "517"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Widget/CommentCell.m"
+            timestampString = "502336433.49889"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-scrollViewDidScroll:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InternetStir/Controller/CommentViewController.m"
+            timestampString = "502335819.492681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
+            landmarkName = "-viewCellInitial:index:frame:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

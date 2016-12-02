@@ -339,7 +339,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     
     UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
     Btn.frame = CGRectMake(0, 20, 15, 20);
-    [Btn setBackgroundImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    [Btn setBackgroundImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
     [Btn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
@@ -525,7 +525,6 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
             height = 13 + 20 + 4 + size.height + 4 + 20 + 10;
         }
     }
-    NSLog(@"-------------%f",height);
     return height;
 #endif
 }
@@ -588,7 +587,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 
     }else {
 
-        cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:CommentTableViewCellIdentifier forIndexPath:indexPath];
         if (cell == nil) {
             cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CommentTableViewCellIdentifier];
         }
@@ -605,11 +604,14 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
             [tmpCell setShowData:c];
             [tmpCell setDetailCommentFrame:c.uiFrame];
         }
+        tmpCell.bgView.tag = indexPath.row - 1;
         tmpCell.myIndexPath = indexPath;
         tmpCell.delegate = self;
-        
+        [tmpCell.delButton addTarget:self action:@selector(removeFan:) forControlEvents:UIControlEventTouchUpInside];
+        tmpCell.delButton.tag = indexPath.row;
         [tmpCell.iconBtn addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
         tmpCell.iconBtn.tag = indexPath.row;
+        tmpCell.bgView.contentOffset = CGPointMake(0, 0);
         for (int i = 0; i < [tmpCell.replyIconView count]; i++) {
             ((UIImageView *)[tmpCell.replyIconView objectAtIndex:i]).frame = [(NSValue *)[tmpCell.detailCommentFrame.replyPictureF objectAtIndex:i] CGRectValue];
             tmpCell.replyIcon = [tmpCell.replyIconView objectAtIndex:i];
@@ -631,15 +633,47 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
             button.tag = indexPath.row;
             [tmpCell.replyNameLabel addSubview:button];
         }
-//        if (indexPath.row % 2 == 1) {
-//            tmpCell.contentView.backgroundColor = [UIColor cyanColor];
-//        }else {
-//            tmpCell.contentView.backgroundColor = [UIColor orangeColor];
-//        }
+        for (int i = 0; i < [tmpCell.detailCommentFrame.replyScrollF count]; i++) {
+            
+            CGRect rect = [[tmpCell.detailCommentFrame.replyScrollF objectAtIndex:i] CGRectValue];
+            tmpCell.delImage = [tmpCell.replyDel objectAtIndex:i];
+            ((UIView *)[tmpCell.replyDel objectAtIndex:i]).frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 63, rect.origin.y + 1, 63, rect.size.height - 1);
+            
+            UIButton *button = [UIButton  buttonWithType:UIButtonTypeCustom];
+            button.frame = tmpCell.delImage.bounds;
+            [button setImage:[UIImage imageNamed:@"icon_Trash"] forState:UIControlStateNormal];
+            button.tag = indexPath.row + i;
+            [button addTarget:self action:@selector(deleteComment:) forControlEvents:UIControlEventTouchUpInside];
+            [tmpCell.delImage addSubview:button];
+        }
         return tmpCell;
     }
    
 #endif
+}
+- (void) removeFan:(UIButton *)button {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    
+    NSInteger index = button.tag - 1;
+    FansComment *fans = [currentComment.replayComments objectAtIndex:index];
+    [itsApp.remoteSvr deleteFansComment:currentComment.fid cid:fans.cid];
+}
+- (void) deleteComment:(UIButton *)button {
+    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    CelebComment* currentComment = ds.currentCelebComment;
+    
+    CommentCell *cell = (CommentCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSInteger index = button.tag - indexPath.row;
+    FansComment *fans = [currentComment.replayComments objectAtIndex:indexPath.row - 1];
+    FansComment *comment = [fans.replayComments objectAtIndex:index];
+    [itsApp.remoteSvr deleteFansComment:currentComment.fid cid:comment.cid];
+
 }
 //- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 //    
@@ -648,17 +682,17 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
 //    }
 //}
 //#pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    // 输出点击的view的类名
-    NSLog(@"%@", NSStringFromClass([touch.view class]));
-    
-    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-        return YES;
-    }
-    return  NO;
-}  
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    // 输出点击的view的类名
+//    NSLog(@"%@", NSStringFromClass([touch.view class]));
+//    
+//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+//    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+//        return YES;
+//    }
+//    return  NO;
+//}  
 
 - (void)attributedLabel:(TTTAttributedLabel *)label
    didSelectLinkWithURL:(NSURL *)url{
@@ -667,7 +701,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }
-/*
+
 -(void)viewCellInitial:(NSIndexPath *)indepath index:(NSInteger)tag frame:(CGRect)frame{
 
     CommentCell *cell = [self.tableView cellForRowAtIndexPath:indepath];
@@ -680,15 +714,15 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
         }];
 
     }else if (cell.type == 2) {
-        UIScrollView *scrollview = [cell.replyScrollView objectAtIndex:cell.tag];
+        UIScrollView *scrollview = [cell.replyScrollView objectAtIndex:tag];
 
         [UIView animateWithDuration:0.3 animations:^{
-            scrollview.frame = cell.frame;
+            scrollview.frame = cell.scrollFrame;
             scrollview.contentOffset = CGPointMake(0, 0);
         }];
     }
 }
-*／
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 

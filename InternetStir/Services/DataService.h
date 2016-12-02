@@ -338,6 +338,8 @@ typedef enum{
                            type: (int) type;
 -(BOOL) insertCelebCommentItem: (CelebComment*) item;
 -(void) removeCelebCommentItem: (NSString*) fid;
+-(void) removeFansCommentitem: (NSString*) fid
+                          cid: (NSString*) cid;
 -(void) updateCelebCommentItem: (NSString*) fid
                        context: (NSString*) context
                    attachments: (NSMutableArray*) attachments;

@@ -2430,7 +2430,30 @@
     
     return nil;
 }
-
+-(void) removeFansCommentitem: (NSString*) fid
+                          cid: (NSString*) cid {
+    if (fid == nil || cid == nil || self.currentCelebComment == nil) {
+        return;
+    }
+    int listCount = (int)[self.currentCelebComment.replayComments count];
+    for (int i = 0; i < listCount; i++) {
+        FansComment *fan = [self.currentCelebComment.replayComments objectAtIndex:i];
+        if ([fan.fid compare:fid] == NSOrderedSame) {
+            if ([fan.cid compare:cid] == NSOrderedSame) {
+                [self.currentCelebComment.replayComments removeObject:fan];
+                break;
+            }else {
+                for (int j = 0; j < fan.replayComments.count; j++) {
+                    FansComment *comment = [fan.replayComments objectAtIndex:j];
+                    if ([comment.cid compare:cid ] == NSOrderedSame) {
+                        [fan.replayComments removeObject:comment];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 -(void) removeCelebCommentItem: (NSString*) fid{
     
     int i = 0;
@@ -2810,12 +2833,9 @@
     newFComment.pts = trackComment.pts;
     newFComment.uts = trackComment.uts;
     newFComment.isCelebRead = trackComment.isCelebRead;
-    newFComment.u_role = trackComment.u_role;
-    
+    newFComment.u_role = trackComment.u_role;    
     return newFComment;
 }
-
-
 
 -(void) refreshReplyComments:(int)page fid:(NSString *)fid {
 

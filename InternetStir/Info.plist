@@ -71,7 +71,7 @@
 	<key>FacebookAppID</key>
 	<string>214189672337433</string>
 	<key>FacebookDisplayName</key>
-	<string>蕃茄大咖</string>
+	<string>Tomoto</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -138,9 +138,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>"蕃茄大咖"想要取用你的相機 ?</string>
+	<string>&quot;Tomoto&quot;想要取用你的相機 ?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"蕃茄大咖"想要取用你的相片 ?</string>
+	<string>&quot;Tomoto&quot;想要取用你的相片 ?</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UILaunchStoryboardName</key>
