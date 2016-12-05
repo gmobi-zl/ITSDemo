@@ -57,10 +57,12 @@
 		18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665651D5DA95B00BDB2E8 /* SplashController.m */; };
 		867C305EDF8C8FB84F3DEED6 /* libPods-Jacob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A69515971C39331B5EA30D /* libPods-Jacob.a */; };
 		E1172D771DF007280032063D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1172D761DF007280032063D /* GoogleService-Info.plist */; };
+		E122C2141DF5147400C20A45 /* ErrView.m in Sources */ = {isa = PBXBuildFile; fileRef = E122C2131DF5147400C20A45 /* ErrView.m */; };
 		E124AA031D6D6EFB00B5BE8F /* DownLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */; };
 		E12C27841D952AB4001003AF /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12C27831D952AB4001003AF /* ErrorController.m */; };
 		E13A7D681D7E995300305B64 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13A7D671D7E995300305B64 /* TestController.m */; };
 		E142F02D1DE67EAC0032173C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E142F02C1DE67EAC0032173C /* Social.framework */; };
+		E1474E231DF1234700E126B4 /* shareItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E1474E221DF1234700E126B4 /* shareItem.m */; };
 		E14B5DBA1DED3FB8006CFFE7 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E14B5DB91DED3FB8006CFFE7 /* TTTAttributedLabel.m */; };
 		E16212C51D9B647700D64E56 /* FeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = E189F64C1D645D55008587CE /* FeedBackController.m */; };
 		E16212C81D9B687E00D64E56 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16212C71D9B687E00D64E56 /* ArticleController.m */; };
@@ -268,6 +270,8 @@
 		18F665651D5DA95B00BDB2E8 /* SplashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
 		1C420A303C2CEC2FC21B43A5 /* Pods-Jacob.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jacob.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jacob/Pods-Jacob.release.xcconfig"; sourceTree = "<group>"; };
 		E1172D761DF007280032063D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E122C2121DF5147400C20A45 /* ErrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrView.h; sourceTree = "<group>"; };
+		E122C2131DF5147400C20A45 /* ErrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrView.m; sourceTree = "<group>"; };
 		E124AA011D6D6EFB00B5BE8F /* DownLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadController.h; sourceTree = "<group>"; };
 		E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadController.m; sourceTree = "<group>"; };
 		E12C27821D952AB4001003AF /* ErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorController.h; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 		E13A7D661D7E995300305B64 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		E13A7D671D7E995300305B64 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
 		E142F02C1DE67EAC0032173C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		E1474E211DF1234700E126B4 /* shareItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareItem.h; sourceTree = "<group>"; };
+		E1474E221DF1234700E126B4 /* shareItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareItem.m; sourceTree = "<group>"; };
 		E14B5DB81DED3FB8006CFFE7 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		E14B5DB91DED3FB8006CFFE7 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		E16212C61D9B687E00D64E56 /* ArticleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleController.h; sourceTree = "<group>"; };
@@ -758,6 +764,8 @@
 				E18A965A1DB08010009B1D9F /* UserTrackCommentFrame.m */,
 				E18341C61DB5D298005263C0 /* CelebRecommend.h */,
 				E18341C71DB5D298005263C0 /* CelebRecommend.m */,
+				E1474E211DF1234700E126B4 /* shareItem.h */,
+				E1474E221DF1234700E126B4 /* shareItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -910,6 +918,8 @@
 				E18F06A11D991FA9008EC403 /* MMTabPagerView.h */,
 				E1BAACD41DD45BAF00F00DBA /* ShareView.h */,
 				E1BAACD51DD45BAF00F00DBA /* ShareView.m */,
+				E122C2121DF5147400C20A45 /* ErrView.h */,
+				E122C2131DF5147400C20A45 /* ErrView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1166,6 +1176,7 @@
 				E1E3CF681D6544030053F00D /* HomeViewController.m in Sources */,
 				18F6649E1D59BA9B00BDB2E8 /* AppDelegate.m in Sources */,
 				E16212C81D9B687E00D64E56 /* ArticleController.m in Sources */,
+				E122C2141DF5147400C20A45 /* ErrView.m in Sources */,
 				E1F0306A1D741C4100060559 /* SDImageCache.m in Sources */,
 				E1F030641D741C4100060559 /* MJRefreshFooterView.m in Sources */,
 				E19DFD191D8FB70C0042C777 /* HeadView.m in Sources */,
@@ -1227,6 +1238,7 @@
 				E1F030671D741C4100060559 /* UIScrollView+MJRefresh.m in Sources */,
 				18F664FA1D5B20C000BDB2E8 /* ViewController.m in Sources */,
 				E189F63E1D644CC2008587CE /* SettingController.m in Sources */,
+				E1474E231DF1234700E126B4 /* shareItem.m in Sources */,
 				18F665631D5C631D00BDB2E8 /* NewsCategory.m in Sources */,
 				E1F0306F1D741C4100060559 /* SDWebImageManager.m in Sources */,
 				18F664CD1D5AC9FF00BDB2E8 /* MMHttpSession.m in Sources */,

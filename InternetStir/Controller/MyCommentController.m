@@ -17,6 +17,7 @@
 #import "MMEventService.h"
 #import "UserTrackComment.h"
 #import "CommentViewController.h"
+#import "HomeViewController.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -45,28 +46,56 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithCustomView:Btn];
     self.navigationItem.leftBarButtonItem = left;
     
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.tableView];
-    [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
-    
+    ITSApplication* itsApp = [ITSApplication get];
+    DataService* ds = itsApp.dataSvr;
+    NSMutableArray *trackComment = ds.userTrackComments;
+    if (trackComment.count > 0) {
+        self.tableView = [[UITableView alloc] init];
+        self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:self.tableView];
+        [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
+    }else {
+        UIImageView *tomoto = [[UIImageView alloc] init];
+        tomoto.frame = CGRectMake(screenW/2 - 100, screenH/2 - 150, 200, 200);
+        tomoto.image = [UIImage imageNamed:@"P119_emptypage_commenttrack"];
+        [self.view addSubview:tomoto];
+        
+        CGSize size = [MMSystemHelper sizeWithString:NSLocalizedString(@"NoComment", nil) font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(screenW - 20, MAXFLOAT)];
+        UILabel *label = [[UILabel alloc] init];
+        label.frame = CGRectMake(10, screenH/2 + 50, screenW - 20, size.height);
+        label.text = NSLocalizedString(@"NoComment", nil);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:16];
+        [self.view addSubview:label];
+        
+        CGSize btnSize = [MMSystemHelper sizeWithString:NSLocalizedString(@"GoComment", nil) font:[UIFont systemFontOfSize:16] maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake(screenW/2 - btnSize.width/2, screenH/2 + 50 + size.height + 10, btnSize.width, btnSize.height);
+        [button setTitle:NSLocalizedString(@"GoComment", nil) forState:UIControlStateNormal];
+        [button setTitleColor:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(pushCommentVc) forControlEvents:UIControlEventTouchUpInside];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        [self.view addSubview:button];
+    }
     [self setupRefresh];
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_USER_TRACK_COMMENT_DATA_REFRESH selector:@selector(userTrackDataRefreshListener:)];
 
-    ITSApplication* itsApp = [ITSApplication get];
+//    ITSApplication* itsApp = [ITSApplication get];
     NSMutableDictionary* eParams = [NSMutableDictionary dictionaryWithCapacity:1];
     [itsApp.reportSvr recordEvent:@"list" params:eParams eventCategory:@"comment.track.view"];
 }
-
+-(void)pushCommentVc {
+    HomeViewController *controller = [[HomeViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 -(void)userTrackDataRefreshListener: (id) data{
     if (self.view.hidden == NO){
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             
             ITSApplication* itsApp = [ITSApplication get];
             DataService* ds = itsApp.dataSvr;
@@ -331,8 +360,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSFontAttributeName:[UIFont systemFontOfSize:19],
-       NSForegroundColorAttributeName:[MMSystemHelper string2UIColor:HOME_VIPNAME_COLOR]}];
-    
+       NSForegroundColorAttributeName:[UIColor grayColor]}];
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     NSMutableArray *trackComment = ds.userTrackComments;

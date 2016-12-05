@@ -202,7 +202,7 @@
     }];
     CGFloat height;
     if (comment.isShow == NO) {
-        height = size.height ;
+        height = size.height;
     }else {
         height = size1.height;
     }
@@ -230,9 +230,15 @@
             self.buttonF = self.contentF;
         }
     }
-   
-    self.cellHeight = CGRectGetMaxY(self.buttonF);
-
+    if (size.height < size1.height) {
+        if (comment.isShow == YES) {
+            self.cellHeight = CGRectGetMaxY(self.buttonF);
+        }else{
+            self.cellHeight = CGRectGetMaxY(self.BtnF);
+        }
+    }else {
+        self.cellHeight = CGRectGetMaxY(self.buttonF);
+    }
     if ([comment.replayComments count]) {
         NSInteger maxHotCommentCount = comment.replayComments.count;
         if (maxHotCommentCount > CB_MAX_COUNT){

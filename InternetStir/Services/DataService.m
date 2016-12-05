@@ -411,7 +411,18 @@
         if (tmpData != nil)
             self.celebInfo.title = tmpData;
         
+        NSArray* shareArr = [dicData objectForKey:@"share"];
+        if (shareArr != nil) {
+            self.shareArr = [[NSMutableArray alloc] init];
+            for (NSDictionary *item in shareArr) {
+                shareItem *share = [[shareItem alloc] init];
+                share.name = [item objectForKey:@"name"];
+                share.title = [item objectForKey:@"title"];
+                [self.shareArr addObject:share];
+            }
+        }
         NSArray* tmpCateList = [dicData objectForKey:@"categories"];
+        
         if (tmpCateList != nil){
             NSMutableArray* newCateList = [NSMutableArray arrayWithCapacity:1];
             for(NSDictionary* item in tmpCateList){

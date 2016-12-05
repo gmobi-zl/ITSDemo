@@ -92,15 +92,15 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     [itsApp.reportSvr recordEvent:@"本文" params:eParams eventCategory:@"comment.more.view"];
     
     //获取通知中心
-//    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-//    [notificationCenter addObserver:self selector:@selector(keyChange:) name:UIKeyboardDidShowNotification object:nil];
-//    
-//    //增加监听，当键退出时收出消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
-//    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(keyChange:) name:UIKeyboardDidShowNotification object:nil];
+    
+    //增加监听，当键退出时收出消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
     CBUserService* us = itsApp.cbUserSvr;
     if (us.user.isLogin == YES && us.user.isCBADM == YES){
         if (self.currentShowItem == nil)
@@ -215,46 +215,46 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     }
 }
 
-//- (void)keyChange:(NSNotification *)notification {
-//    //获得键盘的尺寸
-////        CGFloat curkeyBoardHeight = [[[notification userInfo] objectForKey:@"UIKeyboardBoundsUserInfoKey"] CGRectValue].size.height;
-//    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
-//    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-//        // 第三方键盘回调三次问题，监听仅执行最后一次
-//    if(begin.size.height > 0 && (begin.origin.y - end.origin.y > 0)){
-//        NSDictionary *dic = notification.userInfo;
-//        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-//        if (keyboardRect.size.height > 250 && self.replyViewDraw > keyboardRect.origin.y) {
-//            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-//                    
-//                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
+- (void)keyChange:(NSNotification *)notification {
+    //获得键盘的尺寸
+//        CGFloat curkeyBoardHeight = [[[notification userInfo] objectForKey:@"UIKeyboardBoundsUserInfoKey"] CGRectValue].size.height;
+    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+        // 第三方键盘回调三次问题，监听仅执行最后一次
+    if(begin.size.height > 0 && (begin.origin.y - end.origin.y > 0)){
+        NSDictionary *dic = notification.userInfo;
+        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+        if (keyboardRect.size.height > 250 && self.replyViewDraw > keyboardRect.origin.y) {
+            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+                    
+                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
+                CGPoint point = self.tableView.contentOffset;
+                self.offset = point.y;
+                point.y -= (keyboardRect.origin.y - self.replyViewDraw);
+                self.tableView.contentOffset = point;
+            }];
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+        NSDictionary *dic = notification.userInfo;
+        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+        if (keyboardRect.size.height > 250) {
+            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+                
+                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
 //                CGPoint point = self.tableView.contentOffset;
-//                self.offset = point.y;
-//                point.y -= (keyboardRect.origin.y - self.replyViewDraw);
+//                point.y += (keyboardRect.origin.y - self.replyViewDraw);
 //                self.tableView.contentOffset = point;
-//            }];
-//        }
-//    }
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)notification {
-//        NSDictionary *dic = notification.userInfo;
-//        CGRect keyboardRect = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-//        if (keyboardRect.size.height > 250) {
-//            [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-//                
-//                [UIView setAnimationCurve:[dic[UIKeyboardAnimationCurveUserInfoKey] doubleValue]];
-////                CGPoint point = self.tableView.contentOffset;
-////                point.y += (keyboardRect.origin.y - self.replyViewDraw);
-////                self.tableView.contentOffset = point;
-////                self.tableView.contentOffset = CGPointMake(0, self.offset);
-//                NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
-//                [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
-//                                        atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-//        }];
-//    }
-//}
-//
+//                self.tableView.contentOffset = CGPointMake(0, self.offset);
+                NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
+                [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
+                                        atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        }];
+    }
+}
+
 -(void)celebReplyCommentsDataRefreshListener: (id) data{
     if (self.view.hidden == NO){
         
@@ -441,45 +441,55 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                  DataService* ds = itsApp.dataSvr;
                  CelebComment* currentComment = ds.currentCelebComment;
                  
-                 [itsApp.remoteSvr replayCelebComment:currentComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-                     
-                     if (resultData != nil){
-                         NSNumber* retNum = [resultData objectForKey:@"success"];
-                         if (retNum != nil){
-                             BOOL ret = [retNum boolValue];
-                             if (ret == YES){
-                                 CelebUser* user = itsApp.cbUserSvr.user;
-                                 FansComment* sendComment = [FansComment alloc];
-                                 sendComment.name = user.userName;
-                                 sendComment.avator = user.avatar;
-                                 sendComment.comment = contentStr;
-                                 NSString* retuuid = [resultData objectForKey:@"uuid"];
-                                 NSString* retfid = [resultData objectForKey:@"fid"];
-                                 NSString* retcid = [resultData objectForKey:@"cid"];
-                                 
-                                 sendComment.uuid = retuuid;
-                                 sendComment.fid = retfid;
-                                 sendComment.cid = retcid;
-                                 sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
-                                 sendComment.uts = sendComment.pts;
-                                 
-                                 CommentFrame* frame = [CommentFrame alloc];
-                                 [frame initWithCommentData:sendComment];
-                                 sendComment.uiFrame = frame;
-                                 
-                                 [ds userInsertCurrentReplyCommentItem:sendComment];
-                                 CGFloat screenH = [MMSystemHelper getScreenHeight];
-
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                     [self.tableView reloadData];
-                                     if (self.tableView.contentSize.height > screenH - 49) {
-                                        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height) animated:YES];
-                                     }
-                                 });
+                 BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
+                 if (isHadNetwork == YES) {
+                     [itsApp.remoteSvr replayCelebComment:currentComment.fid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                         
+                         if (resultData != nil){
+                             NSNumber* retNum = [resultData objectForKey:@"success"];
+                             if (retNum != nil){
+                                 BOOL ret = [retNum boolValue];
+                                 if (ret == YES){
+                                     CelebUser* user = itsApp.cbUserSvr.user;
+                                     FansComment* sendComment = [FansComment alloc];
+                                     sendComment.name = user.userName;
+                                     sendComment.avator = user.avatar;
+                                     sendComment.comment = contentStr;
+                                     NSString* retuuid = [resultData objectForKey:@"uuid"];
+                                     NSString* retfid = [resultData objectForKey:@"fid"];
+                                     NSString* retcid = [resultData objectForKey:@"cid"];
+                                     
+                                     sendComment.uuid = retuuid;
+                                     sendComment.fid = retfid;
+                                     sendComment.cid = retcid;
+                                     sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                                     sendComment.uts = sendComment.pts;
+                                     
+                                     CommentFrame* frame = [CommentFrame alloc];
+                                     [frame initWithCommentData:sendComment];
+                                     sendComment.uiFrame = frame;
+                                     
+                                     [ds userInsertCurrentReplyCommentItem:sendComment];
+                                     CGFloat screenH = [MMSystemHelper getScreenHeight];
+                                     
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         [self.tableView reloadData];
+                                         if (self.tableView.contentSize.height > screenH - 49) {
+                                             [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.bounds.size.height) animated:YES];
+                                         }
+                                     });
+                                 }
                              }
                          }
-                     }
-                 }];
+                     }];
+
+                 }else {
+                     ErrorController *controller = [[ErrorController alloc] init];
+                     controller.type = 1;
+                     controller.fid = currentComment.fid;
+                     controller.content = contentStr;
+                     [self.navigationController pushViewController:controller animated:YES];
+                 }
              }
 #endif
          }
@@ -673,6 +683,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
     FansComment *fans = [currentComment.replayComments objectAtIndex:indexPath.row - 1];
     FansComment *comment = [fans.replayComments objectAtIndex:index];
     [itsApp.remoteSvr deleteFansComment:currentComment.fid cid:comment.cid];
+    
 
 }
 //- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -714,12 +725,14 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
         }];
 
     }else if (cell.type == 2) {
-        UIScrollView *scrollview = [cell.replyScrollView objectAtIndex:tag];
-
-        [UIView animateWithDuration:0.3 animations:^{
-            scrollview.frame = cell.scrollFrame;
-            scrollview.contentOffset = CGPointMake(0, 0);
-        }];
+        if (cell.replyScrollView.count > tag) {
+            UIScrollView *scrollview = [cell.replyScrollView objectAtIndex:tag];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                scrollview.frame = cell.scrollFrame;
+                scrollview.contentOffset = CGPointMake(0, 0);
+            }];
+        }
     }
 }
 
@@ -859,42 +872,53 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                  return;
              }
 
-             [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:currentFansComment.cid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
-                 if (resultData != nil){
-                     NSNumber* retNum = [resultData objectForKey:@"success"];
-                     if (retNum != nil){
-                         BOOL ret = [retNum boolValue];
-                         if (ret == YES){
-                             CelebUser* user = itsApp.cbUserSvr.user;
-                             FansComment* sendComment = [FansComment alloc];
-                             sendComment.name = user.userName;
-                             sendComment.avator = user.avatar;
-                             sendComment.comment = contentStr;
-                             NSString* retuuid = [resultData objectForKey:@"uuid"];
-                             NSString* retfid = [resultData objectForKey:@"fid"];
-                             NSString* retcid = [resultData objectForKey:@"cid"];
-                             NSString* retrid = [resultData objectForKey:@"rid"];
-                             sendComment.uuid = retuuid;
-                             sendComment.fid = retfid;
-                             sendComment.cid = retcid;
-                             sendComment.rid = retrid;
-                             sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
-                             sendComment.uts = sendComment.pts;
-                             
-                             [ds userInsertCurrentReplyCommentItem:sendComment];
-                             
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 [self.tableView reloadData];
+             BOOL isHadNetwork = [MMSystemHelper isConnectedToNetwork];
+             if (isHadNetwork == YES) {
+                 [itsApp.remoteSvr replayFansComment:currentComment.fid replayCommendId:currentFansComment.cid comment:contentStr callback:^(int status, int code, NSDictionary *resultData) {
+                     if (resultData != nil){
+                         NSNumber* retNum = [resultData objectForKey:@"success"];
+                         if (retNum != nil){
+                             BOOL ret = [retNum boolValue];
+                             if (ret == YES){
+                                 CelebUser* user = itsApp.cbUserSvr.user;
+                                 FansComment* sendComment = [FansComment alloc];
+                                 sendComment.name = user.userName;
+                                 sendComment.avator = user.avatar;
+                                 sendComment.comment = contentStr;
+                                 NSString* retuuid = [resultData objectForKey:@"uuid"];
+                                 NSString* retfid = [resultData objectForKey:@"fid"];
+                                 NSString* retcid = [resultData objectForKey:@"cid"];
+                                 NSString* retrid = [resultData objectForKey:@"rid"];
+                                 sendComment.uuid = retuuid;
+                                 sendComment.fid = retfid;
+                                 sendComment.cid = retcid;
+                                 sendComment.rid = retrid;
+                                 sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
+                                 sendComment.uts = sendComment.pts;
                                  
-                                 NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
-                                 [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
-                                                         atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                                 [ds userInsertCurrentReplyCommentItem:sendComment];
                                  
-                             });
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     [self.tableView reloadData];
+                                     
+                                     NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+                                     [[self tableView] scrollToRowAtIndexPath:scrollIndexPath
+                                                             atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                                     
+                                 });
+                             }
                          }
                      }
-                 }
-             }];
+                 }];
+
+             }else {
+                 ErrorController *controller = [[ErrorController alloc] init];
+                 controller.type = 2;
+                 controller.content = contentStr;
+                 controller.fid = currentComment.fid;
+                 controller.cid = currentFansComment.cid;
+                 [self.navigationController pushViewController:controller animated:YES];
+             }
 #endif
         }
     }];

@@ -17,7 +17,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import<Social/Social.h>
-@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TTTAttributedLabelDelegate>
+@interface HomeViewController : GAITrackedViewController<FacebookDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,TTTAttributedLabelDelegate,ShareViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 #ifdef DEMO_DATA
 @property (nonatomic,strong)NSMutableArray *commentData;

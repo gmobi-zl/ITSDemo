@@ -55,4 +55,7 @@
 "Release2Refresh"="松开刷新…";
 "PullLoad"="下拉刷新…";
 "Pull2Load"="上拉刷新…";
-"NetErr"="网络错误";
+"NetErr"="错误，您的网络连接似乎出了问题...";
+"NoComment"="您还沒有留言哦，快开始第一次留言吧!";
+"GoComment"="前往留言";
+"Reconnect"="重新连接";

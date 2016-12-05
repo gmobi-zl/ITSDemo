@@ -67,10 +67,12 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [self.effectView.layer insertSublayer:gradient atIndex:0];
     
     self.shareView = [[ShareView alloc] init];
+    self.shareView.delegate = self;
     self.shareView.frame = CGRectMake(0, 0, screenW, 192);
     [self.shareView.cancelButton addTarget:self action:@selector(cancelBtn) forControlEvents:UIControlEventTouchUpInside];
+
     [self.shareView.bgView addTarget:self action:@selector(bgButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.shareView.iconBtn addTarget:self action:@selector(shareFb:) forControlEvents:UIControlEventTouchUpInside];
+   
     //    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
     [self.effectView addSubview:self.shareView];
     
@@ -95,7 +97,20 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     [poApp.reportSvr recordEvent:@"comment" params:eParams eventCategory:@"tabbar.click"];
 }
 #pragma mark - share
-- (void)shareFb:(UIButton *)button {
+- (void)shareView:(NSInteger *)tag {
+    self.shareView.bgView.hidden = NO;
+    self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
+    ConfigService *cf = [ConfigService get];
+    NSString *channel = [cf getChannel];
+    self.shareLink = [NSString stringWithFormat:@"http://api.tomoto.io/v0/share/%@/%@.html",channel,self.fid];
+    
+    if (tag == SHARE_TYPE_FACEBOOK) {
+        [self shareNewsToFacebook];
+    }else if(tag == SHARE_TYPE_TWITTER){
+        [self shareNewsToTwitter];
+    }
+}
+- (void)shareCkick:(UIButton *)button {
     
     self.shareView.bgView.hidden = NO;
     self.effectView.frame = CGRectMake(0, screenH, screenW, 192);
@@ -103,8 +118,11 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     NSString *channel = [cf getChannel];
     self.shareLink = [NSString stringWithFormat:@"http://api.tomoto.io/v0/share/%@/%@.html",channel,self.fid];
 
-    
-    [self shareNewsToFacebook];
+    if (button.tag == SHARE_TYPE_FACEBOOK) {
+        [self shareNewsToFacebook];
+    }else if(button.tag == SHARE_TYPE_TWITTER){
+        [self shareNewsToTwitter];
+    }
 //    [self shareNewsToQQ];
 //    [self RespImageContent];
 //    [self shareNewsToWB];
@@ -130,6 +148,29 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         [alert show];
 
     }else {
+//        TWTRComposer *composer = [[TWTRComposer alloc] init];
+//        NSString *url = self.shareLink;
+//        NSString *title = self.shareTitle;
+//        [composer setText:title];
+////        NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+////        [composer setImage:[UIImage imageWithData:data]];
+//        [composer setURL:[NSURL URLWithString:url]];
+//        
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//            NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [composer setImage:[UIImage imageWithData:data]];
+//                    [composer showFromViewController:self completion:^(TWTRComposerResult result) {
+//                        if(result == TWTRComposerResultCancelled) {
+//                            MMLogDebug(@"Tweet composition cancelled");
+//                        }else{
+//                            MMLogDebug(@"Sending Tweet!");
+//                        }
+//                    }];
+//
+//            });
+//        });
+
         [tweetSheet setInitialText:self.shareTitle];
         [tweetSheet addURL:[NSURL URLWithString:self.shareLink]];
 
@@ -251,8 +292,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         {
             UIAlertView *msgbox = [[UIAlertView alloc] initWithTitle:@"Error" message:@"发送失败" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil];
             [msgbox show];
-            
-            
             break;
         }
         default:
@@ -267,24 +306,24 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     SLComposeViewController *composeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
     if (composeVC == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Twitter账号" message:@"这里没有配置好的twitter账号。你可以在设置中添加或者创建一个Twitter账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Facebook账号" message:@"这里没有配置好的Facebook账号。你可以在设置中添加或者创建一个Facebook账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
         
     }else {
-        [composeVC setInitialText:self.shareTitle];
-        [composeVC addURL:[NSURL URLWithString:self.shareLink]];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [composeVC addImage:[UIImage imageWithData:data]];
-                [self presentViewController:composeVC animated:YES completion:nil];
-            });
-        });
-//        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-//        content.contentURL = [NSURL URLWithString:self.shareLink];
-//        [FBSDKShareDialog showFromViewController:self
-//                                     withContent:content
-//                                        delegate:nil];
+//        [composeVC setInitialText:self.shareTitle];
+//        [composeVC addURL:[NSURL URLWithString:self.shareLink]];
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//            NSData *data =[NSData dataWithContentsOfURL:[NSURL URLWithString:self.sharePhoto]];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [composeVC addImage:[UIImage imageWithData:data]];
+//                [self presentViewController:composeVC animated:YES completion:nil];
+//            });
+//        });
+        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+        content.contentURL = [NSURL URLWithString:self.shareLink];
+        [FBSDKShareDialog showFromViewController:self
+                                     withContent:content
+                                        delegate:nil];
 
     }
 
@@ -446,7 +485,6 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     }
     HomeCommentCell *tmpCell = (HomeCommentCell*)cell;
     tmpCell.heartIcon.hidden = YES;
-    tmpCell.iiii = indexPath.row;
 #ifdef DEMO_DATA
     tmpCell.commentFrame = self.commentData[indexPath.row];
 #else

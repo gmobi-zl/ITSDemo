@@ -60,6 +60,12 @@ static NSString * OSKApplicationCredential_Readability_Key = @"oversharedev";
 static NSString * OSKApplicationCredential_Readability_Secret = @"hWA7rwPqzvNEaK8ZbRBw9fc5kKBQMdRK";
 static NSString * OSKApplicationCredential_Facebook_Key = @"1608179009437197";
 static NSString * OSKApplicationCredential_GooglePlus_Key = @"810720596839-qccfsg2b2ljn0cnu76rha48f5dguns3j.apps.googleusercontent.com";
+//share
+#define SHARE_TYPE_FACEBOOK 0
+#define SHARE_TYPE_TWITTER 1
+#define SHARE_TYPE_WEIXIN 2
+#define SHARE_TYPE_WECHATFRIENFS 3
+#define SHARE_TYPE_QQ 4
 
 // push token
 #define POPO_IOS_PUSH_DEVICE_TOKEN @"push_device_token"

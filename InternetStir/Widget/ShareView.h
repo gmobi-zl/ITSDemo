@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ShareViewDelegate <NSObject>
+
+-(void)shareView:(NSInteger *)tag;
+
+@end
+
 @interface ShareView : UIView
 
 @property (nonatomic, strong) UILabel *shareLabel;
@@ -17,6 +23,7 @@
 @property (nonatomic, strong) UILabel *line;
 @property (nonatomic, strong) UIButton *bgView;
 @property (nonatomic, strong) UIButton *iconBtn;
-- (void)initShareMessage:(NSString *)title url:(NSString *)url photo:(NSString *)photo;
+@property (nonatomic, strong) NSMutableArray *arrImage;
+@property (nonatomic, assign) id<ShareViewDelegate>delegate;
 
 @end

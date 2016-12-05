@@ -96,8 +96,6 @@ NSInteger scrollTag;
         self.replyButton.userInteractionEnabled = YES;
         [self.replyButton setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.bgView addSubview:self.replyButton];
-        
-        
     }
     return self;
 }
@@ -139,13 +137,16 @@ NSInteger scrollTag;
         }];
     }
 }
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.otherScroll = scrollView;
+
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-    NSInteger tag =  scrollView.tag;
-    NSLog(@"#######%ld",(long)scrollTag);
-
+    NSInteger tag = scrollView.tag;
+    NSLog(@"@@@@@@@@@@@@%d",tag);
+ 
     NSInteger index = scrollView.contentOffset.x;
-    NSLog(@"%@",[scrollView class]);
     if (scrollView == self.bgView) {
         self.type = 1;
         if (indexP.row == _myIndexPath.row) {
@@ -170,38 +171,37 @@ NSInteger scrollTag;
         indexP = _myIndexPath;
         self.otherScroll = scrollView;
         self.scrollFrame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,self.detailCommentFrame.BgViewF.size.height);
-
     }else {
-        CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
-        self.type = 2;
-        UIScrollView *scrollview = [self.replyScrollView objectAtIndex:tag];
-        if (indexP.row == _myIndexPath.row) {
-            if (self.otherScroll == scrollView) {
+//        if (self.detailCommentFrame.replyScrollF.count > scrollTag) {
+            CGRect frame = [[self.detailCommentFrame.replyScrollF objectAtIndex:tag] CGRectValue];
+            self.type = 2;
+            UIScrollView *scrollview = [self.replyScrollView objectAtIndex:tag];
+
+            if (indexP.row == _myIndexPath.row) {
+                if (self.otherScroll == scrollView) {
+                    [UIView animateWithDuration:0.3 animations:^{
+                        scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
+                    }];
+                }else {
+                    [UIView animateWithDuration:0.3 animations:^{
+                        self.otherScroll.frame = self.scrollFrame;
+                        self.otherScroll.contentOffset = CGPointMake(0, 0);
+                    }];
+                }
+            }else {
+                if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
+                    [self.delegate viewCellInitial:indexP index:scrollTag frame:self.scrollFrame];
+                }
+                
                 [UIView animateWithDuration:0.3 animations:^{
                     scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
                 }];
-            }else {
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.otherScroll.frame = self.scrollFrame;
-                    self.otherScroll.contentOffset = CGPointMake(0, 0);
-                }];
             }
-        }else {
-            if ([self.delegate respondsToSelector:@selector(viewCellInitial:index:frame:)]) {
-                [self.delegate viewCellInitial:indexP index:scrollTag frame:self.scrollFrame];
-            }
-
-            [UIView animateWithDuration:0.3 animations:^{
-                scrollview.frame = CGRectMake(-index + frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
-            }];
-        }
-        self.otherScroll = scrollView;
-        self.scrollFrame = frame;
-        indexP = _myIndexPath;
+            self.scrollFrame = frame;
+            indexP = _myIndexPath;
+//        }
     }
     scrollTag = tag;
-    NSLog(@"!!!!!%d",scrollView);
-
 }
 -(void)setDetailCommentFrame:(CommentFrame *)detailCommentFrame{
     

@@ -35,7 +35,7 @@ static NSString * const kClientID =
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     [Fabric with:@[[Twitter class]]];
-    [[Twitter sharedInstance] startWithConsumerKey:@"lbF0Iu1RuUHbLxft64xbFeuFW" consumerSecret:@"DHzSxiPD5C0TvLvJkivgj3VsJyPBdbuzT7ZktaNSNEQljKuzpJ"];
+    [[Twitter sharedInstance] startWithConsumerKey:@"kJUntlMuDyho639ysW1p9KVjD" consumerSecret:@"29R2SFblE0RFlqKhxXosmwnrHLLVjIAhzYWR5cXuQEtG95i2eU"];
 
     [Fabric with:@[[Twitter sharedInstance]]];
     

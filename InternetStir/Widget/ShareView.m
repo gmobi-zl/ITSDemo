@@ -9,6 +9,7 @@
 
 #import "ShareView.h"
 #import "MMSystemHelper.h"
+#import "ITSApplication.h"
 
 #define screenW [MMSystemHelper getScreenWidth]
 #define screenH [MMSystemHelper getScreenHeight]
@@ -19,7 +20,7 @@
     if (self) {
         
         self.bgView = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.bgView.frame = CGRectMake(0, 0, screenW - 192, screenH);
+        self.bgView.frame = CGRectMake(0, 0, screenW, screenH - 192);
         self.bgView.backgroundColor = [UIColor clearColor];
         self.bgView.hidden = YES;
         [[UIApplication sharedApplication].keyWindow addSubview:self.bgView];
@@ -50,14 +51,37 @@
         [self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self addSubview:self.cancelButton];
         
-        self.iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.iconBtn.frame = CGRectMake(screenW/2 - 30, 50, 60, 60);
-        [self.iconBtn setImage:[UIImage imageNamed:@"icon_Facebook"] forState:UIControlStateNormal];
-        [self addSubview:self.iconBtn];
+        ITSApplication* itsApp = [ITSApplication get];
+        DataService* ds = itsApp.dataSvr;
+        NSInteger count = ds.shareArr.count;
+        CGFloat space = (screenW - count*60)/(count + 1);
+        self.arrImage = [NSMutableArray arrayWithCapacity:3];
+        for (NSInteger i = 0;i < count;i++ ) {
+            shareItem *item = [ds.shareArr objectAtIndex:i];
+            NSString *imageName = [NSString stringWithFormat:@"icon_%@",item.title];
+            [self.arrImage addObject:imageName];
+        }
+        for (NSInteger i = 0; i < count; i++) {
+            self.iconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.iconBtn.frame = CGRectMake(space + i * (60 + space), 50, 60, 60);
+            [self.iconBtn setBackgroundImage:[UIImage imageNamed:self.arrImage[i]] forState:UIControlStateNormal];
+            shareItem *item = [ds.shareArr objectAtIndex:i];
+            [self.iconBtn addTarget:self action:@selector(shareCkick:) forControlEvents:UIControlEventTouchUpInside];
+            self.iconBtn.userInteractionEnabled = YES;
+            if ([item.name isEqualToString:@"facebook"]) {
+                self.iconBtn.tag = SHARE_TYPE_FACEBOOK;
+            }
+            if ([item.name isEqualToString:@"twitter"]) {
+                self.iconBtn.tag = SHARE_TYPE_TWITTER;
+            }
+            [self addSubview:self.iconBtn];
+        }
     }
     return self;
 }
-- (void)initShareMessage:(NSString *)title url:(NSString *)url photo:(NSString *)photo {
-
+- (void)shareCkick:(UIButton *)button {
+    if ([self.delegate respondsToSelector:@selector(shareView:)]) {
+        [self.delegate shareView:button.tag];
+    }
 }
 @end

@@ -113,12 +113,12 @@ NSString* customerLocal = nil;
             [es send:EVENT_CONNECT_ID eventData:EVENT_CONNECT_SUCCESS];
             return;
         }else {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.label.text = NSLocalizedString(@"NetErr", nil);
-            // Move to bottm center.
-            hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-            [hud hideAnimated:YES afterDelay:3.f];
+//            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+//            hud.mode = MBProgressHUDModeText;
+//            hud.label.text = NSLocalizedString(@"NetErr", nil);
+//            // Move to bottm center.
+//            hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+//            [hud hideAnimated:YES afterDelay:3.f];
         }
     }
     

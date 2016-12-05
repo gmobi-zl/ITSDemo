@@ -56,5 +56,9 @@
 "Release2Refresh"="更新資料…";
 "PullLoad"="更新資料…";
 "Pull2Load"="更新資料…";
-"NetErr"="網路錯誤";
+"NetErr"="錯誤哦，您的網路連線似乎出了問題...";
+"NoComment"="您還沒有留言哦，快開始第一次留言吧!";
+"GoComment"="前往留言";
+"Reconnect"="重新整理";
+
 

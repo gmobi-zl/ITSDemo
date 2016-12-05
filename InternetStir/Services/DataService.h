@@ -27,6 +27,7 @@
 #import "PNNativeAdItem.h"
 #import "CelebComment.h"
 #import "FansComment.h"
+#import "shareItem.h"
 
 //#import "CommentItem.h"
 //#import "CommentCellFrame.h"
@@ -111,6 +112,7 @@ typedef enum{
 
 
 @interface DataService : NSObject
+@property (retain) NSMutableArray *shareArr;
 @property (assign) int comment_count;
 @property (assign) int lastCount;
 @property (assign) BOOL isAdd;
