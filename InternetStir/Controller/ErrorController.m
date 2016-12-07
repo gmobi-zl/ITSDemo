@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"錯誤";
+    self.title = NSLocalizedString(@"Err", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -114,7 +114,7 @@
                         CommentFrame* frame = [CommentFrame alloc];
                         [frame initWithCommentData:sendComment];
                         sendComment.uiFrame = frame;
-                        
+                    
                         [ds userInsertCurrentReplyCommentItem:sendComment];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.navigationController popViewControllerAnimated:YES];

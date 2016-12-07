@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -46,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>CelebrityBaseUrl</key>
 	<string>http://api.tomoto.io/</string>
 	<key>Fabric</key>
@@ -71,7 +71,7 @@
 	<key>FacebookAppID</key>
 	<string>209336052808535</string>
 	<key>FacebookDisplayName</key>
-	<string>Tomoto</string>
+	<string>番茄大咖</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -138,9 +138,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>"Tomoto"想要取用你的相機 ?</string>
+	<string>"可...可惡"想要取用你的相機 ?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"Tomoto"想要取用你的相片 ?</string>
+	<string>"可...可惡"想要取用你的相片 ?</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UILaunchStoryboardName</key>

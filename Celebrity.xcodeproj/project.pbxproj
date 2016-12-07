@@ -56,7 +56,6 @@
 		18F665631D5C631D00BDB2E8 /* NewsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665621D5C631D00BDB2E8 /* NewsCategory.m */; };
 		18F665661D5DA95B00BDB2E8 /* SplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F665651D5DA95B00BDB2E8 /* SplashController.m */; };
 		867C305EDF8C8FB84F3DEED6 /* libPods-Jacob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A69515971C39331B5EA30D /* libPods-Jacob.a */; };
-		E1172D771DF007280032063D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1172D761DF007280032063D /* GoogleService-Info.plist */; };
 		E122C2141DF5147400C20A45 /* ErrView.m in Sources */ = {isa = PBXBuildFile; fileRef = E122C2131DF5147400C20A45 /* ErrView.m */; };
 		E124AA031D6D6EFB00B5BE8F /* DownLoadController.m in Sources */ = {isa = PBXBuildFile; fileRef = E124AA021D6D6EFB00B5BE8F /* DownLoadController.m */; };
 		E12C27841D952AB4001003AF /* ErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12C27831D952AB4001003AF /* ErrorController.m */; };
@@ -68,6 +67,8 @@
 		E16212C81D9B687E00D64E56 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16212C71D9B687E00D64E56 /* ArticleController.m */; };
 		E16C31791DE58FF60062A562 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E16C31781DE58FF60062A562 /* WeiboSDK.bundle */; };
 		E16C317B1DE590080062A562 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E16C317A1DE590080062A562 /* libWeiboSDK.a */; };
+		E1819D361DF7DA98006EC25F /* UCZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1819D351DF7DA98006EC25F /* UCZProgressView.m */; };
+		E1819D3A1DF817AB006EC25F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1819D391DF817AB006EC25F /* GoogleService-Info.plist */; };
 		E181D1301D66AB64005115E6 /* replyGroup.plist in Resources */ = {isa = PBXBuildFile; fileRef = E181D12F1D66AB64005115E6 /* replyGroup.plist */; };
 		E181D1331D66F785005115E6 /* WebviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E181D1321D66F785005115E6 /* WebviewController.m */; };
 		E18341C81DB5D298005263C0 /* CelebRecommend.m in Sources */ = {isa = PBXBuildFile; fileRef = E18341C71DB5D298005263C0 /* CelebRecommend.m */; };
@@ -269,7 +270,6 @@
 		18F665641D5DA94A00BDB2E8 /* SplashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashController.h; sourceTree = "<group>"; };
 		18F665651D5DA95B00BDB2E8 /* SplashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashController.m; sourceTree = "<group>"; };
 		1C420A303C2CEC2FC21B43A5 /* Pods-Jacob.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jacob.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jacob/Pods-Jacob.release.xcconfig"; sourceTree = "<group>"; };
-		E1172D761DF007280032063D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E122C2121DF5147400C20A45 /* ErrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrView.h; sourceTree = "<group>"; };
 		E122C2131DF5147400C20A45 /* ErrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrView.m; sourceTree = "<group>"; };
 		E124AA011D6D6EFB00B5BE8F /* DownLoadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadController.h; sourceTree = "<group>"; };
@@ -287,6 +287,9 @@
 		E16212C71D9B687E00D64E56 /* ArticleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleController.m; sourceTree = "<group>"; };
 		E16C31781DE58FF60062A562 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		E16C317A1DE590080062A562 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		E1819D341DF7DA98006EC25F /* UCZProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCZProgressView.h; sourceTree = "<group>"; };
+		E1819D351DF7DA98006EC25F /* UCZProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCZProgressView.m; sourceTree = "<group>"; };
+		E1819D391DF817AB006EC25F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E181D12F1D66AB64005115E6 /* replyGroup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = replyGroup.plist; sourceTree = "<group>"; };
 		E181D1311D66F785005115E6 /* WebviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewController.h; sourceTree = "<group>"; };
 		E181D1321D66F785005115E6 /* WebviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebviewController.m; sourceTree = "<group>"; };
@@ -542,7 +545,7 @@
 		18F6648D1D59BA9B00BDB2E8 = {
 			isa = PBXGroup;
 			children = (
-				E1172D761DF007280032063D /* GoogleService-Info.plist */,
+				E1819D391DF817AB006EC25F /* GoogleService-Info.plist */,
 				E1EE60341DEE6AEA00CD9085 /* libPods-Jacob.a */,
 				E124AA2A1D6D8DC300B5BE8F /* resources */,
 				E189F6141D6415FF008587CE /* image */,
@@ -830,6 +833,8 @@
 		18F664E81D5ACA4700BDB2E8 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				E1819D341DF7DA98006EC25F /* UCZProgressView.h */,
+				E1819D351DF7DA98006EC25F /* UCZProgressView.m */,
 				E14B5DB81DED3FB8006CFFE7 /* TTTAttributedLabel.h */,
 				E14B5DB91DED3FB8006CFFE7 /* TTTAttributedLabel.m */,
 				E1F030331D741C4100060559 /* MJRefresh */,
@@ -1090,7 +1095,7 @@
 				E1B0DA081DE2EC03003D1263 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E1F030611D741C4100060559 /* MJRefresh.bundle in Resources */,
 				E16C31791DE58FF60062A562 /* WeiboSDK.bundle in Resources */,
-				E1172D771DF007280032063D /* GoogleService-Info.plist in Resources */,
+				E1819D3A1DF817AB006EC25F /* GoogleService-Info.plist in Resources */,
 				E1D214F91DE44646009C7A2C /* Go2Reach.bundle in Resources */,
 				18F664E11D5ACA1900BDB2E8 /* main.js in Resources */,
 			);
@@ -1257,6 +1262,7 @@
 				18F665171D5B311400BDB2E8 /* NewsMood.m in Sources */,
 				1807B1E61D797AC300CBD6FE /* CelebComment.m in Sources */,
 				18F664CA1D5AC9FF00BDB2E8 /* MMDictionaryHelper.m in Sources */,
+				E1819D361DF7DA98006EC25F /* UCZProgressView.m in Sources */,
 				18F664FC1D5B20E600BDB2E8 /* ITSApplication.m in Sources */,
 				18F664D21D5AC9FF00BDB2E8 /* Reachability.m in Sources */,
 				E1B9611E1D936E0C00B779A1 /* WriteArticleCell.m in Sources */,
@@ -1449,7 +1455,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c000;
-				PRODUCT_NAME = Tomoto;
+				PRODUCT_NAME = "番茄大咖";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -1487,7 +1493,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.tomoto.c000;
-				PRODUCT_NAME = Tomoto;
+				PRODUCT_NAME = "番茄大咖";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};

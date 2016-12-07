@@ -12,6 +12,8 @@
 #import "UIImageView+WebCache.h"
 #import "ITSApplication.h"
 
+#define screenW [MMSystemHelper getScreenWidth]
+
 @implementation ContentViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -54,6 +56,13 @@
         self.photo.layer.masksToBounds = YES;
         [self.bgView addSubview:self.photo];
         
+        CGRect frame = CGRectMake(screenW/2 - 50, 21, 100, 100);
+        self.progressView = [[UCZProgressView alloc] initWithFrame:frame];
+        self.progressView.radius = 40.0;
+        self.progressView.progress = 0;
+      
+        [self.contentView addSubview:self.progressView];
+       
     }
     return self;
 }
@@ -62,7 +71,6 @@
     ITSApplication* app = [ITSApplication get];
     NSString* baseUrl = [app.remoteSvr getBaseUrl];
     
-    CGFloat screenW = [MMSystemHelper getScreenWidth];
 //    self.bgView.frame = CGRectMake(0, 10, screenW, 40);
     
     self.titleLabel.frame = CGRectMake(15, 10, self.bounds.size.width - 30, 0);
@@ -85,10 +93,21 @@
     self.icon.contentMode = UIViewContentModeScaleAspectFill;
     self.icon.layer.masksToBounds = YES;
     
-    NSString* imageUrl = [NSString stringWithFormat:@"%@v0/files/%@", baseUrl, image.image];
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    self.progressView.center = self.icon.center;
     
-    //[self.icon sd_setImageWithURL:[NSURL URLWithString:item.photo] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    NSString* imageUrl = [NSString stringWithFormat:@"%@v0/files/%@", baseUrl, image.image];
+//    [self.icon sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    
+    
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil options:SDWebImageRefreshCached  progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        if (expectedSize!=-1) {
+            CGFloat value = (CGFloat)receivedSize/expectedSize;
+            [self.progressView setProgress:value];
+        }
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.progressView setProgress:1.0];
+    }];
+
     self.sourceLabel.frame = CGRectMake(15,self.icon.frame.size.height + self.icon.frame.origin.y + 5, 150, 10);
 //    self.sourceLabel.backgroundColor = [UIColor redColor];
     self.sourceLabel.font = [UIFont systemFontOfSize:10];

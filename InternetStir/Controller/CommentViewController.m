@@ -460,6 +460,7 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                                      NSString* retcid = [resultData objectForKey:@"cid"];
                                      
                                      sendComment.uuid = retuuid;
+                                     sendComment.u_role = user.role;
                                      sendComment.fid = retfid;
                                      sendComment.cid = retcid;
                                      sendComment.pts = [MMSystemHelper getMillisecondTimestamp];
@@ -484,11 +485,13 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                      }];
 
                  }else {
+                     /*
                      ErrorController *controller = [[ErrorController alloc] init];
                      controller.type = 1;
                      controller.fid = currentComment.fid;
                      controller.content = contentStr;
                      [self.navigationController pushViewController:controller animated:YES];
+                      */
                  }
              }
 #endif
@@ -912,12 +915,14 @@ NSString *const CommentOneTableViewCellIdentifier = @"CommentOneCell";
                  }];
 
              }else {
+                 /*
                  ErrorController *controller = [[ErrorController alloc] init];
                  controller.type = 2;
                  controller.content = contentStr;
                  controller.fid = currentComment.fid;
                  controller.cid = currentFansComment.cid;
                  [self.navigationController pushViewController:controller animated:YES];
+                  */
              }
 #endif
         }

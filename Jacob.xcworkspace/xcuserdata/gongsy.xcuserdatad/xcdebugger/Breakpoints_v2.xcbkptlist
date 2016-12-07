@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Widget/HomeCommentCell.m"
-            timestampString = "502183365.764478"
+            timestampString = "502798135.88959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "-setShowData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -146,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InternetStir/Controller/CommentViewController.m"
-            timestampString = "502612844.399193"
+            timestampString = "502709598.214401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>

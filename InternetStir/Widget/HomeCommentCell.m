@@ -70,10 +70,10 @@
 //        [self.button setTitle:@"查看更多留言" forState:UIControlStateNormal];
         [self.button setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         [self.contentView addSubview:self.button];
-        
+       
         self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btn.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self.btn setTitle:@"继续阅读" forState:UIControlStateNormal];
+        [self.btn setTitle:NSLocalizedString(@"Read", nil) forState:UIControlStateNormal];
         [self.btn setTitleColor:[MMSystemHelper string2UIColor:HOME_MORE_COMMENT_COLOR] forState:UIControlStateNormal];
         self.btn.hidden = YES;
         [self.contentView addSubview:self.btn];
@@ -110,14 +110,17 @@
         [self.contentView addSubview:self.likeNum];
         
         self.delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.delBtn setBackgroundImage:[UIImage imageNamed:@"icon_ios_addition"] forState:UIControlStateNormal];
-//        self.delBtn setImageEdgeInsets:<#(UIEdgeInsets)#>
-//        self.delBtn.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:self.delBtn];
         UIImageView *imageview = [[UIImageView alloc] init];
         imageview.frame = CGRectMake(16, 8, 20, 20);
         imageview.image = [UIImage imageNamed:@"icon_ios_addition"];
         [self.delBtn addSubview:imageview];
+        
+        CGRect frame = CGRectMake(screenW/2 - 50, 21, 100, 100);
+        self.progressView = [[UCZProgressView alloc] initWithFrame:frame];
+        self.progressView.radius = 40.0;
+        self.progressView.progress = 0;
+        [self.contentView addSubview:self.progressView];
 
 //        ITSApplication* itsApp = [ITSApplication get];
 //        CBUserService* us = itsApp.cbUserSvr;
@@ -294,10 +297,17 @@
     NSString* imageUrl = [[NSString alloc] initWithFormat:@"%@/%@", fileBaseUrl, image];
     self.photo.contentMode = UIViewContentModeScaleAspectFill;
     self.photo.clipsToBounds = YES;
-    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
-    
+//    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"loader_post"] options:SDWebImageRefreshCached];
+    [self.photo sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil options:SDWebImageRefreshCached  progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        if (expectedSize!=-1) {
+            CGFloat value = (CGFloat)receivedSize/expectedSize;
+            [self.progressView setProgress:value];
+        }
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.progressView setProgress:1.0];
+    }];
     if (data.isShow == NO) {
-        self.commentLabel.numberOfLines = 3;
+        self.commentLabel.numberOfLines = 3;//3
     }else {
         self.commentLabel.numberOfLines = 0;
         self.btn.hidden = YES;
@@ -402,7 +412,8 @@
     self.like.frame = self.commentFrame.likeF;
     self.likeNum.frame = self.commentFrame.likeNumF;
     self.delBtn.frame = self.commentFrame.delBtnF;
-    
+    self.progressView.center = self.photo.center;
+
     for (int i = 0; i < [self.commentFrame.replysF count]; i++) {
         ((UILabel *)[self.replysView objectAtIndex:i]).frame = [(NSValue *)[self.commentFrame.replysF objectAtIndex:i] CGRectValue];
     }

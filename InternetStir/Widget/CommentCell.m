@@ -143,9 +143,7 @@ NSInteger scrollTag;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-    NSInteger tag = scrollView.tag;
-    NSLog(@"@@@@@@@@@@@@%d",tag);
- 
+    NSInteger tag = scrollView.tag; 
     NSInteger index = scrollView.contentOffset.x;
     if (scrollView == self.bgView) {
         self.type = 1;
@@ -368,11 +366,15 @@ NSInteger scrollTag;
 //    }else
     if ([comment isKindOfClass:[FansComment class]]) {
         FansComment *data = comment;
+        if (data.u_role == CELEB_USER_CELEB && us.user.isCBADM == YES) {
+            self.bgView.scrollEnabled = YES;//yes
+        }else {
             if ([us.user.uId compare:data.uuid] == NSOrderedSame) {
-                self.bgView.scrollEnabled = YES;
+                self.bgView.scrollEnabled = YES;//yes
             }else {
                 self.bgView.scrollEnabled = NO;
             }
+        }
 //        self.bgView.userInteractionEnabled = NO;
         self.icon.contentMode = UIViewContentModeScaleAspectFill;
         self.icon.layer.masksToBounds = YES;
@@ -405,10 +407,14 @@ NSInteger scrollTag;
             [self.replyScrollView addObject:scrollView];
 
             FansComment *item = [data.replayComments objectAtIndex:i];
-            if ([us.user.uId compare:item.uuid] == NSOrderedSame) {
-                self.scrollView.scrollEnabled = YES;
+            if (item.u_role == CELEB_USER_CELEB && us.user.isCBADM == YES) {
+                self.scrollView.scrollEnabled = YES;//yes
             }else {
-                self.scrollView.scrollEnabled = NO;
+                if ([us.user.uId compare:item.uuid] == NSOrderedSame) {
+                    self.scrollView.scrollEnabled = YES;//yes
+                }else {
+                    self.scrollView.scrollEnabled = NO;
+                }
             }
             UILabel *replyLabel = [[UILabel alloc]init];
             replyLabel.font = [UIFont systemFontOfSize:14];

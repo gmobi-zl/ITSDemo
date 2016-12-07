@@ -201,6 +201,7 @@
         return mutableAttributedString;
     }];
     CGFloat height;
+    
     if (comment.isShow == NO) {
         height = size.height;
     }else {
@@ -230,6 +231,7 @@
             self.buttonF = self.contentF;
         }
     }
+    
     if (size.height < size1.height) {
         if (comment.isShow == YES) {
             self.cellHeight = CGRectGetMaxY(self.buttonF);
@@ -239,6 +241,9 @@
     }else {
         self.cellHeight = CGRectGetMaxY(self.buttonF);
     }
+    
+//    self.cellHeight = CGRectGetMaxY(self.buttonF);//
+
     if ([comment.replayComments count]) {
         NSInteger maxHotCommentCount = comment.replayComments.count;
         if (maxHotCommentCount > CB_MAX_COUNT){

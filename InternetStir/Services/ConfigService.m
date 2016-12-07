@@ -53,10 +53,10 @@ ConfigService* configInstance = nil;
 -(NSString*) getChannel{
     //return self.currentChannel;
     // Release Server
-//    return @"238dc0b4-729d-4fa9-ac9c-9ba57c91c1e8";  // 肆一
-//    return @"30430e9d-92fc-4d66-9950-36225350a0bb";  // 我是马克
-    return @"3b00a165-0ad4-4bbb-8c87-80b8290fcba4"; //蕃茄大咖
-    
+//    return @"238dc0b4-729d-4fa9-ac9c-9ba57c91c1e8";   // 肆一
+//    return @"30430e9d-92fc-4d66-9950-36225350a0bb";   // 我是马克
+    return @"3b00a165-0ad4-4bbb-8c87-80b8290fcba4";   //蕃茄大咖
+//      return @"cead1ce5-a81d-4056-a4c8-b8e123518ff3";   //How Fun
     // Test Server
     //return @"69db3157-f2b5-48b7-a237-0bb4dce16ea6"; // How Fun
     //return @"71ca0551-2d8b-4946-a15e-701c813ed537"; // 台湾妞韩国媳

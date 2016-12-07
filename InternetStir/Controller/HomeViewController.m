@@ -144,7 +144,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
                                            composeViewControllerForServiceType:SLServiceTypeTwitter];
     
     if (tweetSheet == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Twitter账号" message:@"这里没有配置好的twitter账号。你可以在设置中添加或者创建一个Twitter账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Twitter账号" message:NSLocalizedString(@"No_Twitter_Account", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
 
     }else {
@@ -306,7 +306,7 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
     SLComposeViewController *composeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
     if (composeVC == nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Facebook账号" message:@"这里没有配置好的Facebook账号。你可以在设置中添加或者创建一个Facebook账号" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无Facebook账号" message:NSLocalizedString(@"No_Facebook_Account", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alert show];
         
     }else {
@@ -340,6 +340,8 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
         }else {
             [self.Btn setTitle:@"" forState:UIControlStateNormal];
         }
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithCustomView:self.Btn];
+        self.navigationItem.rightBarButtonItem = right;
         [self.tableView reloadData];
     });
 }
@@ -537,8 +539,10 @@ NSString *const HomeCommentCellIdentifier = @"HomeCommentCell";
 
     UIView *singleTapView = [doubleTapGestureRecognizer view];
     singleTapView.tag = indexPath.row;
+    
     return cell;
 }
+
 - (void)doubleTap:(UIGestureRecognizer*)gestureRecognizer
 {
     UITapGestureRecognizer *singleTap = (UITapGestureRecognizer *)gestureRecognizer;

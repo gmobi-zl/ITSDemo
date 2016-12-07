@@ -49,6 +49,7 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     NSMutableArray *trackComment = ds.userTrackComments;
+/*
     if (trackComment.count > 0) {
         self.tableView = [[UITableView alloc] init];
         self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
@@ -80,6 +81,14 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
         button.titleLabel.font = [UIFont systemFontOfSize:16];
         [self.view addSubview:button];
     }
+ */
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.frame = CGRectMake(0, 0, screenW, screenH);
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
+    [self.tableView registerClass:[MyCommentCell class] forCellReuseIdentifier:MyCommentTableViewCellIdentifier];
     [self setupRefresh];
     MMEventService* es = [MMEventService getInstance];
     [es addEventHandler:self eventName:EVENT_USER_TRACK_COMMENT_DATA_REFRESH selector:@selector(userTrackDataRefreshListener:)];
@@ -358,9 +367,9 @@ NSString *const MyCommentTableViewCellIdentifier = @"MyCommentCell";
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSFontAttributeName:[UIFont systemFontOfSize:19],
-       NSForegroundColorAttributeName:[UIColor grayColor]}];
+//    [self.navigationController.navigationBar setTitleTextAttributes:
+//     @{NSFontAttributeName:[UIFont systemFontOfSize:19],
+//       NSForegroundColorAttributeName:[UIColor grayColor]}];
     ITSApplication* itsApp = [ITSApplication get];
     DataService* ds = itsApp.dataSvr;
     NSMutableArray *trackComment = ds.userTrackComments;

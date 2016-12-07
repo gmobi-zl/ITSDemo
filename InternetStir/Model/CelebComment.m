@@ -87,6 +87,18 @@
             FansComment* fansCM = [[FansComment alloc] initWithDictionary:item];
             [tmpArray addObject:fansCM];
         }
+        FansComment *fans = [[FansComment alloc] init];
+        for (NSInteger i = 0; i < tmpArray.count; i++) {
+            for (NSInteger j = 0; j < tmpArray.count - i - 1; j++) {
+                FansComment *fan = [tmpArray objectAtIndex:j];
+                FansComment *comment = [tmpArray objectAtIndex:j+1];
+                if (fan.uts > comment.uts) {
+                    fans = tmpArray[j];
+                    tmpArray[j] = tmpArray[j + 1];
+                    tmpArray[j + 1] = fans;
+                }
+            }
+        }
         self.topFansComments = tmpArray;
     }
     

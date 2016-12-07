@@ -139,7 +139,10 @@
                                                        if ([role isEqualToString:@"celeb"]){
                                                            us.user.isCBADM = YES;
                                                            us.user.role = CELEB_USER_CELEB;
-                                                       } else if ([role isEqualToString:@"admin"]){
+                                                       }else if ([role isEqualToString:@"assistant"]){
+                                                           us.user.isCBADM = YES;
+                                                           us.user.role = CELEB_USER_CELEB;
+                                                       }else if ([role isEqualToString:@"admin"]){
                                                            us.user.role = CELEB_USER_ADMIN;
                                                        } else if ([role isEqualToString:@"user"]){
                                                            us.user.role = CELEB_USER_NORMAL;

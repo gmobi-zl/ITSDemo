@@ -59,3 +59,7 @@
 "NoComment"="您还沒有留言哦，快开始第一次留言吧!";
 "GoComment"="前往留言";
 "Reconnect"="重新连接";
+"Err"="错误";
+"No_Twitter_Account "="这里没有配置好的twitter账号。你可以在设置中添加或者创建一个Twitter账号";
+"No_Facebook_Account "="这里没有配置好的Facebook账号。你可以在设置中添加或者创建一个Facebook账号";
+"Read"="继续阅读";

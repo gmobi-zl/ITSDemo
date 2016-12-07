@@ -12,10 +12,11 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 //#import "TQRichTextView.h"
 #import "TTTAttributedLabel.h"
-
+#import "UCZProgressView.h"
 @interface HomeCommentCell : UITableViewCell
 
 @property (nonatomic, assign) int iiii;
+@property (nonatomic, strong) UCZProgressView *progressView;
 
 @property (nonatomic, strong) UIImageView *heartIcon;
 @property (nonatomic, strong) HomeCommentFrame *commentFrame;

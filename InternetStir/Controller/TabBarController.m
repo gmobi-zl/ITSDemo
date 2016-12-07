@@ -49,7 +49,7 @@
         nav.tabBarItem.imageInsets = UIEdgeInsetsMake(6, 0,-6, 0);
         nav.tabBarItem.image = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nav.tabBarItem.selectedImage = [[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageSelectArr[cnt]]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        self.tabBar.tintColor = [UIColor redColor];
+//        self.tabBar.tintColor = [UIColor redColor];
         cnt++;
         [arr addObject:nav];
     }
